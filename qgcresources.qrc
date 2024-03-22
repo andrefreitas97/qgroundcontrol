@@ -58,6 +58,17 @@
         <file alias="Gripper.svg">resources/Gripper.svg</file>
         <file alias="GripperRelease.svg">resources/GripperRelease.svg</file>
         <file alias="GripperGrab.svg">resources/GripperGrab.svg</file>
+        <file alias="Grenade.svg">resources/Grenade.svg</file>
+        <file alias="Height.svg">resources/Height.svg</file>
+        <file alias="gps.svg">resources/gps.svg</file>
+        <file alias="baro.svg">resources/baro.svg</file>
+        <file alias="opflow.svg">resources/opflow.svg</file>
+        <file alias="position.svg">resources/position.svg</file>
+        <file alias="landing_assist.svg">resources/landing_assist.svg</file>
+        <file alias="sensor.svg">resources/sensor.svg</file>
+        <file alias="payload.svg">resources/payload.svg</file>
+        <file alias="config.svg">resources/config.svg</file>
+        <file alias="home.svg">resources/home.svg</file>
         <file>resources/icons/qgroundcontrol.ico</file>
     </qresource>
     <qresource prefix="/res/firmware">

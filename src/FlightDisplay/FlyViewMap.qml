@@ -516,6 +516,7 @@ FlightMap {
             checked:    true
             index:      -1
             label:      qsTr("ROI here", "Make this a Region Of Interest")
+            onClicked:  _activeVehicle.stopGuidedModeROI()
         }
 
         //-- Visibilty controlled by actual state

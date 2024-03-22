@@ -27,6 +27,12 @@ add_custom_target(FligthDisplayQml
 		GuidedActionTakeoff.qml
 		GuidedActionGripper.qml
 		GripperMenu.qml
+		GuidedActionGrenades.qml
+		GrenadesMenu.qml
+		GuidedActionPayload.qml
+		PayloadMenu.qml
+		GuidedActionConfig.qml
+		ConfigMenu.qml
 		GuidedValueSlider.qml
 		GuidedToolStripAction.qml
 		MultiRotorChecklist.qml

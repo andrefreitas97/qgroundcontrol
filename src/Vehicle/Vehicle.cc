@@ -4495,3 +4495,126 @@ void Vehicle::sendGripperAction(GRIPPER_OPTIONS gripperOption)
         break;
     }
 }
+
+
+//void Vehicle::setServoAction(float servoInstance, float servoPWM)
+//{
+//    sendMavCommand(
+//        _defaultComponentId,
+//        MAV_CMD_DO_SET_SERVO,
+//        false,                               // Don't show errors
+//        servoInstance,                                   // Param1: Servo instance number
+//        servoPWM,                       // Param2: Pulse Width Modulation
+//        0, 0, 0, 0, 0);                      // Param 3 ~ 7 : unused
+//}
+
+void Vehicle::cycleServoAction(float servoInstance, float servoPWM)
+{
+    sendMavCommand(
+        _defaultComponentId,
+        MAV_CMD_DO_REPEAT_SERVO,
+        false,                               // Don't show errors
+        servoInstance,                                   // Param1: Servo instance number
+        servoPWM,                       // Param2: Pulse Width Modulation
+        1,                              // Param3: Cycle count
+        2,                              // Param4: Cycle time
+        0, 0, 0);                      // Param 5 ~ 7 : unused
+}
+
+void Vehicle::sendGrenadesAction(int grenadesOption)
+{
+    switch(grenadesOption) {
+    case 1:
+        cycleServoAction(11, 600);
+        break;
+    case 2:
+        cycleServoAction(11, 2200);
+        break;
+    default:
+        break;
+    }
+}
+
+void Vehicle::sendHeightAction(int heightOption)
+{
+    switch(heightOption) {
+    case 0:
+        sendBaroHeightAction();
+        break;
+    case 1:
+        sendGPSHeightAction();
+        break;
+    default:
+        break;
+    }
+}
+
+void Vehicle::sendGPSHeightAction()
+{
+    parameterManager()->_sendParamSetToVehicle(_defaultComponentId, "EK3_SRC1_POSZ" , FactMetaData::valueTypeUint8, 3);
+}
+
+void Vehicle::sendBaroHeightAction()
+{
+    parameterManager()->_sendParamSetToVehicle(_defaultComponentId, "EK3_SRC1_POSZ" , FactMetaData::valueTypeUint8, 1);
+}
+
+void Vehicle::sendPositionAction(int positionOption)
+{
+    switch(positionOption) {
+    case 0:
+        sendOpflowONAction();
+        break;
+    case 1:
+        sendOpflowOFFAction();
+        break;
+    default:
+        break;
+    }
+}
+
+void Vehicle::sendOpflowONAction()
+{
+    parameterManager()->_sendParamSetToVehicle(_defaultComponentId, "EK3_SRC2_VELXY" , FactMetaData::valueTypeUint8, 5);
+    parameterManager()->_sendParamSetToVehicle(_defaultComponentId, "EK3_SRC_OPTIONS" , FactMetaData::valueTypeUint8, 1);
+}
+
+void Vehicle::sendOpflowOFFAction()
+{
+    parameterManager()->_sendParamSetToVehicle(_defaultComponentId, "EK3_SRC2_VELXY" , FactMetaData::valueTypeUint8, 0);
+    parameterManager()->_sendParamSetToVehicle(_defaultComponentId, "EK3_SRC_OPTIONS" , FactMetaData::valueTypeUint8, 0);
+}
+
+void Vehicle::sendLandingAssistAction(int landingAssistOption)
+{
+    switch(landingAssistOption) {
+    case 0:
+        sendLandingAssistOFFAction();
+        break;
+    case 1:
+        sendLandingAssistONAction();
+        break;
+    default:
+        break;
+    }
+}
+
+void Vehicle::sendLandingAssistONAction()
+{
+    parameterManager()->_sendParamSetToVehicle(_defaultComponentId, "SCR_USER1" , FactMetaData::valueTypeUint8, 1);
+}
+
+void Vehicle::sendLandingAssistOFFAction()
+{
+    parameterManager()->_sendParamSetToVehicle(_defaultComponentId, "SCR_USER1" , FactMetaData::valueTypeUint8, 0);
+}
+
+void Vehicle::sendSetMount1Action()
+{
+    parameterManager()->_sendParamSetToVehicle(_defaultComponentId, "SCR_USER2" , FactMetaData::valueTypeUint8, 1);
+}
+
+void Vehicle::sendSetMount2Action()
+{
+    parameterManager()->_sendParamSetToVehicle(_defaultComponentId, "SCR_USER2" , FactMetaData::valueTypeUint8, 2);
+}

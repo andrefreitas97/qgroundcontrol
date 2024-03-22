@@ -584,7 +584,7 @@ ApplicationWindow {
                 QGCLabel {
                     id:                 vehicleWarningLabel
                     anchors.centerIn:   parent
-                    text:               qsTr("Vehicle Error")
+                    text:               qsTr("Vehicle Message")
                     font.pointSize:     ScreenTools.smallFontPointSize
                     color:              qgcPal.alertText
                 }
@@ -608,7 +608,7 @@ ApplicationWindow {
                 QGCLabel {
                     id:                 additionalErrorsLabel
                     anchors.centerIn:   parent
-                    text:               qsTr("Additional errors received")
+                    text:               qsTr("Additional messages received")
                     font.pointSize:     ScreenTools.smallFontPointSize
                     color:              qgcPal.alertText
                 }

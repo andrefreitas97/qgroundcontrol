@@ -22,6 +22,9 @@ import QGroundControl.Palette                   1.0
 import QGroundControl.Vehicle                   1.0
 import QGroundControl.FlightMap                 1.0
 
+import QGroundControl.FactSystem    1.0
+import QGroundControl.FactControls  1.0
+
 /// This provides the smarts behind the guided mode commands, minus the user interface. This way you can change UI
 /// without affecting the underlying functionality.
 Item {
@@ -40,6 +43,11 @@ Item {
     readonly property string rtlTitle:                      qsTr("Return")
     readonly property string takeoffTitle:                  qsTr("Takeoff")
     readonly property string gripperTitle:                  qsTr("Gripper Function")
+    readonly property string grenadesTitle:                  qsTr("Grenades Function")
+    readonly property string heightTitle:                 qsTr("Height Source Function")
+    readonly property string positionTitle:                     qsTr("Position Source Function")
+    readonly property string landingAssistTitle:                     qsTr("Landing Assist Function")
+
     readonly property string landTitle:                     qsTr("Land")
     readonly property string startMissionTitle:             qsTr("Start Mission")
     readonly property string mvStartMissionTitle:           qsTr("Start Mission (MV)")
@@ -64,7 +72,12 @@ Item {
     readonly property string disarmMessage:                     qsTr("Disarm the vehicle")
     readonly property string emergencyStopMessage:              qsTr("WARNING: THIS WILL STOP ALL MOTORS. IF VEHICLE IS CURRENTLY IN THE AIR IT WILL CRASH.")
     readonly property string takeoffMessage:                    qsTr("Takeoff from ground and hold position.")
-    readonly property string gripperMessage:                       qsTr("Grab or Release the cargo")
+    readonly property string gripperMessage:                    qsTr("Grab or Release the cargo")
+    readonly property string grenadesMessage:                    qsTr("Confirm Grenade Launcher action")
+    readonly property string heightMessage:                      qsTr("Set Height Source")
+    readonly property string positionMessage:                    qsTr("Set Position Source")
+    readonly property string landingAssistMessage:                    qsTr("Set Landing Assist option")
+
     readonly property string startMissionMessage:               qsTr("Takeoff from ground and start the current mission.")
     readonly property string continueMissionMessage:            qsTr("Continue the mission from the current waypoint.")
     readonly property string resumeMissionUploadFailMessage:    qsTr("Upload of resume mission failed. Confirm to retry upload")
@@ -111,6 +124,10 @@ Item {
     readonly property int actionChangeSpeed:                25
     readonly property int actionGripper:                    26
     readonly property int actionSetHome:                    27
+     readonly property int actionGrenades:                   28
+     readonly property int actionHeight:                  29
+     readonly property int actionPosition:                     30
+    readonly property int actionLandingAssist:                     31
 
     property var    _activeVehicle:             QGroundControl.multiVehicleManager.activeVehicle
     property bool   _useChecklist:              QGroundControl.settingsManager.appSettings.useChecklist.rawValue && QGroundControl.corePlugin.options.preFlightChecklistUrl.toString().length
@@ -139,7 +156,23 @@ Item {
     property bool showGotoLocation:     _guidedActionsEnabled && _vehicleFlying
     property bool showSetHome:          _guidedActionsEnabled
     property bool showActionList:       _guidedActionsEnabled && (showStartMission || showResumeMission || showChangeAlt || showLandAbort || actionList.hasCustomActions)
-    property bool showGripper:          _initialConnectComplete ? _activeVehicle.hasGripper : false
+
+    property bool   _communicationLost: _activeVehicle ? _activeVehicle.vehicleLinkManager.communicationLost : false
+    property Fact _payloadgripper: QGroundControl.settingsManager.appSettings.payloadgripper
+    property Fact _payloadgrenades: QGroundControl.settingsManager.appSettings.payloadgrenades
+
+    property bool   _vehiclealfa: QGroundControl.settingsManager.appSettings.vehiclealfa.rawValue
+    property bool   _vehiclebravo: QGroundControl.settingsManager.appSettings.vehiclebravo.rawValue
+
+        property bool showGripper:         _guidedActionsEnabled && !_communicationLost && _initialConnectComplete && _activeVehicle.hasGripper && _payloadgripper.value
+        property bool showGrenades:        _guidedActionsEnabled && !_communicationLost && _initialConnectComplete && _payloadgrenades.value
+        property bool showHeight:          _guidedActionsEnabled && !_communicationLost && _initialConnectComplete
+        property bool showPosition:        _guidedActionsEnabled && !_communicationLost && _initialConnectComplete && _vehiclebravo
+        property bool showLandingAssist:   _guidedActionsEnabled && !_communicationLost && _initialConnectComplete && _vehiclebravo
+        property bool showPayload:         _guidedActionsEnabled && !_communicationLost && _initialConnectComplete && (_payloadgrenades.value || _payloadgripper.value)
+        property bool showSensors:         _guidedActionsEnabled && !_communicationLost && _initialConnectComplete
+        property bool showConfig:          _guidedActionsEnabled && !_communicationLost && _initialConnectComplete
+
     property string changeSpeedTitle:   _fixedWing ? changeAirspeedTitle : changeCruiseSpeedTitle
     property string changeSpeedMessage: _fixedWing ? changeAirspeedMessage : changeCruiseSpeedMessage
 
@@ -173,6 +206,10 @@ Item {
     property bool   _fixedWing:             _activeVehicle ? _activeVehicle.fixedWing || _activeVehicle.vtolInFwdFlight : false
     property bool  _speedLimitsAvailable:   _activeVehicle && ((_fixedWing && _activeVehicle.haveFWSpeedLimits) || (!_fixedWing && _activeVehicle.haveMRSpeedLimits))
     property var   _gripperFunction:        undefined
+     property int   _grenadesFunction:       0
+    property int   _heightFunction:       0
+    property int   _positionFunction:       0
+    property int   _landingAssistFunction:       0
 
     // You can turn on log output for GuidedActionsController by turning on GuidedActionsControllerLog category
     property bool __guidedModeSupported:    _activeVehicle ? _activeVehicle.guidedModeSupported : false
@@ -514,6 +551,30 @@ Item {
             confirmDialog.message = gripperMessage
             _widgetLayer._gripperMenu.createObject(mainWindow).open()
             break
+        case actionGrenades:
+            confirmDialog.hideTrigger = true
+            confirmDialog.title = grenadesTitle
+            confirmDialog.message = grenadesMessage
+            _widgetLayer._grenadesMenu.createObject(mainWindow).open()
+            break
+        case actionHeight:
+            confirmDialog.hideTrigger = true
+            confirmDialog.title = heightTitle
+            confirmDialog.message = heightMessage
+            _widgetLayer._heightMenu.createObject(mainWindow).open()
+            break
+        case actionPosition:
+            confirmDialog.hideTrigger = true
+            confirmDialog.title = positionTitle
+            confirmDialog.message = positionMessage
+            _widgetLayer._positionMenu.createObject(mainWindow).open()
+            break
+        case actionLandingAssist:
+            confirmDialog.hideTrigger = true
+            confirmDialog.title = landingAssistTitle
+            confirmDialog.message = landingAssistMessage
+            _widgetLayer._landingAssistMenu.createObject(mainWindow).open()
+            break
         case actionSetHome:
             confirmDialog.title = setHomeTitle
             confirmDialog.message = setHomeMessage
@@ -611,7 +672,19 @@ Item {
             }
             break
         case actionGripper:           
-            _gripperFunction === undefined ? _activeVehicle.sendGripperAction(Vehicle.Invalid_option) : _activeVehicle.sendGripperAction(_gripperFunction)
+            _gripperFunction === undefined ? _activeVehicle.sendGripperAction(Vehicle.Invalid_option) :  _activeVehicle.sendGripperAction(_gripperFunction)
+            break
+        case actionGrenades:
+            _activeVehicle.sendGrenadesAction(_grenadesFunction)
+            break
+        case actionHeight:
+            _activeVehicle.sendHeightAction(_heightFunction)
+            break
+        case actionPosition:
+            _activeVehicle.sendPositionAction(_positionFunction)
+            break
+        case actionLandingAssist:
+            _activeVehicle.sendLandingAssistAction(_landingAssistFunction)
             break
         case actionSetHome:
             _activeVehicle.doSetHome(actionData)

@@ -74,7 +74,13 @@ Rectangle {
             title:      guidedController.gripperTitle,
             text:       guidedController.gripperMessage,
             action:     guidedController.actionGripper,
-            visible:    guidedController.showGripper
+            visible:    false//guidedController.showGripper
+        },
+        {
+            title:      guidedController.grenadesTitle,
+            text:       guidedController.grenadesMessage,
+            action:     guidedController.actionGrenades,
+            visible:    false//guidedController.showGrenades
         }
     ]
 

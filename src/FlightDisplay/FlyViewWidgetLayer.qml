@@ -47,6 +47,9 @@ Item {
     property rect   _centerViewport:        Qt.rect(0, 0, width, height)
     property real   _rightPanelWidth:       ScreenTools.defaultFontPixelWidth * 30
     property alias  _gripperMenu:           gripperOptions
+    property alias  _grenadesMenu:          grenadesOptions
+    property alias  _payloadMenu:     payloadOptions
+    property alias  _configMenu:     configOptions
 
     QGCToolInsets {
         id:                     _totalToolInsets
@@ -287,6 +290,18 @@ Item {
 
     GripperMenu {
         id: gripperOptions
+    }
+
+    GrenadesMenu {
+        id: grenadesOptions
+    }
+
+    PayloadMenu {
+        id: payloadOptions
+    }
+
+    ConfigMenu {
+        id: configOptions
     }
 
     VehicleWarnings {

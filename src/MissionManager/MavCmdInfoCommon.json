@@ -629,19 +629,21 @@
         {
             "id":           184,
             "rawName":      "MAV_CMD_DO_REPEAT_SERVO",
-            "friendlyName": "Cycle servo",
-            "description":  "Set servo to specified PWM value.",
+            "friendlyName": "Grenade Dropper",
+            "description":  "Select Grenade to launch.",
+            "category":     "Payloads",
             "param1": {
                 "label":            "Servo",
-                "default":          1,
+                "default":          11,
                 "decimalPlaces":    0,
                 "min":              0
             },
             "param2": {
-                "label":            "PWM",
-                "default":          1000,
-                "decimalPlaces":    0,
-                "min":              0
+                "label":            "Grenade",
+                "enumStrings":      "1,2",
+                "enumValues":       "600,2200",
+                "default":          600,
+                "decimalPlaces":    0
             },
             "param3": {
                 "label":            "Cycles",
@@ -652,11 +654,12 @@
             },
             "param4": {
                 "label":            "Time",
-                "default":          10,
+                "default":          2,
                 "units":            "secs",
                 "decimalPlaces":    0,
                 "min":              0
-            }
+            },
+            "paramRemove":  "1,3,4"
         },
         {
             "id":           187,
@@ -1069,7 +1072,7 @@
             "description":          "Control a gripper mechanism.",
             "specifiesCoordinate":  false,
             "friendlyEdit":         true,
-            "category":             "Advanced",
+            "category":             "Payloads",
             "param1": {
                 "label":            "Gripper id",
                 "default":          1,

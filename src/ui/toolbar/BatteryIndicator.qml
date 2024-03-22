@@ -34,18 +34,16 @@ Item {
         anchors.top:    parent.top
         anchors.bottom: parent.bottom
 
-        Repeater {
-            model: _activeVehicle ? _activeVehicle.batteries : 0
+        Loader {
+            anchors.top:        parent.top
+            anchors.bottom:     parent.bottom
+            sourceComponent:    batteryVisual
 
-            Loader {
-                anchors.top:        parent.top
-                anchors.bottom:     parent.bottom
-                sourceComponent:    batteryVisual
-
-                property var battery: object
-            }
+            property var battery: _activeVehicle.batteries.count && _activeVehicle ? _activeVehicle.batteries.get(0) : undefined
         }
+
     }
+
     MouseArea {
         anchors.fill:   parent
         onClicked: {
@@ -63,7 +61,7 @@ Item {
             function getBatteryColor() {
                 switch (battery.chargeState.rawValue) {
                 case MAVLink.MAV_BATTERY_CHARGE_STATE_OK:
-                    return qgcPal.text
+                    return qgcPal.colorGreen
                 case MAVLink.MAV_BATTERY_CHARGE_STATE_LOW:
                     return qgcPal.colorOrange
                 case MAVLink.MAV_BATTERY_CHARGE_STATE_CRITICAL:
@@ -88,7 +86,7 @@ Item {
                 } else if (battery.chargeState.rawValue !== MAVLink.MAV_BATTERY_CHARGE_STATE_UNDEFINED) {
                     return battery.chargeState.enumStringValue
                 }
-                return ""
+                return qsTr("n/a")
             }
 
             QGCColoredImage {

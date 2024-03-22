@@ -547,7 +547,34 @@ public:
     Q_ENUM(GRIPPER_OPTIONS)
 
     void setGripperAction(GRIPPER_ACTIONS gripperAction);
-    Q_INVOKABLE void sendGripperAction(GRIPPER_OPTIONS gripperOption); 
+    Q_INVOKABLE void sendGripperAction(GRIPPER_OPTIONS gripperOption);
+
+    //void setServoAction(float servoInstance, float servoPWM);
+
+    void cycleServoAction(float servoInstance, float servoPWM);
+    Q_INVOKABLE void sendGrenadesAction(int grenadesOption);
+
+    Q_INVOKABLE void sendHeightAction(int heightOption);
+
+    Q_INVOKABLE void sendGPSHeightAction();
+
+    Q_INVOKABLE void sendBaroHeightAction();
+
+    Q_INVOKABLE void sendPositionAction(int positionOption);
+
+    Q_INVOKABLE void sendOpflowONAction();
+
+    Q_INVOKABLE void sendOpflowOFFAction();
+
+    Q_INVOKABLE void sendLandingAssistAction(int landingAssistOption);
+
+    Q_INVOKABLE void sendLandingAssistONAction();
+
+    Q_INVOKABLE void sendLandingAssistOFFAction();
+
+    Q_INVOKABLE void sendSetMount1Action();
+
+    Q_INVOKABLE void sendSetMount2Action();
 
     bool fixedWing() const;
     bool multiRotor() const;

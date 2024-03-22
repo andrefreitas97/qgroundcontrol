@@ -175,4 +175,22 @@ Item {
         show:                   !QGroundControl.videoManager.fullScreen &&
                                     (videoControl.pipState.state === videoControl.pipState.pipState || mapControl.pipState.state === mapControl.pipState.pipState)
     }
+
+    //RowLayout {
+    //                    QGCButton {
+    //                        id:         heightButton
+    //                        text:       qsTr("Height Source")
+    //                        onClicked:  {
+    //                            _guidedController.actionHeight
+    //                        }
+    //                    }
+
+    //                    QGCButton {
+    //                        id:         positionButton
+    //                        text:       qsTr("Position Source")
+    //                        onClicked:  {
+    //                            _guidedController.actionPosition
+    //                        }
+    //                    }
+    //                }
 }

@@ -21,7 +21,8 @@ GuidedActionPause               1.0 GuidedActionPause.qml
 GuidedActionRTL                 1.0 GuidedActionRTL.qml
 GuidedValueSlider               1.0 GuidedValueSlider.qml
 GuidedActionTakeoff             1.0 GuidedActionTakeoff.qml
-GuidedActionGripper             1.0 GuidedActionGripper.qml
+GuidedActionPayload              1.0 GuidedActionPayload.qml
+GuidedActionConfig              1.0 GuidedActionConfig.qml
 GuidedToolStripAction           1.0 GuidedToolStripAction.qml
 MultiVehicleList                1.0 MultiVehicleList.qml
 PreFlightBatteryCheck           1.0 PreFlightBatteryCheck.qml
@@ -39,3 +40,6 @@ ObstacleDistanceOverlayMap      1.0 ObstacleDistanceOverlayMap.qml
 ObstacleDistanceOverlayVideo    1.0 ObstacleDistanceOverlayVideo.qml
 GripperMenu                     1.0 GripperMenu.qml
 OnScreenGimbalController        1.0 OnScreenGimbalController.qml
+GrenadesMenu                    1.0 GrenadesMenu.qml
+PayloadMenu                      1.0 PayloadMenu.qml
+ConfigMenu                      1.0 ConfigMenu.qml

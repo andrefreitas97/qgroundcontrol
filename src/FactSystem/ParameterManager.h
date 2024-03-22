@@ -96,6 +96,8 @@ public:
     static MAV_PARAM_TYPE               factTypeToMavType(FactMetaData::ValueType_t factType);
     static FactMetaData::ValueType_t    mavTypeToFactType(MAV_PARAM_TYPE mavType);
 
+    void    _sendParamSetToVehicle              (int componentId, const QString& paramName, FactMetaData::ValueType_t valueType, const QVariant& value);
+
 signals:
     void parametersReadyChanged     (bool parametersReady);
     void missingParametersChanged   (bool missingParameters);
@@ -114,7 +116,7 @@ private:
     void    _initialRequestTimeout              (void);
     int     _actualComponentId                  (int componentId);
     void    _readParameterRaw                   (int componentId, const QString& paramName, int paramIndex);
-    void    _sendParamSetToVehicle              (int componentId, const QString& paramName, FactMetaData::ValueType_t valueType, const QVariant& value);
+    
     void    _writeLocalParamCache               (int vehicleId, int componentId);
     void    _tryCacheHashLoad                   (int vehicleId, int componentId, QVariant hash_value);
     void    _loadMetaData                       (void);
