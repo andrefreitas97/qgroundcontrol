@@ -247,23 +247,24 @@ Rectangle {
         RowLayout {
             Layout.alignment:   Qt.AlignHCenter
             spacing:            0
-            visible:            true
+            visible:            QGroundControl.settingsManager.appSettings.cameraZio.value
 
             QGCRadioButton {
                 font.pointSize: ScreenTools.smallFontPointSize
                 text:           qsTr("FPV Stream")
                 checked:        _videoSettings.rtspUrl.value == _videoSettings.rtspUrl1.value ? true : false
                 onClicked:      {_videoSettings.rtspUrl.value = _videoSettings.rtspUrl1.value
-                                 sendSetMount1Action();}
+                                 _activeVehicle.sendSetMount1Action()}
 
             }
+
 
             QGCRadioButton {
                 font.pointSize: ScreenTools.smallFontPointSize
                 text:           qsTr("Gimbal Stream")
                 checked:        _videoSettings.rtspUrl.value == _videoSettings.rtspUrl2.value ? true : false
                 onClicked:      {_videoSettings.rtspUrl.value = _videoSettings.rtspUrl2.value
-                                 sendSetMount2Action();}
+                                 _activeVehicle.sendSetMount2Action()}
             }
         }
 

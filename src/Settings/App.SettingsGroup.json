@@ -368,6 +368,13 @@
     "longDesc":  "Depending on the payload selected the app shows different functions in guided actions.",
     "type":             "bool",
     "default":     false
+},
+{
+    "name":             "cameraZio",
+    "shortDesc": "Gremsy Zio Camera",
+    "longDesc":  "Sets Gremsy Zio Camera as available or unavailable.",
+    "type":             "bool",
+    "default":     false
 }
 ]
 }

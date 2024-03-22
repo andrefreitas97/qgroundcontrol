@@ -84,7 +84,7 @@ Rectangle {
                     QGCLabel {
                         id:         vehicleSectionLabel
                         text:       qsTr("Vehicle")
-                        visible:    QGroundControl.settingsManager.appSettings.vehiclealfa.visible && QGroundControl.settingsManager.appSettings.vehiclebravo.visible
+                        visible:    QGroundControl.settingsManager.flyViewSettings.visible
                     }
                     Rectangle {
                         Layout.preferredHeight: vehicleGrid.height + (_margins * 2)
@@ -135,7 +135,7 @@ Rectangle {
                     QGCLabel {
                         id:         payloadSectionLabel
                         text:       qsTr("Payload")
-                        visible:    QGroundControl.settingsManager.appSettings.payloadgripper.visible && QGroundControl.settingsManager.appSettings.payloadgrenades.visible
+                        visible:    QGroundControl.settingsManager.flyViewSettings.visible
                     }
                     Rectangle {
                         Layout.preferredHeight: payloadGrid.height + (_margins * 2)
@@ -207,7 +207,59 @@ Rectangle {
                         }
                     }
 
+                    Item { width: 1; height: _margins; visible: cameraSectionLabel.visible }
+                    QGCLabel {
+                        id:         cameraSectionLabel
+                        text:       qsTr("Camera")
+                        visible:    QGroundControl.settingsManager.flyViewSettings.visible
+                    }
+                    Rectangle {
+                        Layout.preferredHeight: cameraCol.height + (_margins * 2)
+                        Layout.preferredWidth:  cameraCol.width + (_margins * 2)
+                        color:                  qgcPal.windowShade
+                        visible:                cameraSectionLabel.visible
+                        Layout.fillWidth:       true
 
+                        ColumnLayout {
+                            id:                         cameraCol
+                            anchors.margins:            _margins
+                            anchors.top:                parent.top
+                            anchors.horizontalCenter:   parent.horizontalCenter
+                            spacing:                    _margins
+
+                            RowLayout {
+                                spacing: ScreenTools.defaultFontPixelWidth
+
+                                QGCLabel {
+                                    text:       qsTr("Gremsy Zio:")
+                                }
+
+                                QGCRadioButton {
+                                    text:               qsTr("ON")
+                                    enabled:            vehicleGrid.appSettings.vehiclebravo.value
+                                    checked:            QGroundControl.settingsManager.appSettings.cameraZio.value
+                                    onClicked:{
+                                        QGroundControl.settingsManager.appSettings.cameraZio.value = true
+                                    }
+                                    Layout.columnSpan:  3
+                                }
+
+                                QGCRadioButton {
+                                    text:               qsTr("OFF")
+                                    enabled:            vehicleGrid.appSettings.vehiclebravo.value
+                                    checked:            !QGroundControl.settingsManager.appSettings.cameraZio.value
+                                    onClicked:{
+                                        QGroundControl.settingsManager.appSettings.cameraZio.value = false
+                                        QGroundControl.settingsManager.videoSettings.rtspUrl.value = QGroundControl.settingsManager.videoSettings.rtspUrl1.value
+                                        QGroundControl.multiVehicleManager.activeVehicle.sendSetMount1Action()
+                                    }
+                                    Layout.columnSpan:  3
+                                }
+                            }
+                        }
+                    }
+
+                    Item { width: 1; height: _margins; visible: flyViewSectionLabel.visible }
                     QGCLabel {
                         id:         flyViewSectionLabel
                         text:       qsTr("Fly View")
