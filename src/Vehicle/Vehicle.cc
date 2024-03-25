@@ -4497,16 +4497,16 @@ void Vehicle::sendGripperAction(GRIPPER_OPTIONS gripperOption)
 }
 
 
-//void Vehicle::setServoAction(float servoInstance, float servoPWM)
-//{
-//    sendMavCommand(
-//        _defaultComponentId,
-//        MAV_CMD_DO_SET_SERVO,
-//        false,                               // Don't show errors
-//        servoInstance,                                   // Param1: Servo instance number
-//        servoPWM,                       // Param2: Pulse Width Modulation
-//        0, 0, 0, 0, 0);                      // Param 3 ~ 7 : unused
-//}
+void Vehicle::setServoAction(float servoInstance, float servoPWM)
+{
+    sendMavCommand(
+        _defaultComponentId,
+        MAV_CMD_DO_SET_SERVO,
+        false,                               // Don't show errors
+        servoInstance,                                   // Param1: Servo instance number
+        servoPWM,                       // Param2: Pulse Width Modulation
+        0, 0, 0, 0, 0);                      // Param 3 ~ 7 : unused
+}
 
 void Vehicle::cycleServoAction(float servoInstance, float servoPWM)
 {
@@ -4525,10 +4525,10 @@ void Vehicle::sendGrenadesAction(int grenadesOption)
 {
     switch(grenadesOption) {
     case 1:
-        cycleServoAction(11, 600);
+        cycleServoAction(12, 600);
         break;
     case 2:
-        cycleServoAction(11, 2200);
+        cycleServoAction(12, 2200);
         break;
     default:
         break;
@@ -4617,4 +4617,26 @@ void Vehicle::sendSetMount1Action()
 void Vehicle::sendSetMount2Action()
 {
     parameterManager()->_sendParamSetToVehicle(_defaultComponentId, "SCR_USER2" , FactMetaData::valueTypeUint8, 2);
+}
+
+void Vehicle::setPayloadType(int payload_type)
+{
+    switch(payload_type) {
+    case 0: // Gripper
+        parameterManager()->_sendParamSetToVehicle(_defaultComponentId, "SERVO12_FUNCTION" , FactMetaData::valueTypeUint8, 28);
+        parameterManager()->_sendParamSetToVehicle(_defaultComponentId, "SERVO12_MAX" , FactMetaData::valueTypeUint16, 2000);
+        parameterManager()->_sendParamSetToVehicle(_defaultComponentId, "SERVO12_MIN" , FactMetaData::valueTypeUint16, 550);
+        parameterManager()->_sendParamSetToVehicle(_defaultComponentId, "SERVO12_TRIM" , FactMetaData::valueTypeUint16, 550);
+        setServoAction(12, 2000);
+        break;
+    case 1: // Grenades
+        parameterManager()->_sendParamSetToVehicle(_defaultComponentId, "SERVO12_FUNCTION" , FactMetaData::valueTypeUint8, 0);
+        parameterManager()->_sendParamSetToVehicle(_defaultComponentId, "SERVO12_MAX" , FactMetaData::valueTypeUint16, 2200);
+        parameterManager()->_sendParamSetToVehicle(_defaultComponentId, "SERVO12_MIN" , FactMetaData::valueTypeUint16, 575);
+        parameterManager()->_sendParamSetToVehicle(_defaultComponentId, "SERVO12_TRIM" , FactMetaData::valueTypeUint16, 1450);
+        setServoAction(12, 1450);
+        break;
+    default:
+        break;
+    }
 }

@@ -190,17 +190,19 @@ Rectangle {
                                 onClicked:{
                                     QGroundControl.settingsManager.appSettings.payloadgripper.value = true
                                     QGroundControl.settingsManager.appSettings.payloadgrenades.value = false
+                                    QGroundControl.multiVehicleManager.activeVehicle.setPayloadType(0)
                                 }
                                 Layout.columnSpan:  3
                             }
 
                             QGCRadioButton {
-                                text:               qsTr("Grenades")
+                                text:               qsTr("Grenade Dropper")
                                 visible:            vehicleGrid.appSettings.vehiclebravo.value
                                 checked:            QGroundControl.settingsManager.appSettings.payloadgrenades.value === true
                                 onClicked:{
                                     QGroundControl.settingsManager.appSettings.payloadgripper.value = false
                                     QGroundControl.settingsManager.appSettings.payloadgrenades.value = true
+                                    QGroundControl.multiVehicleManager.activeVehicle.setPayloadType(1)
                                 }
                                 Layout.columnSpan:  3
                             }

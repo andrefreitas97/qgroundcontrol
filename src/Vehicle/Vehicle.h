@@ -549,9 +549,10 @@ public:
     void setGripperAction(GRIPPER_ACTIONS gripperAction);
     Q_INVOKABLE void sendGripperAction(GRIPPER_OPTIONS gripperOption);
 
-    //void setServoAction(float servoInstance, float servoPWM);
+    void setServoAction(float servoInstance, float servoPWM);
 
     void cycleServoAction(float servoInstance, float servoPWM);
+
     Q_INVOKABLE void sendGrenadesAction(int grenadesOption);
 
     Q_INVOKABLE void sendHeightAction(int heightOption);
@@ -575,6 +576,8 @@ public:
     Q_INVOKABLE void sendSetMount1Action();
 
     Q_INVOKABLE void sendSetMount2Action();
+
+    Q_INVOKABLE void setPayloadType(int payload_type);
 
     bool fixedWing() const;
     bool multiRotor() const;
