@@ -113,6 +113,7 @@ Rectangle {
                                 onClicked:{
                                     vehicleGrid.appSettings.vehiclealfa.value = true
                                     vehicleGrid.appSettings.vehiclebravo.value = false
+                                    QGroundControl.settingsManager.appSettings.cameraZio.value = false
                                 }
                                 Layout.columnSpan:  3
                             }

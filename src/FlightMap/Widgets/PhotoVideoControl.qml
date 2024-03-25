@@ -92,6 +92,9 @@ Rectangle {
     property bool   _canShootInCurrentMode:                     _mavlinkCamera ? _mavlinkCameraCanShoot : _videoStreamCanShoot || _simpleCameraAvailable
     property bool   _isShootingInCurrentMode:                   _mavlinkCamera ? _mavlinkCameraIsShooting : _videoStreamIsShootingInCurrentMode || _simpleCameraIsShootingInCurrentMode
 
+    property bool   _communicationLost: _activeVehicle ? _activeVehicle.vehicleLinkManager.communicationLost : false
+    property bool   _initialConnectComplete:    _activeVehicle ? _activeVehicle.initialConnectComplete : false
+
     function setCameraMode(photoMode) {
         _videoStreamInPhotoMode = photoMode
         if (_mavlinkCamera) {
@@ -247,7 +250,8 @@ Rectangle {
         RowLayout {
             Layout.alignment:   Qt.AlignHCenter
             spacing:            0
-            visible:            QGroundControl.settingsManager.appSettings.cameraZio.value
+            visible:            QGroundControl.settingsManager.appSettings.cameraZio.value && _activeVehicle
+            enabled:            !_communicationLost && _initialConnectComplete
 
             QGCRadioButton {
                 font.pointSize: ScreenTools.smallFontPointSize
