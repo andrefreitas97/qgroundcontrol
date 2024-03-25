@@ -189,9 +189,14 @@ Rectangle {
                                 visible:            vehicleGrid.appSettings.vehiclebravo.value
                                 checked:            QGroundControl.settingsManager.appSettings.payloadgripper.value === true
                                 onClicked:{
-                                    QGroundControl.settingsManager.appSettings.payloadgripper.value = true
-                                    QGroundControl.settingsManager.appSettings.payloadgrenades.value = false
-                                    QGroundControl.multiVehicleManager.activeVehicle.setPayloadType(0)
+                                    if(QGroundControl.settingsManager.appSettings.payloadgripper.value){
+                                        QGroundControl.settingsManager.appSettings.payloadgripper.value = false
+                                    }else {
+                                        QGroundControl.settingsManager.appSettings.payloadgripper.value = true;
+                                        QGroundControl.settingsManager.appSettings.payloadgrenades.value = false;
+                                        QGroundControl.multiVehicleManager.activeVehicle.setPayloadType(0);
+                                    }
+
                                 }
                                 Layout.columnSpan:  3
                             }
@@ -201,9 +206,13 @@ Rectangle {
                                 visible:            vehicleGrid.appSettings.vehiclebravo.value
                                 checked:            QGroundControl.settingsManager.appSettings.payloadgrenades.value === true
                                 onClicked:{
-                                    QGroundControl.settingsManager.appSettings.payloadgripper.value = false
-                                    QGroundControl.settingsManager.appSettings.payloadgrenades.value = true
-                                    QGroundControl.multiVehicleManager.activeVehicle.setPayloadType(1)
+                                    if(QGroundControl.settingsManager.appSettings.payloadgrenades.value){
+                                        QGroundControl.settingsManager.appSettings.payloadgrenades.value = false
+                                    }else {
+                                        QGroundControl.settingsManager.appSettings.payloadgrenades.value = true
+                                        QGroundControl.settingsManager.appSettings.payloadgripper.value = false
+                                        QGroundControl.multiVehicleManager.activeVehicle.setPayloadType(1)
+                                    }
                                 }
                                 Layout.columnSpan:  3
                             }
