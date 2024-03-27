@@ -80,57 +80,51 @@ Rectangle {
                     id:                         settingsColumn
                     anchors.horizontalCenter:   parent.horizontalCenter
 
-                    Item { width: 1; height: _margins; visible: vehicleSectionLabel.visible }
-                    QGCLabel {
-                        id:         vehicleSectionLabel
-                        text:       qsTr("Vehicle")
-                        visible:    QGroundControl.settingsManager.flyViewSettings.visible
-                    }
-                    Rectangle {
-                        Layout.preferredHeight: vehicleGrid.height + (_margins * 2)
-                        Layout.preferredWidth:  vehicleGrid.width + (_margins * 2)
-                        color:                  qgcPal.windowShade
-                        visible:                vehicleSectionLabel.visible
-                        Layout.fillWidth:       true
-
-                        GridLayout {
-                            id:                         vehicleGrid
-                            anchors.topMargin:          _margins
-                            anchors.top:                parent.top
-                            Layout.fillWidth:           true
-                            anchors.horizontalCenter:   parent.horizontalCenter
-                            columns:                    3
+                    //Item { width: 1; height: _margins; visible: vehicleSectionLabel.visible }
+                    //QGCLabel {
+                    //    id:         vehicleSectionLabel
+                    //    text:       qsTr("Vehicle")
+                    //    visible:    QGroundControl.settingsManager.flyViewSettings.visible
+                    //}
+                    //Rectangle {
+                    //    Layout.preferredHeight: vehicleGrid.height + (_margins * 2)
+                    //    Layout.preferredWidth:  vehicleGrid.width + (_margins * 2)
+                    //    color:                  qgcPal.windowShade
+                    //    visible:                vehicleSectionLabel.visible
+                    //    Layout.fillWidth:       true
 
 
-                            property var  appSettings:      QGroundControl.settingsManager.appSettings
-                            property bool   _vehiclealfa: appSettings.vehiclealfa.rawValue
-                            property bool   _vehiclebravo: appSettings.vehiclebravo.rawValue
+                    //    GridLayout {
+                    //        id:                         vehicleGrid
+                    //        anchors.topMargin:          _margins
+                    //        anchors.top:                parent.top
+                    //        Layout.fillWidth:           true
+                    //        anchors.horizontalCenter:   parent.horizontalCenter
+                    //        columns:                    3
 
-                            QGCRadioButton {
-                                text:               qsTr("Alfa")
-                                visible:            vehicleGrid.appSettings.vehiclealfa.visible
-                                checked:            vehicleGrid.appSettings.vehiclealfa.value === true
-                                onClicked:{
-                                    vehicleGrid.appSettings.vehiclealfa.value = true
-                                    vehicleGrid.appSettings.vehiclebravo.value = false
-                                    QGroundControl.settingsManager.appSettings.cameraZio.value = false
-                                }
-                                Layout.columnSpan:  3
-                            }
 
-                            QGCRadioButton {
-                                text:               qsTr("Bravo")
-                                visible:            vehicleGrid.appSettings.vehiclebravo.visible
-                                checked:            vehicleGrid.appSettings.vehiclebravo.value === true
-                                onClicked:{
-                                    vehicleGrid.appSettings.vehiclealfa.value = false
-                                    vehicleGrid.appSettings.vehiclebravo.value = true
-                                }
-                                Layout.columnSpan:  3
-                            }
+                    //        property var  appSettings:      QGroundControl.settingsManager.appSettings
 
-                        }
-                    }
+                    //        QGCRadioButton {
+                    //            text:               qsTr("Alfa")
+                    //            visible:            vehicleGrid.appSettings.vehiclealfa.visible
+                    //            enabled:            false
+                    //            checked:            QGroundControl.settingsManager.appSettings.vehiclealfa.value
+                    //            Layout.columnSpan:  3
+
+                    //        }
+
+                    //        QGCRadioButton {
+                    //            text:               qsTr("Bravo")
+                    //            visible:            vehicleGrid.appSettings.vehiclebravo.visible
+                    //            enabled:            false
+                    //            checked:            QGroundControl.settingsManager.appSettings.vehiclebravo.value
+                    //            Layout.columnSpan:  3
+
+                    //        }
+
+                    //    }
+                    //}
 
                     Item { width: 1; height: _margins; visible: payloadSectionLabel.visible }
                     QGCLabel {
@@ -154,39 +148,16 @@ Rectangle {
                             columns:                    3
 
 
-
-                        //ColumnLayout {
-                        //    id:                         payloadCol
-                        //    anchors.margins:            _margins
-                        //    anchors.top:                parent.top
-                        //    anchors.horizontalCenter:   parent.horizontalCenter
-                        //    spacing:                    _margins
-
-                            //FactCheckBox {
-                            //    text:               qsTr("Gripper")
-                            //    fact:               _payloadgripper
-                            //    enabled:            vehicleGrid.appSettings.vehiclebravo.value
-
-                            //    property Fact _payloadgripper: QGroundControl.settingsManager.appSettings.payloadgripper
-                            //}
-
-                            //FactCheckBox {
-                            //    text:               qsTr("Grenades")
-                            //    fact:               _payloadgrenades
-                            //    enabled:            vehicleGrid.appSettings.vehiclebravo.value
-
-                            //    property Fact _payloadgrenades: QGroundControl.settingsManager.appSettings.payloadgrenades
-                            //}
                             QGCLabel {
                                 text:               qsTr("No payloads available for Alfa.")
                                 Layout.columnSpan:  3
                                 Layout.alignment:   Qt.AlignHCenter
-                                visible: vehicleGrid.appSettings.vehiclealfa.value
+                                visible: QGroundControl.settingsManager.appSettings.vehiclealfa.value
                             }
 
                             QGCRadioButton {
                                 text:               qsTr("Gripper")
-                                visible:            vehicleGrid.appSettings.vehiclebravo.value
+                                visible:            QGroundControl.settingsManager.appSettings.vehiclebravo.value
                                 checked:            QGroundControl.settingsManager.appSettings.payloadgripper.value === true
                                 onClicked:{
                                     if(QGroundControl.settingsManager.appSettings.payloadgripper.value){
@@ -203,7 +174,7 @@ Rectangle {
 
                             QGCRadioButton {
                                 text:               qsTr("Grenade Dropper")
-                                visible:            vehicleGrid.appSettings.vehiclebravo.value
+                                visible:            QGroundControl.settingsManager.appSettings.vehiclebravo.value
                                 checked:            QGroundControl.settingsManager.appSettings.payloadgrenades.value === true
                                 onClicked:{
                                     if(QGroundControl.settingsManager.appSettings.payloadgrenades.value){
@@ -248,17 +219,17 @@ Rectangle {
 
                                 QGCRadioButton {
                                     text:               qsTr("ON")
-                                    enabled:            vehicleGrid.appSettings.vehiclebravo.value
+                                    enabled:            QGroundControl.settingsManager.appSettings.vehiclebravo.value
                                     checked:            QGroundControl.settingsManager.appSettings.cameraZio.value
                                     onClicked:{
                                         QGroundControl.settingsManager.appSettings.cameraZio.value = true
                                     }
                                     Layout.columnSpan:  3
-                                }
+                                }          
 
                                 QGCRadioButton {
                                     text:               qsTr("OFF")
-                                    enabled:            vehicleGrid.appSettings.vehiclebravo.value
+                                    enabled:            QGroundControl.settingsManager.appSettings.vehiclebravo.value
                                     checked:            !QGroundControl.settingsManager.appSettings.cameraZio.value
                                     onClicked:{
                                         QGroundControl.settingsManager.appSettings.cameraZio.value = false
@@ -537,7 +508,7 @@ Rectangle {
                                 QGCLabel {
                                     id:         gimbalrtspUrlLabel
                                     text:       qsTr("Gimbal RTSP URL")
-                                    visible:    !_videoAutoStreamConfig && _isRTSP && _videoSettings.rtspUrl.visible
+                                    visible:    !_videoAutoStreamConfig && _isRTSP && _videoSettings.rtspUrl.visible && QGroundControl.settingsManager.appSettings.vehiclebravo.value
                                 }
                                 FactTextField {
                                     Layout.preferredWidth:  _comboFieldWidth

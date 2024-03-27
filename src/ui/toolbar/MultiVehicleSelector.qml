@@ -29,7 +29,7 @@ QGCComboBox {
     property bool showIndicator: _multipleVehicles
 
     property var    _activeVehicle:     QGroundControl.multiVehicleManager.activeVehicle
-    property bool   _multipleVehicles:  QGroundControl.multiVehicleManager.vehicles.count > 1
+    property bool   _multipleVehicles:  QGroundControl.multiVehicleManager.vehicles.count > 0 //1
     property var    _vehicleModel:      [ ]
 
     Connections {
@@ -46,7 +46,14 @@ QGCComboBox {
         if (_multipleVehicles) {
             for (var i = 0; i < QGroundControl.multiVehicleManager.vehicles.count; i++) {
                 var vehicle = QGroundControl.multiVehicleManager.vehicles.get(i)
-                newModel.push(qsTr("Vehicle") + " " + vehicle.id)
+
+                if (vehicle.id < 10){
+                    newModel.push(qsTr("Alfa") + " " + vehicle.id)
+                }else if (vehicle.id >= 10){
+                    newModel.push(qsTr("Bravo") + " " + vehicle.id)
+                } else {
+                    newModel.push(qsTr("Vehicle") + " " + vehicle.id)
+                }
 
                 if (vehicle.id === _activeVehicle.id) {
                     newCurrentIndex = i
@@ -56,6 +63,18 @@ QGCComboBox {
         currentIndex = -1
         _vehicleModel = newModel
         currentIndex = newCurrentIndex
+
+        if(_activeVehicle.id < 10){
+            QGroundControl.settingsManager.appSettings.vehiclealfa.value = true
+            QGroundControl.settingsManager.appSettings.vehiclebravo.value = false
+            QGroundControl.settingsManager.appSettings.cameraZio.value = false
+            QGroundControl.settingsManager.videoSettings.rtspUrl.value = QGroundControl.settingsManager.videoSettings.rtspUrl1.value
+            QGroundControl.multiVehicleManager.activeVehicle.sendSetMount1Action()
+        }
+        if(_activeVehicle.id >= 10){
+            QGroundControl.settingsManager.appSettings.vehiclealfa.value = false
+            QGroundControl.settingsManager.appSettings.vehiclebravo.value = true
+        }
     }
 
     onActivated: {
