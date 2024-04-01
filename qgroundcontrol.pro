@@ -27,7 +27,7 @@ message(Qt version $$[QT_VERSION])
 
 include(QGCCommon.pri)
 
-TARGET   = QGroundControl
+TARGET   = SAQGroundControl
 TEMPLATE = app
 QGCROOT  = $$PWD
 
@@ -60,7 +60,7 @@ WindowsBuild {
 # Branding
 #
 
-QGC_APP_NAME        = "QGroundControl"
+QGC_APP_NAME        = "SAQGroundControl"
 QGC_ORG_NAME        = "QGroundControl.org"
 QGC_ORG_DOMAIN      = "org.qgroundcontrol"
 QGC_APP_DESCRIPTION = "Open source ground control app provided by QGroundControl dev team"

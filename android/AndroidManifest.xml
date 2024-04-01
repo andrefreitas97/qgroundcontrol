@@ -14,9 +14,17 @@
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
+                <action android:name="android.hardware.usb.action.USB_DEVICE_ATTACHED"/>
+                <action android:name="android.hardware.usb.action.USB_DEVICE_DETACHED"/>
+                <action android:name="android.bluetooth.device.action.ACL_CONNECTED"/>
+                <action android:name="android.bluetooth.device.action.ACL_DISCONNECTED"/>
+                <action android:name="android.hardware.usb.action.USB_ACCESSORY_ATTACHED"/>
 
                 <!-- %%QGC_INSERT_ACTIVITY_INTENT_FILTER -->
             </intent-filter>
+            <meta-data android:resource="@xml/device_filter" android:name="android.hardware.usb.action.USB_DEVICE_ATTACHED"/>
+            <meta-data android:resource="@xml/device_filter" android:name="android.hardware.usb.action.USB_DEVICE_DETACHED"/>
+            <meta-data android:resource="@xml/device_filter" android:name="android.hardware.usb.action.USB_ACCESSORY_ATTACHED"/>
             <!-- %%QGC_INSERT_ACTIVITY_META_DATA -->
             <!-- Application arguments -->
             <!-- meta-data android:name="android.app.arguments" android:value="arg1 arg2 arg3"/ -->
@@ -93,7 +101,7 @@
     <uses-feature android:name="android.hardware.location.gps" android:required="false"/>
     <uses-feature android:name="android.hardware.location.network" android:required="false"/>
     <uses-feature android:name="android.hardware.location" android:required="false"/>
-    <uses-feature android:name="android.hardware.usb.accessory" android:required="false"/>
+    <uses-feature android:name="android.hardware.usb.accessory" android:required="true"/>
 
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.WRITE_INTERNAL_STORAGE"/>
