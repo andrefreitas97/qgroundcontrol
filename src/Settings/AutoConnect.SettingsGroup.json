@@ -15,7 +15,7 @@
     "shortDesc": "Automatically connect to a Pixhawk board",
     "longDesc":  "If this option is enabled GroundControl will automatically connect to a Pixhawk board which is connected via USB.",
     "type":             "bool",
-    "default":     true
+    "default":     false
 },
 {
     "name":             "autoConnectSiKRadio",
@@ -29,21 +29,21 @@
     "shortDesc": "Automatically connect to a P4 Flow",
     "longDesc":  "If this option is enabled GroundControl will automatically connect to a PX4 Flow board which is connected via USB.",
     "type":             "bool",
-    "default":     true
+    "default":     false
 },
 {
     "name":             "autoConnectRTKGPS",
     "shortDesc": "Automatically connect to an RTK GPS",
     "longDesc":  "If this option is enabled GroundControl will automatically connect to an RTK GPS which is connected via USB.",
     "type":             "bool",
-    "default":     true
+    "default":     false
 },
 {
     "name":             "autoConnectLibrePilot",
     "shortDesc": "Automatically connect to a LibrePilot",
     "longDesc":  "If this option is enabled GroundControl will automatically connect to a LibrePilot board which is connected via USB.",
     "type":             "bool",
-    "default":     true
+    "default":     false
 },
 {
     "name":             "autoConnectNmeaPort",
@@ -64,13 +64,13 @@
     "shortDesc": "Automatically open a connection with Zero-Conf",
     "longDesc":  "If this option is enabled GroundControl will automatically connect to a vehicle which is detected over Zero-Conf.",
     "type":             "bool",
-    "default":     true
+    "default":     false
 },
 {
     "name":             "udpListenPort",
     "shortDesc": "UDP port for autoconnect",
     "type":             "uint32",
-    "default":     14550
+    "default":     14551
 },
 {
     "name":             "udpTargetHostIP",
@@ -82,7 +82,7 @@
     "name":             "udpTargetHostPort",
     "shortDesc": "UDP target host port for autoconnect",
     "type":             "uint32",
-    "default":     14550
+    "default":     15552
 },
 {
     "name":             "nmeaUdpPort",
