@@ -73,6 +73,7 @@ public:
     DEFINE_SETTINGFACT(payloadgripper)
     DEFINE_SETTINGFACT(payloadgrenades)
     DEFINE_SETTINGFACT(cameraZio)
+    DEFINE_SETTINGFACT(proximityAvoidance)
 
 
     // Although this is a global setting it only affects ArduPilot vehicle since PX4 automatically starts the stream from the vehicle side

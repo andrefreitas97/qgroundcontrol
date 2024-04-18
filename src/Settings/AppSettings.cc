@@ -178,6 +178,7 @@ DECLARE_SETTINGSFACT(AppSettings, vehiclebravo)
 DECLARE_SETTINGSFACT(AppSettings, payloadgripper)
 DECLARE_SETTINGSFACT(AppSettings, payloadgrenades)
 DECLARE_SETTINGSFACT(AppSettings, cameraZio)
+DECLARE_SETTINGSFACT(AppSettings, proximityAvoidance)
 
 DECLARE_SETTINGSFACT_NO_FUNC(AppSettings, indoorPalette)
 {

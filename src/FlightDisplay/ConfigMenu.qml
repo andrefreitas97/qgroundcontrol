@@ -44,6 +44,9 @@ Component {
         property bool showLandingAssistON: param7.value == 1
         property bool showLandingAssistOFF: param7.value == 0
 
+        property Fact param8: controller.getParameterFact(-1, "AVOID_ENABLE")
+        property bool showProximityAvoidance: param8.value == 2 || param8.value == 3 || param8.value == 6 || param8.value == 7 ? true : false
+
 
         onRejected:{
             _guidedController.closeAll()
@@ -93,7 +96,7 @@ Component {
                 QGCRadioButton {
                     font.pointSize: ScreenTools.defaultFontPointSize
                     text:           qsTr("GPS")
-                    enabled:        QGroundControl.settingsManager.appSettings.vehiclebravo.value
+                    enabled:        QGroundControl.settingsManager.appSettings.vehiclebravo.value && !QGroundControl.settingsManager.appSettings.payloadgripper.value
                     checked:        showGPSposition
                     onClicked:      _activeVehicle.sendPositionAction(1)
                 }
@@ -206,6 +209,49 @@ Component {
                     text:           qsTr("Follow GCS")
                     checked:        QGroundControl.settingsManager.flyViewSettings.updateHomePosition.value
                     onClicked:      QGroundControl.settingsManager.flyViewSettings.updateHomePosition.value = true
+                }
+
+            }
+
+            Row {
+                Layout.alignment:   Qt.AlignLeft
+                spacing:            ScreenTools.defaultFontPixelWidth
+
+                QGCColoredImage {
+                    anchors.top:        parent.top
+                    anchors.bottom:     parent.bottom
+                    width:              height
+                    sourceSize.width:   width
+                    source:             "/res/avoidance.svg"
+                    color:              QGroundControl.settingsManager.appSettings.proximityAvoidance.value ? qgcPal.colorGreen : qgcPal.colorRed
+                }
+
+                QGCLabel {
+                    text:       qsTr("Obstacle Avoidance:")
+                    anchors.verticalCenter: parent.verticalCenter
+                    font.bold:              true
+                }
+
+                QGCRadioButton {
+                    font.pointSize: ScreenTools.defaultFontPointSize
+                    text:           qsTr("ON")
+                    enabled: showProximityAvoidance
+                    checked:        QGroundControl.settingsManager.appSettings.proximityAvoidance.value
+                    onClicked:{
+                        QGroundControl.settingsManager.appSettings.proximityAvoidance.value = true
+                        _activeVehicle.setProximityAvoidance(1)
+                    }
+                }
+
+                QGCRadioButton {
+                    font.pointSize: ScreenTools.defaultFontPointSize
+                    text:           qsTr("OFF")
+                    enabled: showProximityAvoidance
+                    checked:        !QGroundControl.settingsManager.appSettings.proximityAvoidance.value
+                    onClicked:{
+                        QGroundControl.settingsManager.appSettings.proximityAvoidance.value = false
+                        _activeVehicle.setProximityAvoidance(0)
+                    }
                 }
 
             }

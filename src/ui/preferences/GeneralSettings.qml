@@ -60,6 +60,9 @@ Rectangle {
     property bool   _showSaveVideoSettings:     _isGst || _videoAutoStreamConfig
     property bool   _disableAllDataPersistence: QGroundControl.settingsManager.appSettings.disableAllPersistence.rawValue
 
+    property var    _activeVehicle:             QGroundControl.multiVehicleManager.activeVehicle
+    property bool   _vehicleArmed:          _activeVehicle ? _activeVehicle.armed  : false
+
     property string gpsDisabled: "Disabled"
     property string gpsUdpPort:  "UDP Port"
 
@@ -147,25 +150,39 @@ Rectangle {
                             anchors.horizontalCenter:   parent.horizontalCenter
                             columns:                    3
 
+                            QGCLabel {
+                                text:               qsTr("No vehicle connected.")
+                                Layout.columnSpan:  3
+                                Layout.alignment:   Qt.AlignHCenter
+                                visible: !_activeVehicle
+                            }
 
                             QGCLabel {
                                 text:               qsTr("No payloads available for Alfa.")
                                 Layout.columnSpan:  3
                                 Layout.alignment:   Qt.AlignHCenter
-                                visible: QGroundControl.settingsManager.appSettings.vehiclealfa.value
+                                visible: QGroundControl.settingsManager.appSettings.vehiclealfa.value && _activeVehicle
                             }
 
                             QGCRadioButton {
                                 text:               qsTr("Gripper")
-                                visible:            QGroundControl.settingsManager.appSettings.vehiclebravo.value
+                                visible:            QGroundControl.settingsManager.appSettings.vehiclebravo.value && _activeVehicle
+                                enabled:            !_vehicleArmed
                                 checked:            QGroundControl.settingsManager.appSettings.payloadgripper.value === true
                                 onClicked:{
                                     if(QGroundControl.settingsManager.appSettings.payloadgripper.value){
                                         QGroundControl.settingsManager.appSettings.payloadgripper.value = false
                                     }else {
-                                        QGroundControl.settingsManager.appSettings.payloadgripper.value = true;
-                                        QGroundControl.settingsManager.appSettings.payloadgrenades.value = false;
-                                        QGroundControl.multiVehicleManager.activeVehicle.setPayloadType(0);
+                                        QGroundControl.settingsManager.appSettings.payloadgripper.value = true
+                                        QGroundControl.settingsManager.appSettings.payloadgrenades.value = false
+                                        QGroundControl.multiVehicleManager.activeVehicle.setPayloadType(0)
+
+                                        QGroundControl.multiVehicleManager.activeVehicle.sendPositionAction(1)
+
+                                        QGroundControl.settingsManager.appSettings.cameraZio.value = false
+                                        QGroundControl.settingsManager.videoSettings.rtspUrl.value = QGroundControl.settingsManager.videoSettings.rtspUrl1.value
+                                        QGroundControl.multiVehicleManager.activeVehicle.sendSetMount1Action()
+                                        QGroundControl.multiVehicleManager.activeVehicle.sendDisableMount2Action()
                                     }
 
                                 }
@@ -174,7 +191,8 @@ Rectangle {
 
                             QGCRadioButton {
                                 text:               qsTr("Grenade Dropper")
-                                visible:            QGroundControl.settingsManager.appSettings.vehiclebravo.value
+                                visible:            QGroundControl.settingsManager.appSettings.vehiclebravo.value && _activeVehicle
+                                enabled:            !_vehicleArmed
                                 checked:            QGroundControl.settingsManager.appSettings.payloadgrenades.value === true
                                 onClicked:{
                                     if(QGroundControl.settingsManager.appSettings.payloadgrenades.value){
@@ -183,64 +201,110 @@ Rectangle {
                                         QGroundControl.settingsManager.appSettings.payloadgrenades.value = true
                                         QGroundControl.settingsManager.appSettings.payloadgripper.value = false
                                         QGroundControl.multiVehicleManager.activeVehicle.setPayloadType(1)
+
+                                        QGroundControl.settingsManager.appSettings.cameraZio.value = false
+                                        QGroundControl.settingsManager.videoSettings.rtspUrl.value = QGroundControl.settingsManager.videoSettings.rtspUrl1.value
+                                        QGroundControl.multiVehicleManager.activeVehicle.sendSetMount1Action()
+                                        QGroundControl.multiVehicleManager.activeVehicle.sendDisableMount2Action()
                                     }
                                 }
                                 Layout.columnSpan:  3
                             }
-                        }
-                    }
 
-                    Item { width: 1; height: _margins; visible: cameraSectionLabel.visible }
-                    QGCLabel {
-                        id:         cameraSectionLabel
-                        text:       qsTr("Camera")
-                        visible:    QGroundControl.settingsManager.flyViewSettings.visible
-                    }
-                    Rectangle {
-                        Layout.preferredHeight: cameraCol.height + (_margins * 2)
-                        Layout.preferredWidth:  cameraCol.width + (_margins * 2)
-                        color:                  qgcPal.windowShade
-                        visible:                cameraSectionLabel.visible
-                        Layout.fillWidth:       true
-
-                        ColumnLayout {
-                            id:                         cameraCol
-                            anchors.margins:            _margins
-                            anchors.top:                parent.top
-                            anchors.horizontalCenter:   parent.horizontalCenter
-                            spacing:                    _margins
-
-                            RowLayout {
-                                spacing: ScreenTools.defaultFontPixelWidth
-
-                                QGCLabel {
-                                    text:       qsTr("Gremsy Zio:")
-                                }
-
-                                QGCRadioButton {
-                                    text:               qsTr("ON")
-                                    enabled:            QGroundControl.settingsManager.appSettings.vehiclebravo.value
-                                    checked:            QGroundControl.settingsManager.appSettings.cameraZio.value
-                                    onClicked:{
-                                        QGroundControl.settingsManager.appSettings.cameraZio.value = true
-                                    }
-                                    Layout.columnSpan:  3
-                                }          
-
-                                QGCRadioButton {
-                                    text:               qsTr("OFF")
-                                    enabled:            QGroundControl.settingsManager.appSettings.vehiclebravo.value
-                                    checked:            !QGroundControl.settingsManager.appSettings.cameraZio.value
-                                    onClicked:{
+                            QGCRadioButton {
+                                text:               qsTr("Gremsy Zio")
+                                visible:            QGroundControl.settingsManager.appSettings.vehiclebravo.value && _activeVehicle
+                                enabled:            !_vehicleArmed
+                                checked:            QGroundControl.settingsManager.appSettings.cameraZio.value
+                                onClicked:{
+                                    if(QGroundControl.settingsManager.appSettings.cameraZio.value){
                                         QGroundControl.settingsManager.appSettings.cameraZio.value = false
                                         QGroundControl.settingsManager.videoSettings.rtspUrl.value = QGroundControl.settingsManager.videoSettings.rtspUrl1.value
                                         QGroundControl.multiVehicleManager.activeVehicle.sendSetMount1Action()
+                                        QGroundControl.multiVehicleManager.activeVehicle.sendDisableMount2Action()
+                                    }else {
+                                        QGroundControl.settingsManager.appSettings.cameraZio.value = true
+                                        QGroundControl.multiVehicleManager.activeVehicle.sendEnableMount2Action()
+
+                                        QGroundControl.settingsManager.appSettings.payloadgripper.value = false
+                                        QGroundControl.settingsManager.appSettings.payloadgrenades.value = false
                                     }
-                                    Layout.columnSpan:  3
+                                }
+                                Layout.columnSpan:  3
+                            }
+
+                            QGCLabel {
+                                text:               qsTr("Note: Reboot vehicle after change of payload.")
+                                Layout.columnSpan:  3
+                                Layout.alignment:   Qt.AlignHCenter
+                                font.pointSize:     ScreenTools.smallFontPointSize
+                                visible: QGroundControl.settingsManager.appSettings.vehiclebravo.value && _activeVehicle
+                            }
+
+                            QGCButton {
+                                text:       qsTr("Reboot Vehicle")
+                                enabled: _activeVehicle && !_vehicleArmed
+                                onClicked: {
+                                    mainWindow.showMessageDialog(qsTr("Reboot Vehicle"),
+                                                                 qsTr("Select Ok to reboot vehicle."),
+                                                                 Dialog.Cancel | Dialog.Ok,
+                                                                 function() { _activeVehicle.rebootVehicle() })
                                 }
                             }
                         }
                     }
+
+                    //Item { width: 1; height: _margins; visible: cameraSectionLabel.visible }
+                    //QGCLabel {
+                    //    id:         cameraSectionLabel
+                    //    text:       qsTr("Camera")
+                    //    visible:    QGroundControl.settingsManager.flyViewSettings.visible
+                    //}
+                    //Rectangle {
+                    //    Layout.preferredHeight: cameraCol.height + (_margins * 2)
+                    //    Layout.preferredWidth:  cameraCol.width + (_margins * 2)
+                    //    color:                  qgcPal.windowShade
+                    //    visible:                cameraSectionLabel.visible
+                    //    Layout.fillWidth:       true
+
+                    //    ColumnLayout {
+                    //        id:                         cameraCol
+                    //        anchors.margins:            _margins
+                    //        anchors.top:                parent.top
+                    //        anchors.horizontalCenter:   parent.horizontalCenter
+                    //        spacing:                    _margins
+
+                    //        RowLayout {
+                    //            spacing: ScreenTools.defaultFontPixelWidth
+
+                    //            QGCLabel {
+                    //                text:       qsTr("Gremsy Zio:")
+                    //            }
+
+                    //            QGCRadioButton {
+                    //                text:               qsTr("ON")
+                    //                enabled:            QGroundControl.settingsManager.appSettings.vehiclebravo.value
+                    //                checked:            QGroundControl.settingsManager.appSettings.cameraZio.value
+                    //                onClicked:{
+                    //                    QGroundControl.settingsManager.appSettings.cameraZio.value = true
+                    //                }
+                    //                Layout.columnSpan:  3
+                    //            }
+
+                    //            QGCRadioButton {
+                    //                text:               qsTr("OFF")
+                    //                enabled:            QGroundControl.settingsManager.appSettings.vehiclebravo.value
+                    //                checked:            !QGroundControl.settingsManager.appSettings.cameraZio.value
+                    //                onClicked:{
+                    //                    QGroundControl.settingsManager.appSettings.cameraZio.value = false
+                    //                    QGroundControl.settingsManager.videoSettings.rtspUrl.value = QGroundControl.settingsManager.videoSettings.rtspUrl1.value
+                    //                    QGroundControl.multiVehicleManager.activeVehicle.sendSetMount1Action()
+                    //                }
+                    //                Layout.columnSpan:  3
+                    //            }
+                    //        }
+                    //    }
+                    //}
 
                     Item { width: 1; height: _margins; visible: flyViewSectionLabel.visible }
                     QGCLabel {

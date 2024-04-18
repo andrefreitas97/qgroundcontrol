@@ -375,6 +375,13 @@
     "longDesc":  "Sets Gremsy Zio Camera as available or unavailable.",
     "type":             "bool",
     "default":     false
+},
+{
+    "name":             "proximityAvoidance",
+    "shortDesc": "Proximity Avoidance Switch",
+    "longDesc":  "Sets Proximity Avoidance on or off.",
+    "type":             "bool",
+    "default":     false
 }
 ]
 }

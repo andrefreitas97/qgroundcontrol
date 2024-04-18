@@ -577,7 +577,13 @@ public:
 
     Q_INVOKABLE void sendSetMount2Action();
 
+    Q_INVOKABLE void sendEnableMount2Action();
+
+    Q_INVOKABLE void sendDisableMount2Action();
+
     Q_INVOKABLE void setPayloadType(int payload_type);
+
+    Q_INVOKABLE void setProximityAvoidance(int on_off);
 
     bool fixedWing() const;
     bool multiRotor() const;

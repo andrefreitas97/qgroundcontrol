@@ -4619,6 +4619,18 @@ void Vehicle::sendSetMount2Action()
     parameterManager()->_sendParamSetToVehicle(_defaultComponentId, "SCR_USER2" , FactMetaData::valueTypeUint8, 2);
 }
 
+void Vehicle::sendEnableMount2Action()
+{
+    parameterManager()->_sendParamSetToVehicle(_defaultComponentId, "CAM2_TYPE" , FactMetaData::valueTypeUint8, 6);
+    parameterManager()->_sendParamSetToVehicle(_defaultComponentId, "MNT2_TYPE" , FactMetaData::valueTypeUint8, 6);
+}
+
+void Vehicle::sendDisableMount2Action()
+{
+    parameterManager()->_sendParamSetToVehicle(_defaultComponentId, "CAM2_TYPE" , FactMetaData::valueTypeUint8, 0);
+    parameterManager()->_sendParamSetToVehicle(_defaultComponentId, "MNT2_TYPE" , FactMetaData::valueTypeUint8, 0);
+}
+
 void Vehicle::setPayloadType(int payload_type)
 {
     switch(payload_type) {
@@ -4635,6 +4647,33 @@ void Vehicle::setPayloadType(int payload_type)
         parameterManager()->_sendParamSetToVehicle(_defaultComponentId, "SERVO12_MIN" , FactMetaData::valueTypeUint16, 575);
         parameterManager()->_sendParamSetToVehicle(_defaultComponentId, "SERVO12_TRIM" , FactMetaData::valueTypeUint16, 1450);
         setServoAction(12, 1450);
+        break;
+    default:
+        break;
+    }
+}
+
+
+void Vehicle::setProximityAvoidance(int on_off)
+{
+    switch(on_off) {
+    case 0: // OFF
+    sendMavCommand(
+        _defaultComponentId,
+        MAV_CMD_DO_AUX_FUNCTION,
+        false,                               // Don't show errors
+        40,                                   // Param1: Auxiliary Function
+        0,                       // Param2: Switch Level
+        0, 0, 0, 0, 0);                      // Param 3 ~ 7 : unused
+        break;
+    case 1: // ON
+        sendMavCommand(
+            _defaultComponentId,
+            MAV_CMD_DO_AUX_FUNCTION,
+            false,                               // Don't show errors
+            40,                                   // Param1: Auxiliary Function
+            2,                       // Param2: Switch Level
+            0, 0, 0, 0, 0);                      // Param 3 ~ 7 : unused
         break;
     default:
         break;

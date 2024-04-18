@@ -69,6 +69,7 @@
         <file alias="payload.svg">resources/payload.svg</file>
         <file alias="config.svg">resources/config.svg</file>
         <file alias="home.svg">resources/home.svg</file>
+        <file alias="avoidance.svg">resources/avoidance.svg</file>
         <file>resources/icons/qgroundcontrol.ico</file>
     </qresource>
     <qresource prefix="/res/firmware">
