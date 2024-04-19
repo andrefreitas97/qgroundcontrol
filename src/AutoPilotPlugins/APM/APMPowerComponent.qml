@@ -138,92 +138,92 @@ SetupPage {
                 }
             }
 
-            // Battery2 Monitor settings only - used when only monitor param is available
-            Column {
-                spacing: _margins / 2
-                visible: !_batt2MonitorEnabled || !_batt2ParamsAvailable
+            //// Battery2 Monitor settings only - used when only monitor param is available
+            //Column {
+            //    spacing: _margins / 2
+            //    visible: !_batt2MonitorEnabled || !_batt2ParamsAvailable
 
-                QGCLabel {
-                    text:       qsTr("Battery 2")
-                    font.family: ScreenTools.demiboldFontFamily
-                }
+            //    QGCLabel {
+            //        text:       qsTr("Battery 2")
+            //        font.family: ScreenTools.demiboldFontFamily
+            //    }
 
-                Rectangle {
-                    width:  batt2Column.x + batt2Column.width + _margins
-                    height: batt2Column.y + batt2Column.height + _margins
-                    color:  ggcPal.windowShade
+            //    Rectangle {
+            //        width:  batt2Column.x + batt2Column.width + _margins
+            //        height: batt2Column.y + batt2Column.height + _margins
+            //        color:  ggcPal.windowShade
 
-                    ColumnLayout {
-                        id:                 batt2Column
-                        anchors.margins:    _margins
-                        anchors.top:        parent.top
-                        anchors.left:       parent.left
-                        spacing:            ScreenTools.defaultFontPixelWidth
+            //        ColumnLayout {
+            //            id:                 batt2Column
+            //            anchors.margins:    _margins
+            //            anchors.top:        parent.top
+            //            anchors.left:       parent.left
+            //            spacing:            ScreenTools.defaultFontPixelWidth
 
-                        RowLayout {
-                            id:                 batt2MonitorRow
-                            spacing:            ScreenTools.defaultFontPixelWidth
+            //            RowLayout {
+            //                id:                 batt2MonitorRow
+            //                spacing:            ScreenTools.defaultFontPixelWidth
 
-                            QGCLabel { text: qsTr("Battery2 monitor:") }
-                            FactComboBox {
-                                id:         monitor2Combo
-                                fact:       _batt2Monitor
-                                indexModel: false
-                                sizeToContents: true
-                            }
-                        }
+            //                QGCLabel { text: qsTr("Battery2 monitor:") }
+            //                FactComboBox {
+            //                    id:         monitor2Combo
+            //                    fact:       _batt2Monitor
+            //                    indexModel: false
+            //                    sizeToContents: true
+            //                }
+            //            }
 
-                        QGCLabel {
-                            text:       _restartRequired
-                            visible:    _showBatt2Reboot
-                        }
+            //            QGCLabel {
+            //                text:       _restartRequired
+            //                visible:    _showBatt2Reboot
+            //            }
 
-                        QGCButton {
-                            text:       qsTr("Reboot vehicle")
-                            visible:    _showBatt2Reboot
-                            onClicked:  controller.vehicle.rebootVehicle()
-                        }
-                    }
-                }
-            }
+            //            QGCButton {
+            //                text:       qsTr("Reboot vehicle")
+            //                visible:    _showBatt2Reboot
+            //                onClicked:  controller.vehicle.rebootVehicle()
+            //            }
+            //        }
+            //    }
+            //}
 
-            // Battery 2 settings - Used when full params are available
-            Column {
-                id:         batt2FullSettings
-                spacing:    _margins / 2
-                visible:    _batt2MonitorEnabled && _batt2ParamsAvailable
+            //// Battery 2 settings - Used when full params are available
+            //Column {
+            //    id:         batt2FullSettings
+            //    spacing:    _margins / 2
+            //    visible:    _batt2MonitorEnabled && _batt2ParamsAvailable
 
-                QGCLabel {
-                    text:       qsTr("Battery 2")
-                    font.family: ScreenTools.demiboldFontFamily
-                }
+            //    QGCLabel {
+            //        text:       qsTr("Battery 2")
+            //        font.family: ScreenTools.demiboldFontFamily
+            //    }
 
-                Rectangle {
-                    width:  battery2Loader.x + battery2Loader.width + _margins
-                    height: battery2Loader.y + battery2Loader.height + _margins
-                    color:  ggcPal.windowShade
+            //    Rectangle {
+            //        width:  battery2Loader.x + battery2Loader.width + _margins
+            //        height: battery2Loader.y + battery2Loader.height + _margins
+            //        color:  ggcPal.windowShade
 
-                    Loader {
-                        id:                 battery2Loader
-                        anchors.margins:    _margins
-                        anchors.top:        parent.top
-                        anchors.left:       parent.left
-                        sourceComponent:    batt2FullSettings.visible ? powerSetupComponent : undefined
+            //        Loader {
+            //            id:                 battery2Loader
+            //            anchors.margins:    _margins
+            //            anchors.top:        parent.top
+            //            anchors.left:       parent.left
+            //            sourceComponent:    batt2FullSettings.visible ? powerSetupComponent : undefined
 
-                        property Fact armVoltMin:       controller.getParameterFact(-1, "r.BATT2_ARM_VOLT", false /* reportMissing */)
-                        property Fact battAmpPerVolt:   controller.getParameterFact(-1, "r.BATT2_AMP_PERVLT", false /* reportMissing */)
-                        property Fact battAmpOffset:    controller.getParameterFact(-1, "BATT2_AMP_OFFSET", false /* reportMissing */)
-                        property Fact battCapacity:     controller.getParameterFact(-1, "BATT2_CAPACITY", false /* reportMissing */)
-                        property Fact battCurrPin:      controller.getParameterFact(-1, "BATT2_CURR_PIN", false /* reportMissing */)
-                        property Fact battMonitor:      controller.getParameterFact(-1, "BATT2_MONITOR", false /* reportMissing */)
-                        property Fact battVoltMult:     controller.getParameterFact(-1, "BATT2_VOLT_MULT", false /* reportMissing */)
-                        property Fact battVoltPin:      controller.getParameterFact(-1, "BATT2_VOLT_PIN", false /* reportMissing */)
-                        property FactGroup  _batteryFactGroup:  batt2FullSettings.visible ? controller.vehicle.getFactGroup("battery1") : null
-                        property Fact vehicleVoltage:   _batteryFactGroup ? _batteryFactGroup.voltage : null
-                        property Fact vehicleCurrent:   _batteryFactGroup ? _batteryFactGroup.current : null
-                    }
-                }
-            }
+            //            property Fact armVoltMin:       controller.getParameterFact(-1, "r.BATT2_ARM_VOLT", false /* reportMissing */)
+            //            property Fact battAmpPerVolt:   controller.getParameterFact(-1, "r.BATT2_AMP_PERVLT", false /* reportMissing */)
+            //            property Fact battAmpOffset:    controller.getParameterFact(-1, "BATT2_AMP_OFFSET", false /* reportMissing */)
+            //            property Fact battCapacity:     controller.getParameterFact(-1, "BATT2_CAPACITY", false /* reportMissing */)
+            //            property Fact battCurrPin:      controller.getParameterFact(-1, "BATT2_CURR_PIN", false /* reportMissing */)
+            //            property Fact battMonitor:      controller.getParameterFact(-1, "BATT2_MONITOR", false /* reportMissing */)
+            //            property Fact battVoltMult:     controller.getParameterFact(-1, "BATT2_VOLT_MULT", false /* reportMissing */)
+            //            property Fact battVoltPin:      controller.getParameterFact(-1, "BATT2_VOLT_PIN", false /* reportMissing */)
+            //            property FactGroup  _batteryFactGroup:  batt2FullSettings.visible ? controller.vehicle.getFactGroup("battery1") : null
+            //            property Fact vehicleVoltage:   _batteryFactGroup ? _batteryFactGroup.voltage : null
+            //            property Fact vehicleCurrent:   _batteryFactGroup ? _batteryFactGroup.current : null
+            //        }
+            //    }
+            //}
 
             Column {
                 spacing:    _margins / 2
