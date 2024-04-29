@@ -501,7 +501,7 @@ Rectangle {
                 anchors.horizontalCenter: parent.horizontalCenter
                 fillMode: Image.PreserveAspectFit
                 cache: false
-                visible: expended ? camera.enableControl : false
+                visible: false //expended ? camera.enableControl : false
                 MouseArea {
                     id: resetMA
                     anchors.fill: parent
