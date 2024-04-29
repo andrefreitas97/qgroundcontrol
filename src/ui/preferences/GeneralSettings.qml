@@ -381,7 +381,7 @@ Rectangle {
 
                             FactCheckBox {
                                 text:       qsTr("Use Vertical Instrument Panel")
-                                visible:    _alternateInstrumentPanel.visible
+                                visible:    false //_alternateInstrumentPanel.visible
                                 fact:       _alternateInstrumentPanel
 
                                 property Fact _alternateInstrumentPanel: QGroundControl.settingsManager.flyViewSettings.alternateInstrumentPanel
@@ -660,6 +660,13 @@ Rectangle {
                                 FactCheckBox {
                                     text:       qsTr("Auto-Delete Saved Recordings")
                                     fact:       _videoSettings.enableStorageLimit
+                                    visible:    _showSaveVideoSettings && fact.visible
+                                }
+
+                                Item { width: 1; height: 1}
+                                FactCheckBox {
+                                    text:       qsTr("Enable Camera Menu")
+                                    fact:       _videoSettings.enableCameraMenu
                                     visible:    _showSaveVideoSettings && fact.visible
                                 }
                             }

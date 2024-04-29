@@ -23,13 +23,13 @@ import QGroundControl.Controllers       1.0
 import QGroundControl.FactSystem        1.0
 import QGroundControl.FactControls      1.0
 
-import QGroundControl.SettingsManager       1.0
+import QGroundControl.SettingsManager   1.0
 
 Rectangle {
     height:     mainLayout.height + (_margins * 2)
     color:      Qt.rgba(qgcPal.window.r, qgcPal.window.g, qgcPal.window.b, 0.5)
     radius:     _margins
-    visible:    (_mavlinkCamera || _videoStreamAvailable || _simpleCameraAvailable) && multiVehiclePanelSelector.showSingleVehiclePanel
+    visible:    (_mavlinkCamera || _videoStreamAvailable || _simpleCameraAvailable) && multiVehiclePanelSelector.showSingleVehiclePanel && _enableCameraMenu
 
     property real   _margins:                                   ScreenTools.defaultFontPixelHeight / 2
     property var    _activeVehicle:                             QGroundControl.multiVehicleManager.activeVehicle
@@ -94,6 +94,8 @@ Rectangle {
 
     property bool   _communicationLost: _activeVehicle ? _activeVehicle.vehicleLinkManager.communicationLost : false
     property bool   _initialConnectComplete:    _activeVehicle ? _activeVehicle.initialConnectComplete : false
+
+    property bool   _enableCameraMenu:   QGroundControl.settingsManager.videoSettings.enableCameraMenu.value
 
     function setCameraMode(photoMode) {
         _videoStreamInPhotoMode = photoMode
@@ -244,31 +246,6 @@ Rectangle {
                         onClicked:      setCameraMode(true)
                     }
                 }
-            }
-        }
-
-        RowLayout {
-            Layout.alignment:   Qt.AlignHCenter
-            spacing:            0
-            visible:            QGroundControl.settingsManager.appSettings.cameraZio.value && _activeVehicle
-            enabled:            !_communicationLost && _initialConnectComplete
-
-            QGCRadioButton {
-                font.pointSize: ScreenTools.smallFontPointSize
-                text:           qsTr("FPV Stream")
-                checked:        _videoSettings.rtspUrl.value == _videoSettings.rtspUrl1.value ? true : false
-                onClicked:      {_videoSettings.rtspUrl.value = _videoSettings.rtspUrl1.value
-                                 _activeVehicle.sendSetMount1Action()}
-
-            }
-
-
-            QGCRadioButton {
-                font.pointSize: ScreenTools.smallFontPointSize
-                text:           qsTr("Gimbal Stream")
-                checked:        _videoSettings.rtspUrl.value == _videoSettings.rtspUrl2.value ? true : false
-                onClicked:      {_videoSettings.rtspUrl.value = _videoSettings.rtspUrl2.value
-                                 _activeVehicle.sendSetMount2Action()}
             }
         }
 

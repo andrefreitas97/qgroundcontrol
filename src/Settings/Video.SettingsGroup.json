@@ -152,6 +152,13 @@
     "enumValues":       "0,1,2,3,4,5",
     "default":           0,
     "qgcRebootRequired": true
+},
+{
+    "name":             "enableCameraMenu",
+    "shortDesc": "Enable Camera Menu",
+    "longDesc":  "Enable or Disable Camera Menu.",
+    "type":             "bool",
+    "default":     false
 }
 ]
 }

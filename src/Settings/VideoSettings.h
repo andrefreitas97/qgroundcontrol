@@ -35,6 +35,9 @@ public:
     DEFINE_SETTINGFACT(recordingFormat)
     DEFINE_SETTINGFACT(maxVideoSize)
     DEFINE_SETTINGFACT(enableStorageLimit)
+
+    DEFINE_SETTINGFACT(enableCameraMenu)
+
     DEFINE_SETTINGFACT(rtspTimeout)
     DEFINE_SETTINGFACT(streamEnabled)
     DEFINE_SETTINGFACT(disableWhenDisarmed)

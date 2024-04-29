@@ -131,6 +131,8 @@ DECLARE_SETTINGSFACT(VideoSettings, lowLatencyMode)
 DECLARE_SETTINGSFACT(VideoSettings, rtspUrl1)
 DECLARE_SETTINGSFACT(VideoSettings, rtspUrl2)
 
+DECLARE_SETTINGSFACT(VideoSettings, enableCameraMenu)
+
 DECLARE_SETTINGSFACT_NO_FUNC(VideoSettings, videoSource)
 {
     if (!_videoSourceFact) {

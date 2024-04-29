@@ -20,7 +20,6 @@ import QtQml.Models             2.1
 import QGroundControl               1.0
 import QGroundControl.Controls      1.0
 import QGroundControl.Controllers   1.0
-import QGroundControl.Controls      1.0
 import QGroundControl.FactSystem    1.0
 import QGroundControl.FlightDisplay 1.0
 import QGroundControl.FlightMap     1.0
@@ -148,7 +147,6 @@ Item {
         property real rightEdgeCenterInset: visible ? parent.width - x : 0
 
         state:                  _verticalCenter ? "verticalCenter" : "topAnchor"
-        visible: !SiYi.hideWidgets
         states: [
             State {
                 name: "verticalCenter"
@@ -169,6 +167,37 @@ Item {
         ]
 
         property bool _verticalCenter: !QGroundControl.settingsManager.flyViewSettings.alternateInstrumentPanel.rawValue
+    }
+
+    VideoStreamSourceSelector {
+        id:                     videoStreamSource
+        anchors.margins:        _toolsMargin
+        anchors.right:          parent.right
+        width:                  _rightPanelWidth
+
+        property real rightEdgeCenterInset: visible ? parent.width - x : 0
+
+        state:                  _verticalCenter ? "verticalCenter" : "topAnchor"
+        states: [
+            State {
+                name: "verticalCenter"
+                AnchorChanges {
+                    target:                 videoStreamSource
+                    anchors.top:            undefined
+                    anchors.verticalCenter: _root.verticalCenter
+                }
+            },
+            State {
+                name: "topAnchor"
+                AnchorChanges {
+                    target:                 videoStreamSource
+                    anchors.verticalCenter: undefined
+                    anchors.top:            photoVideoControl.bottom
+                }
+            }
+        ]
+
+        property bool _verticalCenter: !QGroundControl.settingsManager.videoSettings.enableCameraMenu.value
     }
 
     Rectangle {
