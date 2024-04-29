@@ -434,6 +434,11 @@ HEADERS += \
     src/QmlControls/CustomAction.h \
     src/QmlControls/CustomActionManager.h \
     src/QmlControls/QmlUnitsConversion.h \
+    src/SiYi/SiYi.h \
+    src/SiYi/SiYiCamera.h \
+    src/SiYi/SiYiCrcApi.h \
+    src/SiYi/SiYiTcpClient.h \
+    src/SiYi/SiYiTransmitter.h \
     src/Vehicle/VehicleEscStatusFactGroup.h \
     src/api/QGCCorePlugin.h \
     src/api/QGCOptions.h \
@@ -448,6 +453,11 @@ contains (DEFINES, QGC_ENABLE_PAIRING) {
 
 SOURCES += \
     src/QmlControls/CustomActionManager.cc \
+    src/SiYi/SiYi.cc \
+    src/SiYi/SiYiCamera.cc \
+    src/SiYi/SiYiCrcApi.cc \
+    src/SiYi/SiYiTcpClient.cc \
+    src/SiYi/SiYiTransmitter.cc \
     src/Vehicle/VehicleEscStatusFactGroup.cc \
     src/api/QGCCorePlugin.cc \
     src/api/QGCOptions.cc \
@@ -1453,3 +1463,4 @@ LinuxBuild {
 
     INSTALLS += target share_qgroundcontrol share_icons share_metainfo share_applications
 }
+
