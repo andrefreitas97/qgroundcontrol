@@ -45,8 +45,8 @@ Rectangle {
     property real videoH: 720
     property bool expended: true
     property bool using1080p: false //camera.using1080p
-    property real iconScale: SiYi.isAndroid ? 0.7 : 1.5
-    property int iconLeftMargin: 150
+    property real iconScale: SiYi.isAndroid ? 0.9 : 1.5
+    property int iconLeftMargin: 175
     property bool laserIconShow: false
     property bool showLaserOnLeft: camera.mainStreamSplitMode === 3
                                    || camera.mainStreamSplitMode === 5
@@ -241,11 +241,11 @@ Rectangle {
         id: controlRectangle
         anchors.left: parent.left
         anchors.leftMargin: SiYi.isAndroid ? iconLeftMargin + 4 : 150
-        //anchors.topMargin: 10
+        anchors.topMargin: 10
         width: controlColumn.width
         height: controlColumn.height
         anchors.top: parent.top
-        //visible: camera.isConnected
+        visible: camera.isConnected
         Text {
             id: btText
             text: "1234"
