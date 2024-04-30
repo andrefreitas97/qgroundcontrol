@@ -100,7 +100,7 @@ public:
 
     class GimbalManager {
     public:
-        unsigned requestGimbalManagerInformationRetries = 6;
+        unsigned requestGimbalManagerInformationRetries = 9;
         bool receivedInformation = false;
     };
 
