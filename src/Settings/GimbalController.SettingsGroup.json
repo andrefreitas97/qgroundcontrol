@@ -7,7 +7,7 @@
     "name":              "EnableOnScreenControl",
     "shortDesc":         "Enable on Screen Camera Control",
     "type":              "bool",
-    "default":           false
+    "default":           true
 },
 {
     "name":              "ControlType",
@@ -21,21 +21,21 @@
     "name":              "CameraVFov",
     "shortDesc":         "Vertical camera field of view",
     "type":              "uint32",
-    "default":           70,
+    "default":           55,
     "units":             "deg"
 },
 {
     "name":              "CameraHFov",
     "shortDesc":         "Horizontal camera field of view",
     "type":              "uint32",
-    "default":           70,
+    "default":           95,
     "units":             "deg"
 },
 {
     "name":              "CameraSlideSpeed",
     "shortDesc":         "Maximum gimbal speed on click and drag (deg/sec)",
     "type":              "uint32",
-    "default":           30,
+    "default":           180,
     "units":             "deg/s"
 },
 {
