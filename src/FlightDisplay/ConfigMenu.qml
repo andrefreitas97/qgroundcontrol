@@ -88,7 +88,7 @@ Component {
                 QGCRadioButton {
                     font.pointSize: ScreenTools.defaultFontPointSize
                     text:           qsTr("Opflow + GPS")
-                    enabled:        QGroundControl.settingsManager.appSettings.vehiclebravo.value
+                    enabled:        QGroundControl.settingsManager.appSettings.vehiclebravo.value && !QGroundControl.settingsManager.appSettings.payloadgripper.value
                     checked:        showOpflow
                     onClicked:      _activeVehicle.sendPositionAction(0)
                 }
