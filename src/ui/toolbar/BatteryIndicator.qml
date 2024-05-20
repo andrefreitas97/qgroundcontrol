@@ -29,6 +29,8 @@ Item {
 
     property var _activeVehicle: QGroundControl.multiVehicleManager.activeVehicle
 
+    property int batteryCells: QGroundControl.settingsManager.appSettings.vehiclebravo.value ? 6 : 4
+
     Row {
         id:             batteryIndicatorRow
         anchors.top:    parent.top
@@ -82,7 +84,7 @@ Item {
                         return battery.percentRemaining.valueString + battery.percentRemaining.units
                     }
                 } else if (!isNaN(battery.voltage.rawValue)) {
-                    return battery.voltage.valueString + battery.voltage.units
+                    return (battery.voltage.value/batteryCells).toFixed(2).toString() + battery.voltage.units
                 } else if (battery.chargeState.rawValue !== MAVLink.MAV_BATTERY_CHARGE_STATE_UNDEFINED) {
                     return battery.chargeState.enumStringValue
                 }
