@@ -47,6 +47,10 @@ Component {
         property Fact param8: controller.getParameterFact(-1, "AVOID_ENABLE")
         property bool showProximityAvoidance: param8.value == 2 || param8.value == 3 || param8.value == 6 || param8.value == 7 ? true : false
 
+        property Fact param9: controller.getParameterFact(-1, "SCR_USER3")
+        property bool showSlow: param9.value == 1
+        property bool showNormal: param9.value == 2
+        property bool showFast: param9.value == 3
 
         onRejected:{
             _guidedController.closeAll()
@@ -65,6 +69,51 @@ Component {
         anchors.top:                parent.top
         anchors.horizontalCenter:   parent.horizontalCenter
         spacing:                    ScreenTools.defaultFontPixelHeight / 2
+
+            Row {
+                Layout.alignment:   Qt.AlignLeft
+                spacing:            ScreenTools.defaultFontPixelWidth
+
+                QGCColoredImage {
+                    anchors.top:        parent.top
+                    anchors.bottom:     parent.bottom
+                    width:              height
+                    sourceSize.width:   width
+                    source:             "/res/position.svg"
+                    color:              qgcPal.buttonText
+                }
+
+                QGCLabel {
+                    text:       qsTr("Speed Mode:")
+                    anchors.verticalCenter: parent.verticalCenter
+                    font.bold:              true
+                }
+
+                QGCRadioButton {
+                    font.pointSize: ScreenTools.defaultFontPointSize
+                    text:           qsTr("Cine")
+                    enabled:        QGroundControl.settingsManager.appSettings.vehiclebravo.value && _activeVehicle.flightMode == "Loiter"
+                    checked:        showSlow
+                    onClicked:      _activeVehicle.setSpeedMode(1)
+                }
+
+                QGCRadioButton {
+                    font.pointSize: ScreenTools.defaultFontPointSize
+                    text:           qsTr("Normal")
+                    enabled:        QGroundControl.settingsManager.appSettings.vehiclebravo.value && _activeVehicle.flightMode == "Loiter"
+                    checked:        showNormal
+                    onClicked:      _activeVehicle.setSpeedMode(2)
+                }
+
+                QGCRadioButton {
+                    font.pointSize: ScreenTools.defaultFontPointSize
+                    text:           qsTr("Sport")
+                    enabled:        QGroundControl.settingsManager.appSettings.vehiclebravo.value && _activeVehicle.flightMode == "Loiter"
+                    checked:        showFast
+                    onClicked:      _activeVehicle.setSpeedMode(3)
+                }
+
+            }
 
             Row {
                 Layout.alignment:   Qt.AlignLeft
