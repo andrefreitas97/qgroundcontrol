@@ -25,6 +25,9 @@ Component {
 
         property var    _activeVehicle:             QGroundControl.multiVehicleManager.activeVehicle
 
+        property bool  _initialConnectComplete: _activeVehicle ? _activeVehicle.initialConnectComplete : false
+        property bool  _isVehicleArmed:         _initialConnectComplete ? _activeVehicle.armed : false
+
         FactPanelController { id: controller }
         property Fact param1: controller.getParameterFact(-1, "EK3_SRC_OPTIONS")
         property Fact param2: controller.getParameterFact(-1, "EK3_SRC2_VELXY")
@@ -174,6 +177,7 @@ Component {
                 QGCRadioButton {
                     font.pointSize: ScreenTools.defaultFontPointSize
                     text:           qsTr("Baro")
+                    enabled:        !_isVehicleArmed
                     checked:        showBaro
                     onClicked:      _activeVehicle.sendHeightAction(0)
 
@@ -182,6 +186,7 @@ Component {
                 QGCRadioButton {
                     font.pointSize: ScreenTools.defaultFontPointSize
                     text:           qsTr("GPS")
+                    enabled:        !_isVehicleArmed
                     checked:        showGPSheight
                     onClicked:      _activeVehicle.sendHeightAction(1)
                 }
