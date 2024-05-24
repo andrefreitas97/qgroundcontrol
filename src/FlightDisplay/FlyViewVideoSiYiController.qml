@@ -58,7 +58,7 @@ Rectangle {
         id: controlMouseArea
         anchors.fill: parent
         hoverEnabled: false
-        visible: false //camera.isConnected
+        visible: camera.isConnected //false
         onPressed: {
             if (camera.isTracking) {
                 return
@@ -501,7 +501,7 @@ Rectangle {
                 anchors.horizontalCenter: parent.horizontalCenter
                 fillMode: Image.PreserveAspectFit
                 cache: false
-                visible: false //expended ? camera.enableControl : false
+                visible: expended ? camera.enableControl : false
                 MouseArea {
                     id: resetMA
                     anchors.fill: parent

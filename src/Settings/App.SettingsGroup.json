@@ -370,9 +370,9 @@
     "default":     false
 },
 {
-    "name":             "cameraZio",
-    "shortDesc": "Gremsy Zio Camera",
-    "longDesc":  "Sets Gremsy Zio Camera as available or unavailable.",
+    "name":             "gimbalCamera",
+    "shortDesc": "Gimbal Camera",
+    "longDesc":  "Sets Gimbal Camera as available or unavailable.",
     "type":             "bool",
     "default":     false
 },

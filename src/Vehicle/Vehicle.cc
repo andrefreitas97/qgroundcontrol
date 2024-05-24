@@ -4621,8 +4621,8 @@ void Vehicle::sendSetMount2Action()
 
 void Vehicle::sendEnableMount2Action()
 {
-    parameterManager()->_sendParamSetToVehicle(_defaultComponentId, "CAM2_TYPE" , FactMetaData::valueTypeUint8, 6);
-    parameterManager()->_sendParamSetToVehicle(_defaultComponentId, "MNT2_TYPE" , FactMetaData::valueTypeUint8, 6);
+    parameterManager()->_sendParamSetToVehicle(_defaultComponentId, "CAM2_TYPE" , FactMetaData::valueTypeUint8, 4);
+    parameterManager()->_sendParamSetToVehicle(_defaultComponentId, "MNT2_TYPE" , FactMetaData::valueTypeUint8, 8);
 }
 
 void Vehicle::sendDisableMount2Action()
