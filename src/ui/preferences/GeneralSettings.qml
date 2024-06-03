@@ -570,9 +570,9 @@ Rectangle {
                                     fact:                   _videoSettings.rtspUrl1
                                     visible:                fpvrtspUrlLabel.visible
                                     //text: "rtsp://192.168.144.25:8554/main.264"
-                                    onTextChanged: {
-                                        SiYi.camera.analyzeIp(text)
-                                    }
+                                    //onTextChanged: {
+                                    //    SiYi.camera.analyzeIp(text)
+                                    //}
                                 }
 
                                 QGCLabel {
