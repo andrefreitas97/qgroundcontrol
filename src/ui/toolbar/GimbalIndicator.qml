@@ -370,6 +370,7 @@ Item {
             text:                   activeGimbal && activeGimbal.retracted ? 
                                         qsTr("Retracted") :
                                         (activeGimbal && activeGimbal.yawLock ? qsTr("Yaw locked") : qsTr("Yaw follow"))
+            font.bold:              true
             Layout.columnSpan:      2
             Layout.alignment:       Qt.AlignHCenter
         }
