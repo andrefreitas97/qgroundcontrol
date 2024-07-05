@@ -19,7 +19,7 @@ import QGroundControl.FactControls  1.0
 Component {
     id: messageDialogComponent
     QGCPopupDialog {
-        title: "Configurate vehicle"
+        title: "Configure vehicle:"
         property var  acceptFunction:     null
         buttons:  StandardButton.Close
 
@@ -54,6 +54,11 @@ Component {
         property bool showSlow: param9.value == 1
         property bool showNormal: param9.value == 2
         property bool showFast: param9.value == 3
+
+        property Fact param10: controller.getParameterFact(-1, "RNGFND1_TYPE")
+        property Fact param11: controller.getParameterFact(-1, "RNGFND1_ORIENT")
+        property bool showSurfaceTracking: param10.value != 0 && param11.value == 25
+
 
         onRejected:{
             _guidedController.closeAll()
@@ -240,6 +245,48 @@ Component {
                     anchors.bottom:     parent.bottom
                     width:              height
                     sourceSize.width:   width
+                    source:             "/res/surface.svg"
+                    color:              QGroundControl.settingsManager.appSettings.surfaceTracking.value ? qgcPal.colorGreen : qgcPal.colorRed
+                }
+
+                QGCLabel {
+                    text:       qsTr("Surface Tracking:")
+                    anchors.verticalCenter: parent.verticalCenter
+                    font.bold:              true
+                }
+
+                QGCRadioButton {
+                    font.pointSize: ScreenTools.defaultFontPointSize
+                    text:           qsTr("ON")
+                    enabled: showSurfaceTracking
+                    checked:        QGroundControl.settingsManager.appSettings.surfaceTracking.value
+                    onClicked:{
+                        QGroundControl.settingsManager.appSettings.surfaceTracking.value = true
+                        _activeVehicle.setSurfaceTracking(1)
+                    }
+                }
+
+                QGCRadioButton {
+                    font.pointSize: ScreenTools.defaultFontPointSize
+                    text:           qsTr("OFF")
+                    enabled: showSurfaceTracking
+                    checked:        !QGroundControl.settingsManager.appSettings.surfaceTracking.value
+                    onClicked:{
+                        QGroundControl.settingsManager.appSettings.surfaceTracking.value = false
+                        _activeVehicle.setSurfaceTracking(0)
+                    }
+                }
+            }
+
+            Row {
+                Layout.alignment:   Qt.AlignLeft
+                spacing:            ScreenTools.defaultFontPixelWidth
+
+                QGCColoredImage {
+                    anchors.top:        parent.top
+                    anchors.bottom:     parent.bottom
+                    width:              height
+                    sourceSize.width:   width
                     source:             "/res/home.svg"
                     color:              qgcPal.buttonText
                 }
@@ -307,7 +354,6 @@ Component {
                         _activeVehicle.setProximityAvoidance(0)
                     }
                 }
-
             }
 
         }

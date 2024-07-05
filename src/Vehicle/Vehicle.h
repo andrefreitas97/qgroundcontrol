@@ -587,6 +587,8 @@ public:
 
     Q_INVOKABLE void setProximityAvoidance(int on_off);
 
+    Q_INVOKABLE void setSurfaceTracking(int on_off);
+
     bool fixedWing() const;
     bool multiRotor() const;
     bool vtol() const;

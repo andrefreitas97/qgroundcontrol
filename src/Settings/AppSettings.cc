@@ -179,6 +179,7 @@ DECLARE_SETTINGSFACT(AppSettings, payloadgripper)
 DECLARE_SETTINGSFACT(AppSettings, payloadgrenades)
 DECLARE_SETTINGSFACT(AppSettings, gimbalCamera)
 DECLARE_SETTINGSFACT(AppSettings, proximityAvoidance)
+DECLARE_SETTINGSFACT(AppSettings, surfaceTracking)
 
 DECLARE_SETTINGSFACT_NO_FUNC(AppSettings, indoorPalette)
 {

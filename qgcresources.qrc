@@ -70,6 +70,7 @@
         <file alias="config.svg">resources/config.svg</file>
         <file alias="home.svg">resources/home.svg</file>
         <file alias="avoidance.svg">resources/avoidance.svg</file>
+        <file alias="surface.svg">resources/surface.svg</file>
         <file>resources/icons/qgroundcontrol.ico</file>
     </qresource>
     <qresource prefix="/res/firmware">

@@ -74,6 +74,7 @@ public:
     DEFINE_SETTINGFACT(payloadgrenades)
     DEFINE_SETTINGFACT(gimbalCamera)
     DEFINE_SETTINGFACT(proximityAvoidance)
+    DEFINE_SETTINGFACT(surfaceTracking)
 
 
     // Although this is a global setting it only affects ArduPilot vehicle since PX4 automatically starts the stream from the vehicle side

@@ -45,7 +45,7 @@ Rectangle {
     property real videoH: 720
     property bool expended: true
     property bool using1080p: false //camera.using1080p
-    property real iconScale: SiYi.isAndroid ? 0.9 : 1.5
+    property real iconScale: SiYi.isAndroid ? 1 : 1.5
     property int iconLeftMargin: 175
     property bool laserIconShow: false
     property bool showLaserOnLeft: camera.mainStreamSplitMode === 3
@@ -508,6 +508,24 @@ Rectangle {
                     onPressed: camera.resetPostion()
                 }
             }
+
+            //Image {
+            //    // 回中
+            //    id: down
+            //    sourceSize.width: btText.width * iconScale
+            //    sourceSize.height: btText.width * iconScale
+            //    source: downMA.pressed ? "qrc:/resources/SiYi/ResetGreen.svg" : "qrc:/resources/SiYi/Reset.svg"
+            //    //anchors.verticalCenter: parent.verticalCenter
+            //    anchors.horizontalCenter: parent.horizontalCenter
+            //    fillMode: Image.PreserveAspectFit
+            //    cache: false
+            //    visible: expended ? camera.enableControl : false
+            //    MouseArea {
+            //        id: downMA
+            //        anchors.fill: parent
+            //        onPressed: camera.turn(0,-90)
+            //    }
+            //}
 
             Image {
                 // 拍照

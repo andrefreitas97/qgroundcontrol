@@ -382,6 +382,13 @@
     "longDesc":  "Sets Proximity Avoidance on or off.",
     "type":             "bool",
     "default":     false
+},
+{
+    "name":             "surfaceTracking",
+    "shortDesc": "Surface Tracking Switch",
+    "longDesc":  "Sets Surface Tracking on or off.",
+    "type":             "bool",
+    "default":     false
 }
 ]
 }

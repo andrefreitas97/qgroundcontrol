@@ -4704,3 +4704,29 @@ void Vehicle::setProximityAvoidance(int on_off)
         break;
     }
 }
+
+void Vehicle::setSurfaceTracking(int on_off)
+{
+    switch(on_off) {
+    case 0: // OFF
+        sendMavCommand(
+            _defaultComponentId,
+            MAV_CMD_DO_AUX_FUNCTION,
+            false,                               // Don't show errors
+            75,                                   // Param1: Auxiliary Function
+            1,                       // Param2: Switch Level
+            0, 0, 0, 0, 0);                      // Param 3 ~ 7 : unused
+        break;
+    case 1: // ON
+        sendMavCommand(
+            _defaultComponentId,
+            MAV_CMD_DO_AUX_FUNCTION,
+            false,                               // Don't show errors
+            75,                                   // Param1: Auxiliary Function
+            0,                       // Param2: Switch Level
+            0, 0, 0, 0, 0);                      // Param 3 ~ 7 : unused
+        break;
+    default:
+        break;
+    }
+}
