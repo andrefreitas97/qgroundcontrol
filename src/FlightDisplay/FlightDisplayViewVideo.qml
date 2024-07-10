@@ -48,7 +48,7 @@ Item {
         Image {
             id:             noVideo
             anchors.fill:   parent
-            source:         "/res/NoVideoBackground.jpg"
+            source:         "/res/Gradiente_Logo.jpg"
             fillMode:       Image.PreserveAspectCrop
             visible:        !(QGroundControl.videoManager.decoding)
 

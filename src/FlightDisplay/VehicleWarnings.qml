@@ -45,15 +45,15 @@ Rectangle {
             text:                       _activeVehicle ? _activeVehicle.prearmError : ""
         }
 
-        QGCLabel {
-            anchors.horizontalCenter:   parent.horizontalCenter
-            visible:                    _prearmErrorVisible
-            width:                      ScreenTools.defaultFontPixelWidth * 50
-            horizontalAlignment:        Text.AlignHCenter
-            wrapMode:                   Text.WordWrap
-            color:                      "black"
-            font.pointSize:             ScreenTools.largeFontPointSize
-            text:                       qsTr("The vehicle has failed a pre-arm check. In order to arm the vehicle, resolve the failure.")
-        }
+        //QGCLabel {
+        //    anchors.horizontalCenter:   parent.horizontalCenter
+        //    visible:                    _prearmErrorVisible
+        //    width:                      ScreenTools.defaultFontPixelWidth * 50
+        //    horizontalAlignment:        Text.AlignHCenter
+        //    wrapMode:                   Text.WordWrap
+        //    color:                      "black"
+        //    font.pointSize:             ScreenTools.largeFontPointSize
+        //    text:                       qsTr("The vehicle has failed a pre-arm check. In order to arm the vehicle, resolve the failure.")
+        //}
     }
 }

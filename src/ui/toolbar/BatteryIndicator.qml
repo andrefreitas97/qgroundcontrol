@@ -106,6 +106,7 @@ Item {
                 font.pointSize:         ScreenTools.mediumFontPointSize
                 color:                  getBatteryColor()
                 anchors.verticalCenter: parent.verticalCenter
+                font.bold:                true
             }
         }
     }

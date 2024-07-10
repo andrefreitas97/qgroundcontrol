@@ -17,7 +17,7 @@ import QGroundControl.Controls      1.0
 
 Rectangle {
     id:         _root
-    color:      qgcPal.toolbarBackground
+    color:      Qt.rgba(qgcPal.window.r, qgcPal.window.g, qgcPal.window.b, 0.5)
     width:      _idealWidth < repeater.contentWidth ? repeater.contentWidth : _idealWidth
     height:     Math.min(maxHeight, toolStripColumn.height + (flickable.anchors.margins * 2))
     radius:     ScreenTools.defaultFontPixelWidth / 2

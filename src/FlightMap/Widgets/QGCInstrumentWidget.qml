@@ -34,7 +34,7 @@ ColumnLayout {
         height:             _outerRadius * 2
         Layout.fillWidth:   true
         radius:             _outerRadius
-        color:              qgcPal.window
+        color:              "transparent"
 
         DeadMouseArea { anchors.fill: parent }
 

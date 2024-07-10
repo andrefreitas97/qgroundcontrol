@@ -567,7 +567,7 @@ ApplicationWindow {
 
         background: Rectangle {
             anchors.fill:   parent
-            color:          qgcPal.alertBackground
+            color:          Qt.rgba(qgcPal.alertBackground.r, qgcPal.alertBackground.g, qgcPal.alertBackground.b, 0.75) // 0.5 for 50% opacity
             radius:         ScreenTools.defaultFontPixelHeight * 0.5
             border.color:   qgcPal.alertBorder
             border.width:   2

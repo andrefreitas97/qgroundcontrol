@@ -32,6 +32,8 @@
         <file alias="LockOpen.svg">resources/LockOpen.svg</file>
         <file alias="notile.png">resources/notile.png</file>
         <file alias="NoVideoBackground.jpg">resources/NoVideoBackground.jpg</file>
+        <file alias="GRADIENTE_SENTINELA_2.jpg">resources/GRADIENTE_SENTINELA_2.jpg</file>
+        <file alias="Gradiente_Logo.jpg">resources/Gradiente_Logo.jpg</file>
         <file alias="Pause.svg">resources/Pause.svg</file>
         <file alias="pause-mission.svg">resources/pause-mission.svg</file>
         <file alias="pencil.svg">resources/pencil.svg</file>

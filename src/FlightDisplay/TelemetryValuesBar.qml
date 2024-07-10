@@ -20,7 +20,7 @@ Rectangle {
     id:                 telemetryPanel
     height:             telemetryLayout.height + (_toolsMargin * 2)
     width:              telemetryLayout.width + (_toolsMargin * 2)
-    color:              qgcPal.window
+    color:              Qt.rgba(qgcPal.window.r, qgcPal.window.g, qgcPal.window.b, 0.5) // Adjusted color with alpha for transparency
     radius:             ScreenTools.defaultFontPixelWidth / 2
 
     property bool       bottomMode: true
