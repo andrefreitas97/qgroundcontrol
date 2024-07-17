@@ -19,6 +19,8 @@ const char* VehicleGPSFactGroup::_vdopFactName =                "vdop";
 const char* VehicleGPSFactGroup::_courseOverGroundFactName =    "courseOverGround";
 const char* VehicleGPSFactGroup::_countFactName =               "count";
 const char* VehicleGPSFactGroup::_lockFactName =                "lock";
+const char* VehicleGPSFactGroup::_haccFactName =                "hacc";
+const char* VehicleGPSFactGroup::_vaccFactName =                "vacc";
 
 VehicleGPSFactGroup::VehicleGPSFactGroup(QObject* parent)
     : FactGroup(1000, ":/json/Vehicle/GPSFact.json", parent)
@@ -30,6 +32,8 @@ VehicleGPSFactGroup::VehicleGPSFactGroup(QObject* parent)
     , _courseOverGroundFact (0, _courseOverGroundFactName,  FactMetaData::valueTypeDouble)
     , _countFact            (0, _countFactName,             FactMetaData::valueTypeInt32)
     , _lockFact             (0, _lockFactName,              FactMetaData::valueTypeInt32)
+    , _haccFact             (0, _haccFactName,              FactMetaData::valueTypeDouble)
+    , _vaccFact             (0, _vaccFactName,              FactMetaData::valueTypeDouble)
 {
     _addFact(&_latFact,                 _latFactName);
     _addFact(&_lonFact,                 _lonFactName);
@@ -39,6 +43,8 @@ VehicleGPSFactGroup::VehicleGPSFactGroup(QObject* parent)
     _addFact(&_courseOverGroundFact,    _courseOverGroundFactName);
     _addFact(&_lockFact,                _lockFactName);
     _addFact(&_countFact,               _countFactName);
+    _addFact(&_haccFact,               _haccFactName);
+    _addFact(&_vaccFact,               _vaccFactName);
 
     _latFact.setRawValue(std::numeric_limits<float>::quiet_NaN());
     _lonFact.setRawValue(std::numeric_limits<float>::quiet_NaN());
@@ -46,6 +52,7 @@ VehicleGPSFactGroup::VehicleGPSFactGroup(QObject* parent)
     _hdopFact.setRawValue(std::numeric_limits<float>::quiet_NaN());
     _vdopFact.setRawValue(std::numeric_limits<float>::quiet_NaN());
     _courseOverGroundFact.setRawValue(std::numeric_limits<float>::quiet_NaN());
+
 }
 
 void VehicleGPSFactGroup::handleMessage(Vehicle* /* vehicle */, mavlink_message_t& message)
@@ -78,6 +85,8 @@ void VehicleGPSFactGroup::_handleGpsRawInt(mavlink_message_t& message)
     vdop()->setRawValue             (gpsRawInt.epv == UINT16_MAX ? qQNaN() : gpsRawInt.epv / 100.0);
     courseOverGround()->setRawValue (gpsRawInt.cog == UINT16_MAX ? qQNaN() : gpsRawInt.cog / 100.0);
     lock()->setRawValue             (gpsRawInt.fix_type);
+    hacc()->setRawValue             (gpsRawInt.h_acc * 1e-3);
+    vacc()->setRawValue             (gpsRawInt.v_acc * 1e-3);
 }
 
 void VehicleGPSFactGroup::_handleHighLatency(mavlink_message_t& message)

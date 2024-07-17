@@ -38,4 +38,6 @@ void VehicleGPS2FactGroup::_handleGps2Raw(mavlink_message_t& message)
     vdop()->setRawValue             (gps2Raw.epv == UINT16_MAX ? qQNaN() : gps2Raw.epv / 100.0);
     courseOverGround()->setRawValue (gps2Raw.cog == UINT16_MAX ? qQNaN() : gps2Raw.cog / 100.0);
     lock()->setRawValue             (gps2Raw.fix_type);
+    hacc()->setRawValue             (gps2Raw.h_acc * 1e-3);
+    vacc()->setRawValue             (gps2Raw.v_acc * 1e-3);
 }

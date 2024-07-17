@@ -27,6 +27,8 @@ public:
     Q_PROPERTY(Fact* courseOverGround   READ courseOverGround   CONSTANT)
     Q_PROPERTY(Fact* count              READ count              CONSTANT)
     Q_PROPERTY(Fact* lock               READ lock               CONSTANT)
+    Q_PROPERTY(Fact* hacc               READ hacc               CONSTANT)
+    Q_PROPERTY(Fact* vacc               READ vacc               CONSTANT)
 
     Fact* lat               () { return &_latFact; }
     Fact* lon               () { return &_lonFact; }
@@ -36,6 +38,8 @@ public:
     Fact* courseOverGround  () { return &_courseOverGroundFact; }
     Fact* count             () { return &_countFact; }
     Fact* lock              () { return &_lockFact; }
+    Fact* hacc              () { return &_haccFact; }
+    Fact* vacc              () { return &_vaccFact; }
 
     // Overrides from FactGroup
     virtual void handleMessage(Vehicle* vehicle, mavlink_message_t& message) override;
@@ -48,6 +52,8 @@ public:
     static const char* _courseOverGroundFactName;
     static const char* _countFactName;
     static const char* _lockFactName;
+    static const char* _haccFactName;
+    static const char* _vaccFactName;
 
 protected:
     void _handleGpsRawInt   (mavlink_message_t& message);
@@ -62,4 +68,6 @@ protected:
     Fact _courseOverGroundFact;
     Fact _countFact;
     Fact _lockFact;
+    Fact _haccFact;
+    Fact _vaccFact;
 };
