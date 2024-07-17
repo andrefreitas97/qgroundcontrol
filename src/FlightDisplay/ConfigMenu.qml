@@ -182,7 +182,7 @@ Component {
                 QGCRadioButton {
                     font.pointSize: ScreenTools.defaultFontPointSize
                     text:           qsTr("Baro")
-                    enabled:        !_isVehicleArmed
+                    enabled:        QGroundControl.settingsManager.appSettings.vehiclebravo.value
                     checked:        showBaro
                     onClicked:      _activeVehicle.sendHeightAction(0)
 
@@ -191,7 +191,7 @@ Component {
                 QGCRadioButton {
                     font.pointSize: ScreenTools.defaultFontPointSize
                     text:           qsTr("GPS")
-                    enabled:        !_isVehicleArmed
+                    enabled:        QGroundControl.settingsManager.appSettings.vehiclebravo.value
                     checked:        showGPSheight
                     onClicked:      _activeVehicle.sendHeightAction(1)
                 }
