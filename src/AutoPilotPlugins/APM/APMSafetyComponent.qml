@@ -214,7 +214,7 @@ SetupPage {
 
                     property Fact _failsafeThrEnable:   controller.getParameterFact(-1, "THR_FAILSAFE")
                     property Fact _failsafeThrValue:    controller.getParameterFact(-1, "THR_FS_VALUE")
-                    property Fact _failsafeGCSEnable:   controller.getParameterFact(-1, "FS_GCS_ENABL")
+                    property Fact _failsafeGCSEnable:   controller.getParameterFact(-1, "FS_GCS_ENABLE")
 
                     QGCLabel {
                         text:       qsTr("Failsafe Triggers")
@@ -372,8 +372,14 @@ SetupPage {
 
                                 QGCLabel { text: qsTr("Throttle failsafe:") }
                                 QGCComboBox {
-                                    model:              [qsTr("Disabled"), qsTr("Always RTL"),
-                                        qsTr("Continue with Mission in Auto Mode"), qsTr("Always Land")]
+                                    model:              [qsTr("Disabled"),
+                                                        qsTr("Always RTL"),
+                                                        qsTr("Continue with Mission in Auto Mode"),
+                                                        qsTr("Always Land"),
+                                                        qsTr("Always SmartRTL or RTL"),
+                                                        qsTr("Always SmartRTL or Land"),
+                                                        qsTr("Auto DO_LAND_START or RTL"),
+                                                        qsTr("Always Brake or Land")]
                                     currentIndex:       _failsafeThrEnable.value
                                     Layout.fillWidth:   true
 
