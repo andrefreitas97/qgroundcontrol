@@ -80,6 +80,20 @@
     "default":     0
 },
 {
+    "name":             "videoFlip_FPV",
+    "shortDesc": "FPV Video Display Flip",
+    "longDesc":  "Handle Video Flip.",
+    "type":             "bool",
+    "default":     true
+},
+{
+    "name":             "videoFlip_Gimbal",
+    "shortDesc": "Gimbal Video Display Flip",
+    "longDesc":  "Handle Video Flip.",
+    "type":             "bool",
+    "default":     false
+},
+{
     "name":             "showRecControl",
     "shortDesc": "Show Video Record Control",
     "longDesc":  "Show recording control in the UI.",

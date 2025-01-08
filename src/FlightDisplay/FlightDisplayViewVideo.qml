@@ -36,6 +36,15 @@ Item {
     property bool   _hasZoom:           _camera && _camera.hasZoom
     property int    _fitMode:           QGroundControl.settingsManager.videoSettings.videoFit.rawValue
 
+    property var    _videoSettings:             QGroundControl.settingsManager.videoSettings
+
+
+    property bool _FPVvideo: _videoSettings.rtspUrl.value == _videoSettings.rtspUrl1.value ? true : false
+    property bool _Gimbalvideo: _videoSettings.rtspUrl.value == _videoSettings.rtspUrl2.value ? true : false
+    property bool _flipFPV: _videoSettings.videoFlip_FPV.rawValue
+    property bool _flipGimbal: _videoSettings.videoFlip_Gimbal.rawValue
+    property bool _flip: ((_FPVvideo && _flipFPV) || (_Gimbalvideo && _flipGimbal)) ? true : false
+
     function getWidth() {
         return videoBackground.getWidth()
     }
@@ -97,6 +106,12 @@ Item {
             QGCVideoBackground {
                 id:             videoContent
                 objectName:     "videoContent"
+
+                transform: Rotation {
+                        angle: _flip ? 180 : 0
+                        origin.x: videoContent.width / 2
+                        origin.y: videoContent.height / 2
+                    }
 
                 Connections {
                     target: QGroundControl.videoManager

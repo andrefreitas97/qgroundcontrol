@@ -381,7 +381,7 @@ Rectangle {
                     flow:   GridLayout.TopToBottom
                     rows:   dynamicRows + (_mavlinkCamera ? _mavlinkCamera.activeSettings.length : 0)
 
-                    property int dynamicRows: 10
+                    property int dynamicRows: 11
 
                     // First column
                     QGCLabel {
@@ -431,6 +431,12 @@ Rectangle {
 
                     QGCLabel {
                         text:               qsTr("Video Grid Lines")
+                        visible:            _anyVideoStreamAvailable
+                        onVisibleChanged:   gridLayout.dynamicRows += visible ? 1 : -1
+                    }
+
+                    QGCLabel {
+                        text:               qsTr("Video Flip")
                         visible:            _anyVideoStreamAvailable
                         onVisibleChanged:   gridLayout.dynamicRows += visible ? 1 : -1
                     }
@@ -575,6 +581,18 @@ Rectangle {
                         checked:            _videoStreamSettings.gridLines.rawValue
                         visible:            _anyVideoStreamAvailable
                         onClicked:          _videoStreamSettings.gridLines.rawValue = checked ? 1 : 0
+                    }
+
+                    QGCSwitch {
+                        checked:            _videoStreamSettings.videoFlip_FPV.rawValue
+                        visible:            _anyVideoStreamAvailable && _videoSettings.rtspUrl.value == _videoSettings.rtspUrl1.value
+                        onClicked:          _videoStreamSettings.videoFlip_FPV.rawValue = checked ? true : false
+                    }
+
+                    QGCSwitch {
+                        checked:            _videoStreamSettings.videoFlip_Gimbal.rawValue
+                        visible:            _anyVideoStreamAvailable && _videoSettings.rtspUrl.value == _videoSettings.rtspUrl2.value
+                        onClicked:          _videoStreamSettings.videoFlip_Gimbal.rawValue = checked ? true : false
                     }
 
                     FactComboBox {

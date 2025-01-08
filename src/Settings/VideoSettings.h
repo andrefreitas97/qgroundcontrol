@@ -31,6 +31,8 @@ public:
     DEFINE_SETTINGFACT(aspectRatio)
     DEFINE_SETTINGFACT(videoFit)
     DEFINE_SETTINGFACT(gridLines)
+    DEFINE_SETTINGFACT(videoFlip_FPV)
+    DEFINE_SETTINGFACT(videoFlip_Gimbal)
     DEFINE_SETTINGFACT(showRecControl)
     DEFINE_SETTINGFACT(recordingFormat)
     DEFINE_SETTINGFACT(maxVideoSize)
