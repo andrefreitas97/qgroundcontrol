@@ -40,10 +40,12 @@ Item {
 
 
     property bool _FPVvideo: _videoSettings.rtspUrl.value == _videoSettings.rtspUrl0.value ? true : false
-    property bool _Gimbalvideo: _videoSettings.rtspUrl.value == _videoSettings.rtspUrl1.value ? true : false
+    property bool _Gimbal1video: _videoSettings.rtspUrl.value == _videoSettings.rtspUrl1.value ? true : false
+    property bool _Gimbal2video: _videoSettings.rtspUrl.value == _videoSettings.rtspUrl2.value ? true : false
     property bool _flipFPV: _videoSettings.videoFlip_FPV.rawValue
-    property bool _flipGimbal: _videoSettings.videoFlip_Gimbal.rawValue
-    property bool _flip: ((_FPVvideo && _flipFPV) || (_Gimbalvideo && _flipGimbal)) ? true : false
+    property bool _flipGimbal1: _videoSettings.videoFlip_Gimbal1.rawValue
+    property bool _flipGimbal2: _videoSettings.videoFlip_Gimbal2.rawValue
+    property bool _flip: ((_FPVvideo && _flipFPV) || (_Gimbal1video && _flipGimbal1) || (_Gimbal2video && _flipGimbal2)) ? true : false
 
     function getWidth() {
         return videoBackground.getWidth()

@@ -590,9 +590,15 @@ Rectangle {
                     }
 
                     QGCSwitch {
-                        checked:            _videoStreamSettings.videoFlip_Gimbal.rawValue
+                        checked:            _videoStreamSettings.videoFlip_Gimbal1.rawValue
                         visible:            _anyVideoStreamAvailable && _videoSettings.rtspUrl.value == _videoSettings.rtspUrl1.value
-                        onClicked:          _videoStreamSettings.videoFlip_Gimbal.rawValue = checked ? true : false
+                        onClicked:          _videoStreamSettings.videoFlip_Gimbal1.rawValue = checked ? true : false
+                    }
+
+                    QGCSwitch {
+                        checked:            _videoStreamSettings.videoFlip_Gimbal2.rawValue
+                        visible:            _anyVideoStreamAvailable && _videoSettings.rtspUrl.value == _videoSettings.rtspUrl2.value
+                        onClicked:          _videoStreamSettings.videoFlip_Gimbal2.rawValue = checked ? true : false
                     }
 
                     FactComboBox {

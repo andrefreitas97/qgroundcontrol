@@ -94,8 +94,15 @@
     "default":     true
 },
 {
-    "name":             "videoFlip_Gimbal",
-    "shortDesc": "Gimbal Video Display Flip",
+    "name":             "videoFlip_Gimbal1",
+    "shortDesc": "Gimbal 1 Video Display Flip",
+    "longDesc":  "Handle Video Flip.",
+    "type":             "bool",
+    "default":     false
+},
+{
+    "name":             "videoFlip_Gimbal2",
+    "shortDesc": "Gimbal 2 Video Display Flip",
     "longDesc":  "Handle Video Flip.",
     "type":             "bool",
     "default":     false
