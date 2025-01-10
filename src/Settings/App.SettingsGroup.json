@@ -370,9 +370,16 @@
     "default":     false
 },
 {
-    "name":             "gimbalCamera",
-    "shortDesc": "Gimbal Camera",
-    "longDesc":  "Sets Gimbal Camera as available or unavailable.",
+    "name":             "gimbalCamera1",
+    "shortDesc": "Gimbal Camera 1",
+    "longDesc":  "Sets Gimbal Camera 1 as available or unavailable.",
+    "type":             "bool",
+    "default":     false
+},
+{
+    "name":             "gimbalCamera2",
+    "shortDesc": "Gimbal Camera 2",
+    "longDesc":  "Sets Gimbal Camera 2 as available or unavailable.",
     "type":             "bool",
     "default":     false
 },

@@ -39,8 +39,8 @@ Item {
     property var    _videoSettings:             QGroundControl.settingsManager.videoSettings
 
 
-    property bool _FPVvideo: _videoSettings.rtspUrl.value == _videoSettings.rtspUrl1.value ? true : false
-    property bool _Gimbalvideo: _videoSettings.rtspUrl.value == _videoSettings.rtspUrl2.value ? true : false
+    property bool _FPVvideo: _videoSettings.rtspUrl.value == _videoSettings.rtspUrl0.value ? true : false
+    property bool _Gimbalvideo: _videoSettings.rtspUrl.value == _videoSettings.rtspUrl1.value ? true : false
     property bool _flipFPV: _videoSettings.videoFlip_FPV.rawValue
     property bool _flipGimbal: _videoSettings.videoFlip_Gimbal.rawValue
     property bool _flip: ((_FPVvideo && _flipFPV) || (_Gimbalvideo && _flipGimbal)) ? true : false

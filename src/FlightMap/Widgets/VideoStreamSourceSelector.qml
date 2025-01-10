@@ -32,7 +32,7 @@ Rectangle {
     height:     mainLayout.height + (_margins * 2)
     color:      Qt.rgba(qgcPal.window.r, qgcPal.window.g, qgcPal.window.b, 0.5)
     radius:     _margins
-    visible:    multiVehiclePanelSelector.showSingleVehiclePanel && QGroundControl.settingsManager.appSettings.gimbalCamera.value && _activeVehicle
+    visible:    multiVehiclePanelSelector.showSingleVehiclePanel && (QGroundControl.settingsManager.appSettings.gimbalCamera1.value || QGroundControl.settingsManager.appSettings.gimbalCamera2.value) && _activeVehicle
 
     property real   _margins:                                   ScreenTools.defaultFontPixelHeight / 2
     property var    _activeVehicle:                             QGroundControl.multiVehicleManager.activeVehicle
@@ -59,16 +59,28 @@ Rectangle {
 
             onEnabledChanged:{
                 if (enabled) {
-                _videoSettings.rtspUrl.value = _videoSettings.rtspUrl1.value;
-                _activeVehicle.sendSetMount1Action();
+                _videoSettings.rtspUrl.value = _videoSettings.rtspUrl0.value;
+                _activeVehicle.sendSetMount0Action();
                 SiYi.camera.analyzeIp(_videoSettings.rtspUrl.value);
-                gimbalController.activeGimbal = gimbalController.gimbals.get(0)
+                //gimbalController.activeGimbal = gimbalController.gimbals.get(0)
                 }
             }
 
             QGCRadioButton {
                 font.pointSize: ScreenTools.smallFontPointSize
-                text:           qsTr("FPV Stream")
+                text:           qsTr("FPV\nStream")
+                font.bold:      _videoSettings.rtspUrl.value == _videoSettings.rtspUrl0.value ? true : false
+                checked:        _videoSettings.rtspUrl.value == _videoSettings.rtspUrl0.value ? true : false
+                onClicked:      {_videoSettings.rtspUrl.value = _videoSettings.rtspUrl0.value
+                                _activeVehicle.sendSetMount0Action()
+                                SiYi.camera.analyzeIp(_videoSettings.rtspUrl.value)
+                                //gimbalController.activeGimbal = gimbalController.gimbals.get(0)
+                                }
+            }
+
+            QGCRadioButton {
+                font.pointSize: ScreenTools.smallFontPointSize
+                text:           qsTr("Gimbal 1\nStream")
                 font.bold:      _videoSettings.rtspUrl.value == _videoSettings.rtspUrl1.value ? true : false
                 checked:        _videoSettings.rtspUrl.value == _videoSettings.rtspUrl1.value ? true : false
                 onClicked:      {_videoSettings.rtspUrl.value = _videoSettings.rtspUrl1.value
@@ -76,18 +88,20 @@ Rectangle {
                                 SiYi.camera.analyzeIp(_videoSettings.rtspUrl.value)
                                 gimbalController.activeGimbal = gimbalController.gimbals.get(0)
                                 }
+                visible:        QGroundControl.settingsManager.appSettings.gimbalCamera1.value
             }
 
             QGCRadioButton {
                 font.pointSize: ScreenTools.smallFontPointSize
-                text:           qsTr("Gimbal Stream")
+                text:           qsTr("Gimbal 2\nStream")
                 font.bold:      _videoSettings.rtspUrl.value == _videoSettings.rtspUrl2.value ? true : false
                 checked:        _videoSettings.rtspUrl.value == _videoSettings.rtspUrl2.value ? true : false
                 onClicked:      {_videoSettings.rtspUrl.value = _videoSettings.rtspUrl2.value
-                                _activeVehicle.sendSetMount2Action()
+                                //_activeVehicle.sendSetMount2Action()
                                 SiYi.camera.analyzeIp(_videoSettings.rtspUrl.value)
-                                gimbalController.activeGimbal = gimbalController.gimbals.get(1)
+                                //gimbalController.activeGimbal = gimbalController.gimbals.get(1)
                                 }
+                visible:        QGroundControl.settingsManager.appSettings.gimbalCamera2.value
             }
         }    
     }

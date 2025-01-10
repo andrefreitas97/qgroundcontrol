@@ -26,18 +26,25 @@
     "default":     "rtsp://192.168.144.25:8554/main.264"
 },
 {
-    "name":             "rtspUrl1",
-    "shortDesc": "RTSP URL 1",
-    "longDesc":  "RTSP URL 1 video stream.",
+    "name":             "rtspUrl0",
+    "shortDesc": "RTSP URL 0",
+    "longDesc":  "RTSP URL 0 video stream (FPV).",
     "type":             "string",
     "default":     "rtsp://192.168.144.25:8554/main.264"
 },
 {
-    "name":             "rtspUrl2",
-    "shortDesc": "RTSP URL 2",
-    "longDesc":  "RTSP URL 2 video stream.",
+    "name":             "rtspUrl1",
+    "shortDesc": "RTSP URL 1",
+    "longDesc":  "RTSP URL 1 video stream (Gimbal 1).",
     "type":             "string",
-    "default":     "rtsp://192.168.144.26:8554/main.264"
+    "default":     "rtsp://192.168.144.60/video0"
+},
+{
+    "name":             "rtspUrl2",
+    "shortDesc": "RTSP URL 1",
+    "longDesc":  "RTSP URL 1 video stream (Gimbal 2).",
+    "type":             "string",
+    "default":     ""
 },
 {
     "name":             "tcpUrl",

@@ -130,6 +130,7 @@ DECLARE_SETTINGSFACT(VideoSettings, streamEnabled)
 DECLARE_SETTINGSFACT(VideoSettings, disableWhenDisarmed)
 DECLARE_SETTINGSFACT(VideoSettings, lowLatencyMode)
 
+DECLARE_SETTINGSFACT(VideoSettings, rtspUrl0)
 DECLARE_SETTINGSFACT(VideoSettings, rtspUrl1)
 DECLARE_SETTINGSFACT(VideoSettings, rtspUrl2)
 

@@ -9,7 +9,7 @@
 
 
 import QtQuick                  2.3
-import QtQuick.Controls         1.2
+import QtQuick.Controls         2.4
 import QtQuick.Controls.Styles  1.4
 import QtQuick.Dialogs          1.2
 import QtQuick.Layouts          1.2
@@ -166,6 +166,133 @@ Rectangle {
                                 visible: QGroundControl.settingsManager.appSettings.vehiclealfa.value && _activeVehicle
                             }
 
+
+                            QGCLabel {
+                                text:               qsTr("Front Payload")
+                                Layout.columnSpan:  3
+                                Layout.alignment:   Qt.AlignHCenter
+                                visible:            QGroundControl.settingsManager.appSettings.vehiclebravo.value && _activeVehicle
+                            }
+
+                            //QGCLabel {
+                            //    text:               qsTr("Gimbal Camera 1")
+                            //    visible:            QGroundControl.settingsManager.appSettings.vehiclebravo.value && _activeVehicle
+                            //}
+                            //QGCSwitch {
+                            //    Layout.columnSpan:  2
+                            //    visible:            QGroundControl.settingsManager.appSettings.vehiclebravo.value && _activeVehicle
+                            //    enabled:            !_vehicleArmed
+                            //    checked:            QGroundControl.settingsManager.appSettings.gimbalCamera1.value
+                            //    onClicked:{
+                            //        if(QGroundControl.settingsManager.appSettings.gimbalCamera1.value){
+                            //            QGroundControl.settingsManager.appSettings.gimbalCamera1.value = false
+                            //            QGroundControl.settingsManager.videoSettings.rtspUrl.value = QGroundControl.settingsManager.videoSettings.rtspUrl0.value
+                            //            QGroundControl.multiVehicleManager.activeVehicle.sendSetMount0Action()
+                            //            QGroundControl.multiVehicleManager.activeVehicle.sendDisableMount1Action()
+                            //        }
+                            //        else{
+                            //            QGroundControl.settingsManager.appSettings.gimbalCamera1.value = true
+                            //            QGroundControl.multiVehicleManager.activeVehicle.sendEnableMount1Action()
+
+                            //            //QGroundControl.settingsManager.appSettings.payloadgripper.value = false
+                            //            //QGroundControl.settingsManager.appSettings.payloadgrenades.value = false
+                            //        }
+                            //    }
+                            //}
+
+                            QGCRadioButton {
+                                text:               qsTr("Gimbal Camera 1")
+                                visible:            QGroundControl.settingsManager.appSettings.vehiclebravo.value && _activeVehicle
+                                enabled:            !_vehicleArmed
+                                checked:            QGroundControl.settingsManager.appSettings.gimbalCamera1.value
+                                onClicked:{
+                                    if(QGroundControl.settingsManager.appSettings.gimbalCamera1.value){
+                                        QGroundControl.settingsManager.appSettings.gimbalCamera1.value = false
+                                        QGroundControl.settingsManager.videoSettings.rtspUrl.value = QGroundControl.settingsManager.videoSettings.rtspUrl0.value
+                                        QGroundControl.multiVehicleManager.activeVehicle.sendSetMount0Action()
+                                        QGroundControl.multiVehicleManager.activeVehicle.sendDisableMount1Action()
+                                    }else {
+                                        QGroundControl.settingsManager.appSettings.gimbalCamera1.value = true
+                                        QGroundControl.multiVehicleManager.activeVehicle.sendEnableMount1Action()
+
+                                        //QGroundControl.settingsManager.appSettings.payloadgripper.value = false
+                                        //QGroundControl.settingsManager.appSettings.payloadgrenades.value = false
+                                    }
+                                }
+                                Layout.columnSpan:  3
+                            }
+
+
+                            QGCLabel {
+                                text:               qsTr("Rear Payload")
+                                Layout.columnSpan:  3
+                                Layout.alignment:   Qt.AlignHCenter
+                                visible:            QGroundControl.settingsManager.appSettings.vehiclebravo.value && _activeVehicle
+                            }
+
+
+                            //QGCLabel {
+                            //    text:       qsTr("Gripper")
+                            //    visible:     QGroundControl.settingsManager.appSettings.vehiclebravo.value && _activeVehicle
+                            //}
+                            //QGCSwitch {
+                            //    Layout.columnSpan: 2
+                            //    visible: QGroundControl.settingsManager.appSettings.vehiclebravo.value && _activeVehicle
+                            //    enabled: !_vehicleArmed
+                            //    checked: QGroundControl.settingsManager.appSettings.payloadgripper.value
+                            //    onClicked: {
+                            //        // If Gripper is being turned ON
+                            //        if (!QGroundControl.settingsManager.appSettings.payloadgripper.value) {
+                            //            // Turn Gripper ON
+                            //            QGroundControl.settingsManager.appSettings.payloadgripper.value = true
+                            //            QGroundControl.settingsManager.appSettings.payloadgrenades.value = false
+                            //            QGroundControl.multiVehicleManager.activeVehicle.setPayloadType(0)
+                            //            QGroundControl.multiVehicleManager.activeVehicle.sendPositionAction(1)
+                            //            //QGroundControl.settingsManager.appSettings.gimbalCamera1.value = false
+                            //            //QGroundControl.settingsManager.videoSettings.rtspUrl.value = QGroundControl.settingsManager.videoSettings.rtspUrl0.value
+                            //            //QGroundControl.multiVehicleManager.activeVehicle.sendSetMount0Action()
+                            //            //QGroundControl.multiVehicleManager.activeVehicle.sendDisableMount2Action()
+                            //        } else {
+                            //            // If Gripper is being turned OFF
+                            //            QGroundControl.settingsManager.appSettings.payloadgripper.value = false
+                            //        }
+                            //    }
+                            //}
+
+                            //QGCLabel {
+                            //    text:               qsTr("Grenade Dropper")
+                            //    visible:            QGroundControl.settingsManager.appSettings.vehiclebravo.value && _activeVehicle
+                            //}
+                            //QGCSwitch {
+                            //    Layout.columnSpan: 2
+                            //    visible: QGroundControl.settingsManager.appSettings.vehiclebravo.value && _activeVehicle
+                            //    enabled: !_vehicleArmed
+                            //    checked: QGroundControl.settingsManager.appSettings.payloadgrenades.value === true
+                            //    onClicked: {
+                            //        // If Grenade Dropper is being turned ON
+                            //        if (!QGroundControl.settingsManager.appSettings.payloadgrenades.value) {
+                            //            // Turn Grenade Dropper ON
+                            //            QGroundControl.settingsManager.appSettings.payloadgrenades.value = true
+                            //            QGroundControl.settingsManager.appSettings.payloadgripper.value = false
+                            //            QGroundControl.multiVehicleManager.activeVehicle.setPayloadType(1)
+                            //            //QGroundControl.settingsManager.appSettings.gimbalCamera1.value = false
+                            //            //QGroundControl.settingsManager.videoSettings.rtspUrl.value = QGroundControl.settingsManager.videoSettings.rtspUrl0.value
+                            //            //QGroundControl.multiVehicleManager.activeVehicle.sendSetMount0Action()
+                            //            //QGroundControl.multiVehicleManager.activeVehicle.sendDisableMount2Action()
+                            //        } else {
+                            //            // If Grenade Dropper is being turned OFF
+                            //            QGroundControl.settingsManager.appSettings.payloadgrenades.value = false
+                            //        }
+                            //    }
+                            //}
+
+
+                            ButtonGroup {
+                                id: payloadGroup
+                                exclusive: true  // Ensures only one button is selected at a time
+                            }
+
+
                             QGCRadioButton {
                                 text:               qsTr("Gripper")
                                 visible:            QGroundControl.settingsManager.appSettings.vehiclebravo.value && _activeVehicle
@@ -181,14 +308,15 @@ Rectangle {
 
                                         QGroundControl.multiVehicleManager.activeVehicle.sendPositionAction(1)
 
-                                        QGroundControl.settingsManager.appSettings.gimbalCamera.value = false
-                                        QGroundControl.settingsManager.videoSettings.rtspUrl.value = QGroundControl.settingsManager.videoSettings.rtspUrl1.value
-                                        QGroundControl.multiVehicleManager.activeVehicle.sendSetMount1Action()
-                                        QGroundControl.multiVehicleManager.activeVehicle.sendDisableMount2Action()
+                                        QGroundControl.settingsManager.appSettings.gimbalCamera2.value = false
+                                        QGroundControl.settingsManager.videoSettings.rtspUrl.value = QGroundControl.settingsManager.videoSettings.rtspUrl0.value
+                                        QGroundControl.multiVehicleManager.activeVehicle.sendSetMount0Action()
+                                        //QGroundControl.multiVehicleManager.activeVehicle.sendDisableMount2Action()
                                     }
 
                                 }
                                 Layout.columnSpan:  3
+                                ButtonGroup.group: payloadGroup  // Assign to the ButtonGroup
                             }
 
                             QGCRadioButton {
@@ -204,35 +332,37 @@ Rectangle {
                                         QGroundControl.settingsManager.appSettings.payloadgripper.value = false
                                         QGroundControl.multiVehicleManager.activeVehicle.setPayloadType(1)
 
-                                        QGroundControl.settingsManager.appSettings.gimbalCamera.value = false
-                                        QGroundControl.settingsManager.videoSettings.rtspUrl.value = QGroundControl.settingsManager.videoSettings.rtspUrl1.value
-                                        QGroundControl.multiVehicleManager.activeVehicle.sendSetMount1Action()
-                                        QGroundControl.multiVehicleManager.activeVehicle.sendDisableMount2Action()
+                                        QGroundControl.settingsManager.appSettings.gimbalCamera2.value = false
+                                        QGroundControl.settingsManager.videoSettings.rtspUrl.value = QGroundControl.settingsManager.videoSettings.rtspUrl0.value
+                                        QGroundControl.multiVehicleManager.activeVehicle.sendSetMount0Action()
+                                        //QGroundControl.multiVehicleManager.activeVehicle.sendDisableMount2Action()
                                     }
                                 }
                                 Layout.columnSpan:  3
+                                ButtonGroup.group: payloadGroup  // Assign to the ButtonGroup
                             }
 
                             QGCRadioButton {
-                                text:               qsTr("Gimbal Camera")
+                                text:               qsTr("Gimbal Camera 2")
                                 visible:            QGroundControl.settingsManager.appSettings.vehiclebravo.value && _activeVehicle
                                 enabled:            !_vehicleArmed
-                                checked:            QGroundControl.settingsManager.appSettings.gimbalCamera.value
+                                checked:            QGroundControl.settingsManager.appSettings.gimbalCamera2.value
                                 onClicked:{
-                                    if(QGroundControl.settingsManager.appSettings.gimbalCamera.value){
-                                        QGroundControl.settingsManager.appSettings.gimbalCamera.value = false
-                                        QGroundControl.settingsManager.videoSettings.rtspUrl.value = QGroundControl.settingsManager.videoSettings.rtspUrl1.value
-                                        QGroundControl.multiVehicleManager.activeVehicle.sendSetMount1Action()
-                                        QGroundControl.multiVehicleManager.activeVehicle.sendDisableMount2Action()
+                                    if(QGroundControl.settingsManager.appSettings.gimbalCamera2.value){
+                                        QGroundControl.settingsManager.appSettings.gimbalCamera2.value = false
+                                        QGroundControl.settingsManager.videoSettings.rtspUrl.value = QGroundControl.settingsManager.videoSettings.rtspUrl0.value
+                                        QGroundControl.multiVehicleManager.activeVehicle.sendSetMount0Action()
+                                        //QGroundControl.multiVehicleManager.activeVehicle.sendDisableMount2Action()
                                     }else {
-                                        QGroundControl.settingsManager.appSettings.gimbalCamera.value = true
-                                        QGroundControl.multiVehicleManager.activeVehicle.sendEnableMount2Action()
+                                        QGroundControl.settingsManager.appSettings.gimbalCamera2.value = true
+                                        //QGroundControl.multiVehicleManager.activeVehicle.sendEnableMount2Action()
 
                                         QGroundControl.settingsManager.appSettings.payloadgripper.value = false
                                         QGroundControl.settingsManager.appSettings.payloadgrenades.value = false
                                     }
                                 }
                                 Layout.columnSpan:  3
+                                ButtonGroup.group: payloadGroup  // Assign to the ButtonGroup
                             }
 
                             QGCLabel {
@@ -246,6 +376,7 @@ Rectangle {
                             QGCButton {
                                 text:       qsTr("Reboot Vehicle")
                                 enabled: _activeVehicle && !_vehicleArmed
+                                Layout.alignment: Qt.AlignHCenter
                                 onClicked: {
                                     mainWindow.showMessageDialog(qsTr("Reboot Vehicle"),
                                                                  qsTr("Select Ok to reboot vehicle."),
@@ -286,9 +417,9 @@ Rectangle {
                     //            QGCRadioButton {
                     //                text:               qsTr("ON")
                     //                enabled:            QGroundControl.settingsManager.appSettings.vehiclebravo.value
-                    //                checked:            QGroundControl.settingsManager.appSettings.gimbalCamera.value
+                    //                checked:            QGroundControl.settingsManager.appSettings.gimbalCamera1.value
                     //                onClicked:{
-                    //                    QGroundControl.settingsManager.appSettings.gimbalCamera.value = true
+                    //                    QGroundControl.settingsManager.appSettings.gimbalCamera1.value = true
                     //                }
                     //                Layout.columnSpan:  3
                     //            }
@@ -296,10 +427,10 @@ Rectangle {
                     //            QGCRadioButton {
                     //                text:               qsTr("OFF")
                     //                enabled:            QGroundControl.settingsManager.appSettings.vehiclebravo.value
-                    //                checked:            !QGroundControl.settingsManager.appSettings.gimbalCamera.value
+                    //                checked:            !QGroundControl.settingsManager.appSettings.gimbalCamera1.value
                     //                onClicked:{
-                    //                    QGroundControl.settingsManager.appSettings.gimbalCamera.value = false
-                    //                    QGroundControl.settingsManager.videoSettings.rtspUrl.value = QGroundControl.settingsManager.videoSettings.rtspUrl1.value
+                    //                    QGroundControl.settingsManager.appSettings.gimbalCamera1.value = false
+                    //                    QGroundControl.settingsManager.videoSettings.rtspUrl.value = QGroundControl.settingsManager.videoSettings.rtspUrl0.value
                     //                    QGroundControl.multiVehicleManager.activeVehicle.sendSetMount1Action()
                     //                }
                     //                Layout.columnSpan:  3
@@ -567,7 +698,7 @@ Rectangle {
                                 }
                                 FactTextField {
                                     Layout.preferredWidth:  _comboFieldWidth
-                                    fact:                   _videoSettings.rtspUrl1
+                                    fact:                   _videoSettings.rtspUrl0
                                     visible:                fpvrtspUrlLabel.visible
                                     //text: "rtsp://192.168.144.25:8554/main.264"
                                     //onTextChanged: {
@@ -576,14 +707,25 @@ Rectangle {
                                 }
 
                                 QGCLabel {
-                                    id:         gimbalrtspUrlLabel
-                                    text:       qsTr("Gimbal RTSP URL")
+                                    id:         gimbal1rtspUrlLabel
+                                    text:       qsTr("Gimbal 1 RTSP URL")
+                                    visible:    !_videoAutoStreamConfig && _isRTSP && _videoSettings.rtspUrl.visible && QGroundControl.settingsManager.appSettings.vehiclebravo.value
+                                }
+                                FactTextField {
+                                    Layout.preferredWidth:  _comboFieldWidth
+                                    fact:                   _videoSettings.rtspUrl1
+                                    visible:                gimbal1rtspUrlLabel.visible
+                                }
+
+                                QGCLabel {
+                                    id:         gimbal2rtspUrlLabel
+                                    text:       qsTr("Gimbal 2 RTSP URL")
                                     visible:    !_videoAutoStreamConfig && _isRTSP && _videoSettings.rtspUrl.visible && QGroundControl.settingsManager.appSettings.vehiclebravo.value
                                 }
                                 FactTextField {
                                     Layout.preferredWidth:  _comboFieldWidth
                                     fact:                   _videoSettings.rtspUrl2
-                                    visible:                gimbalrtspUrlLabel.visible
+                                    visible:                gimbal2rtspUrlLabel.visible
                                 }
 
                                 QGCLabel {

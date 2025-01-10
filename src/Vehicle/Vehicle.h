@@ -573,11 +573,13 @@ public:
 
     Q_INVOKABLE void sendLandingAssistOFFAction();
 
+    Q_INVOKABLE void sendSetMount0Action();
+
     Q_INVOKABLE void sendSetMount1Action();
 
-    Q_INVOKABLE void sendSetMount2Action();
+    Q_INVOKABLE void sendEnableMount1Action();
 
-    Q_INVOKABLE void sendEnableMount2Action();
+    Q_INVOKABLE void sendDisableMount1Action();
 
     Q_INVOKABLE void sendDisableMount2Action();
 

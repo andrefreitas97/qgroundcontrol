@@ -585,13 +585,13 @@ Rectangle {
 
                     QGCSwitch {
                         checked:            _videoStreamSettings.videoFlip_FPV.rawValue
-                        visible:            _anyVideoStreamAvailable && _videoSettings.rtspUrl.value == _videoSettings.rtspUrl1.value
+                        visible:            _anyVideoStreamAvailable && _videoSettings.rtspUrl.value == _videoSettings.rtspUrl0.value
                         onClicked:          _videoStreamSettings.videoFlip_FPV.rawValue = checked ? true : false
                     }
 
                     QGCSwitch {
                         checked:            _videoStreamSettings.videoFlip_Gimbal.rawValue
-                        visible:            _anyVideoStreamAvailable && _videoSettings.rtspUrl.value == _videoSettings.rtspUrl2.value
+                        visible:            _anyVideoStreamAvailable && _videoSettings.rtspUrl.value == _videoSettings.rtspUrl1.value
                         onClicked:          _videoStreamSettings.videoFlip_Gimbal.rawValue = checked ? true : false
                     }
 
