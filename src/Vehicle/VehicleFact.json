@@ -159,6 +159,13 @@
     "units":            "%"
 },
 {
+    "name":             "rangeFinderDist",
+    "shortDesc": "Alt (AGL)",
+    "type":             "double",
+    "decimalPlaces":    1,
+    "units":            "m"
+},
+{
     "name":             "imuTemp",
     "shortDesc": "Imu temperature",
     "type":             "int16",
