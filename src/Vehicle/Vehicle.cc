@@ -4617,29 +4617,46 @@ void Vehicle::sendLandingAssistOFFAction()
     parameterManager()->_sendParamSetToVehicle(_defaultComponentId, "SCR_USER1" , FactMetaData::valueTypeUint8, 0);
 }
 
-void Vehicle::sendSetMount0Action()
+void Vehicle::sendSetMountFPVAction()
 {
     parameterManager()->_sendParamSetToVehicle(_defaultComponentId, "SCR_USER2" , FactMetaData::valueTypeUint8, 0);
 }
 
-void Vehicle::sendSetMount1Action()
+void Vehicle::sendSetMountA8Action()
 {
     parameterManager()->_sendParamSetToVehicle(_defaultComponentId, "SCR_USER2" , FactMetaData::valueTypeUint8, 1);
 }
 
-void Vehicle::sendEnableMount1Action()
+void Vehicle::sendEnableMountA8Action()
 {
     parameterManager()->_sendParamSetToVehicle(_defaultComponentId, "CAM1_TYPE" , FactMetaData::valueTypeUint8, 4);
     parameterManager()->_sendParamSetToVehicle(_defaultComponentId, "MNT1_TYPE" , FactMetaData::valueTypeUint8, 8);
 }
 
-void Vehicle::sendDisableMount1Action()
+void Vehicle::sendDisableMountA8Action()
 {
     parameterManager()->_sendParamSetToVehicle(_defaultComponentId, "CAM1_TYPE" , FactMetaData::valueTypeUint8, 0);
     parameterManager()->_sendParamSetToVehicle(_defaultComponentId, "MNT1_TYPE" , FactMetaData::valueTypeUint8, 0);
 }
 
-void Vehicle::sendDisableMount2Action()
+void Vehicle::sendSetMountZT6Action()
+{
+    parameterManager()->_sendParamSetToVehicle(_defaultComponentId, "SCR_USER2" , FactMetaData::valueTypeUint8, 1);
+}
+
+void Vehicle::sendEnableMountZT6Action()
+{
+    parameterManager()->_sendParamSetToVehicle(_defaultComponentId, "CAM1_TYPE" , FactMetaData::valueTypeUint8, 4);
+    parameterManager()->_sendParamSetToVehicle(_defaultComponentId, "MNT1_TYPE" , FactMetaData::valueTypeUint8, 8);
+}
+
+void Vehicle::sendDisableMountZT6Action()
+{
+    parameterManager()->_sendParamSetToVehicle(_defaultComponentId, "CAM1_TYPE" , FactMetaData::valueTypeUint8, 0);
+    parameterManager()->_sendParamSetToVehicle(_defaultComponentId, "MNT1_TYPE" , FactMetaData::valueTypeUint8, 0);
+}
+
+void Vehicle::sendDisableMountZIOAction()
 {
     parameterManager()->_sendParamSetToVehicle(_defaultComponentId, "CAM2_TYPE" , FactMetaData::valueTypeUint8, 0);
     parameterManager()->_sendParamSetToVehicle(_defaultComponentId, "MNT2_TYPE" , FactMetaData::valueTypeUint8, 0);

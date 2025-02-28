@@ -72,8 +72,9 @@ public:
     DEFINE_SETTINGFACT(vehiclebravo)
     DEFINE_SETTINGFACT(payloadgripper)
     DEFINE_SETTINGFACT(payloadgrenades)
-    DEFINE_SETTINGFACT(gimbalCamera1)
-    DEFINE_SETTINGFACT(gimbalCamera2)
+    DEFINE_SETTINGFACT(gimbalCameraA8)
+    DEFINE_SETTINGFACT(gimbalCameraZT6)
+    DEFINE_SETTINGFACT(gimbalCameraZIO)
     DEFINE_SETTINGFACT(proximityAvoidance)
     DEFINE_SETTINGFACT(surfaceTracking)
 

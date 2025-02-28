@@ -173,7 +173,7 @@ Item {
         id:                     videoStreamSource
         anchors.margins:        _toolsMargin
         anchors.right:          parent.right
-        width:                  _rightPanelWidth
+        width:                  _rightPanelWidth - (_margins * 4)
 
         property real rightEdgeCenterInset: visible ? parent.width - x : 0
 

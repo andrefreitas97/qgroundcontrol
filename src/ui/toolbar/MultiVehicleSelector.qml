@@ -67,10 +67,10 @@ QGCComboBox {
         if(_activeVehicle.id < 10){
             QGroundControl.settingsManager.appSettings.vehiclealfa.value = true
             QGroundControl.settingsManager.appSettings.vehiclebravo.value = false
-            QGroundControl.settingsManager.appSettings.gimbalCamera1.value = false
-            QGroundControl.settingsManager.appSettings.gimbalCamera2.value = false
-            QGroundControl.settingsManager.videoSettings.rtspUrl.value = QGroundControl.settingsManager.videoSettings.rtspUrl0.value
-            //QGroundControl.multiVehicleManager.activeVehicle.sendSetMount1Action()
+            QGroundControl.settingsManager.appSettings.gimbalCameraA8.value = false
+            QGroundControl.settingsManager.appSettings.gimbalCameraZT6.value = false
+            QGroundControl.settingsManager.appSettings.gimbalCameraZIO.value = false
+            QGroundControl.settingsManager.videoSettings.rtspUrl.value = QGroundControl.settingsManager.videoSettings.rtspUrlFPV.value
         }
         if(_activeVehicle.id >= 10){
             QGroundControl.settingsManager.appSettings.vehiclealfa.value = false

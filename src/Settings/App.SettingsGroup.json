@@ -370,16 +370,23 @@
     "default":     false
 },
 {
-    "name":             "gimbalCamera1",
-    "shortDesc": "Gimbal Camera 1",
-    "longDesc":  "Sets Gimbal Camera 1 as available or unavailable.",
+    "name":             "gimbalCameraA8",
+    "shortDesc": "Gimbal Camera A8",
+    "longDesc":  "Sets Gimbal Camera A8 as available or unavailable.",
     "type":             "bool",
     "default":     false
 },
 {
-    "name":             "gimbalCamera2",
-    "shortDesc": "Gimbal Camera 2",
-    "longDesc":  "Sets Gimbal Camera 2 as available or unavailable.",
+    "name":             "gimbalCameraZT6",
+    "shortDesc": "Gimbal Camera ZT6",
+    "longDesc":  "Sets Gimbal Camera ZT6 as available or unavailable.",
+    "type":             "bool",
+    "default":     false
+},
+{
+    "name":             "gimbalCameraZIO",
+    "shortDesc": "Gimbal Camera ZIO",
+    "longDesc":  "Sets Gimbal Camera ZIO as available or unavailable.",
     "type":             "bool",
     "default":     false
 },

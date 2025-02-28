@@ -585,20 +585,32 @@ Rectangle {
 
                     QGCSwitch {
                         checked:            _videoStreamSettings.videoFlip_FPV.rawValue
-                        visible:            _anyVideoStreamAvailable && _videoSettings.rtspUrl.value == _videoSettings.rtspUrl0.value
+                        visible:            _anyVideoStreamAvailable && _videoSettings.rtspUrl.value == _videoSettings.rtspUrlFPV.value
                         onClicked:          _videoStreamSettings.videoFlip_FPV.rawValue = checked ? true : false
                     }
 
                     QGCSwitch {
-                        checked:            _videoStreamSettings.videoFlip_Gimbal1.rawValue
-                        visible:            _anyVideoStreamAvailable && _videoSettings.rtspUrl.value == _videoSettings.rtspUrl1.value
-                        onClicked:          _videoStreamSettings.videoFlip_Gimbal1.rawValue = checked ? true : false
+                        checked:            _videoStreamSettings.videoFlip_GimbalA8.rawValue
+                        visible:            _anyVideoStreamAvailable && _videoSettings.rtspUrl.value == _videoSettings.rtspUrlA8.value
+                        onClicked:          _videoStreamSettings.videoFlip_GimbalA8.rawValue = checked ? true : false
                     }
 
                     QGCSwitch {
-                        checked:            _videoStreamSettings.videoFlip_Gimbal2.rawValue
-                        visible:            _anyVideoStreamAvailable && _videoSettings.rtspUrl.value == _videoSettings.rtspUrl2.value
-                        onClicked:          _videoStreamSettings.videoFlip_Gimbal2.rawValue = checked ? true : false
+                        checked:            _videoStreamSettings.videoFlip_GimbalZT6Main.rawValue
+                        visible:            _anyVideoStreamAvailable && _videoSettings.rtspUrl.value == _videoSettings.rtspUrlZT6Main.value
+                        onClicked:          _videoStreamSettings.videoFlip_GimbalZT6Main.rawValue = checked ? true : false
+                    }
+
+                    QGCSwitch {
+                        checked:            _videoStreamSettings.videoFlip_GimbalZT6Sub.rawValue
+                        visible:            _anyVideoStreamAvailable && _videoSettings.rtspUrl.value == _videoSettings.rtspUrlZT6Sub.value
+                        onClicked:          _videoStreamSettings.videoFlip_GimbalZT6Sub.rawValue = checked ? true : false
+                    }
+
+                    QGCSwitch {
+                        checked:            _videoStreamSettings.videoFlip_GimbalZIO.rawValue
+                        visible:            _anyVideoStreamAvailable && _videoSettings.rtspUrl.value == _videoSettings.rtspUrlZIO.value
+                        onClicked:          _videoStreamSettings.videoFlip_GimbalZIO.rawValue = checked ? true : false
                     }
 
                     FactComboBox {
