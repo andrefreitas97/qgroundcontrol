@@ -1,4 +1,4 @@
-package org.mavlink.qgroundcontrol;
+package arditi.sentinela.qgroundcontrol;
 
 import android.util.Log;
 

@@ -49,7 +49,7 @@ android {
      *******************************************************/
 
     // namespace = androidPackageName
-    namespace = "org.mavlink.qgroundcontrol"
+    namespace = "arditi.sentinela.qgroundcontrol"
     compileSdkVersion androidCompileSdkVersion
     buildToolsVersion androidBuildToolsVersion
     ndkVersion = androidNdkVersion

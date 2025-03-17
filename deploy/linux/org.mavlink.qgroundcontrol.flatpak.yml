@@ -1,9 +1,9 @@
-app-id: org.mavlink.qgroundcontrol
+app-id: arditi.sentinela.qgroundcontrol
 runtime: org.gnome.Platform
 runtime-version: 47
 sdk: org.gnome.Sdk
 command: QGroundControl
-rename-appdata-file: org.mavlink.qgroundcontrol.metainfo.xml
+rename-appdata-file: arditi.sentinela.qgroundcontrol.metainfo.xml
 
 finish-args:
   - --socket=wayland

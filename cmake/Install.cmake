@@ -38,26 +38,26 @@ if(ANDROID)
     # cmake_print_variables(QGC_ANDROID_DEPLOY_FILE)
 elseif(LINUX)
     configure_file(
-        ${CMAKE_SOURCE_DIR}/deploy/linux/org.mavlink.qgroundcontrol.desktop.in
-        ${CMAKE_BINARY_DIR}/org.mavlink.qgroundcontrol.desktop
+        ${CMAKE_SOURCE_DIR}/deploy/linux/arditi.sentinela.qgroundcontrol.desktop.in
+        ${CMAKE_BINARY_DIR}/arditi.sentinela.qgroundcontrol.desktop
         @ONLY
     )
     install(
-        FILES ${CMAKE_BINARY_DIR}/org.mavlink.qgroundcontrol.desktop
+        FILES ${CMAKE_BINARY_DIR}/arditi.sentinela.qgroundcontrol.desktop
         DESTINATION ${CMAKE_INSTALL_DATADIR}/applications
     )
     install(
         FILES ${QGC_APPIMAGE_ICON_PATH}
         DESTINATION ${CMAKE_INSTALL_DATADIR}/icons/hicolor/128x128/apps/
-        RENAME org.mavlink.qgroundcontrol.png
+        RENAME arditi.sentinela.qgroundcontrol.png
     )
     configure_file(
-        ${CMAKE_SOURCE_DIR}/deploy/linux/org.mavlink.qgroundcontrol.metainfo.xml.in
-        ${CMAKE_BINARY_DIR}/metainfo/org.mavlink.qgroundcontrol.metainfo.xml
+        ${CMAKE_SOURCE_DIR}/deploy/linux/arditi.sentinela.qgroundcontrol.metainfo.xml.in
+        ${CMAKE_BINARY_DIR}/metainfo/arditi.sentinela.qgroundcontrol.metainfo.xml
         @ONLY
     )
     install(
-        FILES ${CMAKE_BINARY_DIR}/metainfo/org.mavlink.qgroundcontrol.metainfo.xml
+        FILES ${CMAKE_BINARY_DIR}/metainfo/arditi.sentinela.qgroundcontrol.metainfo.xml
         DESTINATION ${CMAKE_INSTALL_DATADIR}/metainfo/
     )
     install(

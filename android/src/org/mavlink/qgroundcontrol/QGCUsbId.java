@@ -1,4 +1,4 @@
-package org.mavlink.qgroundcontrol;
+package arditi.sentinela.qgroundcontrol;
 
 public final class QGCUsbId {
 

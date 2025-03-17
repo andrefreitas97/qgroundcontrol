@@ -1,6 +1,6 @@
-package org.mavlink.qgroundcontrol;
+package arditi.sentinela.qgroundcontrol;
 
-import org.mavlink.qgroundcontrol.QGCUsbId;
+import arditi.sentinela.qgroundcontrol.QGCUsbId;
 
 import com.hoho.android.usbserial.driver.ProbeTable;
 import com.hoho.android.usbserial.driver.UsbSerialProber;

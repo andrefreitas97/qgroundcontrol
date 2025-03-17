@@ -9,7 +9,7 @@
 
 #include "MobileScreenMgr.h"
 
-// static const char* kJniClassName = "org/mavlink/qgroundcontrol/QGCActivity";
+// static const char* kJniClassName = "arditi/sentinela/qgroundcontrol/QGCActivity";
 
 void MobileScreenMgr::setKeepScreenOn(bool /*keepScreenOn*/)
 {
