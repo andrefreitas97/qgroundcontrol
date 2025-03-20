@@ -1,4 +1,4 @@
-package arditi.sentinela.qgroundcontrol;
+package arditi.mavlink.qgroundcontrol;
 
 import java.util.List;
 import java.lang.reflect.Method;

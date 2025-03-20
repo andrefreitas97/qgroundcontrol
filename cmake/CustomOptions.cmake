@@ -52,7 +52,7 @@ else() # Allow building for Android 7.1 if supported
     set(QGC_QT_ANDROID_MIN_SDK_VERSION "25" CACHE STRING "Android Min SDK Version")
 endif()
 set(QGC_QT_ANDROID_TARGET_SDK_VERSION "35" CACHE STRING "Android Target SDK Version")
-set(QGC_ANDROID_PACKAGE_NAME "arditi.sentinela.qgroundcontrol" CACHE STRING "Android Package Name")
+set(QGC_ANDROID_PACKAGE_NAME "arditi.mavlink.qgroundcontrol" CACHE STRING "Android Package Name")
 set(QGC_ANDROID_PACKAGE_SOURCE_DIR "${CMAKE_SOURCE_DIR}/android" CACHE PATH "Android Package Path")
 set(QT_ANDROID_DEPLOYMENT_TYPE "" CACHE STRING "Forces Signing if Set to Release")
 option(QT_ANDROID_SIGN_APK "Enable Signing APK" OFF)

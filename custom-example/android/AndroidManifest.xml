@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="arditi.sentinela.qgroundcontrol"
+    package="arditi.mavlink.qgroundcontrol"
     android:installLocation="auto"
     android:versionCode="-- %%INSERT_VERSION_CODE%% --"
     android:versionName="-- %%INSERT_VERSION_NAME%% --">
@@ -45,7 +45,7 @@
         <!-- <meta-data android:name="android.app.system_libs_prefix" android:value="/system/lib/" /> -->
 
         <activity
-            android:name="arditi.sentinela.qgroundcontrol.QGCActivity"
+            android:name="arditi.mavlink.qgroundcontrol.QGCActivity"
             android:configChanges="orientation|uiMode|screenLayout|screenSize|smallestScreenSize|layoutDirection|locale|fontScale|keyboard|keyboardHidden|navigation|mcc|mnc|density"
             android:label="Custom QGroundControl"
             android:launchMode="singleTop"

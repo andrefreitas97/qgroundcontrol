@@ -23,7 +23,7 @@ set(QGC_NSIS_INSTALLER_PARAMETERS
     /DHEADER_BITMAP=${QGC_INSTALLER_HEADER_BITMAP}
     /DAPPNAME=QGroundControl
     /DEXENAME=QGroundControl
-    /DORGNAME=arditi.sentinela.qgroundcontrol
+    /DORGNAME=arditi.mavlink.qgroundcontrol
     /DDESTDIR=${CMAKE_INSTALL_PREFIX}
     /NOCD
     "/XOutFile ${QGC_INSTALLER_OUT}"
