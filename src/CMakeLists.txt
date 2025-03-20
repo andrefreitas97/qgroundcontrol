@@ -7,6 +7,12 @@ qt_add_library(QGC STATIC
     QGCApplication.h
 )
 
+# qt_add_qml_module(QGC
+#     URI QGroundControl
+#     VERSION 1.0
+#     IMPORT_PATH ${QT_QML_OUTPUT_DIRECTORY}
+# )
+
 #######################################################
 #               Linking Libraries
 #######################################################
@@ -22,6 +28,7 @@ target_link_libraries(QGC
     PUBLIC
         Qt6::Core
         Qt6::Widgets
+        QGCLocation
 )
 
 target_include_directories(QGC PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
@@ -29,7 +36,8 @@ target_include_directories(QGC PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
 target_precompile_headers(QGC
     PRIVATE
         <QtCore/QObject>
-        <QtCore/QString>
+        <QtNetwork/QNetworkReply>
+        <QtPositioning/QGeoCoordinate>
 )
 
 if(ANDROID)
