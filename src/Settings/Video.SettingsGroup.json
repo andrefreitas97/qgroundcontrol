@@ -44,14 +44,14 @@
     "shortDesc": "RTSP URL ZT6 Main",
     "longDesc":  "RTSP URL ZT6 main video stream.",
     "type":             "string",
-    "default":     "rtsp://192.168.144.27:8554/video1"
+    "default":     "rtsp://192.168.144.27:8554/video2"
 },
 {
     "name":             "rtspUrlZT6Sub",
     "shortDesc": "RTSP URL ZT6 Sub",
     "longDesc":  "RTSP URL ZT6 Sub video stream.",
     "type":             "string",
-    "default":     "rtsp://192.168.144.27:8554/video2"
+    "default":     "rtsp://192.168.144.27:8554/video1"
 },
 {
     "name":             "rtspUrlZIO",
