@@ -58,7 +58,7 @@ Rectangle {
         id: controlMouseArea
         anchors.fill: parent
         hoverEnabled: false
-        visible: camera.isConnected //false
+        visible: false //camera.isConnected //false
         onPressed: {
             if (camera.isTracking) {
                 return
