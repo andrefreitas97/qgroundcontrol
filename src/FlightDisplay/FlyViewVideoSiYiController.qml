@@ -281,7 +281,7 @@ Rectangle {
                 fillMode: Image.PreserveAspectFit
                 cache: false
                 anchors.verticalCenter: parent.verticalCenter
-                visible: expended ? camera.enableAi : false
+                visible: false //expended ? camera.enableAi : false
                 MouseArea {
                     id: aiControlMouseArea
                     anchors.fill: parent
