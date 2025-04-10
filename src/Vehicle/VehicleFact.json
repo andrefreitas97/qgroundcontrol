@@ -96,7 +96,7 @@
 },
 {
     "name":             "distanceToHome",
-    "shortDesc": "Distance to Home",
+    "shortDesc": "Home Distance",
     "type":             "double",
     "decimalPlaces":    1,
     "units":            "m"
@@ -167,7 +167,7 @@
 },
 {
     "name":             "imuTemp",
-    "shortDesc": "Imu temperature",
+    "shortDesc": "Imu Temp",
     "type":             "int16",
     "units":            "°C"
 }
