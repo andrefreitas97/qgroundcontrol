@@ -261,7 +261,7 @@ Rectangle {
                 fillMode: Image.PreserveAspectFit
                 sourceSize.width: btText.width * iconScale
                 sourceSize.height: btText.width * iconScale
-                visible: expended
+                visible: false //expended
                 MouseArea {
                     anchors.fill: parent
                     onClicked: SiYi.hideWidgets = !SiYi.hideWidgets
@@ -406,7 +406,7 @@ Rectangle {
                 fillMode: Image.PreserveAspectFit
                 sourceSize.width: btText.width * iconScale
                 sourceSize.height: btText.width * iconScale
-                rotation: expended ? 180 : 0
+                rotation: expended ? 270 : 90
                 MouseArea {
                     anchors.fill: parent
                     onClicked: root.expended = !root.expended

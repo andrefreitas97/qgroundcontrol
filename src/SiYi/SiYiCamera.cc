@@ -110,6 +110,57 @@ bool SiYiCamera::zoom(int option)
     return true;
 }
 
+bool SiYiCamera::requestTempFullImage(int option)
+{
+
+    uint8_t cmdId = 0x95;
+    QByteArray body;
+    body.append(char(option));
+
+    QByteArray msg = packMessage(0x01, cmdId, body);
+    sendMessage(msg);
+    return true;
+}
+
+bool SiYiCamera::requestPointTemp(int x, int y, int option)
+{
+
+    uint8_t cmdId = 0x8A;
+    QByteArray body;
+
+    body.append(reinterpret_cast<char*>(&x),2);
+    body.append(reinterpret_cast<char*>(&y),2);
+    body.append(option);
+
+    QByteArray msg = packMessage(0x01, cmdId, body);
+    sendMessage(msg);
+    return true;
+}
+
+bool SiYiCamera::setPalette(int option)
+{
+
+    uint8_t cmdId = 0xa5;
+    QByteArray body;
+    body.append(char(option));
+
+    QByteArray msg = packMessage(0x01, cmdId, body);
+    sendMessage(msg);
+    return true;
+}
+
+bool SiYiCamera::setThermalGain(int option)
+{
+
+    uint8_t cmdId = 0xbd;
+    QByteArray body;
+    body.append(char(option));
+
+    QByteArray msg = packMessage(0x01, cmdId, body);
+    sendMessage(msg);
+    return true;
+}
+
 bool SiYiCamera::focus(int option)
 {
     if (option != 1 && option != 0 && option != -1) {
@@ -309,6 +360,30 @@ void SiYiCamera::getSplitMode()
     sendMessage(msg);
 }
 
+bool SiYiCamera::setZT6ImageMode(int mainStream_option)
+{
+    uint8_t cmdId = 0x93;
+    QByteArray body;
+    if (mainStream_option == 0) {
+        body.append(char(0x03));
+        body.append(char(0x06));
+    }
+
+    if (mainStream_option == 1) {
+        body.append(char(0x00));
+        body.append(char(0x02));
+    }
+
+    if (mainStream_option == 2) {
+        body.append(char(0x02));
+        body.append(char(0x00));
+    }
+
+    QByteArray msg = packMessage(0x01, cmdId, body);
+    sendMessage(msg);
+    return true;
+}
+
 QByteArray SiYiCamera::heartbeatMessage()
 {
     return packMessage(0x01, 0x80, QByteArray());
@@ -387,8 +462,16 @@ void SiYiCamera::analyzeMessage()
                     messageHandle0x92(packet);
                 } else if (msg.header.cmdId == 0x94) {
                     messageHandle0x94(packet);
+                } else if (msg.header.cmdId == 0x95) {
+                    messageHandle0x95(packet);
+                } else if (msg.header.cmdId == 0x8A) {
+                    messageHandle0x8A(packet);
                 } else if (msg.header.cmdId == 0x98) {
                     messageHandle0x98(packet);
+                } else if (msg.header.cmdId == 0xa5) {
+                    messageHandle0xa5(packet);
+                } else if (msg.header.cmdId == 0xbd) {
+                    messageHandle0xbd(packet);
                 } else if (msg.header.cmdId == 0x9e) {
                     messageHandle0x9e(packet);
                 } else if (msg.header.cmdId == 0xa1) {
@@ -846,6 +929,102 @@ void SiYiCamera::messageHandle0x98(const QByteArray &msg)
 
         zoomMultiple_ = ctx->zoomMultiple;
         emit zoomMultipleChanged();
+    }
+}
+
+void SiYiCamera::messageHandle0xa5(const QByteArray &msg)
+{
+    struct ACK {
+        qint8 pseudo_color;
+    };
+
+    int headerLength = 4 + 1 + 4 + 2 + 1 + 4;
+    if (msg.length() == int(headerLength + sizeof(ACK) + 4)) {
+        const char *ptr = msg.constData();
+        ptr += headerLength;
+        auto ctx = reinterpret_cast<const ACK*>(ptr);
+
+        pseudo_color_ = ctx->pseudo_color;
+        emit pseudo_colorChanged();
+    }
+}
+
+void SiYiCamera::messageHandle0xbd(const QByteArray &msg)
+{
+    struct ACK {
+        qint8 ir_gain;
+    };
+
+    int headerLength = 4 + 1 + 4 + 2 + 1 + 4;
+    if (msg.length() == int(headerLength + sizeof(ACK) + 4)) {
+        const char *ptr = msg.constData();
+        ptr += headerLength;
+        auto ctx = reinterpret_cast<const ACK*>(ptr);
+
+        ir_gain_ = ctx->ir_gain;
+        emit ir_gainChanged();
+    }
+}
+
+void SiYiCamera::messageHandle0x95(const QByteArray &msg)
+{
+    struct ACK {
+        qint16 temp_max;
+        qint16 temp_min;
+        qint16 temp_max_x;
+        qint16 temp_max_y;
+        qint16 temp_min_x;
+        qint16 temp_min_y;
+    };
+
+    int headerLength = 4 + 1 + 4 + 2 + 1 + 4;
+    if (msg.length() == int(headerLength + sizeof(ACK) + 4)) {
+        const char *ptr = msg.constData();
+        ptr += headerLength;
+        auto ctx = reinterpret_cast<const ACK*>(ptr);
+
+        temp_max_ = ctx->temp_max;
+        emit temp_maxChanged();
+
+        temp_min_ = ctx->temp_min;
+        emit temp_minChanged();
+
+        temp_max_x_ = ctx->temp_max_x;
+        emit temp_max_xChanged();
+
+        temp_max_y_ = ctx->temp_max_y;
+        emit temp_max_yChanged();
+
+        temp_min_x_ = ctx->temp_min_x;
+        emit temp_min_xChanged();
+
+        temp_min_y_ = ctx->temp_min_y;
+        emit temp_min_yChanged();
+    }
+}
+
+void SiYiCamera::messageHandle0x8A(const QByteArray &msg)
+{
+    struct ACK {
+        qint16 point_temp;
+        qint16 point_temp_x;
+        qint16 point_temp_y;
+    };
+
+    int headerLength = 4 + 1 + 4 + 2 + 1 + 4;
+    if (msg.length() == int(headerLength + sizeof(ACK) + 4)) {
+        const char *ptr = msg.constData();
+        ptr += headerLength;
+        auto ctx = reinterpret_cast<const ACK*>(ptr);
+
+        point_temp_ = ctx->point_temp;
+        emit point_tempChanged();
+
+        point_temp_x_ = ctx->point_temp_x;
+        emit point_temp_xChanged();
+
+        point_temp_y_ = ctx->point_temp_y;
+        emit point_temp_yChanged();
     }
 }
 

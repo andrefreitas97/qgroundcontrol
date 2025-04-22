@@ -630,12 +630,12 @@ Rectangle {
                                 QGCLabel {
                                     id:         gimbalZT6SubrtspUrlLabel
                                     text:       qsTr("Gimbal ZT6 Sub RTSP URL")
-                                    visible:    !_videoAutoStreamConfig && _isRTSP && _videoSettings.rtspUrl.visible && QGroundControl.settingsManager.appSettings.vehiclebravo.value
+                                    visible:    false //!_videoAutoStreamConfig && _isRTSP && _videoSettings.rtspUrl.visible && QGroundControl.settingsManager.appSettings.vehiclebravo.value
                                 }
                                 FactTextField {
                                     Layout.preferredWidth:  _comboFieldWidth
                                     fact:                   _videoSettings.rtspUrlZT6Sub
-                                    visible:                gimbalZT6SubrtspUrlLabel.visible
+                                    visible:               false //gimbalZT6SubrtspUrlLabel.visible
                                 }
 
                                 QGCLabel {

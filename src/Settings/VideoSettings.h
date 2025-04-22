@@ -33,6 +33,11 @@ public:
 
     DEFINE_SETTINGFACT(aspectRatio)
     DEFINE_SETTINGFACT(videoFit)
+    DEFINE_SETTINGFACT(colorPalette)
+    DEFINE_SETTINGFACT(tempFullImage)
+    DEFINE_SETTINGFACT(pointTemp)
+    DEFINE_SETTINGFACT(thermalGain)
+    DEFINE_SETTINGFACT(zt6ImageMode)
     DEFINE_SETTINGFACT(gridLines)
     DEFINE_SETTINGFACT(videoFlip_FPV)
     DEFINE_SETTINGFACT(videoFlip_GimbalA8)

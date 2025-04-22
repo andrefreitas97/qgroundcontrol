@@ -43,3 +43,4 @@ OnScreenGimbalController        1.0 OnScreenGimbalController.qml
 GrenadesMenu                    1.0 GrenadesMenu.qml
 PayloadMenu                      1.0 PayloadMenu.qml
 ConfigMenu                      1.0 ConfigMenu.qml
+ThermalPointsOverlay                 1.0 ThermalPointsOverlay.qml

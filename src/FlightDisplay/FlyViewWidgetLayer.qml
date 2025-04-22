@@ -57,6 +57,12 @@ Item {
     property SiYiCamera camera: siyi.camera
     property int iconLeftMargin: toolStrip.width + toolStrip.anchors.leftMargin
 
+    ThermalPointsOverlay {
+        anchors.fill: parent
+        rootWidth: _root.width
+        rootHeight: _root.height
+    }
+
     QGCToolInsets {
         id:                     _totalToolInsets
         leftEdgeTopInset:       toolStrip.leftEdgeTopInset
@@ -173,7 +179,7 @@ Item {
         id:                     videoStreamSource
         anchors.margins:        _toolsMargin
         anchors.right:          parent.right
-        width:                  _rightPanelWidth - (_margins * 4)
+        width:                  _rightPanelWidth - (_margins * 2)
 
         property real rightEdgeCenterInset: visible ? parent.width - x : 0
 

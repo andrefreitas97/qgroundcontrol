@@ -12,6 +12,17 @@ class SiYiCamera : public SiYiTcpClient
     Q_OBJECT
     Q_PROPERTY(bool isRecording READ isRecording NOTIFY isRecordingChanged)
     Q_PROPERTY(int zoomMultiple READ zoomMultiple NOTIFY zoomMultipleChanged)
+    Q_PROPERTY(int pseudo_color READ pseudo_color NOTIFY pseudo_colorChanged)
+    Q_PROPERTY(int ir_gain READ ir_gain NOTIFY ir_gainChanged)
+    Q_PROPERTY(int temp_max READ temp_max NOTIFY temp_maxChanged)
+    Q_PROPERTY(int temp_min READ temp_min NOTIFY temp_minChanged)
+    Q_PROPERTY(int temp_max_x READ temp_max_x NOTIFY temp_max_xChanged)
+    Q_PROPERTY(int temp_max_y READ temp_max_y NOTIFY temp_max_yChanged)
+    Q_PROPERTY(int temp_min_x READ temp_min_x NOTIFY temp_min_xChanged)
+    Q_PROPERTY(int temp_min_y READ temp_min_y NOTIFY temp_min_yChanged)
+    Q_PROPERTY(int point_temp READ point_temp NOTIFY point_tempChanged)
+    Q_PROPERTY(int point_temp_x READ point_temp_x NOTIFY point_temp_xChanged)
+    Q_PROPERTY(int point_temp_y READ point_temp_y NOTIFY point_temp_yChanged)
     Q_PROPERTY(bool enableZoom READ enableZoom NOTIFY enableZoomChanged)
     Q_PROPERTY(bool enableFocus READ enableFocus NOTIFY enableFocusChanged)
     Q_PROPERTY(bool enablePhoto READ enablePhoto NOTIFY enablePhotoChanged)
@@ -122,6 +133,12 @@ public:
     // 1: 放大，0：停止，-1：缩小
     Q_INVOKABLE bool zoom(int option);
     // 1: 远景，0：停止，-1：近景
+    //Q_INVOKABLE bool requestPalette();
+    Q_INVOKABLE bool requestTempFullImage(int option);
+    Q_INVOKABLE bool requestPointTemp(int x, int y, int option);
+    Q_INVOKABLE bool setPalette(int option);
+    Q_INVOKABLE bool setThermalGain(int option);
+    Q_INVOKABLE bool setZT6ImageMode(int mainStream_option);
     Q_INVOKABLE bool focus(int option);
     Q_INVOKABLE bool sendCommand(int cmd);
     Q_INVOKABLE bool sendRecodingCommand(int cmd);
@@ -172,6 +189,10 @@ private:
     void messageHandle0x92(const QByteArray &msg);
     void messageHandle0x94(const QByteArray &msg);
     void messageHandle0x98(const QByteArray &msg);
+    void messageHandle0xa5(const QByteArray &msg);
+    void messageHandle0xbd(const QByteArray &msg);
+    void messageHandle0x95(const QByteArray &msg);
+    void messageHandle0x8A(const QByteArray &msg);
     void messageHandle0x9e(const QByteArray &msg);
     void messageHandle0xa1(const QByteArray &msg);
     void messageHandle0xa2(const QByteArray &msg);
@@ -192,6 +213,50 @@ private:
     int zoomMultiple_{1};
     int zoomMultiple(){return zoomMultiple_;}
     Q_SIGNAL void zoomMultipleChanged();
+
+    int pseudo_color_{-1};
+    int pseudo_color(){return pseudo_color_;}
+    Q_SIGNAL void pseudo_colorChanged();
+
+    int ir_gain_{1};
+    int ir_gain(){return ir_gain_;}
+    Q_SIGNAL void ir_gainChanged();
+
+    int temp_max_{-1};
+    int temp_max(){return temp_max_;}
+    Q_SIGNAL void temp_maxChanged();
+    
+    int temp_min_{-1};
+    int temp_min(){return temp_min_;}
+    Q_SIGNAL void temp_minChanged();
+
+    int temp_max_x_{-1};
+    int temp_max_x(){return temp_max_x_;}
+    Q_SIGNAL void temp_max_xChanged();
+
+    int temp_max_y_{-1};
+    int temp_max_y(){return temp_max_y_;}
+    Q_SIGNAL void temp_max_yChanged();
+
+    int temp_min_x_{-1};
+    int temp_min_x(){return temp_min_x_;}
+    Q_SIGNAL void temp_min_xChanged();
+
+    int temp_min_y_{-1};
+    int temp_min_y(){return temp_min_y_;}
+    Q_SIGNAL void temp_min_yChanged();
+
+    int point_temp_{-1};
+    int point_temp(){return point_temp_;}
+    Q_SIGNAL void point_tempChanged();
+
+    int point_temp_x_{-1};
+    int point_temp_x(){return point_temp_x_;}
+    Q_SIGNAL void point_temp_xChanged();
+
+    int point_temp_y_{-1};
+    int point_temp_y(){return point_temp_y_;}
+    Q_SIGNAL void point_temp_yChanged();
 
     bool enableZoom_{false};
     bool enableZoom(){return enableZoom_;}

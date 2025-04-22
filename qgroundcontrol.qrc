@@ -297,6 +297,7 @@
         <file alias="QGroundControl/FlightDisplay/ConfigMenu.qml">src/FlightDisplay/ConfigMenu.qml</file>
         <file alias="QGroundControl/FlightDisplay/FlyViewVideoSiYiController.qml">src/FlightDisplay/FlyViewVideoSiYiController.qml</file>
         <file alias="QGroundControl/FlightDisplay/FlyViewVideoSiYiControllerAiSettings.qml">src/FlightDisplay/FlyViewVideoSiYiControllerAiSettings.qml</file>
+        <file alias="QGroundControl/FlightDisplay/ThermalPointsOverlay.qml">src/FlightDisplay/ThermalPointsOverlay.qml</file>
     </qresource>
     <qresource prefix="/FirstRunPromptDialogs">
         <file alias="UnitsFirstRunPrompt.qml">src/FirstRunPromptDialogs/UnitsFirstRunPrompt.qml</file>

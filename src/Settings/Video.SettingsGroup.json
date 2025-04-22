@@ -44,14 +44,14 @@
     "shortDesc": "RTSP URL ZT6 Main",
     "longDesc":  "RTSP URL ZT6 main video stream.",
     "type":             "string",
-    "default":     "rtsp://192.168.144.27:8554/video2"
+    "default":     "rtsp://192.168.144.26:8554/video1"
 },
 {
     "name":             "rtspUrlZT6Sub",
     "shortDesc": "RTSP URL ZT6 Sub",
     "longDesc":  "RTSP URL ZT6 Sub video stream.",
     "type":             "string",
-    "default":     "rtsp://192.168.144.27:8554/video1"
+    "default":     "rtsp://192.168.144.26:8554/video2"
 },
 {
     "name":             "rtspUrlZIO",
@@ -98,6 +98,51 @@
     "type":             "uint32",
     "enumStrings":      "Fit Width,Fit Height,Stretch",
     "enumValues":       "0,1,2",
+    "default":     0
+},
+{
+    "name":             "colorPalette",
+    "shortDesc": "Thermal Video Color Palette",
+    "longDesc":  "Thermal Video Color Palette",
+    "type":             "uint32",
+    "enumStrings":      "White Hot,Golden,Iron Oxide,Rainbow,Night,Aurora,Red Hot,Jungle,Medical,Black Hot,Golden Red",
+    "enumValues":       "0,2,3,4,5,6,7,8,9,10,11",
+    "default":     3
+},
+{
+    "name":             "thermalGain",
+    "shortDesc": "Thermal Video Gain",
+    "longDesc":  "Thermal Video Gain",
+    "type":             "uint32",
+    "enumStrings":      "Low:50~550℃,High:-20~+150℃",
+    "enumValues":       "0,1",
+    "default":     1
+},
+{
+    "name":             "pointTemp",
+    "shortDesc": "Temperature at a Point",
+    "longDesc":  "Temperature at a Point",
+    "type":             "uint32",
+    "enumStrings":      "OFF,ON",
+    "enumValues":       "0,1",
+    "default":     0
+},
+{
+    "name":             "zt6ImageMode",
+    "shortDesc": "ZT6 Image Mode",
+    "longDesc":  "Set ZT6 Image Mode",
+    "type":             "uint32",
+    "enumStrings":      "Split Screen,Optical,Thermal",
+    "enumValues":       "0,1,2",
+    "default":     0
+},
+{
+    "name":             "tempFullImage",
+    "shortDesc": "Temp in the full image",
+    "longDesc":  "Temp in the full image",
+    "type":             "uint32",
+    "enumStrings":      "OFF,ON",
+    "enumValues":       "0,1",
     "default":     0
 },
 {

@@ -108,7 +108,7 @@ Rectangle {
         id:                         mainLayout
         anchors.margins:            _margins
         anchors.top:                parent.top
-        anchors.horizontalCenter:   parent.horizontalCenter
+        anchors.left:   parent.left
         spacing:                    ScreenTools.defaultFontPixelHeight / 2
 
         GridLayout {
@@ -173,7 +173,7 @@ Rectangle {
                                 SiYi.camera.analyzeIp(_videoSettings.rtspUrl.value)
                                 gimbalController.activeGimbal = gimbalController.gimbals.get(0)
                                 }
-                visible:        QGroundControl.settingsManager.appSettings.gimbalCameraZT6.value
+                visible:        false //QGroundControl.settingsManager.appSettings.gimbalCameraZT6.value
             }
 
             QGCRadioButton {
@@ -224,9 +224,9 @@ Rectangle {
                 GridLayout {
                     id:     gridLayout
                     flow:   GridLayout.TopToBottom
-                    rows:   dynamicRows + (_mavlinkCamera ? _mavlinkCamera.activeSettings.length : 0)
+                    rows:   dynamicRows + (_mavlinkCamera ? _mavlinkCamera.activeSettings.length - 1 : 0)
 
-                    property int dynamicRows: 12
+                    property int dynamicRows: 15
 
                     // First column
                     QGCLabel {
@@ -286,21 +286,46 @@ Rectangle {
                         onVisibleChanged:   gridLayout.dynamicRows += visible ? 1 : -1
                     }
 
+                    //QGCLabel {
+                    //    text:               qsTr("Video Screen Fit")
+                    //    visible:            _anyVideoStreamAvailable
+                    //    onVisibleChanged:   gridLayout.dynamicRows += visible ? 1 : -1
+                    //}
+
                     QGCLabel {
-                        text:               qsTr("Video Screen Fit")
-                        visible:            _anyVideoStreamAvailable
+                        text:               qsTr("Image Mode")
+                        visible:            _anyVideoStreamAvailable && _videoSettings.rtspUrl.value == _videoSettings.rtspUrlZT6Main.value
                         onVisibleChanged:   gridLayout.dynamicRows += visible ? 1 : -1
                     }
 
                     QGCLabel {
-                        text:               qsTr("Palette Test (on=white)")
-                        visible:            _anyVideoStreamAvailable && _videoSettings.rtspUrl.value == _videoSettings.rtspUrlZT6Sub.value
+                        text:               qsTr("Thermal Palette")
+                        visible:            _anyVideoStreamAvailable && _videoSettings.rtspUrl.value == _videoSettings.rtspUrlZT6Main.value && _videoStreamSettings.zt6ImageMode.rawValue != 1
                         onVisibleChanged:   gridLayout.dynamicRows += visible ? 1 : -1
                     }
+
+                    QGCLabel {
+                        text:               qsTr("Thermal Gain")
+                        visible:            _anyVideoStreamAvailable && _videoSettings.rtspUrl.value == _videoSettings.rtspUrlZT6Main.value && _videoStreamSettings.zt6ImageMode.rawValue != 1
+                        onVisibleChanged:   gridLayout.dynamicRows += visible ? 1 : -1
+                    }
+
+                    QGCLabel {
+                        text:               qsTr("Max/Min Temperature Points")
+                        visible:            _anyVideoStreamAvailable && _videoSettings.rtspUrl.value == _videoSettings.rtspUrlZT6Main.value && _videoStreamSettings.zt6ImageMode.rawValue != 1
+                        onVisibleChanged:   gridLayout.dynamicRows += visible ? 1 : -1
+                    }
+
+                    QGCLabel {
+                        text:               qsTr("Point Temperature")
+                        visible:            _anyVideoStreamAvailable && _videoSettings.rtspUrl.value == _videoSettings.rtspUrlZT6Main.value && _videoStreamSettings.zt6ImageMode.rawValue != 1
+                        onVisibleChanged:   gridLayout.dynamicRows += visible ? 1 : -1
+                    }
+
 
                     QGCLabel {
                         text:               qsTr("Reset Camera Defaults")
-                        visible:            _mavlinkCamera
+                        visible:            false //_mavlinkCamera
                         onVisibleChanged:   gridLayout.dynamicRows += visible ? 1 : -1
                     }
 
@@ -464,36 +489,74 @@ Rectangle {
                         onClicked:          _videoStreamSettings.videoFlip_GimbalZIO.rawValue = checked ? true : false
                     }
 
-                    FactComboBox {
-                        Layout.fillWidth:   true
-                        sizeToContents:     true
-                        fact:               _videoStreamSettings.videoFit
-                        indexModel:         false
-                        visible:            _anyVideoStreamAvailable
-                    }
-
-                    QGCSwitch {
-                        checked:            _videoStreamSettings.colorPalette.rawValue == 0
-                        visible:            _anyVideoStreamAvailable && _videoSettings.rtspUrl.value == _videoSettings.rtspUrlZT6Sub.value
-                        onClicked:          _videoStreamSettings.colorPalette.rawValue = 0 ? 3 : 0
-                    }
-
                     //FactComboBox {
                     //    Layout.fillWidth:   true
                     //    sizeToContents:     true
-                    //    fact:               _videoStreamSettings.colorPalette
+                    //    fact:               _videoStreamSettings.videoFit
                     //    indexModel:         false
-                    //    visible:            _anyVideoStreamAvailable && _videoSettings.rtspUrl.value == _videoSettings.rtspUrlZT6Sub.value
-                    //    onActivated: {
-                    //                  camera.setPalette(_videoStreamSettings.colorPalette.rawValue)
-                    //                                }
+                    //    visible:            _anyVideoStreamAvailable
                     //}
+
+                    FactComboBox {
+                        Layout.fillWidth:   true
+                        sizeToContents:     true
+                        fact:               _videoStreamSettings.zt6ImageMode
+                        indexModel:         false
+                        visible:            _anyVideoStreamAvailable && _videoSettings.rtspUrl.value == _videoSettings.rtspUrlZT6Main.value
+                        onActivated: {
+                                      camera.setZT6ImageMode(_videoStreamSettings.zt6ImageMode.rawValue)
+                                                    }
+                    }
+
+                    FactComboBox {
+                        Layout.fillWidth:   true
+                        sizeToContents:     true
+                        fact:               _videoStreamSettings.colorPalette
+                        indexModel:         false
+                        visible:            _anyVideoStreamAvailable && _videoSettings.rtspUrl.value == _videoSettings.rtspUrlZT6Main.value && _videoStreamSettings.zt6ImageMode.rawValue != 1
+                        onActivated: {
+                                      camera.setPalette(_videoStreamSettings.colorPalette.rawValue)
+                                                    }
+                    }
+
+                    FactComboBox {
+                        Layout.fillWidth:   true
+                        sizeToContents:     true
+                        fact:               _videoStreamSettings.thermalGain
+                        indexModel:         false
+                        visible:            _anyVideoStreamAvailable && _videoSettings.rtspUrl.value == _videoSettings.rtspUrlZT6Main.value && _videoStreamSettings.zt6ImageMode.rawValue != 1
+                        onActivated: {
+                                      camera.setThermalGain(_videoStreamSettings.thermalGain.rawValue)
+                                                    }
+                    }
+
+                    FactComboBox {
+                        Layout.fillWidth:   true
+                        sizeToContents:     true
+                        fact:               _videoStreamSettings.tempFullImage
+                        indexModel:         false
+                        visible:            _anyVideoStreamAvailable && _videoSettings.rtspUrl.value == _videoSettings.rtspUrlZT6Main.value && _videoStreamSettings.zt6ImageMode.rawValue != 1
+                        onActivated: {
+                                      camera.requestTempFullImage(_videoStreamSettings.tempFullImage.rawValue)
+                                                    }
+                    }
+
+                    FactComboBox {
+                        Layout.fillWidth:   true
+                        sizeToContents:     true
+                        fact:               _videoStreamSettings.pointTemp
+                        indexModel:         false
+                        visible:            _anyVideoStreamAvailable && _videoSettings.rtspUrl.value == _videoSettings.rtspUrlZT6Main.value && _videoStreamSettings.zt6ImageMode.rawValue != 1
+                        onActivated: {
+                                      //camera.requestPointTemp( 1920*(3/4), 1080/2, _videoStreamSettings.pointTemp.rawValue)
+                                                    }
+                    }
 
 
                     QGCButton {
                         Layout.fillWidth:   true
                         text:               qsTr("Reset")
-                        visible:            _mavlinkCamera
+                        visible:            false //_mavlinkCamera
                         onClicked:          resetPrompt.open()
                         MessageDialog {
                             id:                 resetPrompt
