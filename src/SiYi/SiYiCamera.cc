@@ -137,6 +137,16 @@ bool SiYiCamera::requestPointTemp(int x, int y, int option)
     return true;
 }
 
+void SiYiCamera::requestPalette()
+{
+
+    uint8_t cmdId = 0xa4;
+    QByteArray body;
+
+    QByteArray msg = packMessage(0x01, cmdId, body);
+    sendMessage(msg);
+}
+
 bool SiYiCamera::setPalette(int option)
 {
 
@@ -149,6 +159,16 @@ bool SiYiCamera::setPalette(int option)
     return true;
 }
 
+void SiYiCamera::requestThermalGain()
+{
+
+    uint8_t cmdId = 0xbc;
+    QByteArray body;
+
+    QByteArray msg = packMessage(0x01, cmdId, body);
+    sendMessage(msg);
+}
+
 bool SiYiCamera::setThermalGain(int option)
 {
 
@@ -157,6 +177,17 @@ bool SiYiCamera::setThermalGain(int option)
     body.append(char(option));
 
     QByteArray msg = packMessage(0x01, cmdId, body);
+    sendMessage(msg);
+    return true;
+}
+
+bool SiYiCamera::setGimbalMode(int option)
+{
+    uint8_t cmdId = 0x9f;
+    QByteArray body;
+    body.append(char(option));
+
+    QByteArray msg = packMessage(0x00, cmdId, body);
     sendMessage(msg);
     return true;
 }
@@ -468,9 +499,9 @@ void SiYiCamera::analyzeMessage()
                     messageHandle0x8A(packet);
                 } else if (msg.header.cmdId == 0x98) {
                     messageHandle0x98(packet);
-                } else if (msg.header.cmdId == 0xa5) {
+                } else if (msg.header.cmdId == 0xa5 || msg.header.cmdId == 0xa4) {
                     messageHandle0xa5(packet);
-                } else if (msg.header.cmdId == 0xbd) {
+                } else if (msg.header.cmdId == 0xbd || msg.header.cmdId == 0xbc) {
                     messageHandle0xbd(packet);
                 } else if (msg.header.cmdId == 0x9e) {
                     messageHandle0x9e(packet);
@@ -935,7 +966,7 @@ void SiYiCamera::messageHandle0x98(const QByteArray &msg)
 void SiYiCamera::messageHandle0xa5(const QByteArray &msg)
 {
     struct ACK {
-        qint8 pseudo_color;
+        qint8 pseudoColor;
     };
 
     int headerLength = 4 + 1 + 4 + 2 + 1 + 4;
@@ -944,15 +975,15 @@ void SiYiCamera::messageHandle0xa5(const QByteArray &msg)
         ptr += headerLength;
         auto ctx = reinterpret_cast<const ACK*>(ptr);
 
-        pseudo_color_ = ctx->pseudo_color;
-        emit pseudo_colorChanged();
+        pseudoColor_ = ctx->pseudoColor;
+        emit pseudoColorChanged();
     }
 }
 
 void SiYiCamera::messageHandle0xbd(const QByteArray &msg)
 {
     struct ACK {
-        qint8 ir_gain;
+        qint8 irGain;
     };
 
     int headerLength = 4 + 1 + 4 + 2 + 1 + 4;
@@ -961,8 +992,8 @@ void SiYiCamera::messageHandle0xbd(const QByteArray &msg)
         ptr += headerLength;
         auto ctx = reinterpret_cast<const ACK*>(ptr);
 
-        ir_gain_ = ctx->ir_gain;
-        emit ir_gainChanged();
+        irGain_ = ctx->irGain;
+        emit irGainChanged();
     }
 }
 

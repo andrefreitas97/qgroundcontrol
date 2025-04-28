@@ -47,7 +47,7 @@ Item {
     property bool _flipFPV: _videoSettings.videoFlip_FPV.rawValue
     property bool _flipGimbalA8: _videoSettings.videoFlip_GimbalA8.rawValue
     property bool _flipGimbalZT6Main: _videoSettings.videoFlip_GimbalZT6Main.rawValue
-    property bool _flipGimbalZT6Sub: _videoSettings.videoFlip_GimbalZT6.rawValue
+    property bool _flipGimbalZT6Sub: _videoSettings.videoFlip_GimbalZT6Sub.rawValue
     property bool _flipGimbalZIO: _videoSettings.videoFlip_GimbalZIO.rawValue
     property bool _flip: ((_FPVvideo && _flipFPV) || (_GimbalA8video && _flipGimbalA8) || (_GimbalZT6Mainvideo && _flipGimbalZT6Main) || (_GimbalZT6Subvideo && _flipGimbalZT6Sub) || (_GimbalZIOvideo && _flipGimbalZIO)) ? true : false
 

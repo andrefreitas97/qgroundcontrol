@@ -103,6 +103,8 @@ Rectangle {
     property bool   _canShootInCurrentMode:                     _mavlinkCamera ? _mavlinkCameraCanShoot : _videoStreamCanShoot || _simpleCameraAvailable
     property bool   _isShootingInCurrentMode:                   _mavlinkCamera ? _mavlinkCameraIsShooting : _videoStreamIsShootingInCurrentMode || _simpleCameraIsShootingInCurrentMode
 
+    property var  vehicleLinkManager:             _activeVehicle ? _activeVehicle.vehicleLinkManager : undefined
+
 
     ColumnLayout {
         id:                         mainLayout
@@ -121,7 +123,7 @@ Rectangle {
                 _videoSettings.rtspUrl.value = _videoSettings.rtspUrlFPV.value;
                 _activeVehicle.sendSetMountFPVAction();
                 SiYi.camera.analyzeIp(_videoSettings.rtspUrl.value);
-                //gimbalController.activeGimbal = gimbalController.gimbals.get(0)
+                //gimbalController.activeGimbal = gimbalController.gimbals.get(0)            
                 }
             }
 
@@ -204,12 +206,58 @@ Rectangle {
             sourceSize.height:  height
             color:              qgcPal.text
             fillMode:           Image.PreserveAspectFit
+            enabled: !_communicationLost && _initialConnectComplete && activeGimbal
+            opacity:  enabled ? 1 : 0.5
+
 
             QGCMouseArea {
                 fillItem:   parent
-                onClicked:  settingsDialogComponent.createObject(mainWindow).open()
+                onClicked:  {
+                            if(_videoSettings.rtspUrl.value == _videoSettings.rtspUrlZT6Main.value){
+                                console.log("Requesting pseudoColor...")
+                                camera.requestPalette()
+                                console.log("Requesting irGain...")
+                                camera.requestThermalGain()
+                                console.log("Requesting mainStreamSplitMode...")
+                                camera.getSplitMode()  
+                            } 
+
+                            settingsDialogComponent.createObject(mainWindow).open()
+                }
             }
-        }
+
+            Connections {
+                target: camera
+                onPseudoColorChanged: {
+                    console.log("pseudoColor updated:", camera.pseudoColor)
+                    console.log("_videoStreamSettings.colorPalette.value (before):", _videoStreamSettings.colorPalette.value)
+                    _videoStreamSettings.colorPalette.rawValue = camera.pseudoColor
+                    console.log("_videoStreamSettings.colorPalette.value (after):", _videoStreamSettings.colorPalette.value)  
+                }
+            }
+
+            Connections {
+                target: camera
+                onIrGainChanged: {
+                    console.log("irGain updated:", camera.irGain)
+                    console.log("_videoStreamSettings.thermalGain.value (before):", _videoStreamSettings.thermalGain.value)
+                    _videoStreamSettings.thermalGain.rawValue = camera.irGain
+                    console.log("_videoStreamSettings.thermalGain.value (after):", _videoStreamSettings.thermalGain.value)  
+                }
+            }
+
+            Connections {
+                target: camera
+                onMainStreamSplitModeChanged: {
+                    console.log("MainStreamSplit updated:", camera.mainStreamSplitMode)
+                    console.log("_videoStreamSettings.zt6ImageMode.rawValue (before):", _videoStreamSettings.zt6ImageMode.rawValue)
+                    if(camera.mainStreamSplitMode == 3){_videoStreamSettings.zt6ImageMode.rawValue = 0}
+                    if(camera.mainStreamSplitMode == 0){_videoStreamSettings.zt6ImageMode.rawValue = 1}
+                    if(camera.mainStreamSplitMode == 2){_videoStreamSettings.zt6ImageMode.rawValue = 2}
+                    console.log("_videoStreamSettings.zt6ImageMode.rawValue (after):", _videoStreamSettings.zt6ImageMode.rawValue)  
+                }
+            }       
+        }      
 
     Component {
         id: settingsDialogComponent
@@ -309,6 +357,12 @@ Rectangle {
                         visible:            _anyVideoStreamAvailable && _videoSettings.rtspUrl.value == _videoSettings.rtspUrlZT6Main.value && _videoStreamSettings.zt6ImageMode.rawValue != 1
                         onVisibleChanged:   gridLayout.dynamicRows += visible ? 1 : -1
                     }
+
+                    //QGCLabel {
+                    //    text:               qsTr("Gimbal Mode")
+                    //    visible:            _anyVideoStreamAvailable && _videoSettings.rtspUrl.value == _videoSettings.rtspUrlZT6Main.value && _videoStreamSettings.zt6ImageMode.rawValue != 1
+                    //    onVisibleChanged:   gridLayout.dynamicRows += visible ? 1 : -1
+                    //}
 
                     QGCLabel {
                         text:               qsTr("Max/Min Temperature Points")
@@ -529,6 +583,17 @@ Rectangle {
                                       camera.setThermalGain(_videoStreamSettings.thermalGain.rawValue)
                                                     }
                     }
+
+                    //FactComboBox {
+                    //    Layout.fillWidth:   true
+                    //    sizeToContents:     true
+                    //    fact:               _videoStreamSettings.gimbalMode
+                    //    indexModel:         false
+                    //    visible:            _anyVideoStreamAvailable && _videoSettings.rtspUrl.value == _videoSettings.rtspUrlZT6Main.value && _videoStreamSettings.zt6ImageMode.rawValue != 1
+                    //    onActivated: {
+                    //                  camera.setGimbalMode(_videoStreamSettings.gimbalMode.rawValue)
+                    //                                }
+                    //}
 
                     FactComboBox {
                         Layout.fillWidth:   true

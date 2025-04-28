@@ -12,8 +12,8 @@ class SiYiCamera : public SiYiTcpClient
     Q_OBJECT
     Q_PROPERTY(bool isRecording READ isRecording NOTIFY isRecordingChanged)
     Q_PROPERTY(int zoomMultiple READ zoomMultiple NOTIFY zoomMultipleChanged)
-    Q_PROPERTY(int pseudo_color READ pseudo_color NOTIFY pseudo_colorChanged)
-    Q_PROPERTY(int ir_gain READ ir_gain NOTIFY ir_gainChanged)
+    Q_PROPERTY(int pseudoColor READ pseudoColor NOTIFY pseudoColorChanged)
+    Q_PROPERTY(int irGain READ irGain NOTIFY irGainChanged)
     Q_PROPERTY(int temp_max READ temp_max NOTIFY temp_maxChanged)
     Q_PROPERTY(int temp_min READ temp_min NOTIFY temp_minChanged)
     Q_PROPERTY(int temp_max_x READ temp_max_x NOTIFY temp_max_xChanged)
@@ -133,11 +133,13 @@ public:
     // 1: 放大，0：停止，-1：缩小
     Q_INVOKABLE bool zoom(int option);
     // 1: 远景，0：停止，-1：近景
-    //Q_INVOKABLE bool requestPalette();
     Q_INVOKABLE bool requestTempFullImage(int option);
     Q_INVOKABLE bool requestPointTemp(int x, int y, int option);
+    Q_INVOKABLE void requestThermalGain();
+    Q_INVOKABLE void requestPalette();
     Q_INVOKABLE bool setPalette(int option);
     Q_INVOKABLE bool setThermalGain(int option);
+    Q_INVOKABLE bool setGimbalMode(int option);
     Q_INVOKABLE bool setZT6ImageMode(int mainStream_option);
     Q_INVOKABLE bool focus(int option);
     Q_INVOKABLE bool sendCommand(int cmd);
@@ -214,13 +216,13 @@ private:
     int zoomMultiple(){return zoomMultiple_;}
     Q_SIGNAL void zoomMultipleChanged();
 
-    int pseudo_color_{-1};
-    int pseudo_color(){return pseudo_color_;}
-    Q_SIGNAL void pseudo_colorChanged();
+    int pseudoColor_{-1};
+    int pseudoColor(){return pseudoColor_;}
+    //Q_SIGNAL void pseudoColorChanged();
 
-    int ir_gain_{1};
-    int ir_gain(){return ir_gain_;}
-    Q_SIGNAL void ir_gainChanged();
+    int irGain_{-1};
+    int irGain(){return irGain_;}
+    //Q_SIGNAL void irGainChanged();
 
     int temp_max_{-1};
     int temp_max(){return temp_max_;}
@@ -344,7 +346,7 @@ private:
 
     int m_mainStreamSplitMode{-1};
     int mainStreamSplitMode() { return m_mainStreamSplitMode; }
-    Q_SIGNAL void mainStreamSplitModeChanged();
+    //Q_SIGNAL void mainStreamSplitModeChanged();
 
     int m_subStreamSplitMode{-1};
     int subStreamSplitMode() { return m_subStreamSplitMode; }
@@ -353,6 +355,9 @@ private:
 signals:
     void isRecordingChanged();
     void enableVideoChanged();
+    void pseudoColorChanged();
+    void irGainChanged();
+    void mainStreamSplitModeChanged();
 };
 
 #endif // SIYICAMERA_H

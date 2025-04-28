@@ -37,6 +37,7 @@ public:
     DEFINE_SETTINGFACT(tempFullImage)
     DEFINE_SETTINGFACT(pointTemp)
     DEFINE_SETTINGFACT(thermalGain)
+    DEFINE_SETTINGFACT(gimbalMode)
     DEFINE_SETTINGFACT(zt6ImageMode)
     DEFINE_SETTINGFACT(gridLines)
     DEFINE_SETTINGFACT(videoFlip_FPV)

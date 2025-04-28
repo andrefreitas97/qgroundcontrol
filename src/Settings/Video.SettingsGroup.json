@@ -119,6 +119,15 @@
     "default":     1
 },
 {
+    "name":             "gimbalMode",
+    "shortDesc": "Gimbal Mode",
+    "longDesc":  "Gimbal Mode",
+    "type":             "uint32",
+    "enumStrings":      "Lock,Follow,FPV",
+    "enumValues":       "3,4,5",
+    "default":     4
+},
+{
     "name":             "pointTemp",
     "shortDesc": "Temperature at a Point",
     "longDesc":  "Temperature at a Point",

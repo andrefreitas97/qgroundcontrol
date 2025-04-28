@@ -57,10 +57,13 @@ Item {
     property SiYiCamera camera: siyi.camera
     property int iconLeftMargin: toolStrip.width + toolStrip.anchors.leftMargin
 
+    property bool   _mainWindowIsMap:       mapControl.pipState.state === mapControl.pipState.fullState
+
     ThermalPointsOverlay {
         anchors.fill: parent
         rootWidth: _root.width
         rootHeight: _root.height
+        visible: QGroundControl.settingsManager.appSettings.vehiclebravo.value && !_mainWindowIsMap
     }
 
     QGCToolInsets {
