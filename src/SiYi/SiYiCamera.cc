@@ -75,6 +75,17 @@ bool SiYiCamera::resetPostion()
     return true;
 }
 
+bool SiYiCamera::sendControlAngle()
+{
+    uint8_t cmdId = 0x9f;
+    QByteArray body;
+    body.append(char(0x09));
+
+    QByteArray msg = packMessage(0x01, cmdId, body);
+    sendMessage(msg);
+    return true;
+}
+
 bool SiYiCamera::autoFocus(int x, int y, int w, int h)
 {
     uint8_t cmdId = 0x97;

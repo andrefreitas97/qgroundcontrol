@@ -129,6 +129,7 @@ public:
 
     Q_INVOKABLE bool turn(int yaw, int pitch);
     Q_INVOKABLE bool resetPostion();
+    Q_INVOKABLE bool sendControlAngle();
     Q_INVOKABLE bool autoFocus(int x, int y, int w, int h);
     // 1: 放大，0：停止，-1：缩小
     Q_INVOKABLE bool zoom(int option);
