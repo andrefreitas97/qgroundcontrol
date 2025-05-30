@@ -4753,3 +4753,20 @@ void Vehicle::setSurfaceTracking(int on_off)
         break;
     }
 }
+
+void Vehicle::setLandingLight(int option)
+{
+    switch(option) {
+    case 0:
+        parameterManager()->_sendParamSetToVehicle(_defaultComponentId, "LIGHT_LANDING" , FactMetaData::valueTypeUint8, 0);
+        break;
+    case 1:
+        parameterManager()->_sendParamSetToVehicle(_defaultComponentId, "LIGHT_LANDING" , FactMetaData::valueTypeUint8, 1);
+        break;
+    case 2:
+        parameterManager()->_sendParamSetToVehicle(_defaultComponentId, "LIGHT_LANDING" , FactMetaData::valueTypeUint8, 2);
+        break;
+    default:
+        break;
+    }
+}

@@ -58,6 +58,13 @@ Component {
         property Fact param10: controller.getParameterFact(-1, "RNGFND1_TYPE")
         property Fact param11: controller.getParameterFact(-1, "RNGFND1_ORIENT")
         property bool showSurfaceTracking: param10.value != 0 && param11.value == 25
+        
+        property bool landingLightAvailable: controller.parameterExists(-1, "LIGHT_LANDING")
+
+        property Fact param13: controller.getParameterFact(-1, "LIGHT_LANDING", false /* reportMissing */)
+        property bool showLandingLightOFF: param13.value == 0
+        property bool showLandingLightON: param13.value == 1
+        property bool showLandingLightAUTO: param13.value == 2
 
 
         onRejected:{
@@ -275,6 +282,51 @@ Component {
                         QGroundControl.settingsManager.appSettings.surfaceTracking.value = false
                         _activeVehicle.setSurfaceTracking(0)
                     }
+                }
+            }
+
+            Row {
+                Layout.alignment:   Qt.AlignLeft
+                spacing:            ScreenTools.defaultFontPixelWidth
+
+                QGCColoredImage {
+                    anchors.top:        parent.top
+                    anchors.bottom:     parent.bottom
+                    width:              height
+                    sourceSize.width:   width
+                    source:             "/res/illumination.svg"
+                    color:              showLandingLightOFF ? qgcPal.colorRed : qgcPal.colorGreen
+                }
+
+                QGCLabel {
+                    text:       qsTr("Landing Light:")
+                    anchors.verticalCenter: parent.verticalCenter
+                    font.bold:              true
+                }
+
+                QGCRadioButton {
+                    font.pointSize: ScreenTools.defaultFontPointSize
+                    text:           qsTr("OFF")
+                    enabled:        landingLightAvailable
+                    checked:        showLandingLightOFF
+                    onClicked:      _activeVehicle.setLandingLight(0)
+                }
+
+                QGCRadioButton {
+                    font.pointSize: ScreenTools.defaultFontPointSize
+                    text:           qsTr("ON")
+                    enabled:        landingLightAvailable
+                    checked:        showLandingLightON
+                    onClicked:      _activeVehicle.setLandingLight(1)
+
+                }
+
+                QGCRadioButton {
+                    font.pointSize: ScreenTools.defaultFontPointSize
+                    text:           qsTr("AUTO")
+                    enabled:        landingLightAvailable
+                    checked:        showLandingLightAUTO
+                    onClicked:      _activeVehicle.setLandingLight(2)
                 }
             }
 

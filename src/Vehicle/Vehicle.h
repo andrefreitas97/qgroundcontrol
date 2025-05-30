@@ -597,6 +597,8 @@ public:
 
     Q_INVOKABLE void setSurfaceTracking(int on_off);
 
+    Q_INVOKABLE void setLandingLight(int option);
+
     bool fixedWing() const;
     bool multiRotor() const;
     bool vtol() const;
