@@ -22,17 +22,20 @@ public:
     Q_PROPERTY(Fact* angle          READ angleFact      CONSTANT)
     Q_PROPERTY(Fact* distance       READ distanceFact   CONSTANT)
     Q_PROPERTY(Fact* height         READ heightFact     CONSTANT)
+    Q_PROPERTY(Fact* maxheight         READ maxheightFact     CONSTANT)
     Q_PROPERTY(bool  roverFirmware  READ roverFirmware  CONSTANT)
 
     Fact* angleFact     (void) { return &_angleFact; }
     Fact* distanceFact  (void) { return &_distanceFact; }
     Fact* heightFact    (void) { return &_heightFact; }
+    Fact* maxheightFact    (void) { return &_maxheightFact; }
     bool  roverFirmware (void) { return !!qobject_cast<ArduRoverFirmwarePlugin*>(_vehicle->firmwarePlugin()); }
 
     static const char* settingsGroup;
     static const char* angleName;
     static const char* distanceName;
     static const char* heightName;
+    static const char* maxheightName;
 
 private:
     QMap<QString, FactMetaData*> _metaDataMap;
@@ -40,4 +43,5 @@ private:
     SettingsFact _angleFact;
     SettingsFact _distanceFact;
     SettingsFact _heightFact;
+    SettingsFact _maxheightFact;
 };

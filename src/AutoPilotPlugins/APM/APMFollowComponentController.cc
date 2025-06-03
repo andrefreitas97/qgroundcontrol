@@ -13,12 +13,14 @@ const char* APMFollowComponentController::settingsGroup =   "APMFollow";
 const char* APMFollowComponentController::angleName =       "angle";
 const char* APMFollowComponentController::distanceName =    "distance";
 const char* APMFollowComponentController::heightName =      "height";
+const char* APMFollowComponentController::maxheightName =      "maxheight";
 
 APMFollowComponentController::APMFollowComponentController(void)
     : _metaDataMap  (FactMetaData::createMapFromJsonFile(QStringLiteral(":/json/APMFollowComponent.FactMetaData.json"), this))
     , _angleFact    (settingsGroup, _metaDataMap[angleName])
     , _distanceFact (settingsGroup, _metaDataMap[distanceName])
     , _heightFact   (settingsGroup, _metaDataMap[heightName])
+    , _maxheightFact   (settingsGroup, _metaDataMap[maxheightName])
 {
 
 }

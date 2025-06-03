@@ -59,10 +59,7 @@ protected:
     ESP8266Component*           _esp8266Component;
     APMHeliComponent*           _heliComponent;
     APMRemoteSupportComponent*  _apmRemoteSupportComponent;
-#if 0
-    // Follow me not ready for Stable
     APMFollowComponent*         _followComponent;
-#endif
 
 #if !defined(NO_SERIAL_LINK) && !defined(__android__)
 private slots:

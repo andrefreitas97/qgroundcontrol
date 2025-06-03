@@ -40,6 +40,7 @@ SetupPage {
             property bool _followParamsAvailable:       controller.parameterExists(-1, "FOLL_SYSID")
             property Fact _followDistanceMax:           controller.getParameterFact(-1, "FOLL_DIST_MAX", false /* reportMissing */)
             property Fact _followSysId:                 controller.getParameterFact(-1, "FOLL_SYSID", false /* reportMissing */)
+            property Fact _followOptions:               controller.getParameterFact(-1, "FOLL_OPTIONS", false /* reportMissing */)
             property Fact _followOffsetX:               controller.getParameterFact(-1, "FOLL_OFS_X", false /* reportMissing */)
             property Fact _followOffsetY:               controller.getParameterFact(-1, "FOLL_OFS_Y", false /* reportMissing */)
             property Fact _followOffsetZ:               controller.getParameterFact(-1, "FOLL_OFS_Z", false /* reportMissing */)
@@ -58,6 +59,8 @@ SetupPage {
             readonly property int _followYawBehaviorFace:           1
             readonly property int _followYawBehaviorSame:           2
             readonly property int _followYawBehaviorFlight:         3
+            readonly property int _none:                            0
+            readonly property int _mountFollowsTarget:              1
             readonly property int _followAltitudeTypeAbsolute:      0
             readonly property int _followAltitudeTypeRelative:      1
             readonly property int _followOffsetTypeRelative:        1
@@ -65,7 +68,7 @@ SetupPage {
             Component.onCompleted: _setUIFromParams()
 
             function validateSupportedParamSetup() {
-                var followSysIdOk = _followSysId.rawValue == QGroundControl.mavlinkSystemID
+                //var followSysIdOk = _followSysId.rawValue == QGroundControl.mavlinkSystemID
                 var followOffsetOk = _followOffsetType.rawValue == _followOffsetTypeRelative
                 var followAltOk = true
                 var followYawOk = true
@@ -73,8 +76,8 @@ SetupPage {
                     followAltOk = _followAltitudeType.rawValue == _followAltitudeTypeRelative
                     followYawOk = _followYawBehavior.rawValue == _followYawBehaviorNone || _followYawBehavior.rawValue == _followYawBehaviorFace || _followYawBehavior.rawValue == _followYawBehaviorFlight
                 }
-                _supportedSetup = followOffsetOk && followAltOk && followYawOk && followSysIdOk
-                console.log("_supportedSetup", _supportedSetup, followSysIdOk, followOffsetOk, followAltOk, followYawOk)
+                _supportedSetup = followOffsetOk && followAltOk && followYawOk //&& followSysIdOk
+                console.log("_supportedSetup", _supportedSetup, followOffsetOk, followAltOk, followYawOk)
                 return _supportedSetup
             }
 
@@ -110,10 +113,20 @@ SetupPage {
 
                     pointVehicleCombo.currentIndex = comboIndex
                 }
+
+                var comboIndex = -1
+                    for (var i=0; i<mountOptionsCombo.rgValues.length; i++) {
+                        if (mountOptionsCombo.rgValues[i] == _followOptions.rawValue) {
+                            comboIndex = i
+                            break
+                        }
+                    }
+
+                mountOptionsCombo.currentIndex = comboIndex
             }
 
             function _setFollowMeParamDefaults() {
-                _followSysId.rawValue = QGroundControl.mavlinkSystemID
+                //_followSysId.rawValue = QGroundControl.mavlinkSystemID
                 _followOffsetType.rawValue = _followOffsetTypeRelative
                 if (!_roverFirmware) {
                     _followAltitudeType.rawValue = _followAltitudeTypeRelative
@@ -172,6 +185,7 @@ SetupPage {
                 onMissingParametersAvailable: {
                     _followDistanceMax =    controller.getParameterFact(-1, "FOLL_DIST_MAX")
                     _followSysId =          controller.getParameterFact(-1, "FOLL_SYSID")
+                    _followOptions =        controller.getParameterFact(-1, "FOLL_OPTIONS")
                     _followOffsetX =        controller.getParameterFact(-1, "FOLL_OFS_X")
                     _followOffsetY =        controller.getParameterFact(-1, "FOLL_OFS_Y")
                     _followOffsetZ =        controller.getParameterFact(-1, "FOLL_OFS_Z")
@@ -245,10 +259,80 @@ SetupPage {
                         Layout.fillWidth:   true
                         columns:            2
 
+                        QGCLabel {
+                            id:         sysIdLabel
+                            text:       qsTr("Follow target's mavlink SYS ID (0 to follow the first target “seen”)")
+                        }
+                        FactTextField {
+                            fact:       _followSysId
+                            visible:    sysIdLabel.visible
+                        }
+
+                        QGCLabel {
+                            id:         maxDistLabel
+                            text:       qsTr("Maximum Distance")
+                        }
+                        FactTextField {
+                            fact:       _followDistanceMax
+                            visible:    maxDistLabel.visible
+                        }
+
+                        QGCLabel {
+                            id:         maxHeightLabel
+                            text:       qsTr("Maximum Height")
+                        }
+                        FactTextField {
+                            fact:       controller.maxheight
+                            visible:    maxHeightLabel.visible
+                        }
+
+                        QGCLabel {
+                            id:         mountOptionsLabel
+                            text:       qsTr("Mount Options")
+                        }
+                        QGCComboBox {
+                            id:                     mountOptionsCombo
+                            Layout.preferredWidth:  ScreenTools.defaultFontPixelWidth * 35
+                            model:                  rgText
+                            onActivated:            _followOptions.rawValue = rgValues[index]
+
+                            property var rgText:    [ qsTr("None"), qsTr("Mount follows target on mode enter") ]
+                            property var rgValues:  [ _none, _mountFollowsTarget ]
+                        }
+
+
+                        QGCLabel {
+                            text:       qsTr("Point Vehicle")
+                            //visible:    !_roverFirmware
+                        }
+                        QGCComboBox {
+                            id:                     pointVehicleCombo
+                            Layout.preferredWidth:  ScreenTools.defaultFontPixelWidth * 35
+                            model:                  rgText
+                            visible:                !_roverFirmware
+                            onActivated:            _followYawBehavior.rawValue = rgValues[index]
+
+                            property var rgText:    [ qsTr("Maintain current vehicle orientation"), qsTr("Point at target location"), qsTr("Same orientation as target"), qsTr("Point at direction of flight") ]
+                            property var rgValues:  [ _followYawBehaviorNone, _followYawBehaviorFace, _followYawBehaviorSame, _followYawBehaviorFlight ]
+                        }
+                    }
+
+                    GridLayout {
+                        Layout.fillWidth:   true
+                        columns:            2
+                        //visible:            !_followMaintain
+
+                        QGCLabel {
+                            Layout.columnSpan:  2
+                            Layout.alignment:   Qt.AlignHCenter
+                            font.bold: true
+                            text:               qsTr("Vehicle Offsets")
+                        }
+
                         QGCLabel { text: qsTr("Vehicle Position") }
                         QGCComboBox {
                             id:                 followPositionCombo
-                            Layout.fillWidth:   true
+                            Layout.preferredWidth:  ScreenTools.defaultFontPixelWidth * 35
                             model:              [ qsTr("Maintain Current Offsets"), qsTr("Specify Offsets")]
 
                             onActivated: {
@@ -261,54 +345,87 @@ SetupPage {
                             }
                         }
 
-                        QGCLabel {
-                            text:       qsTr("Point Vehicle")
-                            visible:    !_roverFirmware
-                        }
-                        QGCComboBox {
-                            id:                     pointVehicleCombo
+                        QGCLabel { 
+                            id: anglelabel
+                            visible:            !_followMaintain
+                            Layout.preferredWidth:  ScreenTools.defaultFontPixelWidth * 15
+                            text: qsTr("Angle = ") + controller.angle.rawValue + qsTr(" º") }
+                        //FactTextField {
+                        //    fact:       controller.angle
+                        //    Layout.fillWidth:       true
+                        //    onUpdated:  {_setXYOffsetByAngleAndDistance(controller.angle.rawValue, controller.distance.rawValue)
+                        //                 _setUIFromParams()}
+                        //}
+                        Slider {
+                            //anchors.left:       parent.left
+                            //anchors.right:      parent.right
                             Layout.fillWidth:       true
-                            model:                  rgText
-                            visible:                !_roverFirmware
-                            onActivated:            _followYawBehavior.rawValue = rgValues[index]
-
-                            property var rgText:    [ qsTr("Maintain current vehicle orientation"), qsTr("Point at ground station location"), qsTr("Same direction as ground station movement") ]
-                            property var rgValues:  [ _followYawBehaviorNone, _followYawBehaviorFace, _followYawBehaviorFlight ]
-                        }
-                    }
-
-                    GridLayout {
-                        Layout.fillWidth:   true
-                        columns:            4
-                        visible:            !_followMaintain
-
-                        QGCLabel {
-                            Layout.columnSpan:  2
-                            Layout.alignment:   Qt.AlignHCenter
-                            text:               qsTr("Vehicle Offsets")
+                            visible:            anglelabel.visible
+                            enabled:            !_followMaintain
+                            minimumValue:       0
+                            maximumValue:       360
+                            stepSize:           15
+                            tickmarksEnabled:   true
+                            value:              controller.angle.rawValue
+                            onValueChanged: {controller.angle.rawValue = value
+                                             _setXYOffsetByAngleAndDistance(controller.angle.rawValue, controller.distance.rawValue)}
                         }
 
-                        QGCLabel { text: qsTr("Angle") }
-                        FactTextField {
-                            fact:       controller.angle
-                            onUpdated:  { console.log("updated"); _setXYOffsetByAngleAndDistance(controller.angle.rawValue, controller.distance.rawValue) }
-                        }
 
-                        QGCLabel { text: qsTr("Distance") }
-                        FactTextField {
-                            fact:       controller.distance
-                            onUpdated:  _setXYOffsetByAngleAndDistance(controller.angle.rawValue, controller.distance.rawValue)
+                        QGCLabel { 
+                            id:         distLabel
+                            visible:            !_followMaintain
+                            Layout.preferredWidth:  ScreenTools.defaultFontPixelWidth * 15
+                            text: qsTr("Distance = ") + controller.distance.rawValue + qsTr(" m")
+                        }
+                        //FactTextField {
+                        //    fact:       controller.distance
+                        //    Layout.fillWidth:       true
+                        //    onUpdated:  {_setXYOffsetByAngleAndDistance(controller.angle.rawValue, controller.distance.rawValue)
+                        //                 _setUIFromParams()}
+                        //}
+                        Slider {
+                            //anchors.left:       parent.left
+                            //anchors.right:      parent.right
+                            Layout.fillWidth:       true
+                            visible:            distLabel.visible
+                            enabled:            !_followMaintain
+                            minimumValue:       0
+                            maximumValue:       _followDistanceMax.rawValue
+                            stepSize:           10 //maximumValue * 0.05
+                            tickmarksEnabled:   true
+                            value:              controller.distance.rawValue
+                            onValueChanged: {controller.distance.rawValue = value
+                                             _setXYOffsetByAngleAndDistance(controller.angle.rawValue, controller.distance.rawValue)}
                         }
 
                         QGCLabel {
                             id:         heightLabel
-                            text:       qsTr("Height")
+                            Layout.preferredWidth:  ScreenTools.defaultFontPixelWidth * 15
+                            text: qsTr("Height = ") + controller.height.rawValue + qsTr(" m")
                             visible:    !_roverFirmware && !_followMaintain
                         }
-                        FactTextField {
-                            fact:       controller.height
-                            visible:    heightLabel.visible
-                            onUpdated:  _followOffsetZ.rawValue = -controller.height.rawValue
+                        //FactTextField {
+                        //    fact:       controller.height
+                        //    Layout.fillWidth:       true
+                        //    visible:    heightLabel.visible
+                        //    onUpdated: {_followOffsetZ.rawValue = -controller.height.rawValue
+                        //                _setUIFromParams()}
+                        //}
+
+                        Slider {
+                            //anchors.left:       parent.left
+                            //anchors.right:      parent.right
+                            Layout.fillWidth:       true
+                            visible:            heightLabel.visible
+                            enabled:            !_followMaintain
+                            minimumValue:       20
+                            maximumValue:       controller.maxheight.rawValue
+                            stepSize:           10
+                            tickmarksEnabled:   true
+                            value:              controller.height.rawValue
+                            onValueChanged: {controller.height.rawValue = value
+                                             _followOffsetZ.rawValue = -controller.height.rawValue}
                         }
                     }
                 }
@@ -316,7 +433,7 @@ SetupPage {
 
             RowLayout {
                 id:         offsetSetupLayout
-                spacing:    ScreenTools.defaultFontPixelWidth * 2
+                spacing:    ScreenTools.defaultFontPixelWidth * 15
                 visible:    _showOffsetsSetup
 
                 Item {
@@ -339,13 +456,13 @@ SetupPage {
                         color:                  qgcPal.windowShade
                     }
 
-                    QGCLabel {
-                        anchors.horizontalCenter:   parent.horizontalCenter
-                        anchors.topMargin:          parent.height / 4
-                        anchors.top:                parent.top
-                        text:                       qsTr("Click in the graphic to change angle")
-                        opacity:                    0.5
-                    }
+                    //QGCLabel {
+                    //    anchors.horizontalCenter:   parent.horizontalCenter
+                    //    anchors.topMargin:          parent.height / 4
+                    //    anchors.top:                parent.top
+                    //    text:                       qsTr("Click in the graphic to change angle")
+                    //    opacity:                    0.5
+                    //}
 
                     Image {
                         id:                 gcsIcon
@@ -429,17 +546,17 @@ SetupPage {
                         }
                     }
 
-                    MouseArea {
-                        anchors.fill: parent
-
-                        onClicked: {
-                            // Translate x,y to centered
-                            var x = mouse.x - (width / 2)
-                            var y = (height - mouse.y) - (height / 2)
-                            controller.angle.rawValue = _radiansToHeading(Math.atan2(y, x))
-                            _setXYOffsetByAngleAndDistance(controller.angle.rawValue, controller.distance.rawValue)
-                        }
-                    }
+                    //MouseArea {
+                    //    anchors.fill: parent
+//
+                    //    onClicked: {
+                    //        // Translate x,y to centered
+                    //        var x = mouse.x - (width / 2)
+                    //        var y = (height - mouse.y) - (height / 2)
+                    //        controller.angle.rawValue = _radiansToHeading(Math.atan2(y, x))
+                    //        _setXYOffsetByAngleAndDistance(controller.angle.rawValue, controller.distance.rawValue)
+                    //    }
+                    //}
                 }
 
                 ColumnLayout {
@@ -501,26 +618,43 @@ SetupPage {
                         }
                     }
 
-                    MissionItemIndexLabel {
-                        id:                 launchIconHeight
-                        Layout.alignment:   Qt.AlignHCenter
-                        label:              qsTr("L")
+                    Image {
+                        id:                 gcsIconGround
+                        source:             "/res/QGCLogoArrow"
+                        mipmap:             true
+                        antialiasing:       true
+                        fillMode:           Image.PreserveAspectFit
+                        height:             ScreenTools.defaultFontPixelHeight * 2.5
+                        sourceSize.height:  height
 
-                        transform: [
-                            Scale {
-                                origin.x:       launchIconHeight.width  / 2
-                                origin.y:       launchIconHeight.height / 2
-                                xScale:         1.5
-                                yScale:         2.5
-
-                            },
-                            Rotation {
-                                origin.x:       launchIconHeight.width  / 2
-                                origin.y:       launchIconHeight.height / 2
-                                angle:          75
-                                axis { x: 1; y: 0; z: 0 }
-                            } ]
+                        transform: Rotation {
+                            origin.x:       vehicleIconHeight.width  / 2
+                            origin.y:       vehicleIconHeight.height / 2
+                            angle:          65
+                            axis { x: 1; y: 0; z: 0 }
+                        }
                     }
+
+                    //MissionItemIndexLabel {
+                    //    id:                 launchIconHeight
+                    //    Layout.alignment:   Qt.AlignHCenter
+                    //    label:              qsTr("L")
+//
+                    //    transform: [
+                    //        Scale {
+                    //            origin.x:       launchIconHeight.width  / 2
+                    //            origin.y:       launchIconHeight.height / 2
+                    //            xScale:         1.5
+                    //            yScale:         2.5
+//
+                    //        },
+                    //        Rotation {
+                    //            origin.x:       launchIconHeight.width  / 2
+                    //            origin.y:       launchIconHeight.height / 2
+                    //            angle:          75
+                    //            axis { x: 1; y: 0; z: 0 }
+                    //        } ]
+                    //}
                 }
             }
         }
