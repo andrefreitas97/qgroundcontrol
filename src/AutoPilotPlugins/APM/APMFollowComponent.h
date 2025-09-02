@@ -26,6 +26,7 @@ public:
     QString description             (void) const override;
     QString iconResource            (void) const override;
     bool    requiresSetup           (void) const override { return false; }
+    bool requiresAdvancedUI(void) const override;
     bool    setupComplete           (void) const override { return true; }
     QUrl    setupSource             (void) const override;
     QUrl    summaryQmlSource        (void) const override;

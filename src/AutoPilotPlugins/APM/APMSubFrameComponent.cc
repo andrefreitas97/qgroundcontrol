@@ -45,6 +45,11 @@ bool APMSubFrameComponent::requiresSetup(void) const
     return false;
 }
 
+bool APMSubFrameComponent::requiresAdvancedUI(void) const
+{
+    return true;
+}
+
 bool APMSubFrameComponent::setupComplete(void) const
 {
     return true;

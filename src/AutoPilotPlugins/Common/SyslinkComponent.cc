@@ -38,6 +38,11 @@ bool SyslinkComponent::requiresSetup(void) const
     return false;
 }
 
+bool SyslinkComponent::requiresAdvancedUI(void) const
+{
+    return true;
+}
+
 bool SyslinkComponent::setupComplete(void) const
 {
     return true;

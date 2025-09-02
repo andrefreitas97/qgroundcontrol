@@ -38,6 +38,11 @@ bool PX4TuningComponent::requiresSetup(void) const
     return false;
 }
 
+bool PX4TuningComponent::requiresAdvancedUI(void) const
+{
+    return true;
+}
+
 bool PX4TuningComponent::setupComplete(void) const
 {
     return true;

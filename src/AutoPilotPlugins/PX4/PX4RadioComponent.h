@@ -28,6 +28,7 @@ public:
     virtual QString description(void) const;
     virtual QString iconResource(void) const;
     virtual bool requiresSetup(void) const;
+    bool requiresAdvancedUI(void) const;
     virtual bool setupComplete(void) const;
     virtual QUrl setupSource(void) const;
     virtual QUrl summaryQmlSource(void) const;

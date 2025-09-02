@@ -33,6 +33,11 @@ QString APMFollowComponent::iconResource(void) const
     return QStringLiteral("/qmlimages/FollowComponentIcon.png");
 }
 
+bool APMFollowComponent::requiresAdvancedUI(void) const
+{
+    return false;
+}
+
 QUrl APMFollowComponent::setupSource(void) const
 {
     return QUrl::fromUserInput(QStringLiteral("qrc:/qml/APMFollowComponent.qml"));

@@ -38,6 +38,11 @@ bool PX4RadioComponent::requiresSetup(void) const
     return _vehicle->parameterManager()->getParameter(-1, "COM_RC_IN_MODE")->rawValue().toInt() == 1 ? false : true;
 }
 
+bool PX4RadioComponent::requiresAdvancedUI(void) const
+{
+    return true;
+}
+
 bool PX4RadioComponent::setupComplete(void) const
 {
     if (_vehicle->parameterManager()->getParameter(-1, "COM_RC_IN_MODE")->rawValue().toInt() != 1) {

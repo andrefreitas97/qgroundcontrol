@@ -42,6 +42,11 @@ bool CameraComponent::requiresSetup(void) const
     return false;
 }
 
+bool CameraComponent::requiresAdvancedUI(void) const
+{
+    return true;
+}
+
 bool CameraComponent::setupComplete(void) const
 {
     return true;

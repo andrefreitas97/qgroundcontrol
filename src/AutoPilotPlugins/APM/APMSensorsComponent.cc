@@ -43,6 +43,11 @@ bool APMSensorsComponent::requiresSetup(void) const
     return true;
 }
 
+bool APMSensorsComponent::requiresAdvancedUI(void) const
+{
+    return true;
+}
+
 bool APMSensorsComponent::setupComplete(void) const
 {
     return !compassSetupNeeded() && !accelSetupNeeded();

@@ -29,6 +29,7 @@ public:
     bool requiresSetup() const final;
     bool setupComplete() const final;
     QUrl setupSource() const final;
+    bool requiresAdvancedUI(void) const final;
     QUrl summaryQmlSource() const final;
     bool allowSetupWhileArmed() const final { return true; }
     bool allowSetupWhileFlying() const final { return true; }

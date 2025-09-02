@@ -49,6 +49,11 @@ bool APMRadioComponent::requiresSetup(void) const
     return true;
 }
 
+bool APMRadioComponent::requiresAdvancedUI(void) const
+{
+    return true;
+}
+
 bool APMRadioComponent::setupComplete(void) const
 {
     // The best we can do to detect the need for a radio calibration is look for attitude

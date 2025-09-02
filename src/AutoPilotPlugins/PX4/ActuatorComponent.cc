@@ -45,6 +45,11 @@ bool ActuatorComponent::requiresSetup(void) const
     return true;
 }
 
+bool ActuatorComponent::requiresAdvancedUI(void) const
+{
+    return true;
+}
+
 bool ActuatorComponent::setupComplete(void) const
 {
     return !_actuators.hasUnsetRequiredFunctions();

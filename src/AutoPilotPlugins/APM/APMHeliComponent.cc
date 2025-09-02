@@ -36,6 +36,11 @@ bool APMHeliComponent::requiresSetup(void) const
     return false;
 }
 
+bool APMHeliComponent::requiresAdvancedUI(void) const
+{
+    return true;
+}
+
 bool APMHeliComponent::setupComplete(void) const
 {
     return true;

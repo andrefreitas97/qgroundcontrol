@@ -36,6 +36,11 @@ bool MotorComponent::requiresSetup(void) const
     return false;
 }
 
+bool MotorComponent::requiresAdvancedUI(void) const
+{
+    return true;
+}
+
 bool MotorComponent::setupComplete(void) const
 {
     return true;

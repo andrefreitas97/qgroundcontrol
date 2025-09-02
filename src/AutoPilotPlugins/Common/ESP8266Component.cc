@@ -38,6 +38,11 @@ bool ESP8266Component::requiresSetup(void) const
     return false;
 }
 
+bool ESP8266Component::requiresAdvancedUI(void) const
+{
+    return true;
+}
+
 bool ESP8266Component::setupComplete(void) const
 {
     return true;

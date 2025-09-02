@@ -50,6 +50,11 @@ bool APMAirframeComponent::requiresSetup(void) const
     return _requiresFrameSetup;
 }
 
+bool APMAirframeComponent::requiresAdvancedUI(void) const
+{
+    return true;
+}
+
 bool APMAirframeComponent::setupComplete(void) const
 {
     if (_requiresFrameSetup) {

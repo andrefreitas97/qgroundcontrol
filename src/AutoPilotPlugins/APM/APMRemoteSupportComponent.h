@@ -26,6 +26,7 @@ public:
     QString description(void) const final;
     QString iconResource(void) const final;
     bool requiresSetup(void) const final;
+    bool requiresAdvancedUI(void) const final;
     bool setupComplete(void) const final;
     QUrl setupSource(void) const final;
     QUrl summaryQmlSource(void) const final;

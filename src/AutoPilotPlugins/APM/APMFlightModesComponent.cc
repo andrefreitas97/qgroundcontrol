@@ -39,6 +39,11 @@ bool APMFlightModesComponent::requiresSetup(void) const
     return true;
 }
 
+bool APMFlightModesComponent::requiresAdvancedUI(void) const
+{
+    return true;
+}
+
 bool APMFlightModesComponent::setupComplete(void) const
 {
     return true;

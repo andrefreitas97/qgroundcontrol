@@ -50,6 +50,11 @@ bool SensorsComponent::requiresSetup(void) const
     return true;
 }
 
+bool SensorsComponent::requiresAdvancedUI(void) const
+{
+    return true;
+}
+
 bool SensorsComponent::setupComplete(void) const
 {
     foreach (const QString &triggerParam, _deviceIds) {

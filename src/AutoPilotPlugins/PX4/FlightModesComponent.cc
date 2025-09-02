@@ -45,6 +45,11 @@ bool FlightModesComponent::requiresSetup(void) const
     return _vehicle->parameterManager()->getParameter(-1, "COM_RC_IN_MODE")->rawValue().toInt() == 1 ? false : true;
 }
 
+bool FlightModesComponent::requiresAdvancedUI(void) const
+{
+    return true;
+}
+
 bool FlightModesComponent::setupComplete(void) const
 {
     if (_vehicle->parameterManager()->getParameter(-1, "COM_RC_IN_MODE")->rawValue().toInt() == 1) {

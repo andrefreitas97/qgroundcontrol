@@ -36,6 +36,11 @@ bool APMRemoteSupportComponent::requiresSetup(void) const
     return false;
 }
 
+bool APMRemoteSupportComponent::requiresAdvancedUI(void) const
+{
+    return true;
+}
+
 bool APMRemoteSupportComponent::setupComplete(void) const
 {
     return true;

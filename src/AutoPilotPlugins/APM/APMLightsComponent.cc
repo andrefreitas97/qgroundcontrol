@@ -42,6 +42,11 @@ bool APMLightsComponent::requiresSetup(void) const
     return false;
 }
 
+bool APMLightsComponent::requiresAdvancedUI(void) const
+{
+    return true;
+}
+
 bool APMLightsComponent::setupComplete(void) const
 {
     return true;

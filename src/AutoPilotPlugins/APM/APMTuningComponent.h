@@ -29,6 +29,7 @@ public:
     QString iconResource(void) const final;
     bool requiresSetup(void) const final;
     bool setupComplete(void) const final;
+    bool requiresAdvancedUI(void) const final;
     QUrl setupSource(void) const final;
     QUrl summaryQmlSource(void) const final;
     bool allowSetupWhileArmed(void) const final { return true; }

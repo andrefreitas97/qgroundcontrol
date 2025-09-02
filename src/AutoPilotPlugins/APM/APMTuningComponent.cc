@@ -39,6 +39,11 @@ bool APMTuningComponent::requiresSetup(void) const
     return false;
 }
 
+bool APMTuningComponent::requiresAdvancedUI(void) const
+{
+    return true;
+}
+
 bool APMTuningComponent::setupComplete(void) const
 {
     return true;

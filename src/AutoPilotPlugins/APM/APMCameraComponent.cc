@@ -41,6 +41,11 @@ bool APMCameraComponent::requiresSetup(void) const
     return false;
 }
 
+bool APMCameraComponent::requiresAdvancedUI(void) const
+{
+    return true;
+}
+
 bool APMCameraComponent::setupComplete(void) const
 {
     return true;

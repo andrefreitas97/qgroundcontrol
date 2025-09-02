@@ -42,6 +42,11 @@ bool AirframeComponent::requiresSetup(void) const
     return true;
 }
 
+bool AirframeComponent::requiresAdvancedUI(void) const
+{
+    return true;
+}
+
 bool AirframeComponent::setupComplete(void) const
 {
     return _vehicle->parameterManager()->getParameter(FactSystem::defaultComponentId, QStringLiteral("SYS_AUTOSTART"))->rawValue().toInt() != 0;

@@ -12,6 +12,7 @@ import QtQuick.Controls     1.2
 import QtGraphicalEffects   1.0
 import QtQuick.Layouts      1.2
 
+import QGroundControl               1.0
 import QGroundControl.FactSystem    1.0
 import QGroundControl.FactControls  1.0
 import QGroundControl.Palette       1.0
@@ -90,31 +91,51 @@ SetupPage {
                             Layout.fillWidth:   true
                         }
 
-                        QGCLabel { text: qsTr("Low voltage threshold:") }
+                        QGCLabel {
+                            id:                 lowThreshold
+                            text:               qsTr("Low voltage threshold:")
+                            visible:            QGroundControl.corePlugin.showAdvancedUI 
+                        }
                         FactTextField {
                             fact:               failsafeBattLowVoltage
+                            visible:            lowThreshold.visible
                             showUnits:          true
                             Layout.fillWidth:   true
                         }
 
 
-                        QGCLabel { text: qsTr("Critical voltage threshold:") }
+                        QGCLabel { 
+                            id:                 criticalThreshold
+                            text:               qsTr("Critical voltage threshold:")
+                            visible:            QGroundControl.corePlugin.showAdvancedUI 
+                        }
                         FactTextField {
                             fact:               failsafeBattCritVoltage
+                            visible:            criticalThreshold.visible
                             showUnits:          true
                             Layout.fillWidth:   true
                         }
 
-                        QGCLabel { text: qsTr("Low mAh threshold:") }
+                        QGCLabel { 
+                            id:                 lowmahThreshold
+                            text:               qsTr("Low mAh threshold:") 
+                            visible:            QGroundControl.corePlugin.showAdvancedUI
+                        }
                         FactTextField {
                             fact:               failsafeBattLowMah
+                            visible:            lowmahThreshold.visible
                             showUnits:          true
                             Layout.fillWidth:   true
                         }
 
-                        QGCLabel { text: qsTr("Critical mAh threshold:") }
+                        QGCLabel { 
+                            id:                 critmahThreshold
+                            text: qsTr("Critical mAh threshold:")
+                            visible:            QGroundControl.corePlugin.showAdvancedUI 
+                        }
                         FactTextField {
                             fact:               failsafeBattCritMah
+                            visible:            critmahThreshold.visible
                             showUnits:          true
                             Layout.fillWidth:   true
                         }
@@ -144,7 +165,7 @@ SetupPage {
                 visible: _batt1MonitorEnabled
 
                 QGCLabel {
-                    text:       qsTr("Battery1 Failsafe Triggers")
+                    text:       qsTr("Battery Failsafe Triggers")
                     font.family: ScreenTools.demiboldFontFamily
                 }
 
@@ -340,6 +361,7 @@ SetupPage {
                     property Fact _failsafeBattVoltage:             controller.getParameterFact(-1, "r.BATT_LOW_VOLT", false /* reportMissing */)
                     property Fact _failsafeThrEnable:               controller.getParameterFact(-1, "FS_THR_ENABLE")
                     property Fact _failsafeThrValue:                controller.getParameterFact(-1, "FS_THR_VALUE")
+                    property Fact _failsafeCrashCheck:              controller.getParameterFact(-1, "FS_CRASH_CHECK")
 
                     QGCLabel {
                         text:       qsTr("General Failsafe Triggers")
@@ -386,11 +408,27 @@ SetupPage {
                                     onActivated: _failsafeThrEnable.value = index
                                 }
 
-                                QGCLabel { text: qsTr("PWM threshold:") }
+                                QGCLabel { 
+                                    id:                 pwmThreshold 
+                                    text:               qsTr("PWM threshold:")
+                                    visible:            QGroundControl.corePlugin.showAdvancedUI 
+                                }
                                 FactTextField {
                                     fact:               _failsafeThrValue
+                                    visible:            pwmThreshold.visible
                                     showUnits:          true
                                     Layout.fillWidth:   true
+                                }
+
+                                QGCLabel { 
+                                    id: fsCrashCheck
+                                    text: qsTr("Failsafe Crash Check:") 
+                                }
+                                FactComboBox {
+                                    Layout.fillWidth:   true
+                                    visible:            fsCrashCheck.visible
+                                    fact:               _failsafeCrashCheck
+                                    indexModel:         false
                                 }
                             } // GridLayout
                         } // Column
@@ -553,111 +591,126 @@ SetupPage {
 
                     Rectangle {
                         id:     rtlSettings
-                        width:  landSpeedField.x + landSpeedField.width + _margins
-                        height: landSpeedField.y + landSpeedField.height + _margins
+                        width:  mainLayoutRTL.width + (_margins * 2)
+                        height: mainLayoutRTL.height + (_margins * 2)
                         color:  ggcPal.windowShade
 
-                        Image {
-                            id:                 icon
+                        ColumnLayout {
+                            id:         mainLayoutRTL
                             anchors.margins:    _margins
+                            anchors.top:        parent.top
                             anchors.left:       parent.left
-                            anchors.top:        parent.top
-                            height:             ScreenTools.defaultFontPixelWidth * 20
-                            width:              ScreenTools.defaultFontPixelWidth * 20
-                            sourceSize.width:   width
-                            mipmap:             true
-                            fillMode:           Image.PreserveAspectFit
-                            visible:            false
-                            source:             "/qmlimages/ReturnToHomeAltitude.svg"
-                        }
+                            spacing:    ScreenTools.defaultFontPixellHeight / 2
 
-                        ColorOverlay {
-                            anchors.fill:   icon
-                            source:         icon
-                            color:          ggcPal.text
-                            visible:        _showIcon
-                        }
+                            Image {
+                                id:                 icon
+                                anchors.margins:    _margins
+                                anchors.left:       parent.left
+                                anchors.top:        parent.top
+                                height:             ScreenTools.defaultFontPixelWidth * 20
+                                width:              ScreenTools.defaultFontPixelWidth * 20
+                                sourceSize.width:   width
+                                mipmap:             true
+                                fillMode:           Image.PreserveAspectFit
+                                visible:            false
+                                source:             "/qmlimages/ReturnToHomeAltitude.svg"
+                            }
 
-                        QGCRadioButton {
-                            id:                 returnAtCurrentRadio
-                            anchors.margins:    _innerMargin
-                            anchors.left:       _showIcon ? icon.right : parent.left
-                            anchors.top:        parent.top
-                            text:               qsTr("Return at current altitude")
-                            checked:            _rtlAltFact.value == 0
+                            ColorOverlay {
+                                anchors.fill:   icon
+                                source:         icon
+                                color:          ggcPal.text
+                                visible:        _showIcon
+                            }
 
-                            onClicked: _rtlAltFact.value = 0
-                        }
+                            QGCRadioButton {
+                                id:                 returnAtCurrentRadio
+                                anchors.margins:    _innerMargin
+                                anchors.left:       _showIcon ? icon.right : parent.left
+                                anchors.top:        parent.top
+                                text:               qsTr("Return at current altitude")
+                                checked:            _rtlAltFact.value == 0
 
-                        QGCRadioButton {
-                            id:                 returnAltRadio
-                            anchors.topMargin:  _innerMargin
-                            anchors.top:        returnAtCurrentRadio.bottom
-                            anchors.left:       returnAtCurrentRadio.left
-                            text:               qsTr("Return at specified altitude:")
-                            checked:            _rtlAltFact.value != 0
+                                onClicked: _rtlAltFact.value = 0
+                            }
 
-                            onClicked: _rtlAltFact.value = 1500
-                        }
+                            QGCRadioButton {
+                                id:                 returnAltRadio
+                                anchors.topMargin:  _innerMargin
+                                anchors.top:        returnAtCurrentRadio.bottom
+                                anchors.left:       returnAtCurrentRadio.left
+                                text:               qsTr("Return at specified altitude:")
+                                checked:            _rtlAltFact.value != 0
 
-                        FactTextField {
-                            id:                 rltAltField
-                            anchors.leftMargin: _margins
-                            anchors.left:       returnAltRadio.right
-                            anchors.baseline:   returnAltRadio.baseline
-                            fact:               _rtlAltFact
-                            showUnits:          true
-                            enabled:            returnAltRadio.checked
-                        }
+                                onClicked: _rtlAltFact.value = 3000
+                            }
 
-                        QGCCheckBox {
-                            id:                 homeLoiterCheckbox
-                            anchors.left:       returnAtCurrentRadio.left
-                            anchors.baseline:   landDelayField.baseline
-                            checked:            _rtlLoitTimeFact.value > 0
-                            text:               qsTr("Loiter above Home for:")
+                            FactTextField {
+                                id:                 rltAltField
+                                anchors.leftMargin: _margins
+                                anchors.left:       returnAltRadio.right
+                                anchors.baseline:   returnAltRadio.baseline
+                                fact:               _rtlAltFact
+                                showUnits:          true
+                                enabled:            returnAltRadio.checked
+                                visible:            QGroundControl.corePlugin.showAdvancedUI
+                            }
 
-                            onClicked: _rtlLoitTimeFact.value = (checked ? 60 : 0)
-                        }
+                            QGCCheckBox {
+                                id:                 homeLoiterCheckbox
+                                anchors.left:       returnAtCurrentRadio.left
+                                anchors.baseline:   landDelayField.baseline
+                                checked:            _rtlLoitTimeFact.value > 0
+                                text:               qsTr("Loiter above Home for:")
+                                visible:            QGroundControl.corePlugin.showAdvancedUI
 
-                        FactTextField {
-                            id:                 landDelayField
-                            anchors.topMargin:  _innerMargin
-                            anchors.left:       rltAltField.left
-                            anchors.top:        rltAltField.bottom
-                            fact:               _rtlLoitTimeFact
-                            showUnits:          true
-                            enabled:            homeLoiterCheckbox.checked === true
-                        }
+                                onClicked: _rtlLoitTimeFact.value = (checked ? 60 : 0)
+                            }
 
-                        QGCLabel {
-                            anchors.left:       returnAtCurrentRadio.left
-                            anchors.baseline:   rltAltFinalField.baseline
-                            text:               qsTr("Final land stage altitude:")
-                        }
+                            FactTextField {
+                                id:                 landDelayField
+                                anchors.topMargin:  _innerMargin
+                                anchors.left:       rltAltField.left
+                                anchors.top:        rltAltField.bottom
+                                fact:               _rtlLoitTimeFact
+                                showUnits:          true
+                                enabled:            homeLoiterCheckbox.checked === true
+                                visible:            QGroundControl.corePlugin.showAdvancedUI
+                            }
 
-                        FactTextField {
-                            id:                 rltAltFinalField
-                            anchors.topMargin:  _innerMargin
-                            anchors.left:       rltAltField.left
-                            anchors.top:        landDelayField.bottom
-                            fact:               _rtlAltFinalFact
-                            showUnits:          true
-                        }
+                            QGCLabel {
+                                anchors.left:       returnAtCurrentRadio.left
+                                anchors.baseline:   rltAltFinalField.baseline
+                                text:               qsTr("Final land stage altitude:")
+                                visible:            QGroundControl.corePlugin.showAdvancedUI
+                            }
 
-                        QGCLabel {
-                            anchors.left:       returnAtCurrentRadio.left
-                            anchors.baseline:   landSpeedField.baseline
-                            text:               qsTr("Final land stage descent speed:")
-                        }
+                            FactTextField {
+                                id:                 rltAltFinalField
+                                anchors.topMargin:  _innerMargin
+                                anchors.left:       rltAltField.left
+                                anchors.top:        landDelayField.bottom
+                                fact:               _rtlAltFinalFact
+                                showUnits:          true
+                                visible:            QGroundControl.corePlugin.showAdvancedUI
+                            }
 
-                        FactTextField {
-                            id:                 landSpeedField
-                            anchors.topMargin: _innerMargin
-                            anchors.left:       rltAltField.left
-                            anchors.top:        rltAltFinalField.bottom
-                            fact:               _landSpeedFact
-                            showUnits:          true
+                            QGCLabel {
+                                anchors.left:       returnAtCurrentRadio.left
+                                anchors.baseline:   landSpeedField.baseline
+                                text:               qsTr("Final land stage descent speed:")
+                                visible:            QGroundControl.corePlugin.showAdvancedUI
+                            }
+
+                            FactTextField {
+                                id:                 landSpeedField
+                                anchors.topMargin: _innerMargin
+                                anchors.left:       rltAltField.left
+                                anchors.top:        rltAltFinalField.bottom
+                                fact:               _landSpeedFact
+                                showUnits:          true
+                                visible:            QGroundControl.corePlugin.showAdvancedUI
+                            }
                         }
                     } // Rectangle - RTL Settings
                 } // Column - RTL Settings
@@ -728,14 +781,17 @@ SetupPage {
                 spacing: _margins / 2
 
                 QGCLabel {
+                    id:             armingchecks
                     text:           qsTr("Arming Checks")
                     font.family:    ScreenTools.demiboldFontFamily
+                    visible:        QGroundControl.corePlugin.showAdvancedUI 
                 }
 
                 Rectangle {
                     width:  flowLayout.width
                     height: armingCheckInnerColumn.height + (_margins * 2)
                     color:  ggcPal.windowShade
+                    visible: armingchecks.visible
 
                     Column {
                         id:                 armingCheckInnerColumn

@@ -38,6 +38,11 @@ bool PX4FlightBehavior::requiresSetup() const
     return false;
 }
 
+bool PX4FlightBehavior::requiresAdvancedUI(void) const
+{
+    return true;
+}
+
 bool PX4FlightBehavior::setupComplete() const
 {
     return true;

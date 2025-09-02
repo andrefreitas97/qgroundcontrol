@@ -56,6 +56,11 @@ bool APMSafetyComponent::requiresSetup(void) const
     return false;
 }
 
+bool APMSafetyComponent::requiresAdvancedUI(void) const
+{
+    return false;
+}
+
 bool APMSafetyComponent::setupComplete(void) const
 {
     // FIXME: What aboout invalid settings?

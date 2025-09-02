@@ -27,6 +27,7 @@ public:
     QString description         () const;
     QString iconResource        () const;
     bool    requiresSetup       () const;
+    bool requiresAdvancedUI(void) const;
     bool    setupComplete       () const;
     QUrl    setupSource         () const;
     QUrl    summaryQmlSource    () const;

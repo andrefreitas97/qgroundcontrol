@@ -262,7 +262,7 @@ Rectangle {
                 setupIndicator:     true
                 setupComplete:      _activeJoystick ? _activeJoystick.calibrated || _buttonsOnly : false
                 exclusiveGroup:     setupButtonGroup
-                visible:            _fullParameterVehicleAvailable && joystickManager.joysticks.length !== 0
+                visible:            _fullParameterVehicleAvailable && joystickManager.joysticks.length !== 0 && QGroundControl.corePlugin.showAdvancedUI
                 text:               _forcedToButtonsOnly ? qsTr("Buttons") : qsTr("Joystick")
                 Layout.fillWidth:   true
                 onClicked:          showPanel(this, "JoystickConfig.qml")
@@ -282,7 +282,7 @@ Rectangle {
                     setupComplete:      modelData.setupComplete
                     exclusiveGroup:     setupButtonGroup
                     text:               modelData.name
-                    visible:            modelData.setupSource.toString() !== ""
+                    visible:            modelData.setupSource.toString() !== "" && (modelData.requiresAdvancedUI ? QGroundControl.corePlugin.showAdvancedUI : true)
                     Layout.fillWidth:   true
                     onClicked:          showVehicleComponentPanel(modelData)
                 }
@@ -310,7 +310,7 @@ Rectangle {
         anchors.left:           buttonScroll.right
         anchors.top:            parent.top
         anchors.bottom:         parent.bottom
-        width:                  1
+        width:                  3
         color:                  qgcPal.windowShade
     }
 

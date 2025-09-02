@@ -40,6 +40,11 @@ bool SafetyComponent::requiresSetup(void) const
     return false;
 }
 
+bool SafetyComponent::requiresAdvancedUI(void) const
+{
+    return true;
+}
+
 bool SafetyComponent::setupComplete(void) const
 {
     // FIXME: What aboout invalid settings?

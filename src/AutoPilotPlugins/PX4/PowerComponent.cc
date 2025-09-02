@@ -40,6 +40,11 @@ bool PowerComponent::requiresSetup(void) const
     return true;
 }
 
+bool PowerComponent::requiresAdvancedUI(void) const
+{
+    return true;
+}
+
 bool PowerComponent::setupComplete(void) const
 {
     if (!_vehicle->parameterManager()->parameterExists(FactSystem::defaultComponentId, "BAT1_SOURCE") ||

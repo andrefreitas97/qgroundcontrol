@@ -39,6 +39,11 @@ QUrl APMPowerComponent::setupSource(void) const
     return QUrl::fromUserInput(QStringLiteral("qrc:/qml/APMPowerComponent.qml"));
 }
 
+bool APMPowerComponent::requiresAdvancedUI(void) const
+{
+    return true;
+}
+
 QUrl APMPowerComponent::summaryQmlSource(void) const
 {
     return QUrl::fromUserInput(QStringLiteral("qrc:/qml/APMPowerComponentSummary.qml"));
