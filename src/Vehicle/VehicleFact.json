@@ -68,7 +68,7 @@
 },
 {
     "name":             "altitudeRelative",
-    "shortDesc": "Alt (Rel)",
+    "shortDesc": "Alt (Baro)",
     "type":             "double",
     "decimalPlaces":    1,
     "units":            "m"
@@ -89,14 +89,14 @@
 },
 {
     "name":             "flightDistance",
-    "shortDesc": "Flight Distance",
+    "shortDesc": "Flight Dist",
     "type":             "double",
     "decimalPlaces":    1,
     "units":            "m"
 },
 {
     "name":             "distanceToHome",
-    "shortDesc": "Home Distance",
+    "shortDesc": "Home Dist",
     "type":             "double",
     "decimalPlaces":    1,
     "units":            "m"

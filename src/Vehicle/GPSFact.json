@@ -5,13 +5,13 @@
 [
 {
     "name":             "lat",
-    "shortDesc": "Latitude",
+    "shortDesc": "Lat",
     "type":             "double",
     "decimalPlaces":    7
 },
 {
     "name":             "lon",
-    "shortDesc": "Longitude",
+    "shortDesc": "Long",
     "type":             "double",
     "decimalPlaces":    7
 },
@@ -54,14 +54,14 @@
 },
 {
     "name":             "hacc",
-    "shortDesc": "Horizontal Acc",
+    "shortDesc": "H Acc",
     "type":             "double",
     "units":            "m",
     "decimalPlaces":    2
 },
 {
     "name":             "vacc",
-    "shortDesc": "Vertical Acc",
+    "shortDesc": "V Acc",
     "type":             "double",
     "units":            "m",
     "decimalPlaces":    2

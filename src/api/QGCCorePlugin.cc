@@ -310,13 +310,11 @@ void QGCCorePlugin::factValueGridCreateDefaultSettings(const QString& defaultSet
 
     InstrumentValueData* value = column->value<InstrumentValueData*>(rowIndex++);
     value->setFact("Vehicle", "AltitudeRelative");
-    value->setIcon("arrow-thick-up.svg");
     value->setText(value->fact()->shortDescription());
     value->setShowUnits(true);
 
     value = column->value<InstrumentValueData*>(rowIndex++);
     value->setFact("Vehicle", "DistanceToHome");
-    value->setIcon("bookmark copy 3.svg");
     value->setText(value->fact()->shortDescription());
     value->setShowUnits(true);
 
@@ -324,14 +322,12 @@ void QGCCorePlugin::factValueGridCreateDefaultSettings(const QString& defaultSet
     column      = factValueGrid.columns()->value<QmlObjectListModel*>(1);
 
     value = column->value<InstrumentValueData*>(rowIndex++);
-    value->setFact("Vehicle", "ClimbRate");
-    value->setIcon("arrow-simple-up.svg");
+    value->setFact("Vehicle", "rangeFinderDist");
     value->setText(value->fact()->shortDescription());
     value->setShowUnits(true);
 
     value = column->value<InstrumentValueData*>(rowIndex++);
     value->setFact("Vehicle", "GroundSpeed");
-    value->setIcon("arrow-simple-right.svg");
     value->setText(value->fact()->shortDescription());
     value->setShowUnits(true);
 
@@ -356,13 +352,11 @@ void QGCCorePlugin::factValueGridCreateDefaultSettings(const QString& defaultSet
 
     value = column->value<InstrumentValueData*>(rowIndex++);
     value->setFact("Vehicle", "FlightTime");
-    value->setIcon("timer.svg");
     value->setText(value->fact()->shortDescription());
     value->setShowUnits(false);
 
     value = column->value<InstrumentValueData*>(rowIndex++);
     value->setFact("Vehicle", "FlightDistance");
-    value->setIcon("travel-walk.svg");
     value->setText(value->fact()->shortDescription());
     value->setShowUnits(true);
 }
