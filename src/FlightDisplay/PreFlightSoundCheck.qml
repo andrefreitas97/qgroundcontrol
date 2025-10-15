@@ -15,6 +15,9 @@ import QGroundControl.Controls  1.0
 PreFlightCheckButton {
     name:                   qsTr("Sound output")
     manualText:             qsTr("QGC audio output enabled. System audio output enabled, too?")
-    telemetryTextFailure:   qsTr("QGC audio output is disabled. Please enable it under application settings->general to hear audio warnings!")
+    telemetryTextFailure:   allowTelemetryFailureOverride ? qsTr("Warning! QGC audio output is disabled.") : qsTr("QGC audio output is disabled. Please enable it under application settings->general to hear audio warnings!")
     telemetryFailure:       QGroundControl.settingsManager.appSettings.audioMuted.rawValue
+    allowTelemetryFailureOverride: allowOverrideSound
+
+    property bool   allowOverrideSound:  false
 }

@@ -22,17 +22,109 @@ Item {
     PreFlightCheckModel {
         id:     listModel
         PreFlightCheckGroup {
-            name: qsTr("Multirotor Initial Checks")
+            name: qsTr("Airframe")
 
             PreFlightCheckButton {
-                name:           qsTr("Hardware")
-                manualText:     qsTr("Props mounted and secured?")
+                name:           qsTr("Aircraft Integrity")
+                manualText:     qsTr("No cracks, loose screws, or missing fasteners?")
             }
+
+            PreFlightCheckButton {
+                name:           qsTr("Propellers")
+                manualText:     qsTr("Open and not loose?")
+            }
+
+            PreFlightCheckButton {
+                name:           qsTr("Motors")
+                manualText:     qsTr("Spin freely, no unusual play, no dirt or resistance?")
+            }
+
+            PreFlightCheckButton {
+                name:           qsTr("Arms")
+                manualText:     qsTr("Open and Locked?")
+            }
+
+            PreFlightCheckButton {
+                name:           qsTr("Landing Gear")
+                manualText:     qsTr("Locked and Secured?")
+            }
+
+            PreFlightCheckButton {
+                name:           qsTr("Antennas")
+                manualText:     qsTr("Firmly attached and oriented correctly?")
+            }
+
+            PreFlightCheckButton {
+                name:           qsTr("Connectors")
+                manualText:     qsTr("No visible loose connectors?")
+            }
+            
+        }
+
+        PreFlightCheckGroup {
+            name: qsTr("Environment")
+
+            PreFlightCheckButton {
+                name:           qsTr("Weather")
+                manualText:     qsTr("Wind under limits? No precipitation? Good visibility? Temperature within specs?")
+            }
+
+            PreFlightCheckButton {
+                name:           qsTr("Launch area")
+                manualText:     qsTr("Free of obstacles/people?")
+            }
+
+            PreFlightCheckButton {
+                name:           qsTr("Flight area")
+                manualText:     qsTr("Aware of flight path obstacles?")
+            }
+        }
+
+        PreFlightCheckGroup {
+            name: qsTr("RC controller")
+            
+
+            PreFlightRCCheck {
+            }
+
+            PreFlightCheckButton {
+                name:           qsTr("Controller Battery Level")
+                manualText:     qsTr("Enough for operation?")
+            }
+
+            PreFlightCheckButton {
+                name:           qsTr("Sticks and switches")
+                manualText:     qsTr("Operational?")
+            }
+
+            PreFlightSoundCheck {
+                allowOverrideSound:    true
+            }
+        }
+
+        PreFlightCheckGroup {
+            name: qsTr("Power")
 
             PreFlightBatteryCheck {
                 failurePercent:                 40
-                allowFailurePercentOverride:    false
+                allowFailurePercentOverride:    true
             }
+
+            PreFlightCheckButton {
+                name:           qsTr("Battery Integrity")
+                manualText:     qsTr("No swelling or damage?")
+            }
+
+            PreFlightCheckButton {
+                name:           qsTr("Battery latch")
+                manualText:     qsTr("Properly seated and locked?")
+            }
+
+
+        }
+
+        PreFlightCheckGroup {
+            name: qsTr("Electronics")
 
             PreFlightSensorsHealthCheck {
             }
@@ -42,45 +134,78 @@ Item {
                 allowOverrideSatCount:  true
             }
 
-            PreFlightRCCheck {
+            PreFlightCheckButton {
+                name:           qsTr("FPV Camera")
+                manualText:     qsTr("Video available and no lag?")
             }
+
+            PreFlightCheckButton {
+                name:           qsTr("Compass interference")
+                manualText:     qsTr("No large metalic object/structure within 5-10m?")
+            }
+            
         }
 
         PreFlightCheckGroup {
-            name: qsTr("Please arm the vehicle here")
+            name: qsTr("Emergency Plan")
 
             PreFlightCheckButton {
-                name:            qsTr("Motors")
-                manualText:      qsTr("Propellers free? Then throttle up gently. Working properly?")
+                name:           qsTr("RTL")
+                manualText:     qsTr("Altitude appropriate for terrain and path clear?")
             }
 
             PreFlightCheckButton {
-                name:           qsTr("Mission")
-                manualText:     qsTr("Please confirm mission is valid (waypoints valid, no terrain collision).")
+                name:           qsTr("Failsafe")
+                manualText:     qsTr("Failsafe actions checked?")
             }
 
-            PreFlightSoundCheck {
+            PreFlightCheckButton {
+                name:           qsTr("Alternative landing area")
+                manualText:     qsTr("Defined and planned?")
             }
+
         }
 
         PreFlightCheckGroup {
-            name: qsTr("Last preparations before launch")
+            name: qsTr("Camera Payload")
+            visible: QGroundControl.settingsManager.appSettings.gimbalCameraA8.value || QGroundControl.settingsManager.appSettings.gimbalCameraZT6.value
 
-            // Check list item group 2 - Final checks before launch
             PreFlightCheckButton {
-                name:           qsTr("Payload")
-                manualText:     qsTr("Configured and started? Payload lid closed?")
+                name:           qsTr("Mount")
+                manualText:     qsTr("Mounted securely?")
             }
 
             PreFlightCheckButton {
-                name:           qsTr("Wind & weather")
-                manualText:     qsTr("OK for your platform?")
+                name:           qsTr("Connection")
+                manualText:     qsTr("Controls working properly?")
             }
 
             PreFlightCheckButton {
-                name:           qsTr("Flight area")
-                manualText:     qsTr("Launch area and path free of obstacles/people?")
+                name:           qsTr("Video")
+                manualText:     qsTr("Available with no lag?")
             }
+            
+        }
+
+        PreFlightCheckGroup {
+            name: qsTr("Tactical Payload")
+            visible: QGroundControl.settingsManager.appSettings.payloadgripper.value || QGroundControl.settingsManager.appSettings.payloadgrenades.value || QGroundControl.settingsManager.appSettings.gimbalCameraZIO.value
+
+            PreFlightCheckButton {
+                name:           qsTr("Mount")
+                manualText:     qsTr("Mounted securely?")
+            }
+
+            PreFlightCheckButton {
+                name:           qsTr("Connection")
+                manualText:     qsTr("Controls working properly?")
+            }
+
+            PreFlightCheckButton {
+                name:           qsTr("Collision")
+                manualText:     qsTr("Payload clear from propeller contact?")
+            }
+            
         }
     }
 }
