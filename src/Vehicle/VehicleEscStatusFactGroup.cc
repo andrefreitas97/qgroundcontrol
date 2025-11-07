@@ -20,6 +20,10 @@ const char* VehicleEscStatusFactGroup::_rpmFifthFactName =                      
 const char* VehicleEscStatusFactGroup::_rpmSixthFactName =                          "rpm6";
 const char* VehicleEscStatusFactGroup::_rpmSeventhFactName =                        "rpm7";
 const char* VehicleEscStatusFactGroup::_rpmEightFactName =                          "rpm8";
+const char* VehicleEscStatusFactGroup::_rpmNinthFactName       = "rpm9";
+const char* VehicleEscStatusFactGroup::_rpmTenthFactName       = "rpm10";
+const char* VehicleEscStatusFactGroup::_rpmEleventhFactName    = "rpm11";
+const char* VehicleEscStatusFactGroup::_rpmTwelfthFactName     = "rpm12";
 
 const char* VehicleEscStatusFactGroup::_currentFirstFactName =                      "current1";
 const char* VehicleEscStatusFactGroup::_currentSecondFactName =                     "current2";
@@ -29,6 +33,10 @@ const char* VehicleEscStatusFactGroup::_currentFifthFactName =                  
 const char* VehicleEscStatusFactGroup::_currentSixthFactName =                      "current6";
 const char* VehicleEscStatusFactGroup::_currentSeventhFactName =                    "current7";
 const char* VehicleEscStatusFactGroup::_currentEightFactName =                      "current8";
+const char* VehicleEscStatusFactGroup::_currentNinthFactName   = "current9";
+const char* VehicleEscStatusFactGroup::_currentTenthFactName   = "current10";
+const char* VehicleEscStatusFactGroup::_currentEleventhFactName= "current11";
+const char* VehicleEscStatusFactGroup::_currentTwelfthFactName = "current12";
 
 const char* VehicleEscStatusFactGroup::_voltageFirstFactName =                      "voltage1";
 const char* VehicleEscStatusFactGroup::_voltageSecondFactName =                     "voltage2";
@@ -38,6 +46,10 @@ const char* VehicleEscStatusFactGroup::_voltageFifthFactName =                  
 const char* VehicleEscStatusFactGroup::_voltageSixthFactName =                      "voltage6";
 const char* VehicleEscStatusFactGroup::_voltageSeventhFactName =                    "voltage7";
 const char* VehicleEscStatusFactGroup::_voltageEightFactName =                      "voltage8";
+const char* VehicleEscStatusFactGroup::_voltageNinthFactName   = "voltage9";
+const char* VehicleEscStatusFactGroup::_voltageTenthFactName   = "voltage10";
+const char* VehicleEscStatusFactGroup::_voltageEleventhFactName= "voltage11";
+const char* VehicleEscStatusFactGroup::_voltageTwelfthFactName = "voltage12";
 
 const char* VehicleEscStatusFactGroup::_temperatureFirstFactName =                      "temperature1";
 const char* VehicleEscStatusFactGroup::_temperatureSecondFactName =                     "temperature2";
@@ -47,6 +59,10 @@ const char* VehicleEscStatusFactGroup::_temperatureFifthFactName =              
 const char* VehicleEscStatusFactGroup::_temperatureSixthFactName =                      "temperature6";
 const char* VehicleEscStatusFactGroup::_temperatureSeventhFactName =                    "temperature7";
 const char* VehicleEscStatusFactGroup::_temperatureEightFactName =                      "temperature8";
+const char* VehicleEscStatusFactGroup::_temperatureNinthFactName    = "temperature9";
+const char* VehicleEscStatusFactGroup::_temperatureTenthFactName    = "temperature10";
+const char* VehicleEscStatusFactGroup::_temperatureEleventhFactName = "temperature11";
+const char* VehicleEscStatusFactGroup::_temperatureTwelfthFactName  = "temperature12";
 
 VehicleEscStatusFactGroup::VehicleEscStatusFactGroup(QObject* parent)
     : FactGroup                         (1000, ":/json/Vehicle/EscStatusFactGroup.json", parent)
@@ -60,6 +76,10 @@ VehicleEscStatusFactGroup::VehicleEscStatusFactGroup(QObject* parent)
     , _rpmSixthFact                     (0, _rpmSixthFactName,                      FactMetaData::valueTypeFloat)
     , _rpmSeventhFact                   (0, _rpmSeventhFactName,                    FactMetaData::valueTypeFloat)
     , _rpmEightFact                     (0, _rpmEightFactName,                      FactMetaData::valueTypeFloat)
+    , _rpmNinthFact                     (0, _rpmNinthFactName,             FactMetaData::valueTypeFloat)
+    , _rpmTenthFact                     (0, _rpmTenthFactName,             FactMetaData::valueTypeFloat)
+    , _rpmEleventhFact                  (0, _rpmEleventhFactName,          FactMetaData::valueTypeFloat)
+    , _rpmTwelfthFact                   (0, _rpmTwelfthFactName,           FactMetaData::valueTypeFloat)
 
     , _currentFirstFact                 (0, _currentFirstFactName,                  FactMetaData::valueTypeFloat)
     , _currentSecondFact                (0, _currentSecondFactName,                 FactMetaData::valueTypeFloat)
@@ -69,6 +89,10 @@ VehicleEscStatusFactGroup::VehicleEscStatusFactGroup(QObject* parent)
     , _currentSixthFact                 (0, _currentSixthFactName,                      FactMetaData::valueTypeFloat)
     , _currentSeventhFact               (0, _currentSeventhFactName,                    FactMetaData::valueTypeFloat)
     , _currentEightFact                 (0, _currentEightFactName,                      FactMetaData::valueTypeFloat)
+    , _currentNinthFact                 (0, _currentNinthFactName,         FactMetaData::valueTypeFloat)
+    , _currentTenthFact                 (0, _currentTenthFactName,         FactMetaData::valueTypeFloat)
+    , _currentEleventhFact              (0, _currentEleventhFactName,      FactMetaData::valueTypeFloat)
+    , _currentTwelfthFact               (0, _currentTwelfthFactName,       FactMetaData::valueTypeFloat)
 
     , _voltageFirstFact                 (0, _voltageFirstFactName,                  FactMetaData::valueTypeFloat)
     , _voltageSecondFact                (0, _voltageSecondFactName,                 FactMetaData::valueTypeFloat)
@@ -78,6 +102,10 @@ VehicleEscStatusFactGroup::VehicleEscStatusFactGroup(QObject* parent)
     , _voltageSixthFact                 (0, _voltageSixthFactName,                      FactMetaData::valueTypeFloat)
     , _voltageSeventhFact               (0, _voltageSeventhFactName,                    FactMetaData::valueTypeFloat)
     , _voltageEightFact                 (0, _voltageEightFactName,                      FactMetaData::valueTypeFloat)
+    , _voltageNinthFact                 (0, _voltageNinthFactName,         FactMetaData::valueTypeFloat)
+    , _voltageTenthFact                 (0, _voltageTenthFactName,         FactMetaData::valueTypeFloat)
+    , _voltageEleventhFact              (0, _voltageEleventhFactName,      FactMetaData::valueTypeFloat)
+    , _voltageTwelfthFact               (0, _voltageTwelfthFactName,       FactMetaData::valueTypeFloat)
 
     , _temperatureFirstFact             (0, _temperatureFirstFactName,                  FactMetaData::valueTypeFloat)
     , _temperatureSecondFact            (0, _temperatureSecondFactName,                 FactMetaData::valueTypeFloat)
@@ -87,6 +115,10 @@ VehicleEscStatusFactGroup::VehicleEscStatusFactGroup(QObject* parent)
     , _temperatureSixthFact             (0, _temperatureSixthFactName,                      FactMetaData::valueTypeFloat)
     , _temperatureSeventhFact           (0, _temperatureSeventhFactName,                    FactMetaData::valueTypeFloat)
     , _temperatureEightFact             (0, _temperatureEightFactName,                      FactMetaData::valueTypeFloat)
+    , _temperatureNinthFact             (0, _temperatureNinthFactName,     FactMetaData::valueTypeFloat)
+    , _temperatureTenthFact             (0, _temperatureTenthFactName,     FactMetaData::valueTypeFloat)
+    , _temperatureEleventhFact          (0, _temperatureEleventhFactName,  FactMetaData::valueTypeFloat)
+    , _temperatureTwelfthFact           (0, _temperatureTwelfthFactName,   FactMetaData::valueTypeFloat)
 {
     //_addFact(&_indexFact,                       _indexFactName);
 
@@ -98,6 +130,10 @@ VehicleEscStatusFactGroup::VehicleEscStatusFactGroup(QObject* parent)
     _addFact(&_rpmSixthFact,                    _rpmSixthFactName);
     _addFact(&_rpmSeventhFact,                  _rpmSeventhFactName);
     _addFact(&_rpmEightFact,                    _rpmEightFactName);
+    _addFact(&_rpmNinthFact,                    _rpmNinthFactName);
+    _addFact(&_rpmTenthFact,                    _rpmTenthFactName);
+    _addFact(&_rpmEleventhFact,                 _rpmEleventhFactName);
+    _addFact(&_rpmTwelfthFact,                  _rpmTwelfthFactName);
 
     _addFact(&_currentFirstFact,                _currentFirstFactName);
     _addFact(&_currentSecondFact,               _currentSecondFactName);
@@ -107,6 +143,10 @@ VehicleEscStatusFactGroup::VehicleEscStatusFactGroup(QObject* parent)
     _addFact(&_currentSixthFact,                _currentSixthFactName);
     _addFact(&_currentSeventhFact,              _currentSeventhFactName);
     _addFact(&_currentEightFact,                _currentEightFactName);
+    _addFact(&_currentNinthFact,                _currentNinthFactName);
+    _addFact(&_currentTenthFact,                _currentTenthFactName);
+    _addFact(&_currentEleventhFact,             _currentEleventhFactName);
+    _addFact(&_currentTwelfthFact,              _currentTwelfthFactName);
 
     _addFact(&_voltageFirstFact,                _voltageFirstFactName);
     _addFact(&_voltageSecondFact,               _voltageSecondFactName);
@@ -116,6 +156,10 @@ VehicleEscStatusFactGroup::VehicleEscStatusFactGroup(QObject* parent)
     _addFact(&_voltageSixthFact,                _voltageSixthFactName);
     _addFact(&_voltageSeventhFact,              _voltageSeventhFactName);
     _addFact(&_voltageEightFact,                _voltageEightFactName);
+    _addFact(&_voltageNinthFact,                _voltageNinthFactName);
+    _addFact(&_voltageTenthFact,                _voltageTenthFactName);
+    _addFact(&_voltageEleventhFact,             _voltageEleventhFactName);
+    _addFact(&_voltageTwelfthFact,              _voltageTwelfthFactName);
 
     _addFact(&_temperatureFirstFact,                _temperatureFirstFactName);
     _addFact(&_temperatureSecondFact,               _temperatureSecondFactName);
@@ -125,11 +169,15 @@ VehicleEscStatusFactGroup::VehicleEscStatusFactGroup(QObject* parent)
     _addFact(&_temperatureSixthFact,                _temperatureSixthFactName);
     _addFact(&_temperatureSeventhFact,              _temperatureSeventhFactName);
     _addFact(&_temperatureEightFact,                _temperatureEightFactName);
+    _addFact(&_temperatureNinthFact,            _temperatureNinthFactName);
+    _addFact(&_temperatureTenthFact,            _temperatureTenthFactName);
+    _addFact(&_temperatureEleventhFact,         _temperatureEleventhFactName);
+    _addFact(&_temperatureTwelfthFact,          _temperatureTwelfthFactName);
 }
 
 void VehicleEscStatusFactGroup::handleMessage(Vehicle* /* vehicle */, mavlink_message_t& message)
 {
-    if (message.msgid != MAVLINK_MSG_ID_ESC_TELEMETRY_1_TO_4 && message.msgid != MAVLINK_MSG_ID_ESC_TELEMETRY_5_TO_8) {
+    if (message.msgid != MAVLINK_MSG_ID_ESC_TELEMETRY_1_TO_4 && message.msgid != MAVLINK_MSG_ID_ESC_TELEMETRY_5_TO_8 && message.msgid != MAVLINK_MSG_ID_ESC_TELEMETRY_9_TO_12) {
         return;
     }
 
@@ -184,5 +232,33 @@ void VehicleEscStatusFactGroup::handleMessage(Vehicle* /* vehicle */, mavlink_me
         temperatureSixth()->setRawValue             (content.temperature[1]);
         temperatureSeventh()->setRawValue           (content.temperature[2]);
         temperatureEight()->setRawValue             (content.temperature[3]);
+    }
+
+    if (message.msgid == MAVLINK_MSG_ID_ESC_TELEMETRY_9_TO_12) {
+        mavlink_esc_telemetry_9_to_12_t content;
+        mavlink_msg_esc_telemetry_9_to_12_decode(&message, &content);
+
+        rpmNinth()->setRawValue                     (content.rpm[0]);
+        rpmTenth()->setRawValue                     (content.rpm[1]);
+        rpmEleventh()->setRawValue                   (content.rpm[2]);
+        rpmTwelfth()->setRawValue                     (content.rpm[3]);
+
+
+        currentNinth()->setRawValue                 (content.current[0]);
+        currentTenth()->setRawValue                 (content.current[1]);
+        currentEleventh()->setRawValue               (content.current[2]);
+        currentTwelfth()->setRawValue                 (content.current[3]);
+
+
+        voltageNinth()->setRawValue                 (content.voltage[0]);
+        voltageTenth()->setRawValue                 (content.voltage[1]);
+        voltageEleventh()->setRawValue               (content.voltage[2]);
+        voltageTwelfth()->setRawValue                 (content.voltage[3]);
+
+
+        temperatureNinth()->setRawValue             (content.temperature[0]);
+        temperatureTenth()->setRawValue             (content.temperature[1]);
+        temperatureEleventh()->setRawValue           (content.temperature[2]);
+        temperatureTwelfth()->setRawValue             (content.temperature[3]);
     }
 }
