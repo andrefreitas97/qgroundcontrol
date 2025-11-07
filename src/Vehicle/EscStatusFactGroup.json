@@ -66,6 +66,34 @@
     "default":          null
 },
 {
+    "name":             "rpm9",
+    "shortDesc":        "Motor 9 RPM",
+    "type":             "float",
+    "decimalPlaces":    2,
+    "default":          null
+},
+{
+    "name":             "rpm10",
+    "shortDesc":        "Motor 10 RPM",
+    "type":             "float",
+    "decimalPlaces":    2,
+    "default":          null
+},
+{
+    "name":             "rpm11",
+    "shortDesc":        "Motor 11 RPM",
+    "type":             "float",
+    "decimalPlaces":    2,
+    "default":          null
+},
+{
+    "name":             "rpm12",
+    "shortDesc":        "Motor 12 RPM",
+    "type":             "float",
+    "decimalPlaces":    2,
+    "default":          null
+},
+{
     "name":             "current1",
     "shortDesc":        "ESC 1 Current",
     "type":             "float",
@@ -126,6 +154,38 @@
 {
     "name":             "current8",
     "shortDesc":        "ESC 8 Current",
+    "type":             "float",
+    "decimalPlaces":    2,
+    "default":          null,
+    "units":            "A"
+},
+{
+    "name":             "current9",
+    "shortDesc":        "ESC 9 Current",
+    "type":             "float",
+    "decimalPlaces":    2,
+    "default":          null,
+    "units":            "A"
+},
+{
+    "name":             "current10",
+    "shortDesc":        "ESC 10 Current",
+    "type":             "float",
+    "decimalPlaces":    2,
+    "default":          null,
+    "units":            "A"
+},
+{
+    "name":             "current11",
+    "shortDesc":        "ESC 11 Current",
+    "type":             "float",
+    "decimalPlaces":    2,
+    "default":          null,
+    "units":            "A"
+},
+{
+    "name":             "current12",
+    "shortDesc":        "ESC 12 Current",
     "type":             "float",
     "decimalPlaces":    2,
     "default":          null,
@@ -196,6 +256,38 @@
     "units":            "V"
 },
 {
+    "name":             "voltage9",
+    "shortDesc":        "ESC 9 Voltage",
+    "type":             "float",
+    "decimalPlaces":    2,
+    "default":          null,
+    "units":            "V"
+},
+{
+    "name":             "voltage10",
+    "shortDesc":        "ESC 10 Voltage",
+    "type":             "float",
+    "decimalPlaces":    2,
+    "default":          null,
+    "units":            "V"
+},
+{
+    "name":             "voltage11",
+    "shortDesc":        "ESC 11 Voltage",
+    "type":             "float",
+    "decimalPlaces":    2,
+    "default":          null,
+    "units":            "V"
+},
+{
+    "name":             "voltage12",
+    "shortDesc":        "ESC 12 Voltage",
+    "type":             "float",
+    "decimalPlaces":    2,
+    "default":          null,
+    "units":            "V"
+},
+{
     "name":             "temperature1",
     "shortDesc":        "ESC1 Temp",
     "type":             "float",
@@ -254,6 +346,38 @@
 {
     "name":             "temperature8",
     "shortDesc":        "ESC8 Temp",
+    "type":             "float",
+    "decimalPlaces":    0,
+    "default":          null,
+    "units":            "ºC"
+},
+{
+    "name":             "temperature9",
+    "shortDesc":        "ESC9 Temp",
+    "type":             "float",
+    "decimalPlaces":    0,
+    "default":          null,
+    "units":            "ºC"
+},
+{
+    "name":             "temperature10",
+    "shortDesc":        "ESC10 Temp",
+    "type":             "float",
+    "decimalPlaces":    0,
+    "default":          null,
+    "units":            "ºC"
+},
+{
+    "name":             "temperature11",
+    "shortDesc":        "ESC11 Temp",
+    "type":             "float",
+    "decimalPlaces":    0,
+    "default":          null,
+    "units":            "ºC"
+},
+{
+    "name":             "temperature12",
+    "shortDesc":        "ESC12 Temp",
     "type":             "float",
     "decimalPlaces":    0,
     "default":          null,
