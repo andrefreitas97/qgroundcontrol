@@ -19,6 +19,8 @@
 #include "CmdLineOptParser.h"
 #include "SettingsManager.h"
 #include "MavlinkSettings.h"
+#include "Platform.h"
+#include "NTRIP.h"
 
 #if !defined(Q_OS_ANDROID) && !defined(Q_OS_IOS)
     #include <QtWidgets/QMessageBox>
