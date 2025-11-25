@@ -160,13 +160,13 @@ StableBuild {
     message("Stable Build")
 } else {
     message("Daily Build")
-    DEFINES += DAILY_BUILD
+    #DEFINES += DAILY_BUILD
 }
 
 # Set the QGC version from git
 # APP_VERSION_STR = vUnknown
-APP_VERSION_STR = 4.4.0
-VERSION         = 0.0.0   # Marker to indicate out-of-tree build
+APP_VERSION_STR = v4.4.0
+VERSION         = 4.4.0   # Marker to indicate out-of-tree build
 MAC_VERSION     = 0.0.0
 MAC_BUILD       = 0
 exists ($$PWD/.git) {
@@ -178,12 +178,12 @@ exists ($$PWD/.git) {
     message(GIT_DESCRIBE $${GIT_DESCRIBE})
 
     # Pull the version info from the last annotated version tag. Format: v#.#.#
-    contains(GIT_DESCRIBE, ^v[0-9]+.[0-9]+.[0-9]+.*) {
-        APP_VERSION_STR = $${GIT_DESCRIBE}
-        VERSION         = $$replace(GIT_DESCRIBE, "v", "")
-        VERSION         = $$replace(VERSION, "-", ".")
-        VERSION         = $$section(VERSION, ".", 0, 3)
-    }
+    #contains(GIT_DESCRIBE, ^v[0-9]+.[0-9]+.[0-9]+.*) {
+    #    APP_VERSION_STR = $${GIT_DESCRIBE}
+    #    VERSION         = $$replace(GIT_DESCRIBE, "v", "")
+    #    VERSION         = $$replace(VERSION, "-", ".")
+    #    VERSION         = $$section(VERSION, ".", 0, 3)
+    #}
 
     DailyBuild {
         APP_VERSION_STR = "Daily $${GIT_BRANCH}:$${GIT_HASH} $${GIT_TIME}"
