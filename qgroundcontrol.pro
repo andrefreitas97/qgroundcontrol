@@ -397,6 +397,7 @@ INCLUDEPATH += \
     src/Geo \
     src/Gimbal \
     src/GPS \
+    src/GPS/RTCM \
     src/Joystick \
     src/PlanView \
     src/MissionManager \
@@ -445,6 +446,8 @@ HEADERS += \
     src/api/QGCSettings.h \
     src/api/QmlComponentInfo.h \
     src/GPS/Drivers/src/base_station.h \
+    src/GPS/NTRIP.h \
+    src/GPS/RTCM/RTCMMavlink.h \
 
 contains (DEFINES, QGC_ENABLE_PAIRING) {
     HEADERS += \
@@ -463,6 +466,8 @@ SOURCES += \
     src/api/QGCOptions.cc \
     src/api/QGCSettings.cc \
     src/api/QmlComponentInfo.cc \
+    src/GPS/NTRIP.cc \
+    src/GPS/RTCM/RTCMMavlink.cc \
 
 contains (DEFINES, QGC_ENABLE_PAIRING) {
     SOURCES += \
@@ -701,6 +706,7 @@ HEADERS += \
     src/Settings/OfflineMapsSettings.h \
     src/Settings/PlanViewSettings.h \
     src/Settings/RTKSettings.h \
+    src/Settings/NTRIPSettings.h \
     src/Settings/SettingsGroup.h \
     src/Settings/SettingsManager.h \
     src/Settings/UnitsSettings.h \
@@ -828,7 +834,6 @@ HEADERS += \
     src/GPS/GPSManager.h \
     src/GPS/GPSPositionMessage.h \
     src/GPS/GPSProvider.h \
-    src/GPS/RTCM/RTCMMavlink.h \
     src/GPS/definitions.h \
     src/GPS/satellite_info.h \
     src/GPS/sensor_gps.h \
@@ -962,6 +967,7 @@ SOURCES += \
     src/Settings/OfflineMapsSettings.cc \
     src/Settings/PlanViewSettings.cc \
     src/Settings/RTKSettings.cc \
+    src/Settings/NTRIPSettings.cc \
     src/Settings/SettingsGroup.cc \
     src/Settings/SettingsManager.cc \
     src/Settings/UnitsSettings.cc \
@@ -1076,7 +1082,6 @@ SOURCES += \
     src/GPS/Drivers/src/sbf.cpp \
     src/GPS/GPSManager.cc \
     src/GPS/GPSProvider.cc \
-    src/GPS/RTCM/RTCMMavlink.cc \
     src/Joystick/JoystickSDL.cc \
     src/RunGuard.cc \
 }
