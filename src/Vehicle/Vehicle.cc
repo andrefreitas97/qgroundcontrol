@@ -2151,8 +2151,8 @@ void Vehicle::_loadJoystickSettings()
     settings.beginGroup(QString(_settingsGroup).arg(_id));
 
     if (_toolbox->joystickManager()->activeJoystick()) {
-        qCDebug(JoystickLog) << "Vehicle " << this->id() << " Notified of an active joystick. Loading setting joystickenabled: " << settings.value(_joystickEnabledSettingsKey, false).toBool();
-        setJoystickEnabled(settings.value(_joystickEnabledSettingsKey, false).toBool());
+        qCDebug(JoystickLog) << "Vehicle " << this->id() << " Notified of an active joystick. Loading setting joystickenabled: " << settings.value(_joystickEnabledSettingsKey, true).toBool();
+        setJoystickEnabled(settings.value(_joystickEnabledSettingsKey, true).toBool());
     } else {
         qCDebug(JoystickLog) << "Vehicle " << this->id() << " Notified that there is no active joystick";
         setJoystickEnabled(false);
