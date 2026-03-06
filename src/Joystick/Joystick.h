@@ -308,6 +308,8 @@ protected:
 private:
     static const char*  _rgFunctionSettingsKey[maxFunction];
 
+    static const char* _buttonDefaultsInitializedSettingsKey;
+
     static const char* _settingsGroup;
     static const char* _calibratedSettingsKey;
     static const char* _buttonActionNameKey;

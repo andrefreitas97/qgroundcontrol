@@ -42,6 +42,8 @@ const char* Joystick::_roverTXModeSettingsKey =         "TXMode_Rover";
 const char* Joystick::_vtolTXModeSettingsKey =          "TXMode_VTOL";
 const char* Joystick::_submarineTXModeSettingsKey =     "TXMode_Submarine";
 
+const char* Joystick::_buttonDefaultsInitializedSettingsKey = "ButtonDefaultsInitialized";
+
 const char* Joystick::_buttonActionNone =               QT_TR_NOOP("No Action");
 const char* Joystick::_buttonActionArm =                QT_TR_NOOP("Arm");
 const char* Joystick::_buttonActionDisarm =             QT_TR_NOOP("Disarm");
@@ -330,6 +332,39 @@ void Joystick::_loadSettings()
             _buttonActionArray[button]->buttonTime.start();
             qCDebug(JoystickLog) << "_loadSettings button:action" << button << _buttonActionArray[button]->action << _buttonActionArray[button]->repeat;
         }
+    }
+
+    bool buttonDefaultsInitialized = settings.value(_buttonDefaultsInitializedSettingsKey, false).toBool();
+
+    if (!buttonDefaultsInitialized) {
+
+    if (_totalButtonCount > 0 && !_buttonActionArray[0]) {
+            _buttonActionArray[0] = new AssignedButtonAction(this, "Altitude Hold");
+            _buttonActionArray[0]->repeat = false;
+        }
+    
+        if (_totalButtonCount > 1 && !_buttonActionArray[1]) {
+            _buttonActionArray[1] = new AssignedButtonAction(this, "Loiter");
+            _buttonActionArray[1]->repeat = false;
+        }
+    
+        if (_totalButtonCount > 2 && !_buttonActionArray[2]) {
+            _buttonActionArray[2] = new AssignedButtonAction(this, "Smart RTL");
+            _buttonActionArray[2]->repeat = false;
+        }
+    
+        if (_totalButtonCount > 3 && !_buttonActionArray[3]) {
+            _buttonActionArray[3] = new AssignedButtonAction(this, "Follow");
+            _buttonActionArray[3]->repeat = false;
+        }
+    
+        if (_totalButtonCount > 4 && !_buttonActionArray[4]) {
+            _buttonActionArray[4] = new AssignedButtonAction(this, "RTL");
+            _buttonActionArray[4]->repeat = false;
+        }
+    
+        settings.setValue(_buttonDefaultsInitializedSettingsKey, true);
+        _saveButtonSettings();
     }
 
     if (badSettings) {
@@ -733,10 +768,12 @@ void Joystick::startPolling(Vehicle* vehicle)
         }
         // Always set up the new vehicle
         _activeVehicle = vehicle;
+        
         // If joystick is not calibrated, disable it
-        if ( axisCount() != 0 && !_calibrated ) {
-            vehicle->setJoystickEnabled(false);
-        }
+        //if ( axisCount() != 0 && !_calibrated ) {
+        //    vehicle->setJoystickEnabled(false);
+        //}
+
         // Update qml in case of joystick transition
         emit calibratedChanged(_calibrated);
         // Build action list
