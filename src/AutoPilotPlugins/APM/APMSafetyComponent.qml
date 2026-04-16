@@ -584,136 +584,132 @@ SetupPage {
                     property Fact _rtlAltFinalFact: controller.getParameterFact(-1, "RTL_ALT_FINAL")
 
                     QGCLabel {
-                        id:             rtlLabel
                         text:           qsTr("Return to Launch")
                         font.family:    ScreenTools.demiboldFontFamily
                     }
 
                     Rectangle {
-                        id:     rtlSettings
-                        width:  mainLayoutRTL.width + (_margins * 2)
-                        height: mainLayoutRTL.height + (_margins * 2)
+                        width:  mainLayoutRTL.implicitWidth + (_margins * 2)
+                        height: mainLayoutRTL.implicitHeight + (_margins * 2)
                         color:  ggcPal.windowShade
 
                         ColumnLayout {
                             id:         mainLayoutRTL
-                            anchors.margins:    _margins
-                            anchors.top:        parent.top
-                            anchors.left:       parent.left
-                            spacing:    ScreenTools.defaultFontPixellHeight / 2
+                            anchors.margins: _margins
+                            anchors.top: parent.top
+                            anchors.left: parent.left
+                            spacing: _innerMargin
 
                             Image {
                                 id:                 icon
-                                anchors.margins:    _margins
-                                anchors.left:       parent.left
-                                anchors.top:        parent.top
-                                height:             ScreenTools.defaultFontPixelWidth * 20
-                                width:              ScreenTools.defaultFontPixelWidth * 20
-                                sourceSize.width:   width
-                                mipmap:             true
-                                fillMode:           Image.PreserveAspectFit
-                                visible:            false
                                 source:             "/qmlimages/ReturnToHomeAltitude.svg"
+                                sourceSize.width:   ScreenTools.defaultFontPixelWidth * 20
+                                width:              ScreenTools.defaultFontPixelWidth * 20
+                                height:             ScreenTools.defaultFontPixelWidth * 20
+                                fillMode:           Image.PreserveAspectFit
+                                mipmap:             true
+                                visible:            false
+                                Layout.alignment:   Qt.AlignLeft
                             }
 
                             ColorOverlay {
-                                anchors.fill:   icon
-                                source:         icon
-                                color:          ggcPal.text
-                                visible:        _showIcon
+                                source:             icon
+                                color:              ggcPal.text
+                                visible:            _showIcon
+                                width:              icon.width
+                                height:             icon.height
+                                Layout.alignment:   Qt.AlignLeft
                             }
 
                             QGCRadioButton {
                                 id:                 returnAtCurrentRadio
-                                anchors.margins:    _innerMargin
-                                anchors.left:       _showIcon ? icon.right : parent.left
-                                anchors.top:        parent.top
                                 text:               qsTr("Return at current altitude")
                                 checked:            _rtlAltFact.value == 0
+                                Layout.alignment:   Qt.AlignLeft
 
                                 onClicked: _rtlAltFact.value = 0
                             }
 
-                            QGCRadioButton {
-                                id:                 returnAltRadio
-                                anchors.topMargin:  _innerMargin
-                                anchors.top:        returnAtCurrentRadio.bottom
-                                anchors.left:       returnAtCurrentRadio.left
-                                text:               qsTr("Return at specified altitude:")
-                                checked:            _rtlAltFact.value != 0
+                            RowLayout {
+                                spacing: _margins
+                                Layout.alignment: Qt.AlignLeft
 
-                                onClicked: _rtlAltFact.value = 3000
+                                QGCRadioButton {
+                                    id:         returnAltRadio
+                                    text:       qsTr("Return at specified altitude:")
+                                    checked:    _rtlAltFact.value != 0
+
+                                    onClicked: _rtlAltFact.value = 3000
+                                }
+
+                                FactTextField {
+                                    id:                     rltAltField
+                                    fact:                   _rtlAltFact
+                                    showUnits:              true
+                                    enabled:                returnAltRadio.checked
+                                    Layout.minimumWidth: 180
+                                    Layout.preferredWidth: 200
+                                }
                             }
 
-                            FactTextField {
-                                id:                 rltAltField
-                                anchors.leftMargin: _margins
-                                anchors.left:       returnAltRadio.right
-                                anchors.baseline:   returnAltRadio.baseline
-                                fact:               _rtlAltFact
-                                showUnits:          true
-                                enabled:            returnAltRadio.checked
-                                visible:            QGroundControl.corePlugin.showAdvancedUI
+                            RowLayout {
+                                spacing: _margins
+                                Layout.alignment: Qt.AlignLeft
+                                visible: QGroundControl.corePlugin.showAdvancedUI
+
+                                QGCCheckBox {
+                                    id:         homeLoiterCheckbox
+                                    checked:    _rtlLoitTimeFact.value > 0
+                                    text:       qsTr("Loiter above Home for:")
+
+                                    onClicked: _rtlLoitTimeFact.value = (checked ? 60 : 0)
+                                }
+
+                                FactTextField {
+                                    id:                     landDelayField
+                                    fact:                   _rtlLoitTimeFact
+                                    showUnits:              true
+                                    enabled:                homeLoiterCheckbox.checked
+                                    Layout.preferredWidth:  120
+                                }
                             }
 
-                            QGCCheckBox {
-                                id:                 homeLoiterCheckbox
-                                anchors.left:       returnAtCurrentRadio.left
-                                anchors.baseline:   landDelayField.baseline
-                                checked:            _rtlLoitTimeFact.value > 0
-                                text:               qsTr("Loiter above Home for:")
-                                visible:            QGroundControl.corePlugin.showAdvancedUI
+                            RowLayout {
+                                spacing: _margins
+                                Layout.alignment: Qt.AlignLeft
+                                visible: QGroundControl.corePlugin.showAdvancedUI
 
-                                onClicked: _rtlLoitTimeFact.value = (checked ? 60 : 0)
+                                QGCLabel {
+                                    text: qsTr("Final land stage altitude:")
+                                }
+
+                                FactTextField {
+                                    id:                     rltAltFinalField
+                                    fact:                   _rtlAltFinalFact
+                                    showUnits:              true
+                                    Layout.preferredWidth:  120
+                                }
                             }
 
-                            FactTextField {
-                                id:                 landDelayField
-                                anchors.topMargin:  _innerMargin
-                                anchors.left:       rltAltField.left
-                                anchors.top:        rltAltField.bottom
-                                fact:               _rtlLoitTimeFact
-                                showUnits:          true
-                                enabled:            homeLoiterCheckbox.checked === true
-                                visible:            QGroundControl.corePlugin.showAdvancedUI
-                            }
+                            RowLayout {
+                                spacing: _margins
+                                Layout.alignment: Qt.AlignLeft
+                                visible: QGroundControl.corePlugin.showAdvancedUI
 
-                            QGCLabel {
-                                anchors.left:       returnAtCurrentRadio.left
-                                anchors.baseline:   rltAltFinalField.baseline
-                                text:               qsTr("Final land stage altitude:")
-                                visible:            QGroundControl.corePlugin.showAdvancedUI
-                            }
+                                QGCLabel {
+                                    text: qsTr("Final land stage descent speed:")
+                                }
 
-                            FactTextField {
-                                id:                 rltAltFinalField
-                                anchors.topMargin:  _innerMargin
-                                anchors.left:       rltAltField.left
-                                anchors.top:        landDelayField.bottom
-                                fact:               _rtlAltFinalFact
-                                showUnits:          true
-                                visible:            QGroundControl.corePlugin.showAdvancedUI
-                            }
-
-                            QGCLabel {
-                                anchors.left:       returnAtCurrentRadio.left
-                                anchors.baseline:   landSpeedField.baseline
-                                text:               qsTr("Final land stage descent speed:")
-                                visible:            QGroundControl.corePlugin.showAdvancedUI
-                            }
-
-                            FactTextField {
-                                id:                 landSpeedField
-                                anchors.topMargin: _innerMargin
-                                anchors.left:       rltAltField.left
-                                anchors.top:        rltAltFinalField.bottom
-                                fact:               _landSpeedFact
-                                showUnits:          true
-                                visible:            QGroundControl.corePlugin.showAdvancedUI
+                                FactTextField {
+                                    id:                     landSpeedField
+                                    fact:                   _landSpeedFact
+                                    showUnits:              true
+                                    Layout.preferredWidth:  120
+                                }
                             }
                         }
-                    } // Rectangle - RTL Settings
-                } // Column - RTL Settings
+                    }
+                }
             }
 
             Loader {
