@@ -4543,54 +4543,36 @@ void Vehicle::sendGrenadesAction(int grenadesOption)
     }
 }
 
-void Vehicle::sendHeightAction(int heightOption)
-{
-    switch(heightOption) {
-    case 0:
-        sendBaroHeightAction();
-        break;
-    case 1:
-        sendGPSHeightAction();
-        break;
-    default:
-        break;
-    }
-}
-
-void Vehicle::sendGPSHeightAction()
-{
-    parameterManager()->_sendParamSetToVehicle(_defaultComponentId, "EK3_SRC1_POSZ" , FactMetaData::valueTypeUint8, 3);
-}
-
-void Vehicle::sendBaroHeightAction()
-{
-    parameterManager()->_sendParamSetToVehicle(_defaultComponentId, "EK3_SRC1_POSZ" , FactMetaData::valueTypeUint8, 1);
-}
-
 void Vehicle::sendPositionAction(int positionOption)
 {
     switch(positionOption) {
-    case 0:
-        sendOpflowONAction();
-        break;
     case 1:
-        sendOpflowOFFAction();
+        sendGPSBaroAction();
+        break;
+    case 2:
+        sendOpflowBaroAction();
+        break;
+    case 3:
+        sendFullGPSAction();
         break;
     default:
         break;
     }
 }
 
-void Vehicle::sendOpflowONAction()
+void Vehicle::sendGPSBaroAction()
 {
-    parameterManager()->_sendParamSetToVehicle(_defaultComponentId, "EK3_SRC2_VELXY" , FactMetaData::valueTypeUint8, 5);
-    parameterManager()->_sendParamSetToVehicle(_defaultComponentId, "EK3_SRC_OPTIONS" , FactMetaData::valueTypeUint8, 1);
+    parameterManager()->_sendParamSetToVehicle(_defaultComponentId, "SRCSEL_MODE" , FactMetaData::valueTypeUint8, 1);
 }
 
-void Vehicle::sendOpflowOFFAction()
+void Vehicle::sendOpflowBaroAction()
 {
-    parameterManager()->_sendParamSetToVehicle(_defaultComponentId, "EK3_SRC2_VELXY" , FactMetaData::valueTypeUint8, 0);
-    parameterManager()->_sendParamSetToVehicle(_defaultComponentId, "EK3_SRC_OPTIONS" , FactMetaData::valueTypeUint8, 0);
+    parameterManager()->_sendParamSetToVehicle(_defaultComponentId, "SRCSEL_MODE" , FactMetaData::valueTypeUint8, 2);
+}
+
+void Vehicle::sendFullGPSAction()
+{
+    parameterManager()->_sendParamSetToVehicle(_defaultComponentId, "SRCSEL_MODE" , FactMetaData::valueTypeUint8, 3);
 }
 
 void Vehicle::sendLandingAssistAction(int landingAssistOption)

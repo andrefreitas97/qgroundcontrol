@@ -29,13 +29,10 @@ Component {
         property bool  _isVehicleArmed:         _initialConnectComplete ? _activeVehicle.armed : false
 
         FactPanelController { id: controller }
-        property Fact param1: controller.getParameterFact(-1, "EK3_SRC_OPTIONS")
-        property Fact param2: controller.getParameterFact(-1, "EK3_SRC2_VELXY")
-        property bool showGPSposition: param1.value == 0 && param2.value == 0
-
-        property Fact param3: controller.getParameterFact(-1, "EK3_SRC_OPTIONS")
-        property Fact param4: controller.getParameterFact(-1, "EK3_SRC2_VELXY")
-        property bool showOpflow: param3.value == 1 && param4.value == 5
+        property Fact param1: controller.getParameterFact(-1, "SRCSEL_MODE")
+        property bool showOpflow: param1.value == 1 
+        property bool showGPSposition: param1.value == 2
+        property bool showAutoposition: param1.value == 3
 
         property Fact param5: controller.getParameterFact(-1, "EK3_SRC1_POSZ")
         property bool showGPSheight: param5.value == 3
@@ -144,63 +141,33 @@ Component {
                 }
 
                 QGCLabel {
-                    text:       qsTr("Horizontal Position Source:")
+                    text:       qsTr("Position Source:")
                     anchors.verticalCenter: parent.verticalCenter
                     font.bold:              true
                 }
 
                 QGCRadioButton {
                     font.pointSize: ScreenTools.defaultFontPointSize
-                    text:           qsTr("Opflow + GPS")
+                    text:           qsTr("GPS + Baro")
                     enabled:        QGroundControl.settingsManager.appSettings.vehiclebravo.value //&& !QGroundControl.settingsManager.appSettings.payloadgripper.value
                     checked:        showOpflow
-                    onClicked:      _activeVehicle.sendPositionAction(0)
-                }
-
-                QGCRadioButton {
-                    font.pointSize: ScreenTools.defaultFontPointSize
-                    text:           qsTr("GPS")
-                    enabled:        QGroundControl.settingsManager.appSettings.vehiclebravo.value //&& !QGroundControl.settingsManager.appSettings.payloadgripper.value
-                    checked:        showGPSposition
                     onClicked:      _activeVehicle.sendPositionAction(1)
                 }
 
-            }
-
-            Row {
-                Layout.alignment:   Qt.AlignLeft
-                spacing:            ScreenTools.defaultFontPixelWidth
-
-                QGCColoredImage {
-                    anchors.top:        parent.top
-                    anchors.bottom:     parent.bottom
-                    width:              height
-                    sourceSize.width:   width
-                    source:             "/res/Height.svg"
-                    color:              qgcPal.buttonText
-                }
-
-                QGCLabel {
-                    text:       qsTr("Vertical Position Source:")
-                    anchors.verticalCenter: parent.verticalCenter
-                    font.bold:              true
+                QGCRadioButton {
+                    font.pointSize: ScreenTools.defaultFontPointSize
+                    text:           qsTr("Opflow + Baro")
+                    enabled:        QGroundControl.settingsManager.appSettings.vehiclebravo.value 
+                    checked:        showGPSposition
+                    onClicked:      _activeVehicle.sendPositionAction(2)
                 }
 
                 QGCRadioButton {
                     font.pointSize: ScreenTools.defaultFontPointSize
-                    text:           qsTr("Baro")
-                    enabled:        QGroundControl.settingsManager.appSettings.vehiclebravo.value
-                    checked:        showBaro
-                    onClicked:      _activeVehicle.sendHeightAction(0)
-
-                }
-
-                QGCRadioButton {
-                    font.pointSize: ScreenTools.defaultFontPointSize
-                    text:           qsTr("GPS")
-                    enabled:        QGroundControl.settingsManager.appSettings.vehiclebravo.value
-                    checked:        showGPSheight
-                    onClicked:      _activeVehicle.sendHeightAction(1)
+                    text:           qsTr("Full GPS")
+                    enabled:        QGroundControl.settingsManager.appSettings.vehiclebravo.value 
+                    checked:        showAutoposition
+                    onClicked:      _activeVehicle.sendPositionAction(3)
                 }
 
             }
