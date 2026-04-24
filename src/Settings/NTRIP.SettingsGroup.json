@@ -4,63 +4,55 @@
   "QGC.MetaData.Facts": [
     {
       "name": "ntripServerConnectEnabled",
-      "shortDescription": "Connect to NTRIP server",
-      "longDescription": "Connect to NTRIP server using specified address/port",
+      "shortDesc": "Connect to NTRIP server",
+      "longDesc": "Connect to NTRIP server using specified address/port",
       "type": "bool",
-      "defaultValue": false,
-      "qgcRebootRequired": true
+      "default": false
     },
     {
       "name": "ntripServerHostAddress",
-      "shortDescription": "Host address",
+      "shortDesc": "Host address",
       "type": "string",
-      "defaultValue": "127.0.0.1",
-      "qgcRebootRequired": true
+      "default": "193.137.94.71"
     },
     {
       "name": "ntripServerPort",
-      "shortDescription": "Server port",
+      "shortDesc": "Server port",
       "type": "int32",
-      "defaultValue": 2101,
-      "qgcRebootRequired": true
+      "default": 2102
     },
     {
       "name": "ntripUsername",
-      "shortDescription": "Username",
+      "shortDesc": "Username",
       "type": "string",
-      "defaultValue": "",
-      "qgcRebootRequired": true
+      "default": "renep5125"
     },
     {
       "name": "ntripPassword",
-      "shortDescription": "Password",
+      "shortDesc": "Password",
       "type": "string",
-      "defaultValue": "",
-      "qgcRebootRequired": true
+      "default": "z6JYwWEc"
     },
     {
       "name": "ntripMountpoint",
-      "shortDescription": "Mount Point",
-      "longDescription": "NTRIP Mount Point. Leave blank for RTCM over TCP",
+      "shortDesc": "Mount Point",
+      "longDesc": "NTRIP Mount Point. Leave blank for RTCM over TCP",
       "type": "string",
-      "defaultValue": "",
-      "qgcRebootRequired": true
+      "default": "FUNC"
     },
     {
       "name": "ntripWhitelist",
-      "shortDescription": "RTCM Message Whitelist",
-      "longDescription": "RTCM Messages to send over mavlink. Leave blank for all messages",
+      "shortDesc": "Comma-separated RTCM message IDs to forward. Leave blank for all messages.",
+      "longDesc": "Comma-separated RTCM message IDs to forward (e.g. 1005,1077,1087). Leave blank for all messages.",
       "type": "string",
-      "defaultValue": "",
-      "qgcRebootRequired": true
+      "default": ""
     },
     {
       "name": "ntripUseSpartn",
-      "shortDescription": "Use SPARTN pipeline",
-      "longDescription": "If enabled, connect with TLS (2102) and treat payload as SPARTN instead of RTCM. Requires SPARTN keys handled by the receiver.",
+      "shortDesc": "Use SPARTN pipeline",
+      "longDesc": "If enabled, connect with TLS (2102) and treat payload as SPARTN instead of RTCM. Requires SPARTN keys handled by the receiver.",
       "type": "bool",
-      "defaultValue": false,
-      "qgcRebootRequired": true
+      "default": false
     }
   ]
 }
