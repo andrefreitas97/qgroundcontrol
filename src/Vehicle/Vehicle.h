@@ -555,17 +555,13 @@ public:
 
     Q_INVOKABLE void sendGrenadesAction(int grenadesOption);
 
-    Q_INVOKABLE void sendHeightAction(int heightOption);
-
-    Q_INVOKABLE void sendGPSHeightAction();
-
-    Q_INVOKABLE void sendBaroHeightAction();
-
     Q_INVOKABLE void sendPositionAction(int positionOption);
 
-    Q_INVOKABLE void sendOpflowONAction();
+    Q_INVOKABLE void sendOpflowBaroAction();
 
-    Q_INVOKABLE void sendOpflowOFFAction();
+    Q_INVOKABLE void sendGPSBaroAction();
+
+    Q_INVOKABLE void sendFullGPSAction();
 
     Q_INVOKABLE void sendLandingAssistAction(int landingAssistOption);
 
