@@ -1375,6 +1375,70 @@ Rectangle {
                         }
                     }
 
+
+                    Item { width: 1; height: _margins; visible: adsbSectionLabel.visible }
+                    QGCLabel {
+                        id:         adsbSectionLabel
+                        text:       qsTr("ADSB Server")
+                        visible:    QGroundControl.settingsManager.adsbVehicleManagerSettings.visible
+                    }
+                    Rectangle {
+                        Layout.preferredHeight: adsbGrid.y + adsbGrid.height + _margins
+                        Layout.preferredWidth:  adsbGrid.width + (_margins * 2)
+                        color:                  qgcPal.windowShade
+                        visible:                adsbSectionLabel.visible
+                        Layout.fillWidth:       true
+
+                        QGCLabel {
+                            id:                 warningLabel
+                            anchors.margins:    _margins
+                            anchors.top:        parent.top
+                            anchors.left:       parent.left
+                            anchors.right:      parent.right
+                            font.pointSize:     ScreenTools.smallFontPointSize
+                            wrapMode:           Text.WordWrap
+                            text:               qsTr("Note: These setting are not meant for use with an ADSB transponder which is situated on the vehicle.")
+                        }
+
+                        GridLayout {
+                            id:                         adsbGrid
+                            anchors.topMargin:          _margins
+                            anchors.top:                warningLabel.bottom
+                            Layout.fillWidth:           true
+                            anchors.horizontalCenter:   parent.horizontalCenter
+                            columns:                    2
+
+                            property var  adsbSettings:    QGroundControl.settingsManager.adsbVehicleManagerSettings
+
+                            FactCheckBox {
+                                text:                   adsbGrid.adsbSettings.adsbServerConnectEnabled.shortDescription
+                                fact:                   adsbGrid.adsbSettings.adsbServerConnectEnabled
+                                visible:                adsbGrid.adsbSettings.adsbServerConnectEnabled.visible
+                                Layout.columnSpan:      2
+                            }
+
+                            QGCLabel {
+                                text:               adsbGrid.adsbSettings.adsbServerHostAddress.shortDescription
+                                visible:            adsbGrid.adsbSettings.adsbServerHostAddress.visible
+                            }
+                            FactTextField {
+                                fact:                   adsbGrid.adsbSettings.adsbServerHostAddress
+                                visible:                adsbGrid.adsbSettings.adsbServerHostAddress.visible
+                                Layout.fillWidth:       true
+                            }
+
+                            QGCLabel {
+                                text:               adsbGrid.adsbSettings.adsbServerPort.shortDescription
+                                visible:            adsbGrid.adsbSettings.adsbServerPort.visible
+                            }
+                            FactTextField {
+                                fact:                   adsbGrid.adsbSettings.adsbServerPort
+                                visible:                adsbGrid.adsbSettings.adsbServerPort.visible
+                                Layout.preferredWidth:  _valueFieldWidth
+                            }
+                        }
+                    }
+
                                         // --- NTRIP / Network RTK section ---
                     Item { width: 1; height: _margins; visible: ntripSectionLabel.visible }
                     QGCLabel {
@@ -1506,12 +1570,12 @@ Rectangle {
                             // Whitelist
                             QGCLabel {
                                 text:                       ntripGrid.ntrip.ntripWhitelist.shortDescription
-                                visible:                    ntripGrid.ntrip.ntripWhitelist.visible
+                                visible:                    false //ntripGrid.ntrip.ntripWhitelist.visible
                             }
                             FactTextField {
                                 Layout.fillWidth:           true
                                 fact:                       ntripGrid.ntrip.ntripWhitelist
-                                visible:                    ntripGrid.ntrip.ntripWhitelist.visible
+                                visible:                    false //ntripGrid.ntrip.ntripWhitelist.visible
                             }
 
                             // SPARTN (currently disabled like in original file)
@@ -1521,70 +1585,6 @@ Rectangle {
                                 fact:               ntripGrid.ntrip.ntripUseSpartn
                                 visible:            false//_ntrip.ntripUseSpartn.visible
                                 enabled:            false
-                            }
-                        }
-                    }
-
-
-                    Item { width: 1; height: _margins; visible: adsbSectionLabel.visible }
-                    QGCLabel {
-                        id:         adsbSectionLabel
-                        text:       qsTr("ADSB Server")
-                        visible:    QGroundControl.settingsManager.adsbVehicleManagerSettings.visible
-                    }
-                    Rectangle {
-                        Layout.preferredHeight: adsbGrid.y + adsbGrid.height + _margins
-                        Layout.preferredWidth:  adsbGrid.width + (_margins * 2)
-                        color:                  qgcPal.windowShade
-                        visible:                adsbSectionLabel.visible
-                        Layout.fillWidth:       true
-
-                        QGCLabel {
-                            id:                 warningLabel
-                            anchors.margins:    _margins
-                            anchors.top:        parent.top
-                            anchors.left:       parent.left
-                            anchors.right:      parent.right
-                            font.pointSize:     ScreenTools.smallFontPointSize
-                            wrapMode:           Text.WordWrap
-                            text:               qsTr("Note: These setting are not meant for use with an ADSB transponder which is situated on the vehicle.")
-                        }
-
-                        GridLayout {
-                            id:                         adsbGrid
-                            anchors.topMargin:          _margins
-                            anchors.top:                warningLabel.bottom
-                            Layout.fillWidth:           true
-                            anchors.horizontalCenter:   parent.horizontalCenter
-                            columns:                    2
-
-                            property var  adsbSettings:    QGroundControl.settingsManager.adsbVehicleManagerSettings
-
-                            FactCheckBox {
-                                text:                   adsbGrid.adsbSettings.adsbServerConnectEnabled.shortDescription
-                                fact:                   adsbGrid.adsbSettings.adsbServerConnectEnabled
-                                visible:                adsbGrid.adsbSettings.adsbServerConnectEnabled.visible
-                                Layout.columnSpan:      2
-                            }
-
-                            QGCLabel {
-                                text:               adsbGrid.adsbSettings.adsbServerHostAddress.shortDescription
-                                visible:            adsbGrid.adsbSettings.adsbServerHostAddress.visible
-                            }
-                            FactTextField {
-                                fact:                   adsbGrid.adsbSettings.adsbServerHostAddress
-                                visible:                adsbGrid.adsbSettings.adsbServerHostAddress.visible
-                                Layout.fillWidth:       true
-                            }
-
-                            QGCLabel {
-                                text:               adsbGrid.adsbSettings.adsbServerPort.shortDescription
-                                visible:            adsbGrid.adsbSettings.adsbServerPort.visible
-                            }
-                            FactTextField {
-                                fact:                   adsbGrid.adsbSettings.adsbServerPort
-                                visible:                adsbGrid.adsbSettings.adsbServerPort.visible
-                                Layout.preferredWidth:  _valueFieldWidth
                             }
                         }
                     }
