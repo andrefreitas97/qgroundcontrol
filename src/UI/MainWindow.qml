@@ -567,7 +567,7 @@ ApplicationWindow {
 
         background: Rectangle {
             anchors.fill:   parent
-            color:          qgcPal.alertBackground
+            color:          Qt.rgba(qgcPal.alertBackground.r, qgcPal.alertBackground.g, qgcPal.alertBackground.b, 0.75) // 0.5 for 50% opacity
             radius:         ScreenTools.defaultFontPixelHeight * 0.5
             border.color:   qgcPal.alertBorder
             border.width:   2
@@ -588,7 +588,7 @@ ApplicationWindow {
                 QGCLabel {
                     id:                 vehicleWarningLabel
                     anchors.centerIn:   parent
-                    text:               qsTr("Vehicle Error")
+                    text:               qsTr("Vehicle Message")
                     font.pointSize:     ScreenTools.smallFontPointSize
                     color:              qgcPal.alertText
                 }
@@ -612,7 +612,7 @@ ApplicationWindow {
                 QGCLabel {
                     id:                 additionalErrorsLabel
                     anchors.centerIn:   parent
-                    text:               qsTr("Additional errors received")
+                    text:               qsTr("Additional messages received")
                     font.pointSize:     ScreenTools.smallFontPointSize
                     color:              qgcPal.alertText
                 }

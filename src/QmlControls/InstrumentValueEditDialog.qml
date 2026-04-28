@@ -38,7 +38,7 @@ QGCPopupDialog {
         id: noFactComponent
 
         QGCLabel {
-            text: qsTr("Valuec requires a connected vehicle for setup.")
+            text: qsTr("Value requires a connected vehicle for setup.")
         }
     }
 
