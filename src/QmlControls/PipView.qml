@@ -19,7 +19,7 @@ Item {
     id:         _root
     width:      _pipSize
     height:     _pipSize * (9/16)
-    visible:    item2 && item2.pipState !== item2.pipState.window && show
+    visible:    item2 && item2.pipState !== item2.pipState.window && show  
 
     property var    item1:                  null    // Required
     property var    item2:                  null    // Optional, may come and go
@@ -221,23 +221,59 @@ Item {
         anchors.left :          parent.left
         anchors.bottom:         parent.bottom
         height:                 ScreenTools.defaultFontPixelHeight * 2
-        width:                  ScreenTools.defaultFontPixelHeight * 2
+        width:                  ScreenTools.defaultFontPixelHeight * 4   // 👈 make room for 2 buttons
         radius:                 ScreenTools.defaultFontPixelHeight / 3
         visible:                !_isExpanded
         color:                  _fullItem.pipState.isDark ? Qt.rgba(0,0,0,0.75) : Qt.rgba(0,0,0,0.5)
-        Image {
-            width:              parent.width  * 0.75
-            height:             parent.height * 0.75
-            sourceSize.height:  height
-            source:             "/res/buttonRight.svg"
-            mipmap:             true
-            fillMode:           Image.PreserveAspectFit
-            anchors.verticalCenter:     parent.verticalCenter
-            anchors.horizontalCenter:   parent.horizontalCenter
-        }
-        MouseArea {
-            anchors.fill:   parent
-            onClicked:      _root._setPipIsExpanded(true)
+
+        Row {
+            anchors.fill: parent
+            anchors.margins: 2
+            spacing: 4
+
+            // ▶️ Button 1: Open PiP
+            Rectangle {
+                width: parent.height
+                height: parent.height
+                radius: width / 3
+                color: "transparent"
+
+                Image {
+                    anchors.centerIn: parent
+                    width: parent.width * 0.75
+                    height: parent.height * 0.75
+                    source: "/res/buttonRight.svg"
+                    fillMode: Image.PreserveAspectFit
+                }
+
+                MouseArea {
+                    anchors.fill: parent
+                    onClicked: _root._setPipIsExpanded(true)
+                }
+            }
+
+            // 🔄 Button 2: Swap video/map
+            Rectangle {
+                width: parent.height
+                height: parent.height
+                radius: width / 3
+                color: "transparent"
+
+                Image {
+                    anchors.centerIn: parent
+                    width: parent.width * 0.75
+                    height: parent.height * 0.75
+                    source: _fullItem === item1
+                        ? "/qmlimages/camera.svg"   // 👈 when map is full → show camera icon
+                        : "/res/Map.svg"      // 👈 when camera is full → show map icon
+                    fillMode: Image.PreserveAspectFit
+                }
+
+                MouseArea {
+                    anchors.fill: parent
+                    onClicked: _root._swapPip()
+                }
+            }
         }
     }
 }
