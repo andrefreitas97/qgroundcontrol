@@ -16,7 +16,7 @@
 },
 {
     "name":             "batteryCurrent",
-    "shortDesc":        "Battery Current",
+    "shortDesc":        "Batt Current",
     "type":             "float",
     "decimalPlaces":    1,
     "units":            "A"

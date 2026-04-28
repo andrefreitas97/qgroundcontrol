@@ -28,12 +28,14 @@ Item {
     property alias specificVehicleForCard:  factValueGrid.specificVehicleForCard
 
     Rectangle {
-        id:         backgroundRect
-        width:      control.width + extraWidth
-        height:     control.height
-        color:      qgcPal.window
-        radius:     ScreenTools.defaultFontPixelWidth / 2
-        opacity:    0.75
+        id:             backgroundRect
+        anchors.left:   parent.left
+        anchors.bottom: parent.bottom
+        width:          mainLayout.width + (_toolsMargin * 2) + extraWidth
+        height:         mainLayout.height + (_toolsMargin * 2)
+        color:          qgcPal.window
+        radius:         ScreenTools.defaultFontPixelWidth / 2
+        opacity:        0.5
     }
 
     ColumnLayout {

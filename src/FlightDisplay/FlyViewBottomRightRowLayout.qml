@@ -17,7 +17,7 @@ import QGroundControl.FlightDisplay
 RowLayout {
     TelemetryValuesBar {
         Layout.alignment:       Qt.AlignBottom
-        extraWidth:             instrumentPanel.extraValuesWidth
+        //extraWidth:             instrumentPanel.extraValuesWidth
         settingsGroup:          factValueGrid.telemetryBarSettingsGroup
         specificVehicleForCard: null // Tracks active vehicle
     }

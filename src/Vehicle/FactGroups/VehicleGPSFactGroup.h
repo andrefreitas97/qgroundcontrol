@@ -22,6 +22,8 @@ class VehicleGPSFactGroup : public FactGroup
     Q_PROPERTY(Fact *courseOverGround   READ courseOverGround   CONSTANT)
     Q_PROPERTY(Fact *count              READ count              CONSTANT)
     Q_PROPERTY(Fact *lock               READ lock               CONSTANT)
+    Q_PROPERTY(Fact *hacc               READ hacc               CONSTANT)
+    Q_PROPERTY(Fact *vacc               READ vacc               CONSTANT)
 
 public:
     explicit VehicleGPSFactGroup(QObject *parent = nullptr);
@@ -34,6 +36,8 @@ public:
     Fact *courseOverGround() { return &_courseOverGroundFact; }
     Fact *count() { return &_countFact; }
     Fact *lock() { return &_lockFact; }
+    Fact *hacc() { return &_haccFact; }
+    Fact *vacc() { return &_vaccFact; }
 
     // Overrides from FactGroup
     void handleMessage(Vehicle *vehicle, const mavlink_message_t &message) override;
@@ -51,4 +55,6 @@ protected:
     Fact _courseOverGroundFact = Fact(0, QStringLiteral("courseOverGround"), FactMetaData::valueTypeDouble);
     Fact _countFact = Fact(0, QStringLiteral("count"), FactMetaData::valueTypeInt32);
     Fact _lockFact = Fact(0, QStringLiteral("lock"), FactMetaData::valueTypeInt32);
+    Fact _haccFact = Fact(0, QStringLiteral("hacc"), FactMetaData::valueTypeDouble);
+    Fact _vaccFact = Fact(0, QStringLiteral("vacc"), FactMetaData::valueTypeDouble);
 };

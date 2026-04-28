@@ -10,36 +10,36 @@
     "default":          0
 },
 {
-    "name":             "rpmFirst",
-    "shortDesc":        "Rotation Per Minute",
+    "name":             "rpm1",
+    "shortDesc":        "Motor 1 RPM",
     "type":             "float",
     "decimalPlaces":    2,
     "default":          null
 },
 {
-    "name":             "rpmSecond",
-    "shortDesc":        "Rotation Per Minute",
+    "name":             "rpm2",
+    "shortDesc":        "Motor 2 RPM",
     "type":             "float",
     "decimalPlaces":    2,
     "default":          null
 },
 {
-    "name":             "rpmThird",
-    "shortDesc":        "Rotation Per Minute",
+    "name":             "rpm3",
+    "shortDesc":        "Motor 3 RPM",
     "type":             "float",
     "decimalPlaces":    2,
     "default":          null
 },
 {
-    "name":             "rpmFourth",
-    "shortDesc":        "Rotation Per Minute",
+    "name":             "rpm4",
+    "shortDesc":        "Motor 4 RPM",
     "type":             "float",
     "decimalPlaces":    2,
     "default":          null
 },
 {
-    "name":             "currentFirst",
-    "shortDesc":        "Current",
+    "name":             "current1",
+    "shortDesc":        "ESC 1 Current",
     "type":             "float",
     "decimalPlaces":    2,
     "default":          null,
@@ -47,56 +47,56 @@
 
 },
 {
-    "name":             "currentSecond",
-    "shortDesc":        "Current",
+    "name":             "current2",
+    "shortDesc":        "ESC 2 Current",
     "type":             "float",
     "decimalPlaces":    2,
     "default":          null,
     "units":            "A"
 },
 {
-    "name":             "currentThird",
-    "shortDesc":        "Current",
+    "name":             "current3",
+    "shortDesc":        "ESC 3 Current",
     "type":             "float",
     "decimalPlaces":    2,
     "default":          null,
     "units":            "A"
 },
 {
-    "name":             "currentFourth",
-    "shortDesc":        "Current",
+    "name":             "current4",
+    "shortDesc":        "ESC 4 Current",
     "type":             "float",
     "decimalPlaces":    2,
     "default":          null,
     "units":            "A"
 },
 {
-    "name":             "voltageFirst",
-    "shortDesc":        "Voltage",
+    "name":             "voltage1",
+    "shortDesc":        "ESC 1 Voltage",
     "type":             "float",
     "decimalPlaces":    2,
     "default":          null,
     "units":            "v"
 },
 {
-    "name":             "voltageSecond",
-    "shortDesc":        "Voltage",
+    "name":             "voltage2",
+    "shortDesc":        "ESC 2 Voltage",
     "type":             "float",
     "decimalPlaces":    2,
     "default":          null,
     "units":            "v"
 },
 {
-    "name":             "voltageThird",
-    "shortDesc":        "Voltage",
+    "name":             "voltage3",
+    "shortDesc":        "ESC 3 Voltage",
     "type":             "float",
     "decimalPlaces":    2,
     "default":          null,
     "units":            "v"
 },
 {
-    "name":             "voltageFourth",
-    "shortDesc":        "Voltage",
+    "name":             "voltage4",
+    "shortDesc":        "ESC 4 Voltage",
     "type":             "float",
     "decimalPlaces":    2,
     "default":          null,

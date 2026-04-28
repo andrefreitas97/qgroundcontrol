@@ -68,7 +68,7 @@
 },
 {
     "name":             "altitudeRelative",
-    "shortDesc": "Alt (Rel)",
+    "shortDesc": "Alt (Baro)",
     "type":             "double",
     "decimalPlaces":    1,
     "units":            "m"
@@ -89,14 +89,14 @@
 },
 {
     "name":             "flightDistance",
-    "shortDesc": "Flight Distance",
+    "shortDesc": "Flight Dist",
     "type":             "double",
     "decimalPlaces":    1,
     "units":            "m"
 },
 {
     "name":             "distanceToHome",
-    "shortDesc": "Distance to Home",
+    "shortDesc": "Home Dist",
     "type":             "double",
     "decimalPlaces":    1,
     "units":            "m"
@@ -159,8 +159,15 @@
     "units":            "%"
 },
 {
+    "name":             "rangeFinderDist",
+    "shortDesc": "Alt (AGL)",
+    "type":             "double",
+    "decimalPlaces":    1,
+    "units":            "m"
+},
+{
     "name":             "imuTemp",
-    "shortDesc": "Imu temperature",
+    "shortDesc": "Imu Temp",
     "type":             "int16",
     "units":            "°C"
 }
