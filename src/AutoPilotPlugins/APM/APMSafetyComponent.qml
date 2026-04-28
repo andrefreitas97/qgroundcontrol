@@ -172,38 +172,38 @@ SetupPage {
             } // Column - Battery Failsafe Settings
 
 
-            Column {
-                spacing: _margins / 2
-                visible: _batt2MonitorEnabled
-
-                QGCLabel {
-                    text:       qsTr("Battery2 Failsafe Triggers")
-                    font.bold:   true
-                }
-
-                Rectangle {
-                    width:  battery2FailsafeLoader.x + battery2FailsafeLoader.width + _margins
-                    height: battery2FailsafeLoader.y + battery2FailsafeLoader.height + _margins
-                    color:  ggcPal.windowShade
-
-                    Loader {
-                        id:                 battery2FailsafeLoader
-                        anchors.margins:    _margins
-                        anchors.top:        parent.top
-                        anchors.left:       parent.left
-                        sourceComponent:    _batt2ParamsAvailable ? batteryFailsafeComponent : restartRequiredComponent
-
-                        property Fact battMonitor:              _batt2Monitor
-                        property bool battParamsAvailable:      _batt2ParamsAvailable
-                        property Fact failsafeBattLowAct:       _failsafeBatt2LowAct
-                        property Fact failsafeBattCritAct:      _failsafeBatt2CritAct
-                        property Fact failsafeBattLowMah:       _failsafeBatt2LowMah
-                        property Fact failsafeBattCritMah:      _failsafeBatt2CritMah
-                        property Fact failsafeBattLowVoltage:   _failsafeBatt2LowVoltage
-                        property Fact failsafeBattCritVoltage:  _failsafeBatt2CritVoltage
-                    }
-                } // Rectangle
-            } // Column - Battery Failsafe Settings
+            //Column {
+            //    spacing: _margins / 2
+            //    visible: _batt2MonitorEnabled
+//
+            //    QGCLabel {
+            //        text:       qsTr("Battery2 Failsafe Triggers")
+            //        font.bold:   true
+            //    }
+//
+            //    Rectangle {
+            //        width:  battery2FailsafeLoader.x + battery2FailsafeLoader.width + _margins
+            //        height: battery2FailsafeLoader.y + battery2FailsafeLoader.height + _margins
+            //        color:  ggcPal.windowShade
+//
+            //        Loader {
+            //            id:                 battery2FailsafeLoader
+            //            anchors.margins:    _margins
+            //            anchors.top:        parent.top
+            //            anchors.left:       parent.left
+            //            sourceComponent:    _batt2ParamsAvailable ? batteryFailsafeComponent : restartRequiredComponent
+//
+            //            property Fact battMonitor:              _batt2Monitor
+            //            property bool battParamsAvailable:      _batt2ParamsAvailable
+            //            property Fact failsafeBattLowAct:       _failsafeBatt2LowAct
+            //            property Fact failsafeBattCritAct:      _failsafeBatt2CritAct
+            //            property Fact failsafeBattLowMah:       _failsafeBatt2LowMah
+            //            property Fact failsafeBattCritMah:      _failsafeBatt2CritMah
+            //            property Fact failsafeBattLowVoltage:   _failsafeBatt2LowVoltage
+            //            property Fact failsafeBattCritVoltage:  _failsafeBatt2CritVoltage
+            //        }
+            //    } // Rectangle
+            //} // Column - Battery Failsafe Settings
 
             Component {
                 id: planeGeneralFS
@@ -213,7 +213,7 @@ SetupPage {
 
                     property Fact _failsafeThrEnable:   controller.getParameterFact(-1, "THR_FAILSAFE")
                     property Fact _failsafeThrValue:    controller.getParameterFact(-1, "THR_FS_VALUE")
-                    property Fact _failsafeGCSEnable:   controller.getParameterFact(-1, "FS_GCS_ENABL")
+                    property Fact _failsafeGCSEnable:   controller.getParameterFact(-1, "FS_GCS_ENABLE")
 
                     QGCLabel {
                         text:       qsTr("Failsafe Triggers")
@@ -371,8 +371,14 @@ SetupPage {
 
                                 QGCLabel { text: qsTr("Throttle failsafe:") }
                                 QGCComboBox {
-                                    model:              [qsTr("Disabled"), qsTr("Always RTL"),
-                                        qsTr("Continue with Mission in Auto Mode"), qsTr("Always Land")]
+                                    model:              [qsTr("Disabled"),
+                                                        qsTr("Always RTL"),
+                                                        qsTr("Continue with Mission in Auto Mode"),
+                                                        qsTr("Always Land"),
+                                                        qsTr("Always SmartRTL or RTL"),
+                                                        qsTr("Always SmartRTL or Land"),
+                                                        qsTr("Auto DO_LAND_START or RTL"),
+                                                        qsTr("Always Brake or Land")]
                                     currentIndex:       _failsafeThrEnable.value
                                     Layout.fillWidth:   true
 

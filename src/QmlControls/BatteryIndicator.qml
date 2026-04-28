@@ -32,6 +32,8 @@ Item {
     property bool       waitForParameters:  false   // UI won't show until parameters are ready
     property Component  expandedPageComponent
 
+    property int batteryCells: 12
+
     property var    _activeVehicle:     QGroundControl.multiVehicleManager.activeVehicle
     property var    _batterySettings:   QGroundControl.settingsManager.batteryIndicatorSettings
     property Fact   _indicatorDisplay:  _batterySettings.valueDisplay
@@ -144,7 +146,7 @@ Item {
                         return battery.percentRemaining.valueString + battery.percentRemaining.units
                     }
                 } else if (!isNaN(battery.voltage.rawValue)) {
-                    return battery.voltage.valueString + battery.voltage.units
+                    return (battery.voltage.value/batteryCells).toFixed(2).toString() + battery.voltage.units
                 } else if (battery.chargeState.rawValue !== MAVLink.MAV_BATTERY_CHARGE_STATE_UNDEFINED) {
                     return battery.chargeState.enumStringValue
                 }
@@ -183,6 +185,7 @@ Item {
                     text:                   getBatteryPercentageText()
                     font.pointSize:         _showBoth ? ScreenTools.defaultFontPointSize : ScreenTools.mediumFontPointSize
                     visible:                _showBoth || _showPercentage
+                    font.bold:                true
                 }
 
                 QGCLabel {
