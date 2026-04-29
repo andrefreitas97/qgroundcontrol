@@ -309,7 +309,7 @@ SettingsPage {
                     fact:               _fact
                     indexModel:         false
                     visible:            _fact.visible
-                    enabled:            sendBasicIDSlider._fact.rawValue
+                    enabled:            !sendBasicIDSlider._fact.rawValue
                     Layout.fillWidth:   true
 
                     property Fact _fact: remoteIDSettings.basicIDType
@@ -320,7 +320,7 @@ SettingsPage {
                     fact:               _fact
                     indexModel:         false
                     visible:            _fact.visible
-                    enabled:            sendBasicIDSlider._fact.rawValue
+                    enabled:            !sendBasicIDSlider._fact.rawValue
                     Layout.fillWidth:   true
 
                     property Fact _fact: remoteIDSettings.basicIDUaType
@@ -330,7 +330,7 @@ SettingsPage {
                     label:                      _fact.shortDescription
                     fact:                       _fact
                     visible:                    _fact.visible
-                    enabled:            sendBasicIDSlider._fact.rawValue
+                    enabled:            !sendBasicIDSlider._fact.rawValue
                     textField.maximumLength:    20
                     Layout.fillWidth:           true
                     textFieldPreferredWidth:    textFieldWidth
@@ -433,7 +433,7 @@ SettingsPage {
                     fact:               _fact
                     indexModel:         false
                     visible:            _fact.visible
-                    enabled:            sendSelfIDSlider._fact.rawValue
+                    enabled:            !sendSelfIDSlider._fact.rawValue
                     Layout.fillWidth:   true
 
                     property Fact _fact: remoteIDSettings.selfIDType
@@ -443,7 +443,7 @@ SettingsPage {
                     label:                      _fact.shortDescription
                     fact:                       _fact
                     visible:                    _fact.visible
-                    enabled:                     sendSelfIDSlider._fact.rawValue
+                    enabled:                    !sendSelfIDSlider._fact.rawValue
                     textField.maximumLength:    23
                     Layout.fillWidth:           true
                     textFieldPreferredWidth:    textFieldWidth
@@ -455,7 +455,7 @@ SettingsPage {
                     label:                      _fact.shortDescription
                     fact:                       _fact
                     visible:                    _fact.visible
-                    enabled:                    sendSelfIDSlider._fact.rawValue
+                    enabled:                    !sendSelfIDSlider._fact.rawValue
                     textField.maximumLength:    23
                     Layout.fillWidth:           true
                     textFieldPreferredWidth:    textFieldWidth
@@ -467,6 +467,7 @@ SettingsPage {
                     label:                      _fact.shortDescription
                     fact:                       _fact
                     visible:                    _fact.visible
+                    enabled:                    !sendSelfIDSlider._fact.rawValue
                     textField.maximumLength:    23
                     Layout.fillWidth:           true
                     textFieldPreferredWidth:    textFieldWidth
@@ -621,7 +622,7 @@ SettingsPage {
                     fact:               _fact
                     indexModel:         false
                     visible:            _fact.visible
-                    enabled:            euProvideInfoSlider.checked
+                    enabled:            !euProvideInfoSlider.checked
                     Layout.fillWidth:   true
 
                     property Fact _fact: remoteIDSettings.categoryEU
@@ -632,7 +633,7 @@ SettingsPage {
                     fact:               _fact
                     indexModel:         false
                     visible:            _fact.visible
-                    enabled:            euCategoryCombo.enabled
+                    enabled:            !euProvideInfoSlider.checked
                     Layout.fillWidth:   true
 
                     property Fact _fact: remoteIDSettings.classEU
