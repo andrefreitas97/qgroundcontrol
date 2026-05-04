@@ -124,11 +124,11 @@ ListModel {
         pageVisible: function() { return ScreenTools.isDebug }
     }
 
-    ListElement {
-        name: qsTr("Palette Test")
-        url: "qrc:/qml/QGroundControl/AppSettings/QmlTest.qml"
-        iconUrl: "qrc:/InstrumentValueIcons/photo.svg"
-        pageVisible: function() { return ScreenTools.isDebug }
-    }
+    //ListElement {
+    //    name: qsTr("Palette Test")
+    //    url: "qrc:/qml/QGroundControl/AppSettings/QmlTest.qml"
+    //    iconUrl: "qrc:/InstrumentValueIcons/photo.svg"
+    //    pageVisible: function() { return ScreenTools.isDebug }
+    //}
 }
 

@@ -70,7 +70,7 @@ Item {
     readonly property string mvDisarmMessage:                   qsTr("Disarm selected vehicles.")
     readonly property string emergencyStopMessage:              qsTr("WARNING: THIS WILL STOP ALL MOTORS. IF VEHICLE IS CURRENTLY IN THE AIR IT WILL CRASH.")
     readonly property string takeoffMessage:                    qsTr("Takeoff from ground and hold position.")
-    readonly property string gripperMessage:                    qsTr("Grab or Release the cargo")
+    readonly property string gripperMessage:                    qsTr("Confirm gripper action.")
     readonly property string startMissionMessage:               qsTr("Takeoff from ground and start the current mission.")
     readonly property string mvStartMissionMessage:             qsTr("Takeoff from ground and start the current mission for selected vehicles.")
     readonly property string continueMissionMessage:            qsTr("Continue the mission from the current waypoint.")

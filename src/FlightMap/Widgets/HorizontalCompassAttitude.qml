@@ -19,7 +19,7 @@ Rectangle {
     width:  Math.min(_defaultWidth, _maxWidth)
     height: _outerRadius * 2
     radius: _outerRadius
-    color:  qgcPal.window
+    color: "transparent"
 
     property real extraInset:           0
     property real extraValuesWidth:     _outerRadius

@@ -6,16 +6,16 @@
 {
     "name":             "guidedMinimumAltitude",
     "shortDesc": "Minimum altitude for guided actions altitude slider.",
-    "type":             "double",
+    "type":             "uint32",
     "units":            "m",
     "default":     2
 },
 {
     "name":             "guidedMaximumAltitude",
     "shortDesc": "Maximum altitude for guided actions altitude slider.",
-    "type":             "double",
+    "type":             "int32",
     "units":            "m",
-    "default":     121.92
+    "default":     120
 },
 {
     "name":             "showLogReplayStatusBar",
@@ -56,7 +56,7 @@
 {
     "name":             "maxGoToLocationDistance",
     "shortDesc": "Maximum distance allowed for Go To Location.",
-    "type":             "double",
+    "type":             "int32",
     "units":            "m",
     "default":     1000,
     "min":              1
@@ -64,7 +64,7 @@
 {
     "name":         "forwardFlightGoToLocationLoiterRad",
     "shortDesc":    "Loiter radius for orbiting the Go To Location during forward flight. This only applies if the firmware supports a radius in MAV_CMD_DO_REPOSITION commands.",
-    "type":         "double",
+    "type":         "int32",
     "units":        "m",
     "default":      80,
     "min":          25
