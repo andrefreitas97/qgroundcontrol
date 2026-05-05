@@ -32,6 +32,7 @@ public:
     QString iconResource            (void) const override;
     bool    requiresSetup           (void) const override;
     bool    setupComplete           (void) const override;
+    bool    requiresAdvancedUI        (void) const override;
     QUrl    setupSource             (void) const override;
     QUrl    summaryQmlSource        (void) const override;
     bool    allowSetupWhileArmed    (void) const override { return true; }

@@ -234,7 +234,7 @@ Rectangle {
                 id:                 joystickButton
                 icon.source:      "/qmlimages/Joystick.png"
                 setupComplete:      _activeJoystick ? _activeJoystick.calibrated || _buttonsOnly : false
-                visible:            _fullParameterVehicleAvailable && joystickManager.joysticks.length !== 0
+                visible:            _fullParameterVehicleAvailable && joystickManager.joysticks.length !== 0 && QGroundControl.corePlugin.showAdvancedUI
                 text:               _forcedToButtonsOnly ? qsTr("Buttons") : qsTr("Joystick")
                 Layout.fillWidth:   true
                 onClicked:          showPanel(this, "qrc:/qml/QGroundControl/VehicleSetup/JoystickConfig.qml")
@@ -252,7 +252,7 @@ Rectangle {
                     icon.source:      modelData.iconResource
                     setupComplete:      modelData.setupComplete
                     text:               modelData.name
-                    visible:            modelData.setupSource.toString() !== ""
+                    visible:            modelData.setupSource.toString() !== "" && (modelData.requiresAdvancedUI ? QGroundControl.corePlugin.showAdvancedUI : true)
                     Layout.fillWidth:   true
                     onClicked:          showVehicleComponentPanel(componentUrl)
 

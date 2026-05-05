@@ -59,3 +59,8 @@ QUrl SafetyComponent::summaryQmlSource(void) const
 {
     return QUrl::fromUserInput("qrc:/qml/QGroundControl/AutoPilotPlugins/PX4/SafetyComponentSummary.qml");
 }
+
+bool SafetyComponent::requiresAdvancedUI(void) const
+{
+    return true;
+}

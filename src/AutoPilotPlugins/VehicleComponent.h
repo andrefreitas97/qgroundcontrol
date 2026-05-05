@@ -33,6 +33,7 @@ class VehicleComponent : public QObject
     Q_PROPERTY(QString  description                                         READ description            CONSTANT)
     Q_PROPERTY(bool     requiresSetup                                       READ requiresSetup          CONSTANT)
     Q_PROPERTY(bool     setupComplete                                       READ setupComplete          STORED false NOTIFY setupCompleteChanged)
+    Q_PROPERTY(bool     requiresAdvancedUI           READ requiresAdvancedUI          CONSTANT)
     Q_PROPERTY(QString  iconResource                                        READ iconResource           CONSTANT)
     Q_PROPERTY(QUrl     setupSource                                         READ setupSource            NOTIFY setupSourceChanged)
     Q_PROPERTY(QUrl     summaryQmlSource                                    READ summaryQmlSource       CONSTANT)
@@ -49,6 +50,7 @@ public:
     virtual QString iconResource() const = 0;
     virtual bool requiresSetup() const = 0;
     virtual bool setupComplete() const = 0;
+    virtual bool requiresAdvancedUI() const = 0;
     virtual QUrl setupSource() const = 0;
     virtual QUrl summaryQmlSource() const = 0;
 

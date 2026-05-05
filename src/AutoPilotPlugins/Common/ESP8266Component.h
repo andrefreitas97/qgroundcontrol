@@ -24,6 +24,7 @@ public:
     QString iconResource() const final { return QStringLiteral("/qmlimages/wifi.svg"); }
     bool requiresSetup() const final { return false; }
     bool setupComplete() const final { return true; }
+    bool requiresAdvancedUI() const final { return true; }
     QUrl setupSource() const final { return QUrl::fromUserInput("qrc:/qml/QGroundControl/AutoPilotPlugins/Common/ESP8266Component.qml"); }
     QUrl summaryQmlSource() const final { return QUrl::fromUserInput("qrc:/qml/QGroundControl/AutoPilotPlugins/Common/ESP8266ComponentSummary.qml"); }
 

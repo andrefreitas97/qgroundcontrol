@@ -69,3 +69,8 @@ QUrl PowerComponent::summaryQmlSource(void) const
 {
     return QUrl::fromUserInput("qrc:/qml/QGroundControl/AutoPilotPlugins/PX4/PowerComponentSummary.qml");
 }
+
+bool PowerComponent::requiresAdvancedUI(void) const
+{
+    return true;
+}

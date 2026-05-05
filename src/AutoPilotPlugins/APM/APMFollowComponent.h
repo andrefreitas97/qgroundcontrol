@@ -23,6 +23,7 @@ public:
     QString iconResource() const final { return QStringLiteral("/qmlimages/FollowComponentIcon.png"); }
     bool requiresSetup() const final { return false; }
     bool setupComplete() const final { return true; }
+    bool requiresAdvancedUI() const final { return false; }
     QUrl setupSource() const final { return QUrl::fromUserInput(QStringLiteral("qrc:/qml/QGroundControl/AutoPilotPlugins/APM/APMFollowComponent.qml")); }
     QUrl summaryQmlSource() const final { return QUrl::fromUserInput(QStringLiteral("qrc:/qml/QGroundControl/AutoPilotPlugins/APM/APMFollowComponentSummary.qml")); }
     bool allowSetupWhileArmed() const final { return true; }

@@ -31,6 +31,7 @@ public:
     QUrl summaryQmlSource(void) const final;
     bool requiresSetup() const final { return false; }
     bool setupComplete() const final { return true; }
+    bool requiresAdvancedUI() const final;
     QStringList setupCompleteChangedTriggerList() const final { return QStringList(); }
     
 private:

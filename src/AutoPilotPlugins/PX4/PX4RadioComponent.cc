@@ -68,3 +68,8 @@ QUrl PX4RadioComponent::summaryQmlSource(void) const
 {
     return QUrl::fromUserInput("qrc:/qml/QGroundControl/AutoPilotPlugins/PX4/PX4RadioComponentSummary.qml");
 }
+
+bool PX4RadioComponent::requiresAdvancedUI(void) const
+{
+    return true;
+}

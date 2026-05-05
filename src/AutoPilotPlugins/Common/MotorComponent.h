@@ -24,6 +24,7 @@ public:
     QString iconResource() const override { return QStringLiteral("/qmlimages/MotorComponentIcon.svg"); }
     bool requiresSetup() const override { return false; }
     bool setupComplete() const override { return true; }
+    bool requiresAdvancedUI() const final { return true; }
     QUrl setupSource() const override { return QUrl::fromUserInput(QStringLiteral("qrc:/qml/QGroundControl/AutoPilotPlugins/Common/MotorComponent.qml")); }
     QUrl summaryQmlSource() const override { return QUrl(); }
 

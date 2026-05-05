@@ -35,6 +35,7 @@ public:
     virtual QString iconResource(void) const override;
     virtual bool requiresSetup(void) const override;
     virtual bool setupComplete(void) const override;
+    virtual bool requiresAdvancedUI(void) const override;
     virtual QUrl setupSource(void) const override;
     virtual QUrl summaryQmlSource(void) const override;
     

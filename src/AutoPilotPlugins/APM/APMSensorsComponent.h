@@ -28,6 +28,7 @@ public:
     QString iconResource() const final { return QStringLiteral("/qmlimages/SensorsComponentIcon.png"); }
     bool requiresSetup() const final { return true; }
     bool setupComplete() const final { return (!compassSetupNeeded() && !accelSetupNeeded()); }
+    bool requiresAdvancedUI() const final { return true; }
     QUrl setupSource() const final { return QUrl::fromUserInput("qrc:/qml/QGroundControl/AutoPilotPlugins/APM/APMSensorsComponent.qml"); }
     QUrl summaryQmlSource() const final { return QUrl::fromUserInput("qrc:/qml/QGroundControl/AutoPilotPlugins/APM/APMSensorsComponentSummary.qml"); }
 

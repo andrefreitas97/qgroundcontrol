@@ -25,6 +25,7 @@ public:
     QString iconResource() const final { return QStringLiteral("/qmlimages/SafetyComponentIcon.png"); }
     bool requiresSetup() const final { return false; }
     bool setupComplete() const final { return true; } // FIXME: What aboout invalid settings?
+    bool requiresAdvancedUI() const final { return false; }
     QUrl setupSource() const final;
     QUrl summaryQmlSource() const final;
     bool allowSetupWhileArmed() const final { return true; }

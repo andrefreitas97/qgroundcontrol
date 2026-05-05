@@ -62,3 +62,8 @@ QUrl AirframeComponent::summaryQmlSource(void) const
 {
     return QUrl::fromUserInput("qrc:/qml/QGroundControl/AutoPilotPlugins/PX4/AirframeComponentSummary.qml");
 }
+
+bool AirframeComponent::requiresAdvancedUI(void) const
+{
+    return true;
+}

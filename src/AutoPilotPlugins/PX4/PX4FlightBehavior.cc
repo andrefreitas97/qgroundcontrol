@@ -84,3 +84,8 @@ QUrl PX4FlightBehavior::summaryQmlSource() const
 {
     return QUrl();
 }
+
+bool PX4FlightBehavior::requiresAdvancedUI() const
+{
+    return true;
+}

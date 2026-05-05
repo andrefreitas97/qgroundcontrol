@@ -133,3 +133,8 @@ QUrl SensorsComponent::summaryQmlSource(void) const
  {
     return _airspeedCalSupported() && _vehicle->parameterManager()->getParameter(ParameterManager::defaultComponentId, "SENS_DPRES_OFF")->rawValue().toFloat() == 0.0f;
  }
+
+ bool SensorsComponent::requiresAdvancedUI(void) const
+ {
+     return true;
+ }

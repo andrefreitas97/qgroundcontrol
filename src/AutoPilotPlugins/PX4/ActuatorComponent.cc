@@ -69,3 +69,8 @@ QUrl ActuatorComponent::summaryQmlSource(void) const
 {
     return QUrl();
 }
+
+bool ActuatorComponent::requiresAdvancedUI(void) const
+{
+    return true;
+}

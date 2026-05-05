@@ -28,6 +28,7 @@ public:
     QString iconResource() const final { return QStringLiteral("/qmlimages/SubFrameComponentIcon.png"); }
     bool requiresSetup() const final { return false; }
     bool setupComplete() const final { return true; }
+    bool requiresAdvancedUI() const final { return true; }
     QUrl setupSource() const final { return QUrl::fromUserInput(QStringLiteral("qrc:/qml/QGroundControl/AutoPilotPlugins/APM/APMSubFrameComponent.qml")); }
     QUrl summaryQmlSource() const final { return QUrl::fromUserInput(QStringLiteral("qrc:/qml/QGroundControl/AutoPilotPlugins/APM/APMSubFrameComponentSummary.qml")); }
 

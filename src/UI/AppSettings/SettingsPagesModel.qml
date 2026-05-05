@@ -24,35 +24,35 @@ ListModel {
         name: qsTr("Fly View")
         url: "qrc:/qml/QGroundControl/AppSettings/FlyViewSettings.qml"
         iconUrl: "qrc:/qmlimages/PaperPlane.svg"
-        pageVisible: function() { return true }
+        pageVisible: function() { return QGroundControl.corePlugin.showAdvancedUI }
     }
 
     ListElement {
         name: qsTr("Plan View")
         url: "qrc:/qml/QGroundControl/AppSettings/PlanViewSettings.qml"
         iconUrl: "qrc:/qmlimages/Plan.svg"
-        pageVisible: function() { return true }
+        pageVisible: function() { return QGroundControl.corePlugin.showAdvancedUI }
     }
 
     ListElement {
         name: qsTr("Video")
         url: "qrc:/qml/QGroundControl/AppSettings/VideoSettings.qml"
         iconUrl: "qrc:/InstrumentValueIcons/camera.svg"
-        pageVisible: function() { return QGroundControl.settingsManager.videoSettings.visible }
+        pageVisible: function() { return QGroundControl.settingsManager.videoSettings.visible && QGroundControl.corePlugin.showAdvancedUI }
     }
 
     ListElement {
         name: qsTr("Telemetry")
         url: "qrc:/qml/QGroundControl/AppSettings/TelemetrySettings.qml"
         iconUrl: "qrc:/InstrumentValueIcons/drone.svg"
-        pageVisible: function() { return true }
+        pageVisible: function() { return QGroundControl.corePlugin.showAdvancedUI }
     }
 
     ListElement {
         name: qsTr("ADSB Server")
         url: "qrc:/qml/QGroundControl/AppSettings/ADSBServerSettings.qml"
         iconUrl: "qrc:/InstrumentValueIcons/airplane.svg"
-        pageVisible: function() { return true }
+        pageVisible: function() { return QGroundControl.corePlugin.showAdvancedUI }
     }
     ListElement {
         name: qsTr("NTRIP/RTK")
@@ -67,27 +67,27 @@ ListModel {
         name: qsTr("Comm Links")
         url: "qrc:/qml/QGroundControl/AppSettings/LinkSettings.qml"
         iconUrl: "qrc:/InstrumentValueIcons/usb.svg"
-        pageVisible: function() { return true }
+        pageVisible: function() { return QGroundControl.corePlugin.showAdvancedUI }
     }
 
     ListElement {
         name: qsTr("Maps")
         url: "qrc:/qml/QGroundControl/AppSettings/MapSettings.qml"
         iconUrl: "qrc:/InstrumentValueIcons/globe.svg"
-        pageVisible: function() { return true }
+        pageVisible: function() { return QGroundControl.corePlugin.showAdvancedUI }
     }
 
-    ListElement {
-        name: qsTr("PX4 Log Transfer")
-        url: "qrc:/qml/QGroundControl/AppSettings/PX4LogTransferSettings.qml"
-        iconUrl: "qrc:/InstrumentValueIcons/inbox-download.svg"
-        pageVisible: function() { 
-            var activeVehicle = QGroundControl.multiVehicleManager.activeVehicle
-            return QGroundControl.corePlugin.options.showPX4LogTransferOptions && 
-                        QGroundControl.px4ProFirmwareSupported && 
-                        (activeVehicle ? activeVehicle.px4Firmware : true)
-        }
-    }
+    //ListElement {
+    //    name: qsTr("PX4 Log Transfer")
+    //    url: "qrc:/qml/QGroundControl/AppSettings/PX4LogTransferSettings.qml"
+    //    iconUrl: "qrc:/InstrumentValueIcons/inbox-download.svg"
+    //    pageVisible: function() { 
+    //        var activeVehicle = QGroundControl.multiVehicleManager.activeVehicle
+    //        return QGroundControl.corePlugin.options.showPX4LogTransferOptions && 
+    //                    QGroundControl.px4ProFirmwareSupported && 
+    //                    (activeVehicle ? activeVehicle.px4Firmware : true)
+    //    }
+    //}
 
     ListElement {
         name: qsTr("Remote ID")
@@ -100,28 +100,28 @@ ListModel {
         name: qsTr("Console")
         url: "qrc:/qml/QGroundControl/Controls/AppMessages.qml"
         iconUrl: "qrc:/InstrumentValueIcons/conversation.svg"
-        pageVisible: function() { return true }
+        pageVisible: function() { return QGroundControl.corePlugin.showAdvancedUI }
     }
 
-    ListElement {
-        name: qsTr("Help")
-        url: "qrc:/qml/QGroundControl/AppSettings/HelpSettings.qml"
-        iconUrl: "qrc:/InstrumentValueIcons/question.svg"
-        pageVisible: function() { return true }
-    }
+    //ListElement {
+    //    name: qsTr("Help")
+    //    url: "qrc:/qml/QGroundControl/AppSettings/HelpSettings.qml"
+    //    iconUrl: "qrc:/InstrumentValueIcons/question.svg"
+    //    pageVisible: function() { return true }
+    //}
 
     ListElement {
         name: qsTr("Mock Link")
         url: "qrc:/qml/QGroundControl/AppSettings/MockLink.qml"
         iconUrl: "qrc:/InstrumentValueIcons/drone.svg"
-        pageVisible: function() { return ScreenTools.isDebug }
+        pageVisible: function() { return ScreenTools.isDebug && QGroundControl.corePlugin.showAdvancedUI }
     }
 
     ListElement {
         name: qsTr("Debug")
         url: "qrc:/qml/QGroundControl/AppSettings/DebugWindow.qml"
         iconUrl: "qrc:/InstrumentValueIcons/bug.svg"
-        pageVisible: function() { return ScreenTools.isDebug }
+        pageVisible: function() { return ScreenTools.isDebug && QGroundControl.corePlugin.showAdvancedUI }
     }
 
     //ListElement {

@@ -50,3 +50,8 @@ QUrl FlightModesComponent::summaryQmlSource(void) const
 {
     return QUrl::fromUserInput("qrc:/qml/QGroundControl/AutoPilotPlugins/PX4/FlightModesComponentSummary.qml");
 }
+
+bool FlightModesComponent::requiresAdvancedUI(void) const
+{
+    return true;
+}

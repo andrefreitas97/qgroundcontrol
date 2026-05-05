@@ -84,3 +84,8 @@ QUrl PX4TuningComponent::summaryQmlSource(void) const
 {
     return QUrl();
 }
+
+bool PX4TuningComponent::requiresAdvancedUI(void) const
+{
+    return true;
+}
