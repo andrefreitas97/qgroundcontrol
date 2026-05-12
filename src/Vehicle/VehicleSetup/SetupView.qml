@@ -216,9 +216,10 @@ Rectangle {
             ConfigButton {
                 id:                 summaryButton
                 icon.source:        "/qmlimages/VehicleSummaryIcon.png"
-                checked:            true
+                //checked:            true
                 text:               qsTr("Summary")
                 Layout.fillWidth:   true
+                visible:            _corePlugin.showAdvancedUI
 
                 onClicked: showSummaryPanel()
             }

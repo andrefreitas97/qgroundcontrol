@@ -543,7 +543,7 @@ SetupPage {
 
                             GridLayout {
                                 columns: 2
-                                enabled: enabledCheckBox.checked
+                                enabled: !enabledCheckBox.checked
 
                                 QGCLabel {
                                     text: qsTr("Breach action")
