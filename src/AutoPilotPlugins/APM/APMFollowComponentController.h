@@ -19,6 +19,7 @@ class APMFollowComponentController : public FactPanelController
     Q_PROPERTY(Fact *angle          READ angleFact      CONSTANT)
     Q_PROPERTY(Fact *distance       READ distanceFact   CONSTANT)
     Q_PROPERTY(Fact *height         READ heightFact     CONSTANT)
+    Q_PROPERTY(Fact *maxHeight      READ maxHeightFact  CONSTANT)
     Q_PROPERTY(bool roverFirmware   READ roverFirmware  CONSTANT)
 
 public:
@@ -28,6 +29,7 @@ public:
     Fact *angleFact() const { return _angleFact; }
     Fact *distanceFact() const { return _distanceFact; }
     Fact *heightFact() const { return _heightFact; }
+    Fact *maxHeightFact() const { return _maxHeightFact; }
     bool roverFirmware() const;
 
 private:
@@ -36,9 +38,11 @@ private:
     SettingsFact *_angleFact = nullptr;
     SettingsFact *_distanceFact = nullptr;
     SettingsFact *_heightFact = nullptr;
+    SettingsFact *_maxHeightFact = nullptr;
 
     static constexpr const char *_angleName = "angle";
     static constexpr const char *_distanceName = "distance";
     static constexpr const char *_heightName = "height";
+    static constexpr const char *_maxHeightName = "maxheight";
     static constexpr const char *_settingsGroup = "APMFollow";
 };

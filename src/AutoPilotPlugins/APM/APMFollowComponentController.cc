@@ -17,6 +17,7 @@ APMFollowComponentController::APMFollowComponentController(QObject *parent)
     , _angleFact(new SettingsFact(_settingsGroup, _metaDataMap[_angleName], this))
     , _distanceFact(new SettingsFact(_settingsGroup, _metaDataMap[_distanceName], this))
     , _heightFact(new SettingsFact(_settingsGroup, _metaDataMap[_heightName], this))
+    , _maxHeightFact(new SettingsFact(_settingsGroup, _metaDataMap[_maxHeightName], this))
 {
     // qCDebug() << Q_FUNC_INFO << this;
 }
