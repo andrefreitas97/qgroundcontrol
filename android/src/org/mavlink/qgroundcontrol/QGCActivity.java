@@ -213,6 +213,10 @@ public class QGCActivity extends QtActivity
         }
         _instance.getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 
+
+        try { QGCBackgroundService.startService(_instance); }
+        catch (Exception e) { Log.e(TAG, "background service start failed: " + e); }
+
         _usbManager = (UsbManager)_instance.getSystemService(Context.USB_SERVICE);
 
         // Register for USB Detach and USB Permission intent
@@ -278,6 +282,7 @@ public class QGCActivity extends QtActivity
         if (probeAccessoriesTimer != null) {
             probeAccessoriesTimer.cancel();
         }
+        try { QGCBackgroundService.stopService(_instance); } catch (Exception ignored) {}
         unregisterReceiver(mOpenAccessoryReceiver);
         try {
             if (_wifiMulticastLock != null) {

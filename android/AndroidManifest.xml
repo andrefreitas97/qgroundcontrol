@@ -8,6 +8,10 @@
          Remove the comment if you do not require these default features. -->
     <!-- %%INSERT_FEATURES -->
 
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_CONNECTED_DEVICE"/>
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS"/>
+
     <supports-screens android:largeScreens="true" android:normalScreens="true" android:anyDensity="true" android:smallScreens="true"/>
     <application android:hardwareAccelerated="true" android:name="org.qtproject.qt5.android.bindings.QtApplication" android:label="SA SIYI QGC 4.4" android:extractNativeLibs="true" android:icon="@drawable/icon">
         <activity android:configChanges="orientation|uiMode|screenLayout|screenSize|smallestScreenSize|layoutDirection|locale|fontScale|keyboard|keyboardHidden|navigation|mcc|mnc|density" android:name="org.mavlink.qgroundcontrol.QGCActivity" android:label="SA SIYI QGC 4.4" android:screenOrientation="sensorLandscape" android:launchMode="singleTask" android:keepScreenOn="true">
@@ -65,7 +69,7 @@
                           application still try to draw after
                           "applicationStateChanged(Qt::ApplicationSuspended)"
                           signal is sent! -->
-            <meta-data android:name="android.app.background_running" android:value="false"/>
+            <meta-data android:name="android.app.background_running" android:value="true"/>
             <!-- Background running -->
             <!-- auto screen scale factor -->
             <meta-data android:name="android.app.auto_screen_scale_factor" android:value="false"/>
@@ -80,6 +84,10 @@
             <meta-data android:name="android.app.extract_android_style" android:value="default"/>
             <!-- extract android style -->
         </activity>
+        <!-- Keeps QGC alive in the background so MAVLink Forwarding to Sentinela keeps running -->
+        <service android:name="org.mavlink.qgroundcontrol.QGCBackgroundService"
+                 android:foregroundServiceType="connectedDevice"
+                 android:exported="false"/>
         <!-- For adding service(s) please check: https://wiki.qt.io/AndroidServices -->
     </application>
 
