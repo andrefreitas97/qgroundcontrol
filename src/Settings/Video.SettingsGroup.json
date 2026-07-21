@@ -98,7 +98,7 @@
     "type":             "uint32",
     "enumStrings":      "Fit Width,Fit Height,Stretch",
     "enumValues":       "0,1,2",
-    "default":     0
+    "default":     1
 },
 {
     "name":             "colorPalette",
@@ -159,7 +159,7 @@
     "shortDesc": "FPV Video Display Flip",
     "longDesc":  "Handle Video Flip.",
     "type":             "bool",
-    "default":     true
+    "default":     false
 },
 {
     "name":             "videoFlip_GimbalA8",
