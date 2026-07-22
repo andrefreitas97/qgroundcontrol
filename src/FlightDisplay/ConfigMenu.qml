@@ -58,10 +58,9 @@ Component {
         
         property bool landingLightAvailable: controller.parameterExists(-1, "LIGHT_LANDING")
 
-        property Fact param13: controller.getParameterFact(-1, "LIGHT_LANDING", false /* reportMissing */)
+        property Fact param13: controller.getParameterFact(-1, "STROBE_LIGHTS", false /* reportMissing */)
         property bool showLandingLightOFF: param13.value == 0
         property bool showLandingLightON: param13.value == 1
-        property bool showLandingLightAUTO: param13.value == 2
 
 
         onRejected:{
@@ -266,7 +265,7 @@ Component {
                 }
 
                 QGCLabel {
-                    text:       qsTr("Landing Light:")
+                    text:       qsTr("Strobe Lights:")
                     anchors.verticalCenter: parent.verticalCenter
                     font.bold:              true
                 }
@@ -286,14 +285,6 @@ Component {
                     checked:        showLandingLightON
                     onClicked:      _activeVehicle.setLandingLight(1)
 
-                }
-
-                QGCRadioButton {
-                    font.pointSize: ScreenTools.defaultFontPointSize
-                    text:           qsTr("AUTO")
-                    enabled:        landingLightAvailable
-                    checked:        showLandingLightAUTO
-                    onClicked:      _activeVehicle.setLandingLight(2)
                 }
             }
 

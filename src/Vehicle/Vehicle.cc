@@ -4740,13 +4740,10 @@ void Vehicle::setLandingLight(int option)
 {
     switch(option) {
     case 0:
-        parameterManager()->_sendParamSetToVehicle(_defaultComponentId, "LIGHT_LANDING" , FactMetaData::valueTypeUint8, 0);
+        parameterManager()->_sendParamSetToVehicle(_defaultComponentId, "STROBE_LIGHTS" , FactMetaData::valueTypeUint8, 0);
         break;
     case 1:
-        parameterManager()->_sendParamSetToVehicle(_defaultComponentId, "LIGHT_LANDING" , FactMetaData::valueTypeUint8, 1);
-        break;
-    case 2:
-        parameterManager()->_sendParamSetToVehicle(_defaultComponentId, "LIGHT_LANDING" , FactMetaData::valueTypeUint8, 2);
+        parameterManager()->_sendParamSetToVehicle(_defaultComponentId, "STROBE_LIGHTS" , FactMetaData::valueTypeUint8, 1);
         break;
     default:
         break;
