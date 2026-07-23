@@ -159,7 +159,7 @@ Item {
                     id:                 messageText
                     readOnly:           true
                     textFormat:         TextEdit.RichText
-                    selectByMouse:      true
+                    selectByMouse:      !ScreenTools.isMobile
                     color:              qgcPal.text
                     selectionColor:     qgcPal.text
                     selectedTextColor:  qgcPal.window
