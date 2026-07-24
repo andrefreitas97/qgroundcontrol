@@ -57,6 +57,8 @@ public:
 #endif
         if(pMAVLink)
             delete pMAVLink;
+        if(pNTRIP)
+            delete pNTRIP;
 #if defined(QT_DEBUG)
         if(pConsole)
             delete pConsole;
@@ -85,6 +87,7 @@ public:
     QmlComponentInfo* pMicrohard                = nullptr;
 #endif
     QmlComponentInfo* pMAVLink                  = nullptr;
+    QmlComponentInfo* pNTRIP                    = nullptr;
 #if defined(QT_DEBUG)
     QmlComponentInfo* pConsole                  = nullptr;
     QmlComponentInfo* pHelp                     = nullptr;
@@ -151,6 +154,9 @@ QVariantList &QGCCorePlugin::settingsPages()
         _p->pMAVLink = new QmlComponentInfo(tr("MAVLink"),
                                             QUrl::fromUserInput("qrc:/qml/MavlinkSettings.qml"),
                                             QUrl::fromUserInput("qrc:/res/waves.svg"));
+        _p->pNTRIP = new QmlComponentInfo(tr("NTRIP"),
+                                            QUrl::fromUserInput("qrc:/qml/NTRIPSettings.qml"),
+                                            QUrl::fromUserInput("qrc:/res/waves.svg"));
         _p->pRemoteID = new QmlComponentInfo(tr("Remote ID"),
                                             QUrl::fromUserInput("qrc:/qml/RemoteIDSettings.qml"));
 #if defined(QT_DEBUG)
@@ -182,6 +188,7 @@ QVariantList &QGCCorePlugin::settingsPages()
     _p->settingsList.append(QVariant::fromValue(reinterpret_cast<QmlComponentInfo*>(_p->pMicrohard)));
 #endif
     _p->settingsList.append(QVariant::fromValue(reinterpret_cast<QmlComponentInfo*>(_p->pMAVLink)));
+    _p->settingsList.append(QVariant::fromValue(reinterpret_cast<QmlComponentInfo*>(_p->pNTRIP)));
     _p->settingsList.append(QVariant::fromValue(reinterpret_cast<QmlComponentInfo*>(_p->pRemoteID)));
 
 #if defined(QT_DEBUG)
