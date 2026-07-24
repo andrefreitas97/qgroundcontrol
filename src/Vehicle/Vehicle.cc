@@ -4666,23 +4666,6 @@ void Vehicle::setPayloadType(int payload_type)
     }
 }
 
-void Vehicle::setSpeedMode(int option)
-{
-    switch(option) {
-    case 1:
-        parameterManager()->_sendParamSetToVehicle(_defaultComponentId, "SCR_USER3" , FactMetaData::valueTypeUint8, 1);
-        break;
-    case 2:
-        parameterManager()->_sendParamSetToVehicle(_defaultComponentId, "SCR_USER3" , FactMetaData::valueTypeUint8, 2);
-        break;
-    case 3:
-        parameterManager()->_sendParamSetToVehicle(_defaultComponentId, "SCR_USER3" , FactMetaData::valueTypeUint8, 3);
-        break;
-    default:
-        break;
-    }
-}
-
 
 void Vehicle::setProximityAvoidance(int on_off)
 {
@@ -4736,7 +4719,7 @@ void Vehicle::setSurfaceTracking(int on_off)
     }
 }
 
-void Vehicle::setLandingLight(int option)
+void Vehicle::setStrobeLight(int option)
 {
     switch(option) {
     case 0:

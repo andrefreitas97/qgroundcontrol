@@ -254,7 +254,7 @@ Component {
                     text:           qsTr("ON")
                     enabled:        landingLightAvailable
                     checked:        showLandingLightON
-                    onClicked:      _activeVehicle.setLandingLight(1)
+                    onClicked:      _activeVehicle.setStrobeLight(1)
 
                 }
 
@@ -263,7 +263,7 @@ Component {
                     text:           qsTr("OFF")
                     enabled:        landingLightAvailable
                     checked:        showLandingLightOFF
-                    onClicked:      _activeVehicle.setLandingLight(0)
+                    onClicked:      _activeVehicle.setStrobeLight(0)
                 }
 
             }

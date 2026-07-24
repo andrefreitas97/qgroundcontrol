@@ -587,13 +587,11 @@ public:
 
     Q_INVOKABLE void setPayloadType(int payload_type);
 
-    Q_INVOKABLE void setSpeedMode(int option);
-
     Q_INVOKABLE void setProximityAvoidance(int on_off);
 
     Q_INVOKABLE void setSurfaceTracking(int on_off);
 
-    Q_INVOKABLE void setLandingLight(int option);
+    Q_INVOKABLE void setStrobeLight(int option);
 
     bool fixedWing() const;
     bool multiRotor() const;
