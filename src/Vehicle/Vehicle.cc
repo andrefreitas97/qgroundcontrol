@@ -4591,12 +4591,12 @@ void Vehicle::sendLandingAssistAction(int landingAssistOption)
 
 void Vehicle::sendLandingAssistONAction()
 {
-    parameterManager()->_sendParamSetToVehicle(_defaultComponentId, "SCR_USER1" , FactMetaData::valueTypeUint8, 1);
+    parameterManager()->_sendParamSetToVehicle(_defaultComponentId, "LANDING_ASSIST" , FactMetaData::valueTypeUint8, 1);
 }
 
 void Vehicle::sendLandingAssistOFFAction()
 {
-    parameterManager()->_sendParamSetToVehicle(_defaultComponentId, "SCR_USER1" , FactMetaData::valueTypeUint8, 0);
+    parameterManager()->_sendParamSetToVehicle(_defaultComponentId, "LANDING_ASSIST" , FactMetaData::valueTypeUint8, 0);
 }
 
 void Vehicle::sendSetMountFPVAction()
