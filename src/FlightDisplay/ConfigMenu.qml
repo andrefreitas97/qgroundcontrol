@@ -16,6 +16,8 @@ import QGroundControl.FlightMap                 1.0
 import QGroundControl.FactSystem    1.0
 import QGroundControl.FactControls  1.0
 
+import QGroundControl.NTRIP          1.0
+
 Component {
     id: messageDialogComponent
     QGCPopupDialog {
@@ -62,6 +64,33 @@ Component {
         property bool showLandingLightOFF: param13.value == 0
         property bool showLandingLightON: param13.value == 1
         property bool showLandingLightAUTO: param13.value == 2
+
+        property Fact ntripEnabledFact: QGroundControl.settingsManager.ntripSettings.ntripServerConnectEnabled
+        property bool showNtripON:  ntripEnabledFact.rawValue
+        property bool showNtripOFF: !ntripEnabledFact.rawValue
+
+        // Live NTRIP connection status (independent of the enable flag)
+        property string ntripStatusText: {
+            try {
+                return NTRIPManager ? (NTRIPManager.ntripStatus || qsTr("Disconnected")) : qsTr("N/A")
+            } catch (e) {
+                return qsTr("Disconnected")
+            }
+        }
+        property color ntripStatusColor: {
+            try {
+                if (!ntripEnabledFact.rawValue) return qgcPal.colorRed
+                if (!NTRIPManager) return qgcPal.buttonText
+                var lower = (NTRIPManager.ntripStatus || "").toLowerCase()
+                if (lower.indexOf("error") !== -1 || lower.indexOf("failed") !== -1) return qgcPal.colorRed
+                if (lower.indexOf("disconnected") !== -1) return qgcPal.colorOrange
+                if (lower.indexOf("connecting")   !== -1) return qgcPal.colorOrange
+                if (lower.indexOf("connected")    !== -1) return qgcPal.colorGreen
+                return qgcPal.buttonText
+            } catch (e) {
+                return qgcPal.buttonText
+            }
+        }
 
 
         onRejected:{
@@ -372,6 +401,46 @@ Component {
                         QGroundControl.settingsManager.appSettings.proximityAvoidance.value = false
                         _activeVehicle.setProximityAvoidance(0)
                     }
+                }
+            }
+
+            Row {
+                Layout.alignment:   Qt.AlignLeft
+                spacing:            ScreenTools.defaultFontPixelWidth
+
+                QGCColoredImage {
+                    anchors.top:        parent.top
+                    anchors.bottom:     parent.bottom
+                    width:              height
+                    sourceSize.width:   width
+                    source:             "/res/location.svg"
+                    color:              ntripStatusColor
+                }
+
+                QGCLabel {
+                    text:       qsTr("NTRIP (RTK):")
+                    anchors.verticalCenter: parent.verticalCenter
+                    font.bold:              true
+                }
+
+                QGCRadioButton {
+                    font.pointSize: ScreenTools.defaultFontPointSize
+                    text:           qsTr("ON")
+                    checked:        showNtripON
+                    onClicked:      ntripEnabledFact.rawValue = true
+                }
+
+                QGCRadioButton {
+                    font.pointSize: ScreenTools.defaultFontPointSize
+                    text:           qsTr("OFF")
+                    checked:        showNtripOFF
+                    onClicked:      ntripEnabledFact.rawValue = false
+                }
+
+                QGCLabel {
+                    text:                   qsTr("State: ") + (ntripEnabledFact.rawValue ? ntripStatusText : qsTr("Off"))
+                    color:                  ntripStatusColor
+                    anchors.verticalCenter: parent.verticalCenter
                 }
             }
 
