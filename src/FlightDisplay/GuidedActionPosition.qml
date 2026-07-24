@@ -18,11 +18,10 @@ import QtQuick.Layouts  1.12
 
 GuidedToolStripAction {
     property var   activeVehicle:           QGroundControl.multiVehicleManager.activeVehicle
-    property bool   _vehiclebravo: QGroundControl.settingsManager.appSettings.vehiclebravo.value
 
     text:       "Position"
     iconSource: "/res/position.svg"
-    visible:    activeVehicle && _vehiclebravo
+    visible:    activeVehicle
     enabled:    _guidedController.showPosition
     actionID:   _guidedController.actionPosition
 }

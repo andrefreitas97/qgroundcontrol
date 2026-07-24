@@ -161,14 +161,12 @@ Item {
     property Fact _payloadgripper: QGroundControl.settingsManager.appSettings.payloadgripper
     property Fact _payloadgrenades: QGroundControl.settingsManager.appSettings.payloadgrenades
 
-    property bool   _vehiclealfa: QGroundControl.settingsManager.appSettings.vehiclealfa.rawValue
-    property bool   _vehiclebravo: QGroundControl.settingsManager.appSettings.vehiclebravo.rawValue
 
         property bool showGripper:         _guidedActionsEnabled && !_communicationLost && _initialConnectComplete && _activeVehicle.hasGripper && _payloadgripper.value
         property bool showGrenades:        _guidedActionsEnabled && !_communicationLost && _initialConnectComplete && _payloadgrenades.value
         property bool showHeight:          _guidedActionsEnabled && !_communicationLost && _initialConnectComplete
-        property bool showPosition:        _guidedActionsEnabled && !_communicationLost && _initialConnectComplete && _vehiclebravo
-        property bool showLandingAssist:   _guidedActionsEnabled && !_communicationLost && _initialConnectComplete && _vehiclebravo
+        property bool showPosition:        _guidedActionsEnabled && !_communicationLost && _initialConnectComplete 
+        property bool showLandingAssist:   _guidedActionsEnabled && !_communicationLost && _initialConnectComplete 
         property bool showPayload:         _guidedActionsEnabled && !_communicationLost && _initialConnectComplete && (_payloadgrenades.value || _payloadgripper.value)
         property bool showSensors:         _guidedActionsEnabled && !_communicationLost && _initialConnectComplete
         property bool showConfig:          _guidedActionsEnabled && !_communicationLost && _initialConnectComplete

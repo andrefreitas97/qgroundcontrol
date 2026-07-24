@@ -16,11 +16,10 @@ import QGroundControl.FactControls  1.0
 
 ToolStripAction {
     property var   activeVehicle:           QGroundControl.multiVehicleManager.activeVehicle
-    property bool   _vehiclebravo: QGroundControl.settingsManager.appSettings.vehiclebravo.value
 
     text:       "Payloads"
     iconSource: "/res/payload.svg"
-    visible:     activeVehicle && _vehiclebravo
+    visible:     activeVehicle
     enabled:    _guidedController.showPayload
 
     onTriggered: {

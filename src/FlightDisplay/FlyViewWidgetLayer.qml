@@ -63,7 +63,7 @@ Item {
         anchors.fill: parent
         rootWidth: _root.width
         rootHeight: _root.height
-        visible: QGroundControl.settingsManager.appSettings.vehiclebravo.value && !_mainWindowIsMap
+        visible: !_mainWindowIsMap
     }
 
     QGCToolInsets {

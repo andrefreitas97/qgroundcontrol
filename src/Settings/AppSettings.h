@@ -68,8 +68,6 @@ public:
     DEFINE_SETTINGFACT(forwardMavlinkHostName)
     DEFINE_SETTINGFACT(forwardMavlinkAPMSupportHostName)
 
-    DEFINE_SETTINGFACT(vehiclealfa)
-    DEFINE_SETTINGFACT(vehiclebravo)
     DEFINE_SETTINGFACT(payloadgripper)
     DEFINE_SETTINGFACT(payloadgrenades)
     DEFINE_SETTINGFACT(gimbalCameraA8)

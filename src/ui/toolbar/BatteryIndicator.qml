@@ -29,7 +29,7 @@ Item {
 
     property var _activeVehicle: QGroundControl.multiVehicleManager.activeVehicle
 
-    property int batteryCells: QGroundControl.settingsManager.appSettings.vehiclebravo.value ? 6 : 4
+    property int batteryCells: 12
 
     Row {
         id:             batteryIndicatorRow

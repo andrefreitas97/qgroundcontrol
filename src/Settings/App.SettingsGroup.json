@@ -342,25 +342,11 @@
     "default":   "support.ardupilot.org:xxxx"
 },
 {
-    "name":             "vehiclealfa",
-    "shortDesc": "Alfa selected",
-    "longDesc":  "Depending on vehicle selected the app shows different functions in guided actions.",
-    "type":             "bool",
-    "default":     false
-},
-{
-    "name":             "vehiclebravo",
-    "shortDesc": "Bravo selected",
-    "longDesc":  "Depending on vehicle selected the app shows different functions in guided actions.",
-    "type":             "bool",
-    "default":     true
-},
-{
     "name":             "payloadgripper",
     "shortDesc": "Gripper payload selected",
     "longDesc":  "Depending on the payload selected the app shows different functions in guided actions.",
     "type":             "bool",
-    "default":     true
+    "default":     false
 },
 {
     "name":             "payloadgrenades",

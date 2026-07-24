@@ -115,19 +115,12 @@ Rectangle {
                                 visible: !_activeVehicle
                             }
 
-                            QGCLabel {
-                                text:               qsTr("No payloads available for Alfa.")
-                                Layout.columnSpan:  3
-                                Layout.alignment:   Qt.AlignHCenter
-                                visible: QGroundControl.settingsManager.appSettings.vehiclealfa.value && _activeVehicle
-                            }
-
 
                             QGCLabel {
                                 text:               qsTr("Front Payload")
                                 Layout.columnSpan:  3
                                 Layout.alignment:   Qt.AlignHCenter
-                                visible:            QGroundControl.settingsManager.appSettings.vehiclebravo.value && _activeVehicle
+                                visible:            _activeVehicle
                             }
 
 
@@ -138,7 +131,7 @@ Rectangle {
 
                             QGCRadioButton {
                                 text:               qsTr("Gimbal Camera A8")
-                                visible:            QGroundControl.settingsManager.appSettings.vehiclebravo.value && _activeVehicle
+                                visible:            _activeVehicle
                                 enabled:            !_vehicleArmed
                                 checked:            QGroundControl.settingsManager.appSettings.gimbalCameraA8.value
                                 onClicked:{
@@ -159,7 +152,7 @@ Rectangle {
 
                             QGCRadioButton {
                                 text:               qsTr("Gimbal Camera ZT6")
-                                visible:            QGroundControl.settingsManager.appSettings.vehiclebravo.value && _activeVehicle
+                                visible:            _activeVehicle
                                 enabled:            !_vehicleArmed
                                 checked:            QGroundControl.settingsManager.appSettings.gimbalCameraZT6.value
                                 onClicked:{
@@ -183,7 +176,7 @@ Rectangle {
                                 text:               qsTr("Rear Payload")
                                 Layout.columnSpan:  3
                                 Layout.alignment:   Qt.AlignHCenter
-                                visible:            QGroundControl.settingsManager.appSettings.vehiclebravo.value && _activeVehicle
+                                visible:            _activeVehicle
                             }
 
                             ButtonGroup {
@@ -194,7 +187,7 @@ Rectangle {
 
                             QGCRadioButton {
                                 text:               qsTr("Gripper")
-                                visible:            QGroundControl.settingsManager.appSettings.vehiclebravo.value && _activeVehicle
+                                visible:            _activeVehicle
                                 enabled:            !_vehicleArmed
                                 checked:            QGroundControl.settingsManager.appSettings.payloadgripper.value === true
                                 onClicked:{
@@ -220,7 +213,7 @@ Rectangle {
 
                             QGCRadioButton {
                                 text:               qsTr("Grenade Dropper")
-                                visible:            QGroundControl.settingsManager.appSettings.vehiclebravo.value && _activeVehicle
+                                visible:            _activeVehicle
                                 enabled:            !_vehicleArmed
                                 checked:            QGroundControl.settingsManager.appSettings.payloadgrenades.value === true
                                 onClicked:{
@@ -243,7 +236,7 @@ Rectangle {
 
                             QGCRadioButton {
                                 text:               qsTr("Gimbal Camera ZIO")
-                                visible:            QGroundControl.settingsManager.appSettings.vehiclebravo.value && _activeVehicle
+                                visible:            _activeVehicle
                                 enabled:            !_vehicleArmed
                                 checked:            QGroundControl.settingsManager.appSettings.gimbalCameraZIO.value
                                 onClicked:{
@@ -269,7 +262,7 @@ Rectangle {
                                 Layout.columnSpan:  3
                                 Layout.alignment:   Qt.AlignHCenter
                                 font.pointSize:     ScreenTools.smallFontPointSize
-                                visible: QGroundControl.settingsManager.appSettings.vehiclebravo.value && _activeVehicle
+                                visible: _activeVehicle
                             }
 
                             QGCButton {
@@ -316,7 +309,6 @@ Rectangle {
 
                     //            QGCRadioButton {
                     //                text:               qsTr("ON")
-                    //                enabled:            QGroundControl.settingsManager.appSettings.vehiclebravo.value
                     //                checked:            QGroundControl.settingsManager.appSettings.gimbalCameraA8.value
                     //                onClicked:{
                     //                    QGroundControl.settingsManager.appSettings.gimbalCameraA8.value = true
@@ -326,7 +318,6 @@ Rectangle {
 
                     //            QGCRadioButton {
                     //                text:               qsTr("OFF")
-                    //                enabled:            QGroundControl.settingsManager.appSettings.vehiclebravo.value
                     //                checked:            !QGroundControl.settingsManager.appSettings.gimbalCameraA8.value
                     //                onClicked:{
                     //                    QGroundControl.settingsManager.appSettings.gimbalCameraA8.value = false
@@ -609,7 +600,7 @@ Rectangle {
                                 QGCLabel {
                                     id:         gimbalA8rtspUrlLabel
                                     text:       qsTr("Gimbal A8 RTSP URL")
-                                    visible:    !_videoAutoStreamConfig && _isRTSP && _videoSettings.rtspUrl.visible && QGroundControl.settingsManager.appSettings.vehiclebravo.value
+                                    visible:    !_videoAutoStreamConfig && _isRTSP && _videoSettings.rtspUrl.visible
                                 }
                                 FactTextField {
                                     Layout.preferredWidth:  _comboFieldWidth
@@ -620,7 +611,7 @@ Rectangle {
                                 QGCLabel {
                                     id:         gimbalZT6MainrtspUrlLabel
                                     text:       qsTr("Gimbal ZT6 Main RTSP URL")
-                                    visible:    !_videoAutoStreamConfig && _isRTSP && _videoSettings.rtspUrl.visible && QGroundControl.settingsManager.appSettings.vehiclebravo.value
+                                    visible:    !_videoAutoStreamConfig && _isRTSP && _videoSettings.rtspUrl.visible
                                 }
                                 FactTextField {
                                     Layout.preferredWidth:  _comboFieldWidth
@@ -631,7 +622,7 @@ Rectangle {
                                 QGCLabel {
                                     id:         gimbalZT6SubrtspUrlLabel
                                     text:       qsTr("Gimbal ZT6 Sub RTSP URL")
-                                    visible:    false //!_videoAutoStreamConfig && _isRTSP && _videoSettings.rtspUrl.visible && QGroundControl.settingsManager.appSettings.vehiclebravo.value
+                                    visible:    false //!_videoAutoStreamConfig && _isRTSP && _videoSettings.rtspUrl.visible
                                 }
                                 FactTextField {
                                     Layout.preferredWidth:  _comboFieldWidth
@@ -642,7 +633,7 @@ Rectangle {
                                 QGCLabel {
                                     id:         gimbalZIOrtspUrlLabel
                                     text:       qsTr("Gimbal ZIO RTSP URL")
-                                    visible:    !_videoAutoStreamConfig && _isRTSP && _videoSettings.rtspUrl.visible && QGroundControl.settingsManager.appSettings.vehiclebravo.value
+                                    visible:    !_videoAutoStreamConfig && _isRTSP && _videoSettings.rtspUrl.visible
                                 }
                                 FactTextField {
                                     Layout.preferredWidth:  _comboFieldWidth

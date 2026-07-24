@@ -40,7 +40,7 @@ Component {
         property Fact param6: controller.getParameterFact(-1, "EK3_SRC1_POSZ")
         property bool showBaro: param6.value == 1
 
-        property Fact param7: controller.getParameterFact(-1, "SCR_USER1")
+        property Fact param7: controller.getParameterFact(-1, "LANDING_ASSIST")
         property bool showLandingAssistON: param7.value == 1
         property bool showLandingAssistOFF: param7.value == 0
 
@@ -56,7 +56,7 @@ Component {
         property Fact param11: controller.getParameterFact(-1, "RNGFND1_ORIENT")
         property bool showSurfaceTracking: param10.value != 0 && param11.value == 25
         
-        property bool landingLightAvailable: controller.parameterExists(-1, "LIGHT_LANDING")
+        property bool landingLightAvailable: controller.parameterExists(-1, "STROBE_LIGHTS")
 
         property Fact param13: controller.getParameterFact(-1, "STROBE_LIGHTS", false /* reportMissing */)
         property bool showLandingLightOFF: param13.value == 0
@@ -95,51 +95,6 @@ Component {
                 }
 
                 QGCLabel {
-                    text:       qsTr("Speed Mode:")
-                    anchors.verticalCenter: parent.verticalCenter
-                    font.bold:              true
-                }
-
-                QGCRadioButton {
-                    font.pointSize: ScreenTools.defaultFontPointSize
-                    text:           qsTr("Cine")
-                    enabled:        QGroundControl.settingsManager.appSettings.vehiclebravo.value && _activeVehicle.flightMode == "Loiter"
-                    checked:        showSlow
-                    onClicked:      _activeVehicle.setSpeedMode(1)
-                }
-
-                QGCRadioButton {
-                    font.pointSize: ScreenTools.defaultFontPointSize
-                    text:           qsTr("Normal")
-                    enabled:        QGroundControl.settingsManager.appSettings.vehiclebravo.value && _activeVehicle.flightMode == "Loiter"
-                    checked:        showNormal
-                    onClicked:      _activeVehicle.setSpeedMode(2)
-                }
-
-                QGCRadioButton {
-                    font.pointSize: ScreenTools.defaultFontPointSize
-                    text:           qsTr("Sport")
-                    enabled:        QGroundControl.settingsManager.appSettings.vehiclebravo.value && _activeVehicle.flightMode == "Loiter"
-                    checked:        showFast
-                    onClicked:      _activeVehicle.setSpeedMode(3)
-                }
-
-            }
-
-            Row {
-                Layout.alignment:   Qt.AlignLeft
-                spacing:            ScreenTools.defaultFontPixelWidth
-
-                QGCColoredImage {
-                    anchors.top:        parent.top
-                    anchors.bottom:     parent.bottom
-                    width:              height
-                    sourceSize.width:   width
-                    source:             "/res/position.svg"
-                    color:              qgcPal.buttonText
-                }
-
-                QGCLabel {
                     text:       qsTr("Position Source:")
                     anchors.verticalCenter: parent.verticalCenter
                     font.bold:              true
@@ -148,7 +103,6 @@ Component {
                 QGCRadioButton {
                     font.pointSize: ScreenTools.defaultFontPointSize
                     text:           qsTr("GPS + Baro")
-                    enabled:        QGroundControl.settingsManager.appSettings.vehiclebravo.value //&& !QGroundControl.settingsManager.appSettings.payloadgripper.value
                     checked:        showOpflow
                     onClicked:      _activeVehicle.sendPositionAction(1)
                 }
@@ -156,7 +110,6 @@ Component {
                 QGCRadioButton {
                     font.pointSize: ScreenTools.defaultFontPointSize
                     text:           qsTr("Opflow + Baro")
-                    enabled:        QGroundControl.settingsManager.appSettings.vehiclebravo.value 
                     checked:        showGPSposition
                     onClicked:      _activeVehicle.sendPositionAction(2)
                 }
@@ -164,7 +117,6 @@ Component {
                 QGCRadioButton {
                     font.pointSize: ScreenTools.defaultFontPointSize
                     text:           qsTr("Full GPS")
-                    enabled:        QGroundControl.settingsManager.appSettings.vehiclebravo.value 
                     checked:        showAutoposition
                     onClicked:      _activeVehicle.sendPositionAction(3)
                 }
@@ -193,7 +145,6 @@ Component {
                 QGCRadioButton {
                     font.pointSize: ScreenTools.defaultFontPointSize
                     text:           qsTr("ON")
-                    enabled:        QGroundControl.settingsManager.appSettings.vehiclebravo.value
                     checked:        showLandingAssistON
                     onClicked:      _activeVehicle.sendLandingAssistAction(1)
 
@@ -202,7 +153,6 @@ Component {
                 QGCRadioButton {
                     font.pointSize: ScreenTools.defaultFontPointSize
                     text:           qsTr("OFF")
-                    enabled:        QGroundControl.settingsManager.appSettings.vehiclebravo.value
                     checked:        showLandingAssistOFF
                     onClicked:      _activeVehicle.sendLandingAssistAction(0)
                 }
@@ -272,20 +222,21 @@ Component {
 
                 QGCRadioButton {
                     font.pointSize: ScreenTools.defaultFontPointSize
-                    text:           qsTr("OFF")
-                    enabled:        landingLightAvailable
-                    checked:        showLandingLightOFF
-                    onClicked:      _activeVehicle.setLandingLight(0)
-                }
-
-                QGCRadioButton {
-                    font.pointSize: ScreenTools.defaultFontPointSize
                     text:           qsTr("ON")
                     enabled:        landingLightAvailable
                     checked:        showLandingLightON
                     onClicked:      _activeVehicle.setLandingLight(1)
 
                 }
+
+                QGCRadioButton {
+                    font.pointSize: ScreenTools.defaultFontPointSize
+                    text:           qsTr("OFF")
+                    enabled:        landingLightAvailable
+                    checked:        showLandingLightOFF
+                    onClicked:      _activeVehicle.setLandingLight(0)
+                }
+
             }
 
             Row {

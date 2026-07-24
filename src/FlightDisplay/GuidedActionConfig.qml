@@ -16,7 +16,6 @@ import QGroundControl.FactControls  1.0
 
 ToolStripAction {
     property var   activeVehicle:           QGroundControl.multiVehicleManager.activeVehicle
-    property bool   _vehiclebravo: QGroundControl.settingsManager.appSettings.vehiclebravo.value
 
     text:       "Config"
     iconSource: "/res/config.svg"
