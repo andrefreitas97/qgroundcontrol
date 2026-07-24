@@ -23,6 +23,13 @@ Item {
     property real fontPointSize: ScreenTools.largeFontPointSize
     property var activeVehicle: QGroundControl.multiVehicleManager.activeVehicle
 
+    // Flight modes hidden from the drop-down unless Advanced UI is enabled
+    property var _advancedFlightModes: [
+        "Acro", "Drift", "Sport", "Flip", "Autotune", "Position Hold",
+        "Throw", "Avoid ADSB", "Guided No GPS", "Flow Hold", "ZigZag",
+        "SystemID", "AutoRotate", "AutoRTL", "Turtle"
+    ]
+
     Component {
         id: flightModeMenu
 
@@ -51,7 +58,12 @@ Item {
                     spacing: ScreenTools.defaultFontPixelWidth / 2
 
                     Repeater {
-                        model: activeVehicle ? activeVehicle.flightModes : []
+                        model: {
+                            if (!activeVehicle) return []
+                            var modes = activeVehicle.flightModes
+                            if (QGroundControl.corePlugin.showAdvancedUI) return modes
+                            return modes.filter(function(m) { return _advancedFlightModes.indexOf(m) === -1 })
+                        }
 
                         QGCButton {
                             text: modelData
