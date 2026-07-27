@@ -175,6 +175,7 @@ DECLARE_SETTINGSFACT(AppSettings, forwardMavlinkAPMSupportHostName)
 
 DECLARE_SETTINGSFACT(AppSettings, payloadgripper)
 DECLARE_SETTINGSFACT(AppSettings, payloadgrenades)
+DECLARE_SETTINGSFACT(AppSettings, gimbalCameraA2)
 DECLARE_SETTINGSFACT(AppSettings, gimbalCameraA8)
 DECLARE_SETTINGSFACT(AppSettings, gimbalCameraZT6)
 DECLARE_SETTINGSFACT(AppSettings, gimbalCameraZIO)

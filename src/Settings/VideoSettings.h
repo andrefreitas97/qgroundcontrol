@@ -25,7 +25,7 @@ public:
     DEFINE_SETTINGFACT(tcpUrl)
     DEFINE_SETTINGFACT(rtspUrl)
 
-    DEFINE_SETTINGFACT(rtspUrlFPV)
+    DEFINE_SETTINGFACT(rtspUrlA2)
     DEFINE_SETTINGFACT(rtspUrlA8)
     DEFINE_SETTINGFACT(rtspUrlZT6Main)
     DEFINE_SETTINGFACT(rtspUrlZT6Sub)
@@ -40,7 +40,7 @@ public:
     DEFINE_SETTINGFACT(gimbalMode)
     DEFINE_SETTINGFACT(zt6ImageMode)
     DEFINE_SETTINGFACT(gridLines)
-    DEFINE_SETTINGFACT(videoFlip_FPV)
+    DEFINE_SETTINGFACT(videoFlip_GimbalA2)
     DEFINE_SETTINGFACT(videoFlip_GimbalA8)
     DEFINE_SETTINGFACT(videoFlip_GimbalZT6Main)
     DEFINE_SETTINGFACT(videoFlip_GimbalZT6Sub)

@@ -126,45 +126,59 @@ Rectangle {
                             ButtonGroup {
                                 id: frontPayloadGroup
                                 exclusive: true  // Ensures only one button is selected at a time
+                                // Guarantee exactly one option is selected (default to A2)
+                                Component.onCompleted: {
+                                    if (QGroundControl.settingsManager.appSettings.gimbalCameraA8.value) {
+                                        QGroundControl.settingsManager.appSettings.gimbalCameraZT6.value = false
+                                        QGroundControl.settingsManager.appSettings.gimbalCameraA2.value = false
+                                    } else if (QGroundControl.settingsManager.appSettings.gimbalCameraZT6.value) {
+                                        QGroundControl.settingsManager.appSettings.gimbalCameraA2.value = false
+                                    } else {
+                                        QGroundControl.settingsManager.appSettings.gimbalCameraA2.value = true
+                                    }
+                                }
                             }
 
                             QGCRadioButton {
-                                text:               qsTr("Gimbal Camera A8")
+                                text:               qsTr("A2 mini")
                                 visible:            _activeVehicle
                                 enabled:            !_vehicleArmed
-                                checked:            QGroundControl.settingsManager.appSettings.gimbalCameraA8.value
+                                checked:            QGroundControl.settingsManager.appSettings.gimbalCameraA2.value
                                 onClicked:{
-                                    if(QGroundControl.settingsManager.appSettings.gimbalCameraA8.value){
-                                        QGroundControl.settingsManager.appSettings.gimbalCameraA8.value = false
-                                        QGroundControl.settingsManager.videoSettings.rtspUrl.value = QGroundControl.settingsManager.videoSettings.rtspUrlFPV.value
-                                        QGroundControl.multiVehicleManager.activeVehicle.sendSetMountFPVAction()
-                                        QGroundControl.multiVehicleManager.activeVehicle.sendDisableMountA8Action()
-                                    }else {
-                                        QGroundControl.settingsManager.appSettings.gimbalCameraA8.value = true
-                                        QGroundControl.settingsManager.appSettings.gimbalCameraZT6.value = false
-                                        QGroundControl.multiVehicleManager.activeVehicle.sendEnableMountA8Action()
-                                    }
+                                    QGroundControl.settingsManager.appSettings.gimbalCameraA2.value = true
+                                    QGroundControl.settingsManager.appSettings.gimbalCameraA8.value = false
+                                    QGroundControl.settingsManager.appSettings.gimbalCameraZT6.value = false
+                                    QGroundControl.multiVehicleManager.activeVehicle.sendEnableMountA2Action()
                                 }
                                 Layout.columnSpan:  3
                                 ButtonGroup.group: frontPayloadGroup  // Assign to the ButtonGroup
                             }
 
                             QGCRadioButton {
-                                text:               qsTr("Gimbal Camera ZT6")
+                                text:               qsTr("A8 mini")
+                                visible:            _activeVehicle
+                                enabled:            !_vehicleArmed
+                                checked:            QGroundControl.settingsManager.appSettings.gimbalCameraA8.value
+                                onClicked:{
+                                    QGroundControl.settingsManager.appSettings.gimbalCameraA8.value = true
+                                    QGroundControl.settingsManager.appSettings.gimbalCameraZT6.value = false
+                                    QGroundControl.settingsManager.appSettings.gimbalCameraA2.value = false
+                                    QGroundControl.multiVehicleManager.activeVehicle.sendEnableMountA8Action()
+                                }
+                                Layout.columnSpan:  3
+                                ButtonGroup.group: frontPayloadGroup  // Assign to the ButtonGroup
+                            }
+
+                            QGCRadioButton {
+                                text:               qsTr("ZT6 mini")
                                 visible:            _activeVehicle
                                 enabled:            !_vehicleArmed
                                 checked:            QGroundControl.settingsManager.appSettings.gimbalCameraZT6.value
                                 onClicked:{
-                                    if(QGroundControl.settingsManager.appSettings.gimbalCameraZT6.value){
-                                        QGroundControl.settingsManager.appSettings.gimbalCameraZT6.value = false
-                                        QGroundControl.settingsManager.videoSettings.rtspUrl.value = QGroundControl.settingsManager.videoSettings.rtspUrlFPV.value
-                                        QGroundControl.multiVehicleManager.activeVehicle.sendSetMountFPVAction()
-                                        QGroundControl.multiVehicleManager.activeVehicle.sendDisableMountZT6Action()
-                                    }else {
-                                        QGroundControl.settingsManager.appSettings.gimbalCameraZT6.value = true
-                                        QGroundControl.settingsManager.appSettings.gimbalCameraA8.value = false
-                                        QGroundControl.multiVehicleManager.activeVehicle.sendEnableMountZT6Action()
-                                    }
+                                    QGroundControl.settingsManager.appSettings.gimbalCameraZT6.value = true
+                                    QGroundControl.settingsManager.appSettings.gimbalCameraA8.value = false
+                                    QGroundControl.settingsManager.appSettings.gimbalCameraA2.value = false
+                                    QGroundControl.multiVehicleManager.activeVehicle.sendEnableMountZT6Action()
                                 }
                                 Layout.columnSpan:  3
                                 ButtonGroup.group: frontPayloadGroup  // Assign to the ButtonGroup
@@ -187,7 +201,7 @@ Rectangle {
                             QGCRadioButton {
                                 text:               qsTr("Gripper")
                                 visible:            _activeVehicle
-                                enabled:            !_vehicleArmed
+                                enabled:            false //!_vehicleArmed
                                 checked:            QGroundControl.settingsManager.appSettings.payloadgripper.value === true
                                 onClicked:{
                                     if(QGroundControl.settingsManager.appSettings.payloadgripper.value){
@@ -197,12 +211,8 @@ Rectangle {
                                         QGroundControl.settingsManager.appSettings.payloadgrenades.value = false
                                         QGroundControl.multiVehicleManager.activeVehicle.setPayloadType(0)
 
-                                        QGroundControl.multiVehicleManager.activeVehicle.sendPositionAction(1)
-
                                         QGroundControl.settingsManager.appSettings.gimbalCameraZIO.value = false
-                                        QGroundControl.settingsManager.videoSettings.rtspUrl.value = QGroundControl.settingsManager.videoSettings.rtspUrlFPV.value
-                                        QGroundControl.multiVehicleManager.activeVehicle.sendSetMountFPVAction()
-                                        //QGroundControl.multiVehicleManager.activeVehicle.sendDisableMountZIOAction()
+                                        QGroundControl.settingsManager.videoSettings.rtspUrl.value = QGroundControl.settingsManager.videoSettings.rtspUrlA2.value
                                     }
 
                                 }
@@ -213,7 +223,7 @@ Rectangle {
                             QGCRadioButton {
                                 text:               qsTr("Grenade Dropper")
                                 visible:            _activeVehicle
-                                enabled:            !_vehicleArmed
+                                enabled:            false //!_vehicleArmed
                                 checked:            QGroundControl.settingsManager.appSettings.payloadgrenades.value === true
                                 onClicked:{
                                     if(QGroundControl.settingsManager.appSettings.payloadgrenades.value){
@@ -224,9 +234,7 @@ Rectangle {
                                         QGroundControl.multiVehicleManager.activeVehicle.setPayloadType(1)
 
                                         QGroundControl.settingsManager.appSettings.gimbalCameraZIO.value = false
-                                        QGroundControl.settingsManager.videoSettings.rtspUrl.value = QGroundControl.settingsManager.videoSettings.rtspUrlFPV.value
-                                        QGroundControl.multiVehicleManager.activeVehicle.sendSetMountFPVAction()
-                                        //QGroundControl.multiVehicleManager.activeVehicle.sendDisableMountZIOAction()
+                                        QGroundControl.settingsManager.videoSettings.rtspUrl.value = QGroundControl.settingsManager.videoSettings.rtspUrlA2.value
                                     }
                                 }
                                 Layout.columnSpan:  3
@@ -236,14 +244,12 @@ Rectangle {
                             QGCRadioButton {
                                 text:               qsTr("Gimbal Camera ZIO")
                                 visible:            _activeVehicle
-                                enabled:            !_vehicleArmed
+                                enabled:            false //!_vehicleArmed
                                 checked:            QGroundControl.settingsManager.appSettings.gimbalCameraZIO.value
                                 onClicked:{
                                     if(QGroundControl.settingsManager.appSettings.gimbalCameraZIO.value){
                                         QGroundControl.settingsManager.appSettings.gimbalCameraZIO.value = false
-                                        QGroundControl.settingsManager.videoSettings.rtspUrl.value = QGroundControl.settingsManager.videoSettings.rtspUrlFPV.value
-                                        QGroundControl.multiVehicleManager.activeVehicle.sendSetMountFPVAction()
-                                        //QGroundControl.multiVehicleManager.activeVehicle.sendDisableMountZIOAction()
+                                        QGroundControl.settingsManager.videoSettings.rtspUrl.value = QGroundControl.settingsManager.videoSettings.rtspUrlA2.value
                                     }else {
                                         QGroundControl.settingsManager.appSettings.gimbalCameraZIO.value = true
                                         //QGroundControl.multiVehicleManager.activeVehicle.sendEnableMountZIOAction()
@@ -279,55 +285,6 @@ Rectangle {
                         }
                     }
 
-                    //Item { width: 1; height: _margins; visible: cameraSectionLabel.visible }
-                    //QGCLabel {
-                    //    id:         cameraSectionLabel
-                    //    text:       qsTr("Camera")
-                    //    visible:    QGroundControl.settingsManager.flyViewSettings.visible
-                    //}
-                    //Rectangle {
-                    //    Layout.preferredHeight: cameraCol.height + (_margins * 2)
-                    //    Layout.preferredWidth:  cameraCol.width + (_margins * 2)
-                    //    color:                  qgcPal.windowShade
-                    //    visible:                cameraSectionLabel.visible
-                    //    Layout.fillWidth:       true
-
-                    //    ColumnLayout {
-                    //        id:                         cameraCol
-                    //        anchors.margins:            _margins
-                    //        anchors.top:                parent.top
-                    //        anchors.horizontalCenter:   parent.horizontalCenter
-                    //        spacing:                    _margins
-
-                    //        RowLayout {
-                    //            spacing: ScreenTools.defaultFontPixelWidth
-
-                    //            QGCLabel {
-                    //                text:       qsTr("Gremsy Zio:")
-                    //            }
-
-                    //            QGCRadioButton {
-                    //                text:               qsTr("ON")
-                    //                checked:            QGroundControl.settingsManager.appSettings.gimbalCameraA8.value
-                    //                onClicked:{
-                    //                    QGroundControl.settingsManager.appSettings.gimbalCameraA8.value = true
-                    //                }
-                    //                Layout.columnSpan:  3
-                    //            }
-
-                    //            QGCRadioButton {
-                    //                text:               qsTr("OFF")
-                    //                checked:            !QGroundControl.settingsManager.appSettings.gimbalCameraA8.value
-                    //                onClicked:{
-                    //                    QGroundControl.settingsManager.appSettings.gimbalCameraA8.value = false
-                    //                    QGroundControl.settingsManager.videoSettings.rtspUrl.value = QGroundControl.settingsManager.videoSettings.rtspUrlFPV.value
-                    //                    QGroundControl.multiVehicleManager.activeVehicle.sendSetMountA8Action()
-                    //                }
-                    //                Layout.columnSpan:  3
-                    //            }
-                    //        }
-                    //    }
-                    //}
 
                     Item { width: 1; height: _margins; visible: flyViewSectionLabel.visible }
                     QGCLabel {
@@ -582,14 +539,14 @@ Rectangle {
                                 }
 
                                 QGCLabel {
-                                    id:         fpvrtspUrlLabel
-                                    text:       qsTr("FPV RTSP URL")
+                                    id:         a2rtspUrlLabel
+                                    text:       qsTr("Gimbal A2 RTSP URL")
                                     visible:    !_videoAutoStreamConfig && _isRTSP && _videoSettings.rtspUrl.visible
                                 }
                                 FactTextField {
                                     Layout.preferredWidth:  _comboFieldWidth
-                                    fact:                   _videoSettings.rtspUrlFPV
-                                    visible:                fpvrtspUrlLabel.visible
+                                    fact:                   _videoSettings.rtspUrlA2
+                                    visible:                a2rtspUrlLabel.visible
                                     //text: "rtsp://192.168.144.25:8554/main.264"
                                     //onTextChanged: {
                                     //    SiYi.camera.analyzeIp(text)
@@ -633,11 +590,13 @@ Rectangle {
                                     id:         gimbalZIOrtspUrlLabel
                                     text:       qsTr("Gimbal ZIO RTSP URL")
                                     visible:    !_videoAutoStreamConfig && _isRTSP && _videoSettings.rtspUrl.visible
+                                    enabled:               false
                                 }
                                 FactTextField {
                                     Layout.preferredWidth:  _comboFieldWidth
                                     fact:                   _videoSettings.rtspUrlZIO
                                     visible:                gimbalZIOrtspUrlLabel.visible
+                                    enabled:               false
                                 }
 
                                 QGCLabel {

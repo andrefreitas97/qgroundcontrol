@@ -356,6 +356,13 @@
     "default":     false
 },
 {
+    "name":             "gimbalCameraA2",
+    "shortDesc": "Gimbal Camera A2",
+    "longDesc":  "Sets Gimbal Camera A2 as available or unavailable.",
+    "type":             "bool",
+    "default":     true
+},
+{
     "name":             "gimbalCameraA8",
     "shortDesc": "Gimbal Camera A8",
     "longDesc":  "Sets Gimbal Camera A8 as available or unavailable.",

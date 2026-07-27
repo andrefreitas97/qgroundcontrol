@@ -70,6 +70,7 @@ public:
 
     DEFINE_SETTINGFACT(payloadgripper)
     DEFINE_SETTINGFACT(payloadgrenades)
+    DEFINE_SETTINGFACT(gimbalCameraA2)
     DEFINE_SETTINGFACT(gimbalCameraA8)
     DEFINE_SETTINGFACT(gimbalCameraZT6)
     DEFINE_SETTINGFACT(gimbalCameraZIO)

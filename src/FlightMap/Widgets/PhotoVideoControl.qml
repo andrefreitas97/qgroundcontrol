@@ -584,9 +584,9 @@ Rectangle {
                     }
 
                     QGCSwitch {
-                        checked:            _videoStreamSettings.videoFlip_FPV.rawValue
-                        visible:            _anyVideoStreamAvailable && _videoSettings.rtspUrl.value == _videoSettings.rtspUrlFPV.value
-                        onClicked:          _videoStreamSettings.videoFlip_FPV.rawValue = checked ? true : false
+                        checked:            _videoStreamSettings.videoFlip_GimbalA2.rawValue
+                        visible:            _anyVideoStreamAvailable && _videoSettings.rtspUrl.value == _videoSettings.rtspUrlA2.value
+                        onClicked:          _videoStreamSettings.videoFlip_GimbalA2.rawValue = checked ? true : false
                     }
 
                     QGCSwitch {

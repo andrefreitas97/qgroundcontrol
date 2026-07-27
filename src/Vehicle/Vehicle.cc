@@ -4599,49 +4599,40 @@ void Vehicle::sendLandingAssistOFFAction()
     parameterManager()->_sendParamSetToVehicle(_defaultComponentId, "LANDING_ASSIST" , FactMetaData::valueTypeUint8, 0);
 }
 
-void Vehicle::sendSetMountFPVAction()
+void Vehicle::sendEnableMountA2Action()
 {
-    parameterManager()->_sendParamSetToVehicle(_defaultComponentId, "SCR_USER2" , FactMetaData::valueTypeUint8, 0);
-}
+    parameterManager()->_sendParamSetToVehicle(_defaultComponentId, "CAM1_TYPE" , FactMetaData::valueTypeUint8, 0);
+    parameterManager()->_sendParamSetToVehicle(_defaultComponentId, "MNT1_RC_RATE" , FactMetaData::valueTypeUint8, 0);
+    parameterManager()->_sendParamSetToVehicle(_defaultComponentId, "MNT1_YAW_MAX" , FactMetaData::valueTypeUint8, 0);
+    parameterManager()->_sendParamSetToVehicle(_defaultComponentId, "MNT1_YAW_MIN" , FactMetaData::valueTypeUint8, 0);
+    parameterManager()->_sendParamSetToVehicle(_defaultComponentId, "MNT1_TYPE" , FactMetaData::valueTypeUint8, 1);
 
-void Vehicle::sendSetMountA8Action()
-{
-    parameterManager()->_sendParamSetToVehicle(_defaultComponentId, "SCR_USER2" , FactMetaData::valueTypeUint8, 1);
+    parameterManager()->_sendParamSetToVehicle(_defaultComponentId, "RC10_OPTION" , FactMetaData::valueTypeUint8, 213);
+    parameterManager()->_sendParamSetToVehicle(_defaultComponentId, "RC11_OPTION" , FactMetaData::valueTypeUint8, 0);
 }
 
 void Vehicle::sendEnableMountA8Action()
 {
     parameterManager()->_sendParamSetToVehicle(_defaultComponentId, "CAM1_TYPE" , FactMetaData::valueTypeUint8, 4);
+    parameterManager()->_sendParamSetToVehicle(_defaultComponentId, "MNT1_RC_RATE" , FactMetaData::valueTypeUint8, 35);
+    parameterManager()->_sendParamSetToVehicle(_defaultComponentId, "MNT1_YAW_MAX" , FactMetaData::valueTypeUint8, 80);
+    parameterManager()->_sendParamSetToVehicle(_defaultComponentId, "MNT1_YAW_MIN" , FactMetaData::valueTypeUint8, -80);
     parameterManager()->_sendParamSetToVehicle(_defaultComponentId, "MNT1_TYPE" , FactMetaData::valueTypeUint8, 8);
-}
 
-void Vehicle::sendDisableMountA8Action()
-{
-    parameterManager()->_sendParamSetToVehicle(_defaultComponentId, "CAM1_TYPE" , FactMetaData::valueTypeUint8, 0);
-    parameterManager()->_sendParamSetToVehicle(_defaultComponentId, "MNT1_TYPE" , FactMetaData::valueTypeUint8, 0);
-}
-
-void Vehicle::sendSetMountZT6Action()
-{
-    parameterManager()->_sendParamSetToVehicle(_defaultComponentId, "SCR_USER2" , FactMetaData::valueTypeUint8, 1);
+    parameterManager()->_sendParamSetToVehicle(_defaultComponentId, "RC10_OPTION" , FactMetaData::valueTypeUint8, 213);
+    parameterManager()->_sendParamSetToVehicle(_defaultComponentId, "RC11_OPTION" , FactMetaData::valueTypeUint8, 214);
 }
 
 void Vehicle::sendEnableMountZT6Action()
 {
     parameterManager()->_sendParamSetToVehicle(_defaultComponentId, "CAM1_TYPE" , FactMetaData::valueTypeUint8, 4);
+    parameterManager()->_sendParamSetToVehicle(_defaultComponentId, "MNT1_RC_RATE" , FactMetaData::valueTypeUint8, 35);
+    parameterManager()->_sendParamSetToVehicle(_defaultComponentId, "MNT1_YAW_MAX" , FactMetaData::valueTypeUint8, 80);
+    parameterManager()->_sendParamSetToVehicle(_defaultComponentId, "MNT1_YAW_MIN" , FactMetaData::valueTypeUint8, -80);
     parameterManager()->_sendParamSetToVehicle(_defaultComponentId, "MNT1_TYPE" , FactMetaData::valueTypeUint8, 8);
-}
 
-void Vehicle::sendDisableMountZT6Action()
-{
-    parameterManager()->_sendParamSetToVehicle(_defaultComponentId, "CAM1_TYPE" , FactMetaData::valueTypeUint8, 0);
-    parameterManager()->_sendParamSetToVehicle(_defaultComponentId, "MNT1_TYPE" , FactMetaData::valueTypeUint8, 0);
-}
-
-void Vehicle::sendDisableMountZIOAction()
-{
-    parameterManager()->_sendParamSetToVehicle(_defaultComponentId, "CAM2_TYPE" , FactMetaData::valueTypeUint8, 0);
-    parameterManager()->_sendParamSetToVehicle(_defaultComponentId, "MNT2_TYPE" , FactMetaData::valueTypeUint8, 0);
+    parameterManager()->_sendParamSetToVehicle(_defaultComponentId, "RC10_OPTION" , FactMetaData::valueTypeUint8, 213);
+    parameterManager()->_sendParamSetToVehicle(_defaultComponentId, "RC11_OPTION" , FactMetaData::valueTypeUint8, 214);
 }
 
 void Vehicle::setPayloadType(int payload_type)

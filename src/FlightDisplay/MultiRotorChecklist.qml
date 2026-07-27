@@ -135,7 +135,7 @@ Item {
             }
 
             PreFlightCheckButton {
-                name:           qsTr("FPV Camera")
+                name:           qsTr("Camera")
                 manualText:     qsTr("Video available and no lag?")
             }
 

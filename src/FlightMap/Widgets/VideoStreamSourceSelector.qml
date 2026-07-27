@@ -32,7 +32,7 @@ Rectangle {
     height:     mainLayout.height + (_margins * 2)
     color:      Qt.rgba(qgcPal.window.r, qgcPal.window.g, qgcPal.window.b, 0.5)
     radius:     _margins
-    visible:    multiVehiclePanelSelector.showSingleVehiclePanel && (QGroundControl.settingsManager.appSettings.gimbalCameraA8.value || QGroundControl.settingsManager.appSettings.gimbalCameraZT6.value || QGroundControl.settingsManager.appSettings.gimbalCameraZIO.value) && _activeVehicle
+    visible:    multiVehiclePanelSelector.showSingleVehiclePanel && QGroundControl.settingsManager.appSettings.gimbalCameraZT6.value && _activeVehicle
 
     property real   _margins:                                   ScreenTools.defaultFontPixelHeight / 2
     property var    _activeVehicle:                             QGroundControl.multiVehicleManager.activeVehicle
@@ -120,8 +120,7 @@ Rectangle {
 
             onEnabledChanged:{
                 if (enabled) {
-                _videoSettings.rtspUrl.value = _videoSettings.rtspUrlFPV.value;
-                _activeVehicle.sendSetMountFPVAction();
+                _videoSettings.rtspUrl.value = _videoSettings.rtspUrlA2.value;
                 SiYi.camera.analyzeIp(_videoSettings.rtspUrl.value);
                 //gimbalController.activeGimbal = gimbalController.gimbals.get(0)            
                 }
@@ -129,11 +128,10 @@ Rectangle {
 
             QGCRadioButton {
                 font.pointSize: ScreenTools.smallFontPointSize
-                text:           qsTr("FPV\nStream")
-                font.bold:      _videoSettings.rtspUrl.value == _videoSettings.rtspUrlFPV.value ? true : false
-                checked:        _videoSettings.rtspUrl.value == _videoSettings.rtspUrlFPV.value ? true : false
-                onClicked:      {_videoSettings.rtspUrl.value = _videoSettings.rtspUrlFPV.value
-                                _activeVehicle.sendSetMountFPVAction()
+                text:           qsTr("A2\nStream")
+                font.bold:      _videoSettings.rtspUrl.value == _videoSettings.rtspUrlA2.value ? true : false
+                checked:        _videoSettings.rtspUrl.value == _videoSettings.rtspUrlA2.value ? true : false
+                onClicked:      {_videoSettings.rtspUrl.value = _videoSettings.rtspUrlA2.value
                                 SiYi.camera.analyzeIp(_videoSettings.rtspUrl.value)
                                 //gimbalController.activeGimbal = gimbalController.gimbals.get(0)
                                 }
@@ -145,7 +143,6 @@ Rectangle {
                 font.bold:      _videoSettings.rtspUrl.value == _videoSettings.rtspUrlA8.value ? true : false
                 checked:        _videoSettings.rtspUrl.value == _videoSettings.rtspUrlA8.value ? true : false
                 onClicked:      {_videoSettings.rtspUrl.value = _videoSettings.rtspUrlA8.value
-                                _activeVehicle.sendSetMountA8Action()
                                 SiYi.camera.analyzeIp(_videoSettings.rtspUrl.value)
                                 gimbalController.activeGimbal = gimbalController.gimbals.get(0)
                                 }
@@ -158,7 +155,6 @@ Rectangle {
                 font.bold:      _videoSettings.rtspUrl.value == _videoSettings.rtspUrlZT6Main.value ? true : false
                 checked:        _videoSettings.rtspUrl.value == _videoSettings.rtspUrlZT6Main.value ? true : false
                 onClicked:      {_videoSettings.rtspUrl.value = _videoSettings.rtspUrlZT6Main.value
-                                _activeVehicle.sendSetMountZT6Action()
                                 SiYi.camera.analyzeIp(_videoSettings.rtspUrl.value)
                                 gimbalController.activeGimbal = gimbalController.gimbals.get(0)
                                 }
@@ -171,11 +167,11 @@ Rectangle {
                 font.bold:      _videoSettings.rtspUrl.value == _videoSettings.rtspUrlZT6Sub.value ? true : false
                 checked:        _videoSettings.rtspUrl.value == _videoSettings.rtspUrlZT6Sub.value ? true : false
                 onClicked:      {_videoSettings.rtspUrl.value = _videoSettings.rtspUrlZT6Sub.value
-                                _activeVehicle.sendSetMountZT6Action()
+
                                 SiYi.camera.analyzeIp(_videoSettings.rtspUrl.value)
                                 gimbalController.activeGimbal = gimbalController.gimbals.get(0)
                                 }
-                visible:        false //QGroundControl.settingsManager.appSettings.gimbalCameraZT6.value
+                visible:        QGroundControl.settingsManager.appSettings.gimbalCameraZT6.value
             }
 
             QGCRadioButton {
@@ -184,7 +180,6 @@ Rectangle {
                 font.bold:      _videoSettings.rtspUrl.value == _videoSettings.rtspUrlZIO.value ? true : false
                 checked:        _videoSettings.rtspUrl.value == _videoSettings.rtspUrlZIO.value ? true : false
                 onClicked:      {_videoSettings.rtspUrl.value = _videoSettings.rtspUrlZIO.value
-                                //_activeVehicle.sendSetMountZIOAction()
                                 SiYi.camera.analyzeIp(_videoSettings.rtspUrl.value)
                                 //gimbalController.activeGimbal = gimbalController.gimbals.get(1)
                                 }
@@ -514,9 +509,9 @@ Rectangle {
                     }
 
                     QGCSwitch {
-                        checked:            _videoStreamSettings.videoFlip_FPV.rawValue
-                        visible:            _anyVideoStreamAvailable && _videoSettings.rtspUrl.value == _videoSettings.rtspUrlFPV.value
-                        onClicked:          _videoStreamSettings.videoFlip_FPV.rawValue = checked ? true : false
+                        checked:            _videoStreamSettings.videoFlip_GimbalA2.rawValue
+                        visible:            _anyVideoStreamAvailable && _videoSettings.rtspUrl.value == _videoSettings.rtspUrlA2.value
+                        onClicked:          _videoStreamSettings.videoFlip_GimbalA2.rawValue = checked ? true : false
                     }
 
                     QGCSwitch {

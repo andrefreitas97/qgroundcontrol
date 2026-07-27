@@ -569,21 +569,11 @@ public:
 
     Q_INVOKABLE void sendLandingAssistOFFAction();
 
-    Q_INVOKABLE void sendSetMountFPVAction();
-
-    Q_INVOKABLE void sendSetMountA8Action();
-
-    Q_INVOKABLE void sendSetMountZT6Action();
+    Q_INVOKABLE void sendEnableMountA2Action();
 
     Q_INVOKABLE void sendEnableMountA8Action();
 
     Q_INVOKABLE void sendEnableMountZT6Action();
-
-    Q_INVOKABLE void sendDisableMountA8Action();
-
-    Q_INVOKABLE void sendDisableMountZT6Action();
-
-    Q_INVOKABLE void sendDisableMountZIOAction();
 
     Q_INVOKABLE void setPayloadType(int payload_type);
 

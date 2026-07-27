@@ -26,9 +26,9 @@
     "default":     "rtsp://192.168.144.25:8554/main.264"
 },
 {
-    "name":             "rtspUrlFPV",
-    "shortDesc": "RTSP URL FPV",
-    "longDesc":  "RTSP URL FPV video stream.",
+    "name":             "rtspUrlA2",
+    "shortDesc": "RTSP URL A2",
+    "longDesc":  "RTSP URL A2 video stream.",
     "type":             "string",
     "default":     "rtsp://192.168.144.25:8554/main.264"
 },
@@ -155,8 +155,8 @@
     "default":     0
 },
 {
-    "name":             "videoFlip_FPV",
-    "shortDesc": "FPV Video Display Flip",
+    "name":             "videoFlip_GimbalA2",
+    "shortDesc": "Gimbal A2 Video Display Flip",
     "longDesc":  "Handle Video Flip.",
     "type":             "bool",
     "default":     false

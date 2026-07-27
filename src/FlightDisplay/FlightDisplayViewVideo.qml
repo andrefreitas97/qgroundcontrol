@@ -39,17 +39,17 @@ Item {
     property var    _videoSettings:             QGroundControl.settingsManager.videoSettings
 
 
-    property bool _FPVvideo: _videoSettings.rtspUrl.value == _videoSettings.rtspUrlFPV.value ? true : false
+    property bool _GimbalA2video: _videoSettings.rtspUrl.value == _videoSettings.rtspUrlA2.value ? true : false
     property bool _GimbalA8video: _videoSettings.rtspUrl.value == _videoSettings.rtspUrlA8.value ? true : false
     property bool _GimbalZT6Mainvideo: _videoSettings.rtspUrl.value == _videoSettings.rtspUrlZT6Main.value ? true : false
     property bool _GimbalZT6Subvideo: _videoSettings.rtspUrl.value == _videoSettings.rtspUrlZT6Sub.value ? true : false
     property bool _GimbalZIOvideo: _videoSettings.rtspUrl.value == _videoSettings.rtspUrlZIO.value ? true : false
-    property bool _flipFPV: _videoSettings.videoFlip_FPV.rawValue
+    property bool _GimbalA2: _videoSettings.videoFlip_GimbalA2.rawValue
     property bool _flipGimbalA8: _videoSettings.videoFlip_GimbalA8.rawValue
     property bool _flipGimbalZT6Main: _videoSettings.videoFlip_GimbalZT6Main.rawValue
     property bool _flipGimbalZT6Sub: _videoSettings.videoFlip_GimbalZT6Sub.rawValue
     property bool _flipGimbalZIO: _videoSettings.videoFlip_GimbalZIO.rawValue
-    property bool _flip: ((_FPVvideo && _flipFPV) || (_GimbalA8video && _flipGimbalA8) || (_GimbalZT6Mainvideo && _flipGimbalZT6Main) || (_GimbalZT6Subvideo && _flipGimbalZT6Sub) || (_GimbalZIOvideo && _flipGimbalZIO)) ? true : false
+    property bool _flip: ((_GimbalA2video && _GimbalA2) || (_GimbalA8video && _flipGimbalA8) || (_GimbalZT6Mainvideo && _flipGimbalZT6Main) || (_GimbalZT6Subvideo && _flipGimbalZT6Sub) || (_GimbalZIOvideo && _flipGimbalZIO)) ? true : false
 
     function getWidth() {
         return videoBackground.getWidth()
