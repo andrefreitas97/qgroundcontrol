@@ -41,6 +41,8 @@ public:
 
     ~QGCCorePlugin_p()
     {
+        if(pPayload)
+            delete pPayload;
         if(pGeneral)
             delete pGeneral;
         if(pCommLinks)
@@ -59,6 +61,12 @@ public:
             delete pMAVLink;
         if(pNTRIP)
             delete pNTRIP;
+        if(pRTK)
+            delete pRTK;
+        if(pVideo)
+            delete pVideo;
+        if(pADSB)
+            delete pADSB;
 #if defined(QT_DEBUG)
         if(pConsole)
             delete pConsole;
@@ -77,6 +85,7 @@ public:
             delete defaultOptions;
     }
 
+    QmlComponentInfo* pPayload                  = nullptr;
     QmlComponentInfo* pGeneral                  = nullptr;
     QmlComponentInfo* pCommLinks                = nullptr;
     QmlComponentInfo* pOfflineMaps              = nullptr;
@@ -88,6 +97,9 @@ public:
 #endif
     QmlComponentInfo* pMAVLink                  = nullptr;
     QmlComponentInfo* pNTRIP                    = nullptr;
+    QmlComponentInfo* pRTK                      = nullptr;
+    QmlComponentInfo* pVideo                    = nullptr;
+    QmlComponentInfo* pADSB                     = nullptr;
 #if defined(QT_DEBUG)
     QmlComponentInfo* pConsole                  = nullptr;
     QmlComponentInfo* pHelp                     = nullptr;
@@ -132,6 +144,9 @@ void QGCCorePlugin::setToolbox(QGCToolbox *toolbox)
 QVariantList &QGCCorePlugin::settingsPages()
 {
     if(!_p->pGeneral) {
+        _p->pPayload = new QmlComponentInfo(tr("Payload"),
+                                            QUrl::fromUserInput("qrc:/qml/PayloadSettings.qml"),
+                                            QUrl::fromUserInput("qrc:/res/payload.svg"));
         _p->pGeneral = new QmlComponentInfo(tr("General"),
                                             QUrl::fromUserInput("qrc:/qml/GeneralSettings.qml"),
                                             QUrl::fromUserInput("qrc:/res/gear-white.svg"));
@@ -157,6 +172,15 @@ QVariantList &QGCCorePlugin::settingsPages()
         _p->pNTRIP = new QmlComponentInfo(tr("NTRIP"),
                                             QUrl::fromUserInput("qrc:/qml/NTRIPSettings.qml"),
                                             QUrl::fromUserInput("qrc:/res/waves.svg"));
+        _p->pRTK = new QmlComponentInfo(tr("RTK"),
+                                            QUrl::fromUserInput("qrc:/qml/RTKSettings.qml"),
+                                            QUrl::fromUserInput("qrc:/res/waves.svg"));
+        _p->pVideo = new QmlComponentInfo(tr("Video"),
+                                            QUrl::fromUserInput("qrc:/qml/VideoSettings.qml"),
+                                            QUrl::fromUserInput("qrc:/res/camera.svg"));
+        _p->pADSB = new QmlComponentInfo(tr("ADSB Server"),
+                                            QUrl::fromUserInput("qrc:/qml/ADSBSettings.qml"),
+                                            QUrl::fromUserInput("qrc:/res/adsb.svg"));
         _p->pRemoteID = new QmlComponentInfo(tr("Remote ID"),
                                             QUrl::fromUserInput("qrc:/qml/RemoteIDSettings.qml"));
 #if defined(QT_DEBUG)
@@ -178,7 +202,12 @@ QVariantList &QGCCorePlugin::settingsPages()
     _p->settingsList.clear();
 
     // Always-visible pages
+    _p->settingsList.append(QVariant::fromValue(reinterpret_cast<QmlComponentInfo*>(_p->pPayload)));
     _p->settingsList.append(QVariant::fromValue(reinterpret_cast<QmlComponentInfo*>(_p->pGeneral)));
+    _p->settingsList.append(QVariant::fromValue(reinterpret_cast<QmlComponentInfo*>(_p->pVideo)));
+    _p->settingsList.append(QVariant::fromValue(reinterpret_cast<QmlComponentInfo*>(_p->pNTRIP)));
+    _p->settingsList.append(QVariant::fromValue(reinterpret_cast<QmlComponentInfo*>(_p->pRTK)));
+    _p->settingsList.append(QVariant::fromValue(reinterpret_cast<QmlComponentInfo*>(_p->pADSB)));
     _p->settingsList.append(QVariant::fromValue(reinterpret_cast<QmlComponentInfo*>(_p->pCommLinks)));
     _p->settingsList.append(QVariant::fromValue(reinterpret_cast<QmlComponentInfo*>(_p->pOfflineMaps)));
 #if defined(QGC_GST_TAISYNC_ENABLED)
@@ -188,7 +217,6 @@ QVariantList &QGCCorePlugin::settingsPages()
     _p->settingsList.append(QVariant::fromValue(reinterpret_cast<QmlComponentInfo*>(_p->pMicrohard)));
 #endif
     _p->settingsList.append(QVariant::fromValue(reinterpret_cast<QmlComponentInfo*>(_p->pMAVLink)));
-    _p->settingsList.append(QVariant::fromValue(reinterpret_cast<QmlComponentInfo*>(_p->pNTRIP)));
     _p->settingsList.append(QVariant::fromValue(reinterpret_cast<QmlComponentInfo*>(_p->pRemoteID)));
 
 #if defined(QT_DEBUG)
