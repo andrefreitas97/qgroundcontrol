@@ -11,6 +11,7 @@
 #include <QDateTime>
 #include <QLocale>
 #include <QQuaternion>
+#include <cstring>
 
 #include <Eigen/Eigen>
 
@@ -700,6 +701,9 @@ void Vehicle::_mavlinkMessageReceived(LinkInterface* link, mavlink_message_t mes
         break;
     case MAVLINK_MSG_ID_HEARTBEAT:
         _handleHeartbeat(message);
+        break;
+    case MAVLINK_MSG_ID_NAMED_VALUE_FLOAT:
+        _handleNamedValueFloat(message);
         break;
     case MAVLINK_MSG_ID_RADIO_STATUS:
         _handleRadioStatus(message);
@@ -1793,6 +1797,34 @@ void Vehicle::_handleHeartbeat(mavlink_message_t& message)
         _custom_mode = heartbeat.custom_mode;
         if (previousFlightMode != flightMode()) {
             emit flightModeChanged(flightMode());
+        }
+    }
+}
+
+void Vehicle::_handleNamedValueFloat(mavlink_message_t& message)
+{
+    mavlink_named_value_float_t nvf;
+    mavlink_msg_named_value_float_decode(&message, &nvf);
+
+    // NAMED_VALUE_FLOAT.name is char[10] and is NOT null terminated when the
+    // name uses all 10 characters, so copy into a padded buffer before compare.
+    char nameBuf[11];
+    memcpy(nameBuf, nvf.name, 10);
+    nameBuf[10] = '\0';
+
+    // Active Loiter preset published by mode_switch.lua on the vehicle.
+    // 1 = SLOW, 2 = NORMAL, 3 = FAST, 0 (or anything else) = not in Loiter.
+    if (strncmp(nameBuf, "LoitPreset", 10) == 0) {
+        QString preset;
+        switch (static_cast<int>(nvf.value)) {
+        case 1:  preset = QStringLiteral("SLOW");   break;
+        case 2:  preset = QStringLiteral("NORMAL"); break;
+        case 3:  preset = QStringLiteral("FAST");   break;
+        default: preset.clear();                    break;
+        }
+        if (preset != _loiterPreset) {
+            _loiterPreset = preset;
+            emit loiterPresetChanged(_loiterPreset);
         }
     }
 }

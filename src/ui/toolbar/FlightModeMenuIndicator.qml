@@ -105,6 +105,30 @@ Item {
             font.pointSize:     fontPointSize
             Layout.alignment:   Qt.AlignVCenter
         }
+
+        // Active Loiter preset (SLOW / NORMAL / FAST) reported by the vehicle's
+        // mode_switch.lua script. Hidden whenever the vehicle is not in Loiter.
+        Item {
+            Layout.preferredWidth:  ScreenTools.defaultFontPixelWidth / 2
+            height:                 1
+            visible:                loiterPresetLabel.visible
+        }
+
+        QGCLabel {
+            id:                 loiterPresetLabel
+            visible:            activeVehicle && activeVehicle.loiterPreset !== ""
+            text:               activeVehicle ? activeVehicle.loiterPreset : ""
+            font.pointSize:     fontPointSize
+            font.bold:          true
+            Layout.alignment:   Qt.AlignVCenter
+            color: {
+                switch (activeVehicle ? activeVehicle.loiterPreset : "") {
+                case "SLOW":    return "#37b24d"    // green  - gentle
+                case "FAST":    return "#f76707"    // orange - aggressive
+                default:        return qgcPal.text  // NORMAL - default palette
+                }
+            }
+        }
     }
 
     QGCMouseArea {

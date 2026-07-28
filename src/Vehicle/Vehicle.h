@@ -169,6 +169,7 @@ public:
     Q_PROPERTY(bool                 flightModeSetAvailable      READ flightModeSetAvailable                                         CONSTANT)
     Q_PROPERTY(QStringList          flightModes                 READ flightModes                                                    NOTIFY flightModesChanged)
     Q_PROPERTY(QString              flightMode                  READ flightMode                 WRITE setFlightMode                 NOTIFY flightModeChanged)
+    Q_PROPERTY(QString              loiterPreset                READ loiterPreset                                                   NOTIFY loiterPresetChanged)
     Q_PROPERTY(TrajectoryPoints*    trajectoryPoints            MEMBER _trajectoryPoints                                            CONSTANT)
     Q_PROPERTY(QmlObjectListModel*  cameraTriggerPoints         READ cameraTriggerPoints                                            CONSTANT)
     Q_PROPERTY(float                latitude                    READ latitude                                                       NOTIFY coordinateChanged)
@@ -529,6 +530,10 @@ public:
     QStringList flightModes                 ();
     QString flightMode                      () const;
     void setFlightMode                      (const QString& flightMode);
+
+    /// Active Loiter preset reported by the mode_switch.lua script via
+    /// NAMED_VALUE_FLOAT "LoitPreset". Empty string when not in Loiter.
+    QString loiterPreset                    () const { return _loiterPreset; }
 
     bool airship() const;
 
@@ -970,6 +975,7 @@ signals:
     void armedPositionChanged();
     void armedChanged                   (bool armed);
     void flightModeChanged              (const QString& flightMode);
+    void loiterPresetChanged            (const QString& loiterPreset);
     void flyingChanged                  (bool flying);
     void landingChanged                 (bool landing);
     void guidedModeChanged              (bool guidedMode);
@@ -1107,6 +1113,7 @@ private:
     void _handlePing                    (LinkInterface* link, mavlink_message_t& message);
     void _handleHomePosition            (mavlink_message_t& message);
     void _handleHeartbeat               (mavlink_message_t& message);
+    void _handleNamedValueFloat         (mavlink_message_t& message);
     void _handleCurrentMode             (mavlink_message_t& message);
     void _handleRadioStatus             (mavlink_message_t& message);
     void _handleRCChannels              (mavlink_message_t& message);
@@ -1232,6 +1239,8 @@ private:
     SysStatusSensorInfo _sysStatusSensorInfo;
 
     QGCCameraManager* _cameraManager = nullptr;
+
+    QString             _loiterPreset;      ///< "SLOW"/"NORMAL"/"FAST", empty when not in Loiter
 
     QString             _prearmError;
     QTimer              _prearmErrorTimer;
