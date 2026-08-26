@@ -110,6 +110,7 @@ const char* Vehicle::_temperatureFactGroupName =        "temperature";
 const char* Vehicle::_clockFactGroupName =              "clock";
 const char* Vehicle::_setpointFactGroupName =           "setpoint";
 const char* Vehicle::_distanceSensorFactGroupName =     "distanceSensor";
+const char* Vehicle::_customValueFactGroupName =        "customValue";
 const char* Vehicle::_localPositionFactGroupName =      "localPosition";
 const char* Vehicle::_localPositionSetpointFactGroupName ="localPositionSetpoint";
 const char* Vehicle::_escStatusFactGroupName =          "escStatus";
@@ -177,6 +178,7 @@ Vehicle::Vehicle(LinkInterface*             link,
     , _clockFactGroup               (this)
     , _setpointFactGroup            (this)
     , _distanceSensorFactGroup      (this)
+    , _customValueFactGroup         (this)
     , _localPositionFactGroup       (this)
     , _localPositionSetpointFactGroup(this)
     , _escStatusFactGroup           (this)
@@ -327,6 +329,7 @@ Vehicle::Vehicle(MAV_AUTOPILOT              firmwareType,
     , _vibrationFactGroup               (this)
     , _clockFactGroup                   (this)
     , _distanceSensorFactGroup          (this)
+    , _customValueFactGroup             (this)
     , _localPositionFactGroup           (this)
     , _localPositionSetpointFactGroup   (this)
 {
@@ -470,6 +473,7 @@ void Vehicle::_commonInit()
     _addFactGroup(&_clockFactGroup,             _clockFactGroupName);
     _addFactGroup(&_setpointFactGroup,          _setpointFactGroupName);
     _addFactGroup(&_distanceSensorFactGroup,    _distanceSensorFactGroupName);
+    _addFactGroup(&_customValueFactGroup,       _customValueFactGroupName);
     _addFactGroup(&_localPositionFactGroup,     _localPositionFactGroupName);
     _addFactGroup(&_localPositionSetpointFactGroup,_localPositionSetpointFactGroupName);
     _addFactGroup(&_escStatusFactGroup,         _escStatusFactGroupName);
@@ -632,6 +636,15 @@ void Vehicle::_mavlinkMessageReceived(LinkInterface* link, mavlink_message_t mes
     }
 
     if (message.sysid != _id && message.sysid != 0) {
+        // Companion computers (Jetson, RPi, ...) often emit NAMED_VALUE_FLOAT/INT using their own system id.
+        // Those are still telemetry for this vehicle, so route them into the custom value fact group as long as
+        // they arrive on a link this vehicle is using. Nothing else in the message pipeline runs for them.
+        if ((message.msgid == MAVLINK_MSG_ID_NAMED_VALUE_FLOAT || message.msgid == MAVLINK_MSG_ID_NAMED_VALUE_INT) &&
+                _vehicleLinkManager->containsLink(link)) {
+            _customValueFactGroup.handleMessage(this, message);
+            return;
+        }
+
         // We allow RADIO_STATUS messages which come from a link the vehicle is using to pass through and be handled
         if (!(message.msgid == MAVLINK_MSG_ID_RADIO_STATUS && _vehicleLinkManager->containsLink(link))) {
             return;

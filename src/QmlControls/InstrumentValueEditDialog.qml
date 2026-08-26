@@ -62,7 +62,8 @@ QGCPopupDialog {
                 onActivated: {
                     instrumentValueData.setFact(currentText, "")
                     instrumentValueData.icon = ""
-                    instrumentValueData.text = instrumentValueData.fact.shortDescription
+                    // A fact group can be empty (custom values before the first packet is received)
+                    instrumentValueData.text = instrumentValueData.fact ? instrumentValueData.fact.shortDescription : ""
                 }
                 Connections {
                     target: instrumentValueData
@@ -79,7 +80,7 @@ QGCPopupDialog {
                 onActivated: {
                     instrumentValueData.setFact(instrumentValueData.factGroupName, currentText)
                     instrumentValueData.icon = ""
-                    instrumentValueData.text = instrumentValueData.fact.shortDescription
+                    instrumentValueData.text = instrumentValueData.fact ? instrumentValueData.fact.shortDescription : ""
                 }
                 Connections {
                     target: instrumentValueData
