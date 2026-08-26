@@ -753,6 +753,7 @@ HEADERS += \
     src/Vehicle/VehicleBatteryFactGroup.h \
     src/Vehicle/VehicleClockFactGroup.h \
     src/Vehicle/VehicleDistanceSensorFactGroup.h \
+    src/Vehicle/VehicleNamedValueFactGroup.h \
     src/Vehicle/VehicleEstimatorStatusFactGroup.h \
     src/Vehicle/VehicleLocalPositionFactGroup.h \
     src/Vehicle/VehicleLocalPositionSetpointFactGroup.h \
@@ -1014,6 +1015,7 @@ SOURCES += \
     src/Vehicle/VehicleBatteryFactGroup.cc \
     src/Vehicle/VehicleClockFactGroup.cc \
     src/Vehicle/VehicleDistanceSensorFactGroup.cc \
+    src/Vehicle/VehicleNamedValueFactGroup.cc \
     src/Vehicle/VehicleEstimatorStatusFactGroup.cc \
     src/Vehicle/VehicleLocalPositionFactGroup.cc \
     src/Vehicle/VehicleLocalPositionSetpointFactGroup.cc \

@@ -73,6 +73,8 @@ add_library(Vehicle
 	VehicleClockFactGroup.h
 	VehicleDistanceSensorFactGroup.cc
 	VehicleDistanceSensorFactGroup.h
+	VehicleNamedValueFactGroup.cc
+	VehicleNamedValueFactGroup.h
 	VehicleEFIFactGroup.cc
 	VehicleEFIFactGroup.h
 	VehicleEscStatusFactGroup.cc

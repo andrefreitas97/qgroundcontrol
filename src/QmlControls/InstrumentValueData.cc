@@ -43,7 +43,14 @@ InstrumentValueData::InstrumentValueData(FactValueGrid* factValueGrid, QObject* 
 void InstrumentValueData::_activeVehicleChanged(Vehicle* activeVehicle)
 {
     if (_activeVehicle) {
-        disconnect(_activeVehicle, &Vehicle::factGroupNamesChanged, this, &InstrumentValueData::_lookForMissingFact);
+        disconnect(_activeVehicle, &Vehicle::factGroupNamesChanged, this, &InstrumentValueData::_factGroupNamesChanged);
+
+        // The facts belong to the old vehicle, don't hang on to them
+        if (_fact) {
+            disconnect(_fact, &Fact::rawValueChanged, this, &InstrumentValueData::_updateRanges);
+            _fact = nullptr;
+            emit factChanged(_fact);
+        }
     }
 
     if (!activeVehicle) {
@@ -51,7 +58,8 @@ void InstrumentValueData::_activeVehicleChanged(Vehicle* activeVehicle)
     }
 
     _activeVehicle = activeVehicle;
-    connect(_activeVehicle, &Vehicle::factGroupNamesChanged, this, &InstrumentValueData::_lookForMissingFact);
+    connect(_activeVehicle, &Vehicle::factGroupNamesChanged, this, &InstrumentValueData::_factGroupNamesChanged);
+    _connectFactGroups();
 
     emit factGroupNamesChanged();
 
@@ -60,13 +68,78 @@ void InstrumentValueData::_activeVehicleChanged(Vehicle* activeVehicle)
     }
 }
 
+void InstrumentValueData::_connectFactGroups(void)
+{
+    // Facts can be created dynamically after the vehicle shows up. The main case being custom
+    // NAMED_VALUE_FLOAT/NAMED_VALUE_INT telemetry, where a fact is created the first time a
+    // value with a new name is received. Watch every fact group so the value picker stays up to
+    // date and saved values can bind as soon as their fact exists.
+    for (const QMetaObject::Connection& connection: _factGroupConnections) {
+        disconnect(connection);
+    }
+    _factGroupConnections.clear();
+
+    if (!_activeVehicle) {
+        return;
+    }
+
+    _factGroupConnections.append(connect(_activeVehicle, &FactGroup::factNamesChanged, this, &InstrumentValueData::_factNamesChanged));
+    for (FactGroup* factGroup: _activeVehicle->factGroups()) {
+        if (factGroup) {
+            _factGroupConnections.append(connect(factGroup, &FactGroup::factNamesChanged, this, &InstrumentValueData::_factNamesChanged));
+        }
+    }
+}
+
+void InstrumentValueData::_factGroupNamesChanged(void)
+{
+    // A new fact group showed up on the vehicle
+    _connectFactGroups();
+
+    emit factGroupNamesChanged();
+
+    _lookForMissingFact();
+}
+
+void InstrumentValueData::_factNamesChanged(void)
+{
+    // New facts showed up within a fact group
+    emit factValueNamesChanged();
+
+    _lookForMissingFact();
+}
+
 void InstrumentValueData::_lookForMissingFact(void)
 {
-    // This is called when new fact groups show up on the vehicle. We need to see if we can fill in any
+    // This is called when new fact groups/facts show up on the vehicle. We need to see if we can fill in any
     // facts which may have been missing up to now.
-    if (!_fact) {
+    if (_fact || !_activeVehicle) {
+        return;
+    }
+
+    FactGroup* factGroup = nullptr;
+    if (_factGroupName == vehicleFactGroupName) {
+        factGroup = _activeVehicle;
+    } else if (!_factGroupName.isEmpty() && _activeVehicle->factGroupNames().contains(_camelCaseFactGroupName())) {
+        factGroup = _activeVehicle->getFactGroup(_factGroupName);
+    }
+    if (!factGroup) {
+        return;
+    }
+
+    // Only run the worker once the fact is actually available, otherwise it just spews warnings
+    if (_factName.isEmpty() ? !factGroup->factNames().isEmpty() : factGroup->factExists(_factName)) {
         _setFactWorker();
     }
+}
+
+QString InstrumentValueData::_camelCaseFactGroupName(void) const
+{
+    // The picker shows fact group names with an upper cased first letter, the vehicle stores them camel cased
+    if (_factGroupName.isEmpty()) {
+        return _factGroupName;
+    }
+    return _factGroupName.left(1).toLower() + _factGroupName.mid(1);
 }
 
 void InstrumentValueData::clearFact(void)
@@ -103,11 +176,17 @@ void InstrumentValueData::_setFactWorker(void)
     QString nonEmptyFactName;
     if (factGroup) {
         if (_factName.isEmpty()) {
-            nonEmptyFactName = factValueNames()[0];
+            // A fact group with no facts in it yet (custom values before the first packet arrives) has nothing to select
+            QStringList valueNames = factValueNames();
+            if (!valueNames.isEmpty()) {
+                nonEmptyFactName = valueNames[0];
+            }
         } else {
             nonEmptyFactName = _factName;
         }
-        _fact = factGroup->getFact(nonEmptyFactName);
+        if (!nonEmptyFactName.isEmpty() && factGroup->factExists(nonEmptyFactName)) {
+            _fact = factGroup->getFact(nonEmptyFactName);
+        }
     }
 
     if (_fact) {

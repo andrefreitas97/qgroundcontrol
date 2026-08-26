@@ -14,6 +14,7 @@
 #include "QGCApplication.h"
 
 #include <QObject>
+#include <QList>
 
 class FactValueGrid;
 
@@ -106,9 +107,13 @@ private slots:
     void _updateRanges          (void);
     void _activeVehicleChanged  (Vehicle* activeVehicle);
     void _lookForMissingFact    (void);
+    void _factGroupNamesChanged (void);
+    void _factNamesChanged      (void);
 
 private:
-    int  _currentRangeIndex     (const QVariant& value);
+    int     _currentRangeIndex      (const QVariant& value);
+    void    _connectFactGroups      (void);
+    QString _camelCaseFactGroupName (void) const;
     void _updateColor           (void);
     void _updateIcon            (void);
     void _updateOpacity         (void);
@@ -124,6 +129,7 @@ private:
     bool                    _showUnits =            true;
     QString                 _icon;
     QColor                  _currentColor;
+    QList<QMetaObject::Connection> _factGroupConnections;
     double                  _currentOpacity =       1.0;
     QString                 _currentIcon;
 
