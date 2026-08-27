@@ -34,7 +34,10 @@ QGCPopupDialog {
     QGCPalette { id: qgcPalDisabled;    colorGroupEnabled: false }
 
     Loader {
-        sourceComponent: instrumentValueData.fact ? editorComponent : noFactComponent
+        // Don't gate the editor on a fact being set. A fact group can legitimately be empty
+        // (custom NAMED_VALUE_* values before the first packet arrives) and the group/value combos
+        // must stay reachable so the user can pick something else.
+        sourceComponent: instrumentValueData.factGroupNames.length > 0 ? editorComponent : noFactComponent
     }
 
     Component {
@@ -86,6 +89,12 @@ QGCPopupDialog {
                     target: instrumentValueData
                     onFactNameChanged: factNamesCombo.currentIndex = factNamesCombo.find(instrumentValueData.factName)
                 }
+            }
+
+            QGCLabel {
+                Layout.columnSpan:  2
+                visible:            instrumentValueData.factValueNames.length === 0
+                text:               qsTr("No values received yet.")
             }
 
             QGCRadioButton {
