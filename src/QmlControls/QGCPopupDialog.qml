@@ -258,7 +258,11 @@ Popup {
 
         QGCFlickable {
             id:                     mainFlickable
-            Layout.preferredWidth:  Math.min(Math.max(marginItem.width, mainColumnLayout.width), _maxContentWidth)
+            // Note: Don't reference mainColumnLayout.width here. This item's preferred width feeds
+            // that layout's width, so a Math.max against it is a one way ratchet: the dialog grows
+            // with the content but can never shrink back down. titleRowLayout.implicitWidth is the
+            // intrinsic minimum we actually want (title + buttons) and doesn't create the loop.
+            Layout.preferredWidth:  Math.min(Math.max(marginItem.width, titleRowLayout.implicitWidth), _maxContentWidth)
             Layout.preferredHeight: Math.min(marginItem.height, _maxContentHeight)
             contentWidth:           marginItem.width
             contentHeight:          marginItem.height
