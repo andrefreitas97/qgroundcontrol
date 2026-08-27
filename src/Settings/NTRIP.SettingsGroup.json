@@ -39,7 +39,7 @@
   "shortDesc": "Mount Point",
   "longDesc": "NTRIP Mount Point. Leave blank for RTCM over TCP",
   "type": "string",
-  "default": "FUNC"
+  "default": "FUN1"
 },
 {
   "name": "ntripWhitelist",

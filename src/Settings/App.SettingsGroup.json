@@ -360,7 +360,7 @@
     "shortDesc": "Gripper payload selected",
     "longDesc":  "Depending on the payload selected the app shows different functions in guided actions.",
     "type":             "bool",
-    "default":     true
+    "default":     false
 },
 {
     "name":             "payloadgrenades",
