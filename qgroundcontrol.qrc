@@ -58,6 +58,8 @@
         <file alias="JoystickConfigGeneral.qml">src/VehicleSetup/JoystickConfigGeneral.qml</file>
         <file alias="LinkSettings.qml">src/ui/preferences/LinkSettings.qml</file>
         <file alias="NTRIPSettings.qml">src/ui/preferences/NTRIPSettings.qml</file>
+        <file alias="RTKSettings.qml">src/ui/preferences/RTKSettings.qml</file>
+        <file alias="ADSBSettings.qml">src/ui/preferences/ADSBSettings.qml</file>
         <file alias="LogDownloadPage.qml">src/AnalyzeView/LogDownloadPage.qml</file>
         <file alias="LogReplaySettings.qml">src/ui/preferences/LogReplaySettings.qml</file>
         <file alias="MainRootWindow.qml">src/ui/MainRootWindow.qml</file>

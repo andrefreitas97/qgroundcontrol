@@ -59,6 +59,10 @@ public:
             delete pMAVLink;
         if(pNTRIP)
             delete pNTRIP;
+        if(pRTK)
+            delete pRTK;
+        if(pADSB)
+            delete pADSB;
 #if defined(QT_DEBUG)
         if(pConsole)
             delete pConsole;
@@ -88,6 +92,8 @@ public:
 #endif
     QmlComponentInfo* pMAVLink                  = nullptr;
     QmlComponentInfo* pNTRIP                    = nullptr;
+    QmlComponentInfo* pRTK                      = nullptr;
+    QmlComponentInfo* pADSB                     = nullptr;
 #if defined(QT_DEBUG)
     QmlComponentInfo* pConsole                  = nullptr;
     QmlComponentInfo* pHelp                     = nullptr;
@@ -157,6 +163,12 @@ QVariantList &QGCCorePlugin::settingsPages()
         _p->pNTRIP = new QmlComponentInfo(tr("NTRIP"),
                                             QUrl::fromUserInput("qrc:/qml/NTRIPSettings.qml"),
                                             QUrl::fromUserInput("qrc:/res/waves.svg"));
+        _p->pRTK = new QmlComponentInfo(tr("RTK"),
+                                            QUrl::fromUserInput("qrc:/qml/RTKSettings.qml"),
+                                            QUrl::fromUserInput("qrc:/res/waves.svg"));
+        _p->pADSB = new QmlComponentInfo(tr("ADSB Server"),
+                                            QUrl::fromUserInput("qrc:/qml/ADSBSettings.qml"),
+                                            QUrl::fromUserInput("qrc:/res/adsb.svg"));
         _p->pRemoteID = new QmlComponentInfo(tr("Remote ID"),
                                             QUrl::fromUserInput("qrc:/qml/RemoteIDSettings.qml"));
 #if defined(QT_DEBUG)
@@ -179,6 +191,8 @@ QVariantList &QGCCorePlugin::settingsPages()
 
     // Always-visible pages
     _p->settingsList.append(QVariant::fromValue(reinterpret_cast<QmlComponentInfo*>(_p->pGeneral)));
+    _p->settingsList.append(QVariant::fromValue(reinterpret_cast<QmlComponentInfo*>(_p->pRTK)));
+    _p->settingsList.append(QVariant::fromValue(reinterpret_cast<QmlComponentInfo*>(_p->pADSB)));
     _p->settingsList.append(QVariant::fromValue(reinterpret_cast<QmlComponentInfo*>(_p->pCommLinks)));
     _p->settingsList.append(QVariant::fromValue(reinterpret_cast<QmlComponentInfo*>(_p->pOfflineMaps)));
 #if defined(QGC_GST_TAISYNC_ENABLED)
