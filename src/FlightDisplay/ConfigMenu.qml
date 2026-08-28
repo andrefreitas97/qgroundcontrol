@@ -298,15 +298,7 @@ Component {
                     text:       qsTr("Landing Light:")
                     anchors.verticalCenter: parent.verticalCenter
                     font.bold:              true
-                }
-
-                QGCRadioButton {
-                    font.pointSize: ScreenTools.defaultFontPointSize
-                    text:           qsTr("OFF")
-                    enabled:        landingLightAvailable
-                    checked:        showLandingLightOFF
-                    onClicked:      _activeVehicle.setLandingLight(0)
-                }
+                }                
 
                 QGCRadioButton {
                     font.pointSize: ScreenTools.defaultFontPointSize
@@ -315,6 +307,14 @@ Component {
                     checked:        showLandingLightON
                     onClicked:      _activeVehicle.setLandingLight(1)
 
+                }
+
+                QGCRadioButton {
+                    font.pointSize: ScreenTools.defaultFontPointSize
+                    text:           qsTr("OFF")
+                    enabled:        landingLightAvailable
+                    checked:        showLandingLightOFF
+                    onClicked:      _activeVehicle.setLandingLight(0)
                 }
 
                 QGCRadioButton {
