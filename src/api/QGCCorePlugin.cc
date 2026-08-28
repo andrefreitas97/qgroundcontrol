@@ -40,7 +40,9 @@ public:
     }
 
     ~QGCCorePlugin_p()
-    {
+    {   
+        if(pPayload)
+            delete pPayload;
         if(pGeneral)
             delete pGeneral;
         if(pCommLinks)
@@ -61,6 +63,8 @@ public:
             delete pNTRIP;
         if(pRTK)
             delete pRTK;
+        if(pVideo)
+            delete pVideo;
         if(pADSB)
             delete pADSB;
 #if defined(QT_DEBUG)
@@ -81,6 +85,7 @@ public:
             delete defaultOptions;
     }
 
+    QmlComponentInfo* pPayload                  = nullptr;
     QmlComponentInfo* pGeneral                  = nullptr;
     QmlComponentInfo* pCommLinks                = nullptr;
     QmlComponentInfo* pOfflineMaps              = nullptr;
@@ -93,6 +98,7 @@ public:
     QmlComponentInfo* pMAVLink                  = nullptr;
     QmlComponentInfo* pNTRIP                    = nullptr;
     QmlComponentInfo* pRTK                      = nullptr;
+    QmlComponentInfo* pVideo                    = nullptr;
     QmlComponentInfo* pADSB                     = nullptr;
 #if defined(QT_DEBUG)
     QmlComponentInfo* pConsole                  = nullptr;
@@ -138,6 +144,9 @@ void QGCCorePlugin::setToolbox(QGCToolbox *toolbox)
 QVariantList &QGCCorePlugin::settingsPages()
 {
     if(!_p->pGeneral) {
+        _p->pPayload = new QmlComponentInfo(tr("Payload"),
+                                            QUrl::fromUserInput("qrc:/qml/PayloadSettings.qml"),
+                                            QUrl::fromUserInput("qrc:/res/payload.svg"));
         _p->pGeneral = new QmlComponentInfo(tr("General"),
                                             QUrl::fromUserInput("qrc:/qml/GeneralSettings.qml"),
                                             QUrl::fromUserInput("qrc:/res/gear-white.svg"));
@@ -166,6 +175,9 @@ QVariantList &QGCCorePlugin::settingsPages()
         _p->pRTK = new QmlComponentInfo(tr("RTK"),
                                             QUrl::fromUserInput("qrc:/qml/RTKSettings.qml"),
                                             QUrl::fromUserInput("qrc:/res/waves.svg"));
+        _p->pVideo = new QmlComponentInfo(tr("Video"),
+                                            QUrl::fromUserInput("qrc:/qml/VideoSettings.qml"),
+                                            QUrl::fromUserInput("qrc:/res/camera.svg"));
         _p->pADSB = new QmlComponentInfo(tr("ADSB Server"),
                                             QUrl::fromUserInput("qrc:/qml/ADSBSettings.qml"),
                                             QUrl::fromUserInput("qrc:/res/adsb.svg"));
@@ -190,7 +202,9 @@ QVariantList &QGCCorePlugin::settingsPages()
     _p->settingsList.clear();
 
     // Always-visible pages
+    _p->settingsList.append(QVariant::fromValue(reinterpret_cast<QmlComponentInfo*>(_p->pPayload)));
     _p->settingsList.append(QVariant::fromValue(reinterpret_cast<QmlComponentInfo*>(_p->pGeneral)));
+    _p->settingsList.append(QVariant::fromValue(reinterpret_cast<QmlComponentInfo*>(_p->pVideo)));
     _p->settingsList.append(QVariant::fromValue(reinterpret_cast<QmlComponentInfo*>(_p->pRTK)));
     _p->settingsList.append(QVariant::fromValue(reinterpret_cast<QmlComponentInfo*>(_p->pADSB)));
     _p->settingsList.append(QVariant::fromValue(reinterpret_cast<QmlComponentInfo*>(_p->pCommLinks)));
