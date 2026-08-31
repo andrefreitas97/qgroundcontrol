@@ -85,59 +85,6 @@ Rectangle {
                     id:                         settingsColumn
                     anchors.horizontalCenter:   parent.horizontalCenter
 
-
-                    //Item { width: 1; height: _margins; visible: cameraSectionLabel.visible }
-                    //QGCLabel {
-                    //    id:         cameraSectionLabel
-                    //    text:       qsTr("Camera")
-                    //    visible:    QGroundControl.settingsManager.flyViewSettings.visible
-                    //}
-                    //Rectangle {
-                    //    Layout.preferredHeight: cameraCol.height + (_margins * 2)
-                    //    Layout.preferredWidth:  cameraCol.width + (_margins * 2)
-                    //    color:                  qgcPal.windowShade
-                    //    visible:                cameraSectionLabel.visible
-                    //    Layout.fillWidth:       true
-
-                    //    ColumnLayout {
-                    //        id:                         cameraCol
-                    //        anchors.margins:            _margins
-                    //        anchors.top:                parent.top
-                    //        anchors.horizontalCenter:   parent.horizontalCenter
-                    //        spacing:                    _margins
-
-                    //        RowLayout {
-                    //            spacing: ScreenTools.defaultFontPixelWidth
-
-                    //            QGCLabel {
-                    //                text:       qsTr("Gremsy Zio:")
-                    //            }
-
-                    //            QGCRadioButton {
-                    //                text:               qsTr("ON")
-                    //                enabled:            QGroundControl.settingsManager.appSettings.vehiclebravo.value
-                    //                checked:            QGroundControl.settingsManager.appSettings.gimbalCameraA8.value
-                    //                onClicked:{
-                    //                    QGroundControl.settingsManager.appSettings.gimbalCameraA8.value = true
-                    //                }
-                    //                Layout.columnSpan:  3
-                    //            }
-
-                    //            QGCRadioButton {
-                    //                text:               qsTr("OFF")
-                    //                enabled:            QGroundControl.settingsManager.appSettings.vehiclebravo.value
-                    //                checked:            !QGroundControl.settingsManager.appSettings.gimbalCameraA8.value
-                    //                onClicked:{
-                    //                    QGroundControl.settingsManager.appSettings.gimbalCameraA8.value = false
-                    //                    QGroundControl.settingsManager.videoSettings.rtspUrl.value = QGroundControl.settingsManager.videoSettings.rtspUrlFPV.value
-                    //                    QGroundControl.multiVehicleManager.activeVehicle.sendSetMountA8Action()
-                    //                }
-                    //                Layout.columnSpan:  3
-                    //            }
-                    //        }
-                    //    }
-                    //}
-
                     Item { width: 1; height: _margins; visible: flyViewSectionLabel.visible }
                     QGCLabel {
                         id:         flyViewSectionLabel

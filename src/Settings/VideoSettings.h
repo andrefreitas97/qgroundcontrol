@@ -30,6 +30,7 @@ public:
     DEFINE_SETTINGFACT(rtspUrlZT6Main)
     DEFINE_SETTINGFACT(rtspUrlZT6Sub)
     DEFINE_SETTINGFACT(rtspUrlZIO)
+    DEFINE_SETTINGFACT(rtspUrlCelera)
 
     DEFINE_SETTINGFACT(aspectRatio)
     DEFINE_SETTINGFACT(videoFit)
@@ -45,6 +46,7 @@ public:
     DEFINE_SETTINGFACT(videoFlip_GimbalZT6Main)
     DEFINE_SETTINGFACT(videoFlip_GimbalZT6Sub)
     DEFINE_SETTINGFACT(videoFlip_GimbalZIO)
+    DEFINE_SETTINGFACT(videoFlip_Celera)
     DEFINE_SETTINGFACT(showRecControl)
     DEFINE_SETTINGFACT(recordingFormat)
     DEFINE_SETTINGFACT(maxVideoSize)

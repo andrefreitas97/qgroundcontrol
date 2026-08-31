@@ -189,7 +189,7 @@ Item {
 
         PreFlightCheckGroup {
             name: qsTr("Tactical Payload")
-            visible: QGroundControl.settingsManager.appSettings.payloadgripper.value || QGroundControl.settingsManager.appSettings.payloadgrenades.value || QGroundControl.settingsManager.appSettings.gimbalCameraZIO.value
+            visible: QGroundControl.settingsManager.appSettings.payloadgripper.value || QGroundControl.settingsManager.appSettings.payloadgrenades.value || QGroundControl.settingsManager.appSettings.gimbalCameraZIO.value || QGroundControl.settingsManager.appSettings.celeraCamera.value
 
             PreFlightCheckButton {
                 name:           qsTr("Mount")

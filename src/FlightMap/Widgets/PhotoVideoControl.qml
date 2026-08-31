@@ -613,6 +613,12 @@ Rectangle {
                         onClicked:          _videoStreamSettings.videoFlip_GimbalZIO.rawValue = checked ? true : false
                     }
 
+                    QGCSwitch {
+                        checked:            _videoStreamSettings.videoFlip_Celera.rawValue
+                        visible:            _anyVideoStreamAvailable && _videoSettings.rtspUrl.value == _videoSettings.rtspUrlCelera.value
+                        onClicked:          _videoStreamSettings.videoFlip_Celera.rawValue = checked ? true : false
+                    }
+
                     FactComboBox {
                         Layout.fillWidth:   true
                         sizeToContents:     true

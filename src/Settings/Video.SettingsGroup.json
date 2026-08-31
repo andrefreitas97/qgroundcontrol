@@ -58,7 +58,14 @@
     "shortDesc": "RTSP URL 1",
     "longDesc":  "RTSP URL 1 video stream (Gimbal 2).",
     "type":             "string",
-    "default":     ""
+    "default":     "rtsp://192.168.144.200:8554/payload"
+},
+{
+    "name":             "rtspUrlCelera",
+    "shortDesc": "RTSP URL Celera",
+    "longDesc":  "RTSP URL Celera video stream.",
+    "type":             "string",
+    "default":     "rtsp://192.168.144.55:8554/celera"
 },
 {
     "name":             "tcpUrl",
@@ -185,6 +192,13 @@
 {
     "name":             "videoFlip_GimbalZIO",
     "shortDesc": "Gimbal ZIO Video Display Flip",
+    "longDesc":  "Handle Video Flip.",
+    "type":             "bool",
+    "default":     false
+},
+{
+    "name":             "videoFlip_Celera",
+    "shortDesc": "Celera Video Display Flip",
     "longDesc":  "Handle Video Flip.",
     "type":             "bool",
     "default":     false

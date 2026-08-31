@@ -170,6 +170,17 @@ Rectangle {
                             visible:                gimbalZIOrtspUrlLabel.visible
                         }
 
+                        QGCLabel {
+                            id:         celeraRtspUrlLabel
+                            text:       qsTr("Celera RTSP URL")
+                            visible:    !_videoAutoStreamConfig && _isRTSP && _videoSettings.rtspUrl.visible && QGroundControl.settingsManager.appSettings.vehiclebravo.value
+                        }
+                        FactTextField {
+                            Layout.preferredWidth:  _comboFieldWidth
+                            fact:                   _videoSettings.rtspUrlCelera
+                            visible:                celeraRtspUrlLabel.visible
+                        }
+
                          QGCLabel {
                             id:         tcpUrlLabel
                             text:       qsTr("TCP URL")

@@ -32,7 +32,7 @@ Rectangle {
     height:     mainLayout.height + (_margins * 2)
     color:      Qt.rgba(qgcPal.window.r, qgcPal.window.g, qgcPal.window.b, 0.5)
     radius:     _margins
-    visible:    multiVehiclePanelSelector.showSingleVehiclePanel && (QGroundControl.settingsManager.appSettings.gimbalCameraA8.value || QGroundControl.settingsManager.appSettings.gimbalCameraZT6.value || QGroundControl.settingsManager.appSettings.gimbalCameraZIO.value) && _activeVehicle
+    visible:    multiVehiclePanelSelector.showSingleVehiclePanel && (QGroundControl.settingsManager.appSettings.gimbalCameraA8.value || QGroundControl.settingsManager.appSettings.gimbalCameraZT6.value || QGroundControl.settingsManager.appSettings.gimbalCameraZIO.value || QGroundControl.settingsManager.appSettings.celeraCamera.value) && _activeVehicle
 
     property real   _margins:                                   ScreenTools.defaultFontPixelHeight / 2
     property var    _activeVehicle:                             QGroundControl.multiVehicleManager.activeVehicle
@@ -135,7 +135,6 @@ Rectangle {
                 onClicked:      {_videoSettings.rtspUrl.value = _videoSettings.rtspUrlFPV.value
                                 _activeVehicle.sendSetMountFPVAction()
                                 SiYi.camera.analyzeIp(_videoSettings.rtspUrl.value)
-                                //gimbalController.activeGimbal = gimbalController.gimbals.get(0)
                                 }
             }
 
@@ -154,7 +153,7 @@ Rectangle {
 
             QGCRadioButton {
                 font.pointSize: ScreenTools.smallFontPointSize
-                text:           qsTr("ZT6 Main\nStream")
+                text:           qsTr("ZT6\nStream")
                 font.bold:      _videoSettings.rtspUrl.value == _videoSettings.rtspUrlZT6Main.value ? true : false
                 checked:        _videoSettings.rtspUrl.value == _videoSettings.rtspUrlZT6Main.value ? true : false
                 onClicked:      {_videoSettings.rtspUrl.value = _videoSettings.rtspUrlZT6Main.value
@@ -189,6 +188,17 @@ Rectangle {
                                 //gimbalController.activeGimbal = gimbalController.gimbals.get(1)
                                 }
                 visible:        QGroundControl.settingsManager.appSettings.gimbalCameraZIO.value
+            }
+
+            QGCRadioButton {
+                font.pointSize: ScreenTools.smallFontPointSize
+                text:           qsTr("Celera\nStream")
+                font.bold:      _videoSettings.rtspUrl.value == _videoSettings.rtspUrlCelera.value ? true : false
+                checked:        _videoSettings.rtspUrl.value == _videoSettings.rtspUrlCelera.value ? true : false
+                onClicked:      {_videoSettings.rtspUrl.value = _videoSettings.rtspUrlCelera.value
+                                SiYi.camera.analyzeIp(_videoSettings.rtspUrl.value)
+                                }
+                visible:        QGroundControl.settingsManager.appSettings.celeraCamera.value
             }
         }
     }
@@ -541,6 +551,12 @@ Rectangle {
                         checked:            _videoStreamSettings.videoFlip_GimbalZIO.rawValue
                         visible:            _anyVideoStreamAvailable && _videoSettings.rtspUrl.value == _videoSettings.rtspUrlZIO.value
                         onClicked:          _videoStreamSettings.videoFlip_GimbalZIO.rawValue = checked ? true : false
+                    }
+
+                    QGCSwitch {
+                        checked:            _videoStreamSettings.videoFlip_Celera.rawValue
+                        visible:            _anyVideoStreamAvailable && _videoSettings.rtspUrl.value == _videoSettings.rtspUrlCelera.value
+                        onClicked:          _videoStreamSettings.videoFlip_Celera.rawValue = checked ? true : false
                     }
 
                     //FactComboBox {

@@ -391,6 +391,13 @@
     "default":     false
 },
 {
+    "name":             "celeraCamera",
+    "shortDesc": "Celera Camera",
+    "longDesc":  "Sets Celera Camera as available or unavailable.",
+    "type":             "bool",
+    "default":     false
+},
+{
     "name":             "proximityAvoidance",
     "shortDesc": "Proximity Avoidance Switch",
     "longDesc":  "Sets Proximity Avoidance on or off.",

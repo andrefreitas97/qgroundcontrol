@@ -70,6 +70,7 @@ QGCComboBox {
             QGroundControl.settingsManager.appSettings.gimbalCameraA8.value = false
             QGroundControl.settingsManager.appSettings.gimbalCameraZT6.value = false
             QGroundControl.settingsManager.appSettings.gimbalCameraZIO.value = false
+            QGroundControl.settingsManager.appSettings.gimbalCameraCelera.value = false
             QGroundControl.settingsManager.videoSettings.rtspUrl.value = QGroundControl.settingsManager.videoSettings.rtspUrlFPV.value
         }
         if(_activeVehicle.id >= 10){

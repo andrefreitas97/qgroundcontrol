@@ -180,6 +180,7 @@ DECLARE_SETTINGSFACT(AppSettings, payloadgrenades)
 DECLARE_SETTINGSFACT(AppSettings, gimbalCameraA8)
 DECLARE_SETTINGSFACT(AppSettings, gimbalCameraZT6)
 DECLARE_SETTINGSFACT(AppSettings, gimbalCameraZIO)
+DECLARE_SETTINGSFACT(AppSettings, celeraCamera)
 DECLARE_SETTINGSFACT(AppSettings, proximityAvoidance)
 DECLARE_SETTINGSFACT(AppSettings, surfaceTracking)
 

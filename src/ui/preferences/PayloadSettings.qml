@@ -179,6 +179,7 @@ Rectangle {
                                      QGroundControl.multiVehicleManager.activeVehicle.sendPositionAction(1)
 
                                      QGroundControl.settingsManager.appSettings.gimbalCameraZIO.value = false
+                                     QGroundControl.settingsManager.appSettings.celeraCamera.value = false
                                     QGroundControl.settingsManager.videoSettings.rtspUrl.value = QGroundControl.settingsManager.videoSettings.rtspUrlFPV.value
                                     QGroundControl.multiVehicleManager.activeVehicle.sendSetMountFPVAction()
                                     //QGroundControl.multiVehicleManager.activeVehicle.sendDisableMountZIOAction()
@@ -203,6 +204,7 @@ Rectangle {
                                     QGroundControl.multiVehicleManager.activeVehicle.setPayloadType(1)
 
                                      QGroundControl.settingsManager.appSettings.gimbalCameraZIO.value = false
+                                     QGroundControl.settingsManager.appSettings.celeraCamera.value = false
                                     QGroundControl.settingsManager.videoSettings.rtspUrl.value = QGroundControl.settingsManager.videoSettings.rtspUrlFPV.value
                                     QGroundControl.multiVehicleManager.activeVehicle.sendSetMountFPVAction()
                                     //QGroundControl.multiVehicleManager.activeVehicle.sendDisableMountZIOAction()
@@ -228,6 +230,31 @@ Rectangle {
                                     //QGroundControl.multiVehicleManager.activeVehicle.sendEnableMountZIOAction()
 
                                      QGroundControl.settingsManager.appSettings.payloadgripper.value = false
+                                     QGroundControl.settingsManager.appSettings.celeraCamera.value = false
+                                    QGroundControl.settingsManager.appSettings.payloadgrenades.value = false
+                                }
+                            }
+                            Layout.columnSpan:  3
+                            ButtonGroup.group: rearPayloadGroup  // Assign to the ButtonGroup
+                        }
+
+                        QGCRadioButton {
+                            text:               qsTr("Camera Celera")
+                            visible:            QGroundControl.settingsManager.appSettings.vehiclebravo.value && _activeVehicle
+                            enabled:            !_vehicleArmed
+                            checked:            QGroundControl.settingsManager.appSettings.celeraCamera.value
+                            onClicked:{
+                                if(QGroundControl.settingsManager.appSettings.celeraCamera.value){
+                                    QGroundControl.settingsManager.appSettings.celeraCamera.value = false
+                                    QGroundControl.settingsManager.videoSettings.rtspUrl.value = QGroundControl.settingsManager.videoSettings.rtspUrlFPV.value
+                                    QGroundControl.multiVehicleManager.activeVehicle.sendSetMountFPVAction()
+                                    //QGroundControl.multiVehicleManager.activeVehicle.sendDisableMountZIOAction()
+                                }else {
+                                    QGroundControl.settingsManager.appSettings.celeraCamera.value = true
+                                    //QGroundControl.multiVehicleManager.activeVehicle.sendEnableMountZIOAction()
+
+                                     QGroundControl.settingsManager.appSettings.payloadgripper.value = false
+                                     QGroundControl.settingsManager.appSettings.gimbalCameraZIO.value = false
                                     QGroundControl.settingsManager.appSettings.payloadgrenades.value = false
                                 }
                             }
